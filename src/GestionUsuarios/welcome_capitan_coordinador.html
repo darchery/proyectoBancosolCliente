@@ -1,47 +1,53 @@
-<!-- Este mismo contenido (excepto los enlaces a CSS y JavaScript se puede conseguir 
-en MS Visual Studio Code con el atajo html:5 -->
 <!DOCTYPE html>
 <html lang="es-ES">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Capitan_Coordinador</title>
-    <!-- <link rel="stylesheet" href="plantilla-basica-html.css"> -->
-    <!-- <script src="plantilla-basica-html.js" defer></script> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Capitán-Coordinador - Panel de Control</title>
+  <link rel="stylesheet" href="prueba.css">
 </head>
 
 <body>
-    <header>
-        <h1>Bienvenido capitan coordinador</h1>
-    </header>
 
-    <main>
-    <section>
-        
-        <!--Debe poder actualizar datos d econtactos y añadir nuevos colaboradores. Posterior supervisión del administrador-->
-        <button onclick="location.href='gestionar-colaboradores.html'">
-            Gestionar colaboradores 
-        </button>
-        <br><br>
+  <header>
+    <h1>Bienvenido, Capitán-Coordinador</h1>
+    <p>Panel de control</p>
+    <a href="index_login.html" class="logout-btn">Cerrar sesión</a>
+  </header>
 
-        <!--únicamente teine acceso a asignar colaboradores por turnos, no modificación de la tienda-->
-        <button onclick="location.href='gestionar-tienda.html'">
-            Gestionar tienda
-        </button>
-        <br><br>
+  <main class="dashboard">
 
-                <button onclick="location.href='#'">
-            Visualización de los datos
-        </button>
-        <br></br>
+    
+    <a class="card" href="gestionar-colaboradores.html">
+      Gestionar colaboradores<br>
+      
+    </a>
 
-        <button onclick="location.href='#'">
-            Registro de incidencias
-        </button>
+    
+    <a class="card" href="gestionar-tienda.html">
+      Asignar a tienda / turnos<br>
+      
+    </a>
 
-    </section>
-    </main>
+    
+    <a class="card" href="visualizar-datos.html">
+      Visualizar datos<br>
+      
+    </a>
+
+
+    <a class="card" href="registrar-incidencias.html">
+      Registrar incidencias<br>
+      
+    </a>
+
+
+    <a class="card" href="mensajes-capitan-coordinador.html">
+      Bandeja de mensajes<br>
+      
+    </a>
+
+  </main>
 
 </body>
 </html>

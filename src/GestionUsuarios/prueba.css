@@ -1,0 +1,61 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f9ff;
+}
+
+header {
+  background: #0d47a1;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.2);
+}
+
+.logout-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #0d47a1;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background: #e3f2fd;
+  box-shadow: 0 10px 20px rgba(13, 71, 161, 0.15);
+}
