@@ -5,22 +5,22 @@ function login() {
   if (user === pass) {
 
     if (user === "admin") {
-      window.location.href = "welcome_admin.html";
+      window.location.href = "GestionUsuarios/welcome_admin.html";
     }
     else if (user === "capitan_coordinador") {
-      window.location.href = "welcome_capitan_coordinador.html";
+      window.location.href = "GestionUsuarios/welcome_capitan_coordinador.html";
     }
     else if (user === "capitan") {
-      window.location.href = "welcome_capitan.html";
+      window.location.href = "GestionUsuarios/welcome_capitan.html";
     }
     else if (user === "coordinador") {
-      window.location.href = "welcome_coordinador.html";
+      window.location.href = "GestionUsuarios/welcome_coordinador.html";
     }
     else if (user === "entidad_colaboradora") {
-      window.location.href = "welcome_entidad_colaboradora.html";
+      window.location.href = "GestionUsuarios/welcome_entidad_colaboradora.html";
     }
     else if (user === "responsable_tienda") {
-      window.location.href = "welcome_responsable_tienda.html";
+      window.location.href = "GestionUsuarios/welcome_responsable_tienda.html";
     }
     else {
       alert("Usuario no válido");
