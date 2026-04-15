@@ -1,0 +1,33 @@
+#img-footer {
+    width: 25em;
+}
+
+h1 {
+    color: #293189;
+}
+section button {
+    display: block;
+    margin: 10px auto;
+
+    padding: 1em;
+    border-radius: 5%;
+    background-color: #d0d0d2;
+
+    cursor: pointer;
+}
+
+button span{
+    color: #293189;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
