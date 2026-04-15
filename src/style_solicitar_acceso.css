@@ -1,0 +1,12 @@
+/* Estilos comunes para la página de solicitar acceso */
+
+h1 {
+    color: #293189;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
