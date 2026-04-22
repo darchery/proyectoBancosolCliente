@@ -1,4 +1,4 @@
-const btnLogOut = document.getElementById("logout-btn");
+const btnLogOut = document.querySelectorAll(".logout-btn");
 
 if (btnLogOut) {
     btnLogOut.addEventListener("click", () => {
