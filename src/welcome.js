@@ -9,7 +9,7 @@ function welcome() {
     switch (usuario) {
         case "admin":
             if (password === "admin") {
-                window.location.href = folder + "Welcome_admin.html"; // Ojo: pusiste 'Welcome_admin.html' en tu esquema
+                window.location.href = folder + "welcome_admin.html";
             } else {
                 alert("Contraseña incorrecta");
             }
@@ -17,12 +17,45 @@ function welcome() {
 
         case "capitan_coord":
             if (password === "capitan_coord") {
-                window.location.href = folder + "capitan_coordinador.html";
+                window.location.href = folder + "welcome_capitan_coordinador.html";
             } else {
                 alert("Contraseña incorrecta");
             }
             break;
         
+        case "capitan":
+            if (password === "capitan") {
+                window.location.href = folder + "welcome_capitan.html";
+            } else {
+                alert("Contraseña incorrecta");
+            }
+            break;
+
+        case "coord":
+            if (password === "coord") {
+                window.location.href = folder + "welcome_coordinador.html";
+            } else {
+                alert("Contraseña incorrecta");
+            }
+            break;
+
+        case "colab":
+            if (password === "colab") {
+                window.location.href = folder + "welcome_entidad_colaboradora.html";
+            } else {
+                alert("Contraseña incorrecta");
+            }
+            break;
+
+        case "responsable":
+            if (password === "responsable") {
+                window.location.href = folder + "welcome_responsable_tienda.html";
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        break;  
+
+            welcome_responsable_tienda
         default:
             alert("El usuario introducido no existe.");
             break;
