@@ -1,0 +1,88 @@
+:root {
+    --blue-bancosol: #004a99;
+    --border-color: #bdc3c7;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f7f6;
+}
+
+header h1 {
+    color: #293189;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: white;
+    border-bottom: 3px solid var(--blue-bancosol);
+}
+
+.logo-area { display: flex; align-items: center; gap: 15px; }
+.logo-area img { height: 60px; }
+
+.admin-badge {
+    background: var(--orange-admin);
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.dashboard { padding: 20px; }
+
+.filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: white;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.filter-group { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: center; }
+
+.content-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th { background: var(--blue-bancosol); color: white; padding: 10px; border: 1px solid #ccc; }
+td { padding: 8px; border: 1px solid #ccc; font-size: 0.9em; }
+
+tr:hover { background-color: var(--light-blue); cursor: pointer; }
+
+.details-panel {
+    background: white;
+    border: 2px solid var(--blue-bancosol);
+    padding: 15px;
+}
+
+.panel-header {
+    background: var(--blue-bancosol);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
