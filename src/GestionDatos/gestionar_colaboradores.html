@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Colaboradores</title>
+<link rel="stylesheet" href="style_gestion.css">
+</head>
+
+<body>
+
+<header class="main-header">
+  <div class="logo-area">
+    <img src="../images/LOGO_BANCOSOL_FOOTER.png">
+    <div>
+      <h1>GESTIÓN DE CAMPAÑAS</h1>
+      <h2>Colaboradores</h2>
+    </div>
+  </div>
+
+  <div class="admin-badge">
+    Acceso general para administradores.<br>
+    Coordinadores sólo para actualizar contactos
+  </div>
+</header>
+
+<main class="dashboard">
+
+<!-- FILTROS -->
+<section class="filters">
+  <div class="filter-group">
+    <label>USUARIO</label>
+    <select>
+      <option>JM Cobos (Administrador)</option>
+    </select>
+
+    <label>LOCALIDAD</label>
+    <select id="filtro-localidad">
+      <option value="Todas">Todas</option>
+      <option value="ALMACHAR">ALMACHAR</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>ZONA GEOGRÁFICA</label>
+    <select>
+      <option>Todas</option>
+      <option>Axarquía</option>
+    </select>
+
+    <label>COORDINADOR</label>
+    <select id="filtro-coord">
+      <option value="Todas">Todas</option>
+      <option value="JM Cobos">JM Cobos</option>
+    </select>
+  </div>
+</section>
+
+<div class="content-layout">
+
+<!-- TABLA -->
+<section class="table-container">
+<table>
+<thead>
+<tr>
+<th>COLABORADOR</th>
+<th>DOMICILIO</th>
+<th>LOCALIDAD</th>
+<th>COLABORA EN</th>
+<th>COORDINADOR</th>
+<th>CONTACTO PRINCIPAL</th>
+<th>OBSERVACIONES</th>
+</tr>
+</thead>
+<tbody id="tabla-body"></tbody>
+</table>
+</section>
+
+<!-- PANEL DERECHO -->
+<aside class="details-panel">
+
+<div class="panel-header">COLABORADOR SELECCIONADO</div>
+
+<p><b>COLABORADOR:</b> <span id="d-nombre"></span></p>
+<p><b>DOMICILIO:</b> <span id="d-dom"></span></p>
+<p><b>CP - LOCALIDAD:</b> <span id="d-cp"></span></p>
+<p><b>COLABORA EN:</b> <span id="d-colabora"></span></p>
+
+<div class="panel-header">CONTACTOS</div>
+
+<p><b>Contacto 1:</b><br>
+<span id="c1-nombre"></span><br>
+<span id="c1-tel"></span></p>
+
+<p><b>Contacto 2:</b><br>
+<span id="c2-nombre"></span><br>
+<span id="c2-tel"></span></p>
+
+<p><b>Contacto 3:</b><br>
+<span id="c3-nombre"></span><br>
+<span id="c3-tel"></span></p>
+
+<div class="panel-header">OBSERVACIONES</div>
+<p id="d-obs"></p>
+
+<div class="action-buttons">
+<button>Añadir colaborador</button>
+<button>Modificar colaborador</button>
+<button>Eliminar colaborador</button>
+<button>Asignar a tienda</button>
+<button>Guardar</button>
+<button>Exportar</button>
+</div>
+
+</aside>
+
+</div>
+</main>
+
+<script src="gestion_colaboradores.js"></script>
+</body>
+</html>
