@@ -1,0 +1,27 @@
+[
+    {
+        "usuario": "admin",
+        "clave": "admin",
+        "rol": "admin"
+    },
+    {
+        "usuario": "capitan",
+        "clave": "capitan",
+        "rol": "capitan"
+    },
+    {
+        "usuario": "coordinador",
+        "clave": "coordinador",
+        "rol": "coordinador"
+    },
+    {
+        "usuario": "capitan_coordinador",
+        "clave": "capitan_coordinador",
+        "rol": "capitan_coordinador"
+    },
+    {
+        "usuario": "entidad_colaboradora",
+        "clave": "entidad_colaboradora",
+        "rol": "entidad_colaboradora"
+    }
+]
