@@ -64,7 +64,7 @@ section button:hover, .card:hover {
     margin-bottom: 20px;
 }
 
-.logout-btn {
+.boton-logout {
     display: inline-block;
     padding: 8px 20px;
     color: #293189;
@@ -79,7 +79,7 @@ section button:hover, .card:hover {
     font-family: inherit;
 }
 
-.logout-btn:hover {
+.boton-logout:hover {
     background-color: #293189;
     color: white;
 }
