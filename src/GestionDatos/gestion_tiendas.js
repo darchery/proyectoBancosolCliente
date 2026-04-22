@@ -1,14 +1,11 @@
-
-// 🔐 CONTROL DE ACCESO (LO PRIMERO)
 const rolActual = localStorage.getItem('userRole');
 
-// 🚨 Si no hay sesión → fuera
 if (!rolActual) {
     console.warn("No hay sesión activa. Redirigiendo a login...");
     window.location.href = '../index_login.html';
 }
 
-// 1. DATOS (Mini base de datos)
+// MINI BASE DE DATOS
 const tiendas = [
     { id: 'CARREFOUR_001', nombre: 'Carrefour Hiper', cadena: 'CARREFOUR', zona: 'Axarquía', domicilio: 'c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA', localidad: 'RINCON DE LA VICTORIA', coord: 'JM Cobos' },
     { id: 'CARREFOUR_002', nombre: 'Carrefour Market', cadena: 'CARREFOUR', zona: 'Axarquía', domicilio: 'Plaza Don Antonio Estrada, s/n - La Cala del Moral', localidad: 'RINCON DE LA VICTORIA', coord: 'JM Cobos' },
@@ -32,7 +29,7 @@ window.onload = function() {
     console.log("Rol detectado:", rolActual);
 
 
-    // 🔐 CONTROL DE PERMISOS
+    // CONTROL DE PERMISOS
 
     if (rolActual === 'admin') {
         if (menuAdmin) {
@@ -42,13 +39,12 @@ window.onload = function() {
     } else {
         if (menuAdmin) {
             menuAdmin.style.display = 'none'; // mejor que remove()
-            console.log("⛔ Usuario sin permisos: botones ocultos");
+            console.log("Usuario sin permisos: botones ocultos");
         }
     }
 
 
     // CARGA DE DATOS
-
     filtrarYCargarTabla();
 
     // Eventos filtros

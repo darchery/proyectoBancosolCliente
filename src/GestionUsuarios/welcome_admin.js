@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnLogout = document.getElementById('logout-btn-admin');
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
-            localStorage.clear(); // mejor que removeItem
+            localStorage.clear(); 
             window.location.href = rutasPorGestion['login'];
         });
     }
