@@ -14,28 +14,20 @@ en MS Visual Studio Code con el atajo html:5 -->
 
 <body>
     <header>
-        <h1>Bienvenido coordinador</h1>
+        <h1>Bienvenido Coordinador</h1>
         <p class="panel-control">Panel de Control</p>
     </header>
 
     <main>
+    <p class="panel-control">Seleccione qué desea gestionar:</p>
     <section>
-
-        <!--Debe poder actualizar datos d econtactos y añadir nuevos colaboradores. Posterior supervisión del administrador-->
-        <button onclick="location.href='gestionar-colaboradores.html'">
-            Gestionar colaboradores 
-        </button>
-
-        <!--únicamente teine acceso a asignar colaboradores por turnos, no modificación de la tienda-->
-        <button onclick="location.href='gestionar-tienda.html'">
-            Gestionar tienda
-        </button>
-
+        <button class="btn-colaboradores" id="btn-colaboradores-coor">Colaboradores</button>
+        <button class="btn-tienda" id="btn-tienda-coor">Tiendas</button>
     </section>
     </main>
 
     <div class="logout-container">
-        <button class="logout-btn">Cerrar sesión</button>
+        <button id="logout-btn-coor" class="logout-btn">Cerrar sesión</button>
     </div>
 
 <footer>

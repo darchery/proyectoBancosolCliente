@@ -12,6 +12,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f8f9fa;
 }
+
 header h1 {
     color: #293189;
     text-align: center;
@@ -24,30 +25,6 @@ header h1 {
     margin-bottom: 2rem;
     text-align: center;
     font-weight: bold;
-}
-
-.logout-container {
-    margin-bottom: 20px;
-}
-
-.logout-btn {
-    display: inline-block;
-    padding: 8px 20px;
-    color: #293189;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border: 1px solid #293189;
-    border-radius: 20px;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: inherit;
-}
-
-.logout-btn:hover {
-    background-color: #293189;
-    color: white;
 }
 
 section, .dashboard {
@@ -69,7 +46,6 @@ section button, .card {
     text-align: center;
     box-sizing: border-box;
     
-    /* Estilos de texto de style_home.css */
     color: #293189;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -83,16 +59,29 @@ section button:hover, .card:hover {
     transform: translateY(-2px);
 }
 
+.logout-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .logout-btn {
     display: inline-block;
-    margin-top: 10px;
+    padding: 8px 20px;
     color: #293189;
     text-decoration: none;
     font-size: 0.9rem;
+    font-weight: bold;
+    border: 1px solid #293189;
+    border-radius: 20px;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
 }
 
 .logout-btn:hover {
-    text-decoration: underline;
+    background-color: #293189;
+    color: white;
 }
 
 footer {
