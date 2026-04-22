@@ -1,36 +1,79 @@
-/* Estilos comunes para la página de solicitar acceso */
+/* style_solicitar_acceso.css */
+/* Sincronizado con style_welcome.css */
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-form {
-    width: 100%;
-    max-width: 360px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-form input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
 }
 
 h1 {
     color: #293189;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+form {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(41, 49, 137, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form label {
+    font-weight: bold;
+    color: #293189;
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+form input:focus {
+    border-color: #293189;
+    box-shadow: 0 0 5px rgba(41, 49, 137, 0.2);
+}
+
+/* Si hubiera un botón en el form, similar al de login */
+form button {
+    width: 100%;
+    padding: 12px;
+    background: #d0d0d2;
+    color: #293189;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+form button:hover {
+    background-color: #c0c0c2;
+    transform: translateY(-2px);
 }
 
 footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 3rem;
+}
+
+#img-footer {
+    width: 25em;
+    max-width: 90%;
 }

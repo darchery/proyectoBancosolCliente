@@ -1,1 +1,59 @@
-/* Estilos comunes para las páginas welcome */
+/* Estilos para las páginas de bienvenida (welcome_*.html) */
+/* Basado en style_home.css */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
+}
+
+header h1 {
+    color: #293189;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section button {
+    display: block;
+    margin: 10px auto;
+    width: 300px;
+    padding: 1.2em;
+    border-radius: 10px;
+    background-color: #d0d0d2;
+    border: none;
+    cursor: pointer;
+    
+    /* Estilos de texto de style_home.css */
+    color: #293189;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+section button:hover {
+    background-color: #c0c0c2;
+    transform: translateY(-2px);
+}
+
+footer {
+    margin-top: 3rem;
+}
+
+#img-footer {
+    width: 25em;
+    max-width: 90%;
+}
