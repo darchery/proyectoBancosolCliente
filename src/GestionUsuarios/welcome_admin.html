@@ -7,9 +7,8 @@ en MS Visual Studio Code con el atajo html:5 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome Admin</title>
-    <!-- <link rel="stylesheet" href="plantilla-basica-html.css"> -->
     <link rel="stylesheet" href="style_welcome.css">
-    <!-- <script src="plantilla-basica-html.js" defer></script> -->
+    <script src="welcome.js" defer></script>
 </head>
 
 <body>
@@ -19,40 +18,15 @@ en MS Visual Studio Code con el atajo html:5 -->
     </header>
 
     <main>
+    <p class="panel-control">Seleccione qué desea gestionar:</p>
     <section>
-
-        <button onclick="location.href='gestionar-cadena.html'">
-            Gestionar cadena
-        </button>
-
-        <button onclick="location.href='gestionar-roles.html'">
-            Gestionar roles
-        </button>
-
-        <button onclick="location.href='gestionar-colaboradores.html'">
-            Gestionar colaboradores
-        </button>
-
-        <button onclick="location.href='gestionar-campana.html'">
-            Gestionar campaña
-        </button>
-
-        <button onclick="location.href='gestionar-tienda.html'">
-            Gestionar tienda
-        </button>
-
-        <button onclick="location.href='gestionar-voluntarios.html'">
-            Gestionar voluntarios
-        </button>
-
-        <button onclick="location.href='gestionar-datos.html'">
-            Gestionar datos
-        </button>
-
-        <button onclick="location.href='gestionar-coordinadores.html'">
-            Gestionar coordinadores
-        </button>
-
+        <section>
+        <button id="btn-colaboradores-admin">Colaboradores</button>
+        <button id="btn-campana-admin">Campaña</button>
+        <button id="btn-tienda-admin">Tienda</button>
+        <button id="btn-voluntarios-admin">Voluntarios</button>
+        <button id="btn-coordinadores-admin">Coordinadores</button>
+        <button id="btn-bandeja-entrada-admin">Bandeja de entrada</button>
     </section>
     </main>
 

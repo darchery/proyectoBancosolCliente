@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f5f9ff;
+  background: white;
 }
 
 
@@ -10,7 +10,6 @@ body {
   height: 180px;
   overflow: hidden;
   position: relative;
-  background: #0d47a1;     
 }
 
 .banner img {
@@ -19,7 +18,8 @@ body {
   object-fit: contain;     
   object-position: center;
   display: block;
-  background: white;       
+  background: white;    
+  margin-top: 0.75em;   
 }
 
 
@@ -28,6 +28,7 @@ body {
   margin: 60px auto;
   background: white;
   padding: 25px;
+  padding-right: 3em;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(13, 71, 161, 0.2);
   text-align: center;
