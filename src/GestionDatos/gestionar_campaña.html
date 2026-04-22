@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Campañas - Bancosol</title>
+    <link rel="stylesheet" href="style_gestion.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-area">
+            <img src="../images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo">
+            <div>
+                <h1>GESTIÓN DE CAMPAÑAS TIENDAS</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <section class="filters">
+            <div class="filter-group">
+                <label>CADENA</label>
+                <select id="filtro-cadena">
+                    <option value="Todas">Todas</option>
+                    <option value="CARREFOUR">CARREFOUR</option>
+                    <option value="ALDI">ALDI</option>
+                </select>
+
+                <label>LOCALIDAD</label>
+                <select id="filtro-localidad">
+                    <option value="Todas">Todas</option>
+                    <option value="RINCON DE LA VICTORIA">RINCON DE LA VICTORIA</option>
+                    <option value="MALAGA">MALAGA</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>ZONA GEOGRÁFICA</label>
+                <select id="zonaGeografica">
+                    <option value="Todas">Todas</option>
+                    <!--Pendiente de añadir filtros, no se que va aqui-->
+                </select>
+
+                <label>COORDINADOR</label>
+                <select id="filtro-coordinador">
+                    <option value="Todas">Todas</option>
+                    <option value="JM Cobos">JM Cobos</option>
+                    <option value="Aranxa">Aranxa</option>
+                </select>
+            </div>
+        </section>
+
+        <div class="content-layout">
+            <section class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>TIENDA</th>
+                            <th>P</th>
+                            <th>DOMICILIO</th>
+                            <th>LOCALIDAD</th>
+                            <th>COORDINADOR GR</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-body">
+                        </tbody>
+                </table>
+            </section>
+
+            <aside class="details-panel">
+                <div class="panel-header">TIENDA SELECCIONADA</div>
+                <div class="detail-grid" id="detalle-tienda">
+                    <div class="detail-row"><span>ID CADENA:</span> <strong id="det-id">---</strong></div>
+                    <div class="detail-row"><span>DOMICILIO:</span> <strong id="det-dom">---</strong></div>
+                    <div class="detail-row"><span>LOCALIDAD:</span> <strong id="det-loc">---</strong></div>
+                    
+                    <div class="campaign-info">
+                        <div class="panel-header">DATOS DE LA CAMPAÑA</div>
+                        <p>VIERNES MAÑANA: <br><small id="det-v-m">Sin asignar</small></p>
+                        <p>SÁBADO MAÑANA: <br><small id="det-s-m">Sin asignar</small></p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button>Añadir tienda</button>
+                    <button>Modificar tienda</button>
+                    <button>Eliminar tienda</button>
+                    <button>Guardar</button>
+                    <button>Exportar</button>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="gestion_campana.js"></script>
+</body>
+</html>
