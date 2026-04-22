@@ -1,4 +1,14 @@
-// 1. Datos (Tu minibase de datos de tiendas)
+
+// 🔐 CONTROL DE ACCESO (LO PRIMERO)
+const rolActual = localStorage.getItem('userRole');
+
+// 🚨 Si no hay sesión → fuera
+if (!rolActual) {
+    console.warn("No hay sesión activa. Redirigiendo a login...");
+    window.location.href = '../index_login.html';
+}
+
+// 1. DATOS (Mini base de datos)
 const tiendas = [
     { id: 'CARREFOUR_001', nombre: 'Carrefour Hiper', cadena: 'CARREFOUR', zona: 'Axarquía', domicilio: 'c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA', localidad: 'RINCON DE LA VICTORIA', coord: 'JM Cobos' },
     { id: 'CARREFOUR_002', nombre: 'Carrefour Market', cadena: 'CARREFOUR', zona: 'Axarquía', domicilio: 'Plaza Don Antonio Estrada, s/n - La Cala del Moral', localidad: 'RINCON DE LA VICTORIA', coord: 'JM Cobos' },
@@ -6,47 +16,48 @@ const tiendas = [
     { id: 'CARREFOUR_004', nombre: 'CARREFOUR EXPRESS', cadena: 'CARREFOUR', zona: 'Málaga Capital', domicilio: 'Pasaje Tamayo y Baus, 2', localidad: 'MALAGA', coord: 'Aranxa' }
 ];
 
-// Variables globales para las referencias del DOM
+// VARIABLES GLOBALES
 let tablaBody, selectCadena, selectLocalidad, selectCoord, menuAdmin;
 
+// INICIALIZACIÓN
 window.onload = function() {
-    // ASIGNACIÓN DE REFERENCIAS (Se hace dentro del onload para asegurar que el HTML existe)
+
+    // Referencias DOM
     tablaBody = document.getElementById('tabla-body');
     selectCadena = document.getElementById('filtro-cadena');
     selectLocalidad = document.getElementById('filtro-localidad');
     selectCoord = document.getElementById('filtro-coordinador');
     menuAdmin = document.getElementById('admin-menu');
 
-    // --- LÓGICA DE SEGURIDAD BASADA EN TU LOGIN ---
-    
-    // Obtenemos el rol que guardaste en redirigirUsuario(usuarioValido.rol)
-    const rolActual = localStorage.getItem('userRole');
-    
-    console.log("Sistema de Gestión: Verificando rol guardado...", rolActual);
+    console.log("Rol detectado:", rolActual);
+
+
+    // 🔐 CONTROL DE PERMISOS
 
     if (rolActual === 'admin') {
-        // Si el rol en el JSON era 'admin', mostramos los botones
         if (menuAdmin) {
-            menuAdmin.style.display = 'grid'; // Activamos el grid del CSS
-            console.log("Acceso de Administrador confirmado. Botones visibles.");
+            menuAdmin.style.display = 'grid';
+            console.log("✔ Admin: acceso completo");
         }
     } else {
-        // Si el rol es 'capitan', 'coordinador' o no existe, eliminamos los botones
         if (menuAdmin) {
-            menuAdmin.remove(); 
-            console.log("Acceso limitado. Se han eliminado los botones de edición.");
+            menuAdmin.style.display = 'none'; // mejor que remove()
+            console.log("⛔ Usuario sin permisos: botones ocultos");
         }
     }
 
-    // CARGA DE DATOS Y EVENTOS
+
+    // CARGA DE DATOS
+
     filtrarYCargarTabla();
-    
+
+    // Eventos filtros
     if (selectCadena) selectCadena.addEventListener('change', filtrarYCargarTabla);
     if (selectLocalidad) selectLocalidad.addEventListener('change', filtrarYCargarTabla);
     if (selectCoord) selectCoord.addEventListener('change', filtrarYCargarTabla);
 };
 
-// Función para filtrar y mostrar en tabla
+// FILTRAR Y MOSTRAR TABLA
 function filtrarYCargarTabla() {
     if (!tablaBody || !selectCadena) return;
 
@@ -64,7 +75,12 @@ function filtrarYCargarTabla() {
     });
 
     if (filtrados.length === 0) {
-        tablaBody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:20px;">No hay coincidencias</td></tr>';
+        tablaBody.innerHTML = `
+            <tr>
+                <td colspan="5" style="text-align:center; padding:20px;">
+                    No hay coincidencias
+                </td>
+            </tr>`;
         return;
     }
 
@@ -82,15 +98,18 @@ function filtrarYCargarTabla() {
     });
 }
 
-// Función para mostrar detalle lateral
+// DETALLE DE TIENDA
 function mostrarDetalle(id) {
     const tienda = tiendas.find(t => t.id === id);
-    if(tienda) {
+
+    if (tienda) {
         document.getElementById('det-id').innerText = tienda.id;
         document.getElementById('det-dom').innerText = tienda.domicilio;
         document.getElementById('det-loc').innerText = tienda.localidad;
-        
+
         const detCampana = document.getElementById('det-v-m');
-        if (detCampana) detCampana.innerText = `Asignado a: ${tienda.coord}`;
+        if (detCampana) {
+            detCampana.innerText = `Asignado a: ${tienda.coord}`;
+        }
     }
 }

@@ -31,13 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarBoton('btn-coordinadores-admin', 'coordinadores');
     configurarBoton('btn-colaboradores-admin', 'colaboradores');
 
-    // CERRAR SESIÓN     
+    // CERRAR SESIÓN 
     const btnLogout = document.getElementById('logout-btn-admin');
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
-            // Limpiamos seguridad
-            localStorage.removeItem('userRole');
-            // Redirigimos al login usando el objeto de rutas
+            localStorage.clear(); // mejor que removeItem
             window.location.href = rutasPorGestion['login'];
         });
     }
