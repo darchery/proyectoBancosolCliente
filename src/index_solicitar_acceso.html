@@ -1,5 +1,3 @@
-<!-- Este mismo contenido (excepto los enlaces a CSS y JavaScript se puede conseguir 
-en MS Visual Studio Code con el atajo html:5 -->
 <!DOCTYPE html>
 <html lang="es-ES">
 
@@ -8,20 +6,37 @@ en MS Visual Studio Code con el atajo html:5 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol</title>
     <link rel="stylesheet" href="style_solicitar_acceso.css">
-    <!-- <script src="plantilla-basica-html.js" defer></script> -->
 </head>
 
 <body>
+
+   
+    <div class="banner">
+        <img src="../images/LOGO_BANCOSOL_FOOTER.png" alt="Banner Banco">
+    </div>
+
     <h1>Solicitud de acceso</h1>
+
     <form>
-        <label for="correo_solicitud">Introduzca su correo electrónico a continuación:</label>
-        <input type="email" id="correo_solicitud" name="correo_solicitud" />
+        <label for="correo_solicitud">
+            Introduzca su correo electrónico:
+        </label>
+
+        <input 
+            type="email" 
+            id="correo_solicitud" 
+            name="correo_solicitud" 
+            placeholder="ejemplo@correo.com"
+            required 
+        />
+
+        <button type="submit">Enviar solicitud</button>
 
         <p id="info_solicitud"></p>
     </form>
 
-    <footer>
-        <img id="img-footer" src="/images/LOGO_BANCOSOL_FOOTER.png" alt="Logo de Bancosol">
-    </footer>
+
+    <script src="solicitar_acceso.js"></script>
 </body>
+
 </html>
