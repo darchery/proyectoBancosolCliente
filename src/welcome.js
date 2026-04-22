@@ -8,7 +8,7 @@ function welcome() {
 
     switch (usuario) {
         case "admin":
-            if (password === "admin123") {
+            if (password === "admin") {
                 window.location.href = folder + "Welcome_admin.html"; // Ojo: pusiste 'Welcome_admin.html' en tu esquema
             } else {
                 alert("Contraseña incorrecta");
@@ -16,15 +16,13 @@ function welcome() {
             break;
 
         case "capitan_coord":
-            if (password === "cc123") {
+            if (password === "capitan_coord") {
                 window.location.href = folder + "capitan_coordinador.html";
             } else {
                 alert("Contraseña incorrecta");
             }
             break;
         
-        // ... (el resto de tus casos están bien) ...
-
         default:
             alert("El usuario introducido no existe.");
             break;
