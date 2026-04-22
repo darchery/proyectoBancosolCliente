@@ -11,6 +11,9 @@ function redirigirUsuario(rol) {
   const rutaDestino = rutasPorRol[rol];
 
   if (rutaDestino) {
+    // IMPORTANTE: Sin esta línea, los botones de acción nunca aparecerán
+    localStorage.setItem('userRole', rol); 
+    
     window.location.href = rutaDestino;
   } else {
     console.error('ERROR: El rol no se reconoce (' + rol + ')');
@@ -22,10 +25,10 @@ const btnEntrar = document.getElementById("btn-entrar");
 
 if (btnEntrar) {
   btnEntrar.addEventListener("click", async (evento) => {
-    evento.preventDefault(); // Evita que la página se recargue al enviar el formulario
+    evento.preventDefault();
 
-    const userIngresado = document.getElementById("input-usuario").value;
-    const passIngresada = document.getElementById("input-password").value;
+    const userIngresado = document.getElementById("input-usuario").value.trim();
+    const passIngresada = document.getElementById("input-password").value.trim();
 
     if (!userIngresado || !passIngresada) {
       alert("Rellene ambos campos");
@@ -36,20 +39,24 @@ if (btnEntrar) {
       const respuesta = await fetch('usuarios.json');
       const usuariosDB = await respuesta.json();
 
+      // Buscamos al usuario
       const usuarioValido = usuariosDB.find((u) => 
         u.usuario === userIngresado && u.clave === passIngresada
       );
 
       if (usuarioValido) {
-        console.log("Inicio de sesión correcto, su rol es:", usuarioValido.rol);
+        // Limpiamos cualquier rastro de sesión anterior
+        localStorage.removeItem('userRole'); 
+        
+        console.log("Inicio de sesión correcto. Rol:", usuarioValido.rol);
         redirigirUsuario(usuarioValido.rol);
       } else {
         alert("Usuario o contraseña incorrectos.");
       }
 
     } catch (error) {
-      console.error("Error al acceder a la base de datos simulada (usuarios.json):", error);
-      alert("Ha habido un error de conexión");
+      console.error("Error al acceder a usuarios.json:", error);
+      alert("Error de conexión con la base de datos");
     }
   });
 }
