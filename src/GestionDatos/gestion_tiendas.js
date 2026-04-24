@@ -28,9 +28,7 @@ window.onload = function() {
 
     console.log("Rol detectado:", rolActual);
 
-
     // CONTROL DE PERMISOS
-
     if (rolActual === 'admin') {
         if (menuAdmin) {
             menuAdmin.style.display = 'grid';
