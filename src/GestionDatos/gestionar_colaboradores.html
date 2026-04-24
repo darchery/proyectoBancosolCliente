@@ -13,14 +13,13 @@
   <div class="logo-area">
     <img src="../../images/LOGO_BANCOSOL_FOOTER.png">
     <div>
-      <h1>GESTIÓN DE CAMPAÑAS</h1>
-      <h2>Colaboradores</h2>
+      <h1>GESTIÓN DE CAMPAÑAS COLABORADORES</h1>
     </div>
   </div>
 
-  <div class="admin-badge">
-    Acceso general para administradores.<br>
-    Coordinadores sólo para actualizar contactos
+  <!-- Badge dinámico según rol -->
+  <div class="admin-badge" id="rol-badge">
+    Cargando permisos...
   </div>
 </header>
 
@@ -30,9 +29,7 @@
 <section class="filters">
   <div class="filter-group">
     <label>USUARIO</label>
-    <select>
-      <option>JM Cobos (Administrador)</option>
-    </select>
+    <span id="usuario-display" style="font-weight:bold; padding: 4px 8px;"></span>
 
     <label>LOCALIDAD</label>
     <select id="filtro-localidad">
@@ -43,7 +40,7 @@
 
   <div class="filter-group">
     <label>ZONA GEOGRÁFICA</label>
-    <select>
+    <select id="filtro-zona">
       <option>Todas</option>
       <option>Axarquía</option>
     </select>
@@ -59,58 +56,70 @@
 <div class="content-layout">
 
 <!-- TABLA -->
-<section class="table-container">
-<table>
-<thead>
-<tr>
-<th>COLABORADOR</th>
-<th>DOMICILIO</th>
-<th>LOCALIDAD</th>
-<th>COLABORA EN</th>
-<th>COORDINADOR</th>
-<th>CONTACTO PRINCIPAL</th>
-<th>OBSERVACIONES</th>
-</tr>
-</thead>
-<tbody id="tabla-body"></tbody>
-</table>
-</section>
+  <section class="table-container">
+      <table>
+      <thead>
+        <tr>
+          <th>COLABORADOR</th>
+          <th>DOMICILIO</th>
+          <th>LOCALIDAD</th>
+          <th>COLABORA EN</th>
+          <th>COORDINADOR</th>
+          <th>CONTACTO PRINCIPAL</th>
+          <th>OBSERVACIONES</th>
+        </tr>
+      </thead>
+    <tbody id="tabla-body"></tbody>
+    </table>
+  </section>
 
 <!-- PANEL DERECHO -->
 <aside class="details-panel">
 
-<div class="panel-header">COLABORADOR SELECCIONADO</div>
+  <div class="panel-header">COLABORADOR SELECCIONADO</div>
 
-<p><b>COLABORADOR:</b> <span id="d-nombre"></span></p>
-<p><b>DOMICILIO:</b> <span id="d-dom"></span></p>
-<p><b>CP - LOCALIDAD:</b> <span id="d-cp"></span></p>
-<p><b>COLABORA EN:</b> <span id="d-colabora"></span></p>
+  <p><b>COLABORADOR:</b> <span id="d-nombre"></span></p>
+  <p><b>DOMICILIO:</b> <span id="d-dom"></span></p>
+  <p><b>CP - LOCALIDAD:</b> <span id="d-cp"></span></p>
+  <p><b>COLABORA EN:</b> <span id="d-colabora"></span></p>
 
-<div class="panel-header">CONTACTOS</div>
+  <div class="panel-header">CONTACTOS</div>
 
-<p><b>Contacto 1:</b><br>
-<span id="c1-nombre"></span><br>
-<span id="c1-tel"></span></p>
+  <!-- Vista solo lectura (todos los roles) -->
+  <div id="contactos-readonly">
+    <p><b>Contacto 1:</b><br>
+    <span id="c1-nombre"></span><br>
+    <span id="c1-tel"></span></p>
 
-<p><b>Contacto 2:</b><br>
-<span id="c2-nombre"></span><br>
-<span id="c2-tel"></span></p>
+    <p><b>Contacto 2:</b><br>
+    <span id="c2-nombre"></span><br>
+    <span id="c2-tel"></span></p>
 
-<p><b>Contacto 3:</b><br>
-<span id="c3-nombre"></span><br>
-<span id="c3-tel"></span></p>
+    <p><b>Contacto 3:</b><br>
+    <span id="c3-nombre"></span><br>
+    <span id="c3-tel"></span></p>
+  </div>
 
-<div class="panel-header">OBSERVACIONES</div>
-<p id="d-obs"></p>
+  <div class="panel-header">OBSERVACIONES</div>
+  <p id="d-obs"></p>
 
-<div class="action-buttons">
-<button>Añadir colaborador</button>
-<button>Modificar colaborador</button>
-<button>Eliminar colaborador</button>
-<button>Asignar a tienda</button>
-<button>Guardar</button>
-<button>Exportar</button>
-</div>
+ 
+  <div class="action-buttons" id="menu-admin" style="display:none;">
+    <button onclick="accion('anadir')">Añadir colaborador</button>
+    <button onclick="accion('modificar')">Modificar colaborador</button>
+    <button onclick="accion('eliminar')">Eliminar colaborador</button>
+    <button onclick="accion('asignar')">Asignar a tienda</button>
+    <button onclick="accion('guardar')">Guardar</button>
+    <button onclick="accion('exportar')">Exportar</button>
+    <button onclick="accion('cancelar')">Cancelar</button>
+  </div>
+
+  <!-- Botones COORDINADOR: solo actualizar contactos, añadir (pendiente validación) y exportar -->
+  <div class="action-buttons" id="menu-coordinador" style="display:none;">
+    <button onclick="accion('guardar-contactos')">Guardar contactos</button>
+    <button onclick="accion('anadir-pendiente')">Añadir colaborador<br><small>(pendiente validación)</small></button>
+    <button onclick="accion('exportar')">Exportar</button>
+  </div>
 
 </aside>
 
