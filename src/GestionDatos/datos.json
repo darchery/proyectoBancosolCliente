@@ -1,0 +1,165 @@
+{
+  "$schema": "./node_modules/json-server/schema.json",
+
+  "colaboradores": [
+    {
+      "id": "1",
+      "nombre": "A0362-AYUNTAMIENTO DE ALMACHAR",
+      "domicilio": "Calle Almería, 14",
+      "localidad": "ALMACHAR",
+      "cp": "29718",
+      "colabora": "RINCON DE LA VICTORIA",
+      "coord": "JM Cobos",
+      "contactos": [
+        {
+          "tipo": "contacto1",
+          "nombre": "Mario Torre (Concejal)",
+          "email": "",
+          "tel": "555 555 555"
+        },
+        {
+          "tipo": "contacto2",
+          "nombre": "María Vallejo",
+          "email": "",
+          "tel": "333 333 333"
+        },
+        {
+          "tipo": "contacto3",
+          "nombre": "Fijo Ayuntamiento",
+          "email": "",
+          "tel": "999 999 999"
+        }
+      ],
+      "observaciones": "10 voluntarios - Formación jueves 19:45",
+      "pendienteValidacion": false
+    },
+    {
+      "id": "2",
+      "nombre": "Guardia Civil",
+      "domicilio": "---",
+      "localidad": "---",
+      "cp": "---",
+      "colabora": "---",
+      "coord": "JM Cobos",
+      "contactos": [
+        {
+          "tipo": "contacto1",
+          "nombre": "---",
+          "email": "",
+          "tel": "---"
+        },
+        {
+          "tipo": "contacto2",
+          "nombre": "---",
+          "email": "",
+          "tel": "---"
+        },
+        {
+          "tipo": "contacto3",
+          "nombre": "---",
+          "email": "",
+          "tel": "---"
+        }
+      ],
+      "observaciones": "",
+      "pendienteValidacion": false
+    }
+  ],
+
+  "coordinadores": [
+    {
+      "id": "1",
+      "nombre": "Arantxa",
+      "entidad": "BANCOSOL",
+      "area": "MALAGA",
+      "telefono": "600111222",
+      "email": "ara@sol.es",
+      "tiendas": 72,
+      "usuario": "Arantxa",
+      "password": "password1"
+    },
+    {
+      "id": "2",
+      "nombre": "Cristóbal Aragón",
+      "entidad": "BANCOSOL",
+      "area": "INTERIOR",
+      "telefono": "600333444",
+      "email": "cris@sol.es",
+      "tiendas": 48,
+      "usuario": "Aragón",
+      "password": "password2"
+    },
+    {
+      "id": "3",
+      "nombre": "Diego Vazquez",
+      "entidad": "BANCOSOL",
+      "area": "COSTA OCCIDENTAL",
+      "telefono": "",
+      "email": "",
+      "tiendas": 43,
+      "usuario": "Diego",
+      "password": "password3"
+    },
+    {
+      "id": "4",
+      "nombre": "Fran Jimenez",
+      "entidad": "LOS OLIVOS",
+      "area": "MALAGA",
+      "telefono": "",
+      "email": "",
+      "tiendas": 12,
+      "usuario": "FranJim",
+      "password": "password4"
+    },
+    {
+      "id": "5",
+      "nombre": "José M Cobos",
+      "entidad": "BANCOSOL",
+      "area": "AXARQUIA",
+      "telefono": "",
+      "email": "",
+      "tiendas": 40,
+      "usuario": "JMCobos",
+      "password": "password5"
+    }
+  ],
+
+  "tiendas": [
+    {
+      "id": "CARREFOUR_001",
+      "nombre": "Carrefour Hiper",
+      "cadena": "CARREFOUR",
+      "zona": "Axarquía",
+      "domicilio": "c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA",
+      "localidad": "RINCON DE LA VICTORIA",
+      "coord": "JM Cobos"
+    },
+    {
+      "id": "CARREFOUR_002",
+      "nombre": "Carrefour Market",
+      "cadena": "CARREFOUR",
+      "zona": "Axarquía",
+      "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
+      "localidad": "RINCON DE LA VICTORIA",
+      "coord": "JM Cobos"
+    },
+    {
+      "id": "CARREFOUR_003",
+      "nombre": "Carrefour Express",
+      "cadena": "CARREFOUR",
+      "zona": "Costa del Sol",
+      "domicilio": "c/ Ronda, s/n",
+      "localidad": "RINCON DE LA VICTORIA",
+      "coord": "JM Cobos"
+    },
+    {
+      "id": "CARREFOUR_004",
+      "nombre": "CARREFOUR EXPRESS",
+      "cadena": "CARREFOUR",
+      "zona": "Málaga Capital",
+      "domicilio": "Pasaje Tamayo y Baus, 2",
+      "localidad": "MALAGA",
+      "coord": "Arantxa"
+    }
+  ]
+}
