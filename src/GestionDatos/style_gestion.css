@@ -135,6 +135,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
+    margin-bottom: 2em;
 }
 
 .page-campanya .checkbox-item {
