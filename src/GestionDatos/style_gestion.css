@@ -1,8 +1,10 @@
+/* --- VARIABLES GLOBALES --- */
 :root {
     --blue-bancosol: #004a99;
     --border-color: #bdc3c7;
 }
 
+/* --- ESTILOS BASE --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -15,6 +17,7 @@ header h1 {
     margin-bottom: 0.5rem;
 }
 
+/* --- ESTRUCTURA COMÚN (Header y Dashboard) --- */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -37,6 +40,7 @@ header h1 {
 
 .dashboard { padding: 20px; }
 
+/* --- FILTROS (Común en listados) --- */
 .filters {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -49,12 +53,14 @@ header h1 {
 
 .filter-group { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: center; }
 
+/* --- LAYOUT TABLA-PANEL (Común) --- */
 .content-layout {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
 }
 
+/* --- TABLAS (Listados de datos) --- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -63,9 +69,9 @@ table {
 
 th { background: var(--blue-bancosol); color: white; padding: 10px; border: 1px solid #ccc; }
 td { padding: 8px; border: 1px solid #ccc; font-size: 0.9em; }
-
 tr:hover { background-color: var(--light-blue); cursor: pointer; }
 
+/* --- PANEL DE DETALLES (Lateral derecho) --- */
 .details-panel {
     background: white;
     border: 2px solid var(--blue-bancosol);
@@ -85,4 +91,98 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 20px;
+}
+
+/* --- ESPECÍFICO: GESTIONAR_CAMPANYA.HTML --- */
+.page-campanya .management-container {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.page-campanya .box {
+    border: 2px solid #293189;
+    border-radius: 8px;
+    background: white;
+    padding: 15px;
+    position: relative;
+}
+
+.page-campanya .box h2 {
+    color: #293189;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.page-campanya .campanya-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 250px;
+}
+
+.page-campanya .cadenas-box {
+    width: 500px;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-campanya .checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.page-campanya .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.page-campanya .cadenas-actions {
+    margin-top: auto;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 180px;
+}
+
+.page-campanya .right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+}
+
+.page-campanya button {
+    background: white;
+    border: 1.5px solid #293189;
+    color: #293189;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.page-campanya button:hover {
+    background: #293189;
+    color: white;
+}
+
+.page-campanya .character-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.page-campanya .character-container img {
+    max-width: 250px; /* Tamaño controlado para evitar que sea gigante */
+    height: auto;
+    opacity: 0.6;
 }
