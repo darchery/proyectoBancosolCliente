@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Campaña - Bancosol</title>
+    <script src="gestionar_campanyas.js" defer></script>
+    <link rel="stylesheet" href="style_gestion.css">
+    <link rel="stylesheet" href="style_gestion_campanya.css">
+
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-area">
+            <img src="../../images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo">
+            <h1>GESTIÓN DE CAMPAÑA</h1>
+        </div>
+    </header>
+
+    <main class="management-container">
+        <!-- Columna Izquierda: Campaña y Nota -->
+        <div class="campanya-column">
+            <div class="box campanya-box" id="campanya-container">
+                <h2>CAMPAÑA</h2>
+
+            </div>
+
+        </div>
+
+        <!-- Columna Central: Cadenas -->
+        <div class="box cadenas-box">
+            <h2>CADENAS</h2>
+            <div class="checkbox-grid" id="cadenas-grid">
+                <!-- Se cargará dinámicamente -->
+            </div>
+
+            <div class="cadenas-actions">
+                <button id="btn-añadir">Añadir cadena</button>
+                <button id="btn-eliminar">Eliminar cadena</button>
+                <button id="btn-modificar">Modificar cadena</button>
+                <button id="btn-cancelar">Cancelar</button>
+                <button id="btn-guardar">Guardar cambios</button>
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Imagen y Acciones Principales -->
+        <div class="right-column">
+            <div class="character-container">
+                <!-- Placeholder for the character image from the reference -->
+                <img src="../../images/LOGO_BANCOSOL.png" alt="Imagen Representativa" style="opacity: 0.5; filter: grayscale(1);">
+            </div>
+            
+            <div class="main-actions">
+                <button id="btn-generar">Generar campaña</button>
+                <button id="btn-salir-campanya">Salir</button>
+            </div>
+        </div>
+    </main>
+    <script src="gestionar_campanyas.js"></script>
+</body>
+</html>

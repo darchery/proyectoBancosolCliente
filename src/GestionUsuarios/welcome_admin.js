@@ -1,7 +1,7 @@
 const rutasPorGestion = {
     'tiendas':    '../GestionDatos/gestionar_tiendas.html',
     'voluntarios':'../GestionDatos/gestionar_voluntarios.html',
-    'campana':    '../GestionDatos/gestionar_campana.html',
+    'campana':    '../GestionDatos/gestionar_campanya.html',
     'coordinadores': '../GestionDatos/gestionar_coordinadores.html',
     'colaboradores': '../GestionDatos/gestionar_colaboradores.html',
     'login':      '../index_login.html'
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarBoton('btn-campana-admin', 'campana');
     configurarBoton('btn-coordinadores-admin', 'coordinadores');
     configurarBoton('btn-colaboradores-admin', 'colaboradores');
+
 
     // CERRAR SESIÓN 
     const btnLogout = document.getElementById('logout-btn-admin');
