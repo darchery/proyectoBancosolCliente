@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancosol</title>
     <link rel="stylesheet" href="style_solicitar_acceso.css">
+    <script src="solicitar_acceso.js"></script>
 </head>
 
 <body>
 
-   
-    <div class="banner">
-        <img src="../images/LOGO_BANCOSOL_FOOTER.png" alt="Banner Banco">
-    </div>
+
+    <header>
+        <script src="header_comun.js" defer></script>
+    </header>
 
     <h1>Solicitud de acceso</h1>
 
@@ -22,21 +23,17 @@
             Introduzca su correo electrónico:
         </label>
 
-        <input 
-            type="email" 
-            id="correo_solicitud" 
-            name="correo_solicitud" 
-            placeholder="ejemplo@correo.com"
-            required 
-        />
+        <input type="email" id="correo_solicitud" name="correo_solicitud" placeholder="ejemplo@correo.com" required />
 
         <button type="submit">Enviar solicitud</button>
 
         <p id="info_solicitud"></p>
     </form>
 
+    <footer>
+        <script src="footer_comun.js" defer></script>
+    </footer>
 
-    <script src="solicitar_acceso.js"></script>
 </body>
 
 </html>

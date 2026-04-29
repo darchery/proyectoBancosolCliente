@@ -1,23 +1,11 @@
-const rolActual = localStorage.getItem('userRole');
-
-if (!rolActual) {
-    console.warn("No hay sesión activa. Redirigiendo a login...");
-    window.location.href = '../index_login.html';
-}
-
-// MINI BASE DE DATOS
-const tiendas = [
-    { id: 'CARREFOUR_001', nombre: 'Carrefour Hiper', cadena: 'CARREFOUR', zona: 'Axarquía', domicilio: 'c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA', localidad: 'RINCON DE LA VICTORIA', coord: 'JM Cobos' },
-    { id: 'CARREFOUR_002', nombre: 'Carrefour Market', cadena: 'CARREFOUR', zona: 'Axarquía', domicilio: 'Plaza Don Antonio Estrada, s/n - La Cala del Moral', localidad: 'RINCON DE LA VICTORIA', coord: 'JM Cobos' },
-    { id: 'CARREFOUR_003', nombre: 'Carrefour Express', cadena: 'CARREFOUR', zona: 'Costa del Sol', domicilio: 'c/ Ronda, s/n', localidad: 'RINCON DE LA VICTORIA', coord: 'JM Cobos' },
-    { id: 'CARREFOUR_004', nombre: 'CARREFOUR EXPRESS', cadena: 'CARREFOUR', zona: 'Málaga Capital', domicilio: 'Pasaje Tamayo y Baus, 2', localidad: 'MALAGA', coord: 'Aranxa' }
-];
+let tiendas = [];
 
 // VARIABLES GLOBALES
 let tablaBody, selectCadena, selectLocalidad, selectCoord, menuAdmin;
+const rolActual = localStorage.getItem('userRole') || 'admin';
 
 // INICIALIZACIÓN
-window.onload = function() {
+window.onload = async function () {
 
     // Referencias DOM
     tablaBody = document.getElementById('tabla-body');
@@ -30,42 +18,50 @@ window.onload = function() {
 
     // CONTROL DE PERMISOS
     if (rolActual === 'admin') {
-        if (menuAdmin) {
-            menuAdmin.style.display = 'grid';
-            console.log("✔ Admin: acceso completo");
-        }
+        if (menuAdmin) menuAdmin.style.display = 'grid';
     } else {
-        if (menuAdmin) {
-            menuAdmin.style.display = 'none'; // mejor que remove()
-            console.log("Usuario sin permisos: botones ocultos");
-        }
+        if (menuAdmin) menuAdmin.style.display = 'none';
     }
 
+    // CARGAR TIENDAS DESDE API
+    await cargarTiendas();
 
-    // CARGA DE DATOS
     filtrarYCargarTabla();
 
     // Eventos filtros
-    if (selectCadena) selectCadena.addEventListener('change', filtrarYCargarTabla);
-    if (selectLocalidad) selectLocalidad.addEventListener('change', filtrarYCargarTabla);
-    if (selectCoord) selectCoord.addEventListener('change', filtrarYCargarTabla);
+    selectCadena?.addEventListener('change', filtrarYCargarTabla);
+    selectLocalidad?.addEventListener('change', filtrarYCargarTabla);
+    selectCoord?.addEventListener('change', filtrarYCargarTabla);
 };
 
-// FILTRAR Y MOSTRAR TABLA
-function filtrarYCargarTabla() {
-    if (!tablaBody || !selectCadena) return;
+//  CARGAR TIENDAS (API) 
+async function cargarTiendas() {
+    try {
+        const res = await fetch('http://localhost:3001/tiendas');
+        tiendas = await res.json();
+        console.log("Tiendas cargadas:", tiendas);
+    } catch (error) {
+        console.error("Error cargando tiendas:", error);
+    }
+}
 
-    const cadenaSel = selectCadena.value;
-    const localidadSel = selectLocalidad.value;
-    const coordSel = selectCoord.value;
+//  FILTRAR Y MOSTRAR TABLA 
+function filtrarYCargarTabla() {
+
+    if (!tablaBody) return;
+
+    const cadenaSel = selectCadena?.value || 'Todas';
+    const localidadSel = selectLocalidad?.value || 'Todas';
+    const coordSel = selectCoord?.value || 'Todas';
 
     tablaBody.innerHTML = '';
 
     const filtrados = tiendas.filter(tienda => {
-        const cumpleCadena = (cadenaSel === "Todas" || tienda.cadena === cadenaSel);
-        const cumpleLocalidad = (localidadSel === "Todas" || tienda.localidad === localidadSel);
-        const cumpleCoord = (coordSel === "Todas" || tienda.coord === coordSel);
-        return cumpleCadena && cumpleLocalidad && cumpleCoord;
+        return (
+            (cadenaSel === "Todas" || tienda.cadena === cadenaSel) &&
+            (localidadSel === "Todas" || tienda.localidad === localidadSel) &&
+            (coordSel === "Todas" || tienda.coord === coordSel)
+        );
     });
 
     if (filtrados.length === 0) {
@@ -79,7 +75,7 @@ function filtrarYCargarTabla() {
     }
 
     filtrados.forEach(tienda => {
-        const row = `
+        tablaBody.innerHTML += `
             <tr onclick="mostrarDetalle('${tienda.id}')" style="cursor:pointer">
                 <td>${tienda.nombre}</td>
                 <td style="text-align:center"><input type="checkbox" checked></td>
@@ -88,22 +84,21 @@ function filtrarYCargarTabla() {
                 <td>${tienda.coord}</td>
             </tr>
         `;
-        tablaBody.innerHTML += row;
     });
 }
 
-// DETALLE DE TIENDA
+//  DETALLE TIENDA ─
 function mostrarDetalle(id) {
+
     const tienda = tiendas.find(t => t.id === id);
+    if (!tienda) return;
 
-    if (tienda) {
-        document.getElementById('det-id').innerText = tienda.id;
-        document.getElementById('det-dom').innerText = tienda.domicilio;
-        document.getElementById('det-loc').innerText = tienda.localidad;
+    document.getElementById('det-id').innerText = tienda.id;
+    document.getElementById('det-dom').innerText = tienda.domicilio;
+    document.getElementById('det-loc').innerText = tienda.localidad;
 
-        const detCampana = document.getElementById('det-v-m');
-        if (detCampana) {
-            detCampana.innerText = `Asignado a: ${tienda.coord}`;
-        }
+    const detCampana = document.getElementById('det-v-m');
+    if (detCampana) {
+        detCampana.innerText = `Asignado a: ${tienda.coord}`;
     }
 }
