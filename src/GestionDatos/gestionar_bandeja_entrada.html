@@ -3,11 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bandeja de entrada - Bancosol</title>
-    <script src="gestionar_bandeja_entrada.js" defer></script>
+    <title>Bandeja de Entrada - Bancosol</title>
     <link rel="stylesheet" href="style_gestion.css">
+    <script src="gestionar_bandeja_entrada.js" defer></script>
 </head>
 <body>
-    
+    <header class="main-header">
+        <div class="logo-area">
+            <img src="../../images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo">
+            <h1>BANDEJA DE ENTRADA</h1>
+        </div>
+        <div class="admin-badge">ADMINISTRADOR</div>
+    </header>
+
+    <main class="dashboard">
+        <div class="content-layout">   
+            <!-- Sección de la Tabla -->
+            <section class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>FECHA</th>
+                            <th>REMITENTE</th>
+                            <th>ASUNTO</th>
+                            <th>ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-mensajes">
+                        <!-- Se cargará dinámicamente -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Panel de Detalles -->
+            <aside class="details-panel" id="panel-detalles">
+                <div class="panel-header">DETALLES DEL MENSAJE</div>
+                <div id="contenido-detalle">
+                    <p style="text-align: center; color: #666; margin-top: 20px;">
+                        Seleccione un mensaje para ver su contenido
+                    </p>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="btn-responder">Responder</button>
+                    <button id="btn-archivar">Archivar</button>
+                    <button id="btn-eliminar">Eliminar</button>
+                    <button onclick="window.history.back()">Volver</button>
+                </div>
+            </aside>
+        </div>
+    </main>
 </body>
 </html>
