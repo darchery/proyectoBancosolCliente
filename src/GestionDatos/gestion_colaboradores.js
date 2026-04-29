@@ -7,7 +7,7 @@ if (!rolActual) {
     window.location.href = '../index_login.html';
 }
 
-// ─── MINI BASE DE DATOS ────────────────────────────────────────────────────
+
 const colaboradores = [
 {
  id:"1",
