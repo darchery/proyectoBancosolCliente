@@ -1,0 +1,27 @@
+/* ¡ESTA ES LA REGLA NUEVA QUE ARREGLA EL PROBLEMA! */
+header {
+    width: 100%;
+}
+
+header h1 {
+    color: #293189;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.main-header {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center;
+    padding: 10px 20px; 
+    background: white;
+    border-bottom: 3px solid #004a99; 
+    width: 100%; 
+    box-sizing: border-box; 
+}
+
+#logo {
+    height: 60px; 
+    width: auto; 
+    display: block; 
+}
