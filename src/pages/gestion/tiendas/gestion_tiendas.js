@@ -1,104 +1,133 @@
+// DECLARACION DE VARIBLES GLOBALES
 let tiendas = [];
 
-// VARIABLES GLOBALES
+// almacenamos rol actual porque segun cual sea tendrá diferentes funciones
+const rolAct = localStorage.getItem('userRole'); 
+
 let tablaBody, selectCadena, selectLocalidad, selectCoord, menuAdmin;
-const rolActual = localStorage.getItem('userRole') || 'admin';
 
-// INICIALIZACIÓN
-window.onload = async function () {
-
-    // Referencias DOM
-    tablaBody = document.getElementById('tabla-body');
+// INICIALIZACION
+document.addEventListener('DOMContentLoaded', async function ()
+{
+    //1º elementos del HTML
+    tablaBody    = document.getElementById('tabla-body');
     selectCadena = document.getElementById('filtro-cadena');
     selectLocalidad = document.getElementById('filtro-localidad');
-    selectCoord = document.getElementById('filtro-coordinador');
-    menuAdmin = document.getElementById('admin-menu');
+    selectCoord  = document.getElementById('filtro-coordinador');
+    menuAdmin    = document.getElementById('admin-menu');
 
-    console.log("Rol detectado:", rolActual);
+    // Permisos segun rol
+    if (rolAct === 'admin') { menuAdmin.style.display = 'grid';} 
+    else { menuAdmin.style.display = 'none';}
 
-    // CONTROL DE PERMISOS
-    if (rolActual === 'admin') {
-        if (menuAdmin) menuAdmin.style.display = 'grid';
-    } else {
-        if (menuAdmin) menuAdmin.style.display = 'none';
-    }
-
-    // CARGAR TIENDAS DESDE API
+    // Cargamos y mostramos tablas
     await cargarTiendas();
-
     filtrarYCargarTabla();
 
-    // Eventos filtros
+    // Filtros
     selectCadena?.addEventListener('change', filtrarYCargarTabla);
     selectLocalidad?.addEventListener('change', filtrarYCargarTabla);
     selectCoord?.addEventListener('change', filtrarYCargarTabla);
-};
 
-//  CARGAR TIENDAS (API) 
+});
+
+// FUNCIONES
+// Traemos datos del JSON y los guardamos en la vble tienda
 async function cargarTiendas() {
     try {
-        const res = await fetch('http://localhost:3001/tiendas');
-        tiendas = await res.json();
-        console.log("Tiendas cargadas:", tiendas);
+        const respuesta = await fetch('../../../data/datos.json');
+        const datos = await respuesta.json();
+
+        tiendas = datos.tiendas;
+ 
     } catch (error) {
-        console.error("Error cargando tiendas:", error);
+        console.error("Error al cargar el JSON:", error);
+        tiendas = [];
     }
 }
 
-//  FILTRAR Y MOSTRAR TABLA 
 function filtrarYCargarTabla() {
-
+ 
     if (!tablaBody) return;
-
-    const cadenaSel = selectCadena?.value || 'Todas';
+ 
+    //leemos valor del filtro
+    const cadenaSel    = selectCadena?.value    || 'Todas';
     const localidadSel = selectLocalidad?.value || 'Todas';
-    const coordSel = selectCoord?.value || 'Todas';
-
+    const coordSel     = selectCoord?.value     || 'Todas';
+ 
     tablaBody.innerHTML = '';
 
-    const filtrados = tiendas.filter(tienda => {
-        return (
-            (cadenaSel === "Todas" || tienda.cadena === cadenaSel) &&
-            (localidadSel === "Todas" || tienda.localidad === localidadSel) &&
-            (coordSel === "Todas" || tienda.coord === coordSel)
-        );
-    });
+    //solo pasa la tienda que cumpla todas las condiciones: Si no hay resultados mostramos msj 
+    const filtradas = tiendas.filter(tienda => {
+        const coincideCadena =  (cadenaSel === 'Todas' || tienda.cadena === cadenaSel);
+        const coincideLocalidad =   (localidadSel === 'Todas' || tienda.localidad === localidadSel);
+        const coincideCoord =   (coordSel === 'Todas' || tienda.coord === coordSel);
 
-    if (filtrados.length === 0) {
+        return coincideCadena && coincideLocalidad && coincideCoord;
+    });
+ 
+    if (filtradas.length === 0) {
         tablaBody.innerHTML = `
             <tr>
-                <td colspan="5" style="text-align:center; padding:20px;">
-                    No hay coincidencias
-                </td>
+                <td> No hay tiendas con esos filtros </td>
             </tr>`;
         return;
     }
+ 
+    // Recorremos las tiendas ya filtradas
+    filtradas.forEach(tienda => {
 
-    filtrados.forEach(tienda => {
-        tablaBody.innerHTML += `
-            <tr onclick="mostrarDetalle('${tienda.id}')" style="cursor:pointer">
-                <td>${tienda.nombre}</td>
-                <td style="text-align:center"><input type="checkbox" checked></td>
-                <td>${tienda.domicilio}</td>
-                <td>${tienda.localidad}</td>
-                <td>${tienda.coord}</td>
-            </tr>
+        const fila = document.createElement('tr');
+
+        fila.innerHTML = `
+            <td>${tienda.nombre}</td>
+            <td><button class="btn-delete">🗑</button></td>
+            <td>${tienda.domicilio}</td>
+            <td>${tienda.localidad}</td>
+            <td>${tienda.coord}</td>
         `;
+
+        fila.addEventListener('click', () => mostrarDetalle(tienda.id));
+
+        // eliminar
+        fila.querySelector('.btn-delete').addEventListener('click', (e) => {
+            e.stopPropagation();
+            eliminarTienda(tienda.id);
+        });
+
+        tablaBody.appendChild(fila);
     });
 }
-
-//  DETALLE TIENDA ─
+ 
 function mostrarDetalle(id) {
+    let tienda = null;
 
-    const tienda = tiendas.find(t => t.id === id);
+    for (let i = 0; i < tiendas.length; i++) {
+        if (tiendas[i].id === id) {
+            tienda = tiendas[i];
+            break;
+        }
+    }
     if (!tienda) return;
 
-    document.getElementById('det-id').innerText = tienda.id;
-    document.getElementById('det-dom').innerText = tienda.domicilio;
-    document.getElementById('det-loc').innerText = tienda.localidad;
+    document.getElementById('det-id').textContent  = tienda.id;
+    document.getElementById('det-dom').textContent = tienda.domicilio;
+    document.getElementById('det-loc').textContent = tienda.localidad;
+ 
+    const detViernes = document.getElementById('det-v-m');
+    if (detViernes) detViernes.textContent = tienda.zona || 'Sin asignar';
+    
+    const detSabado = document.getElementById('det-s-m');
+    if (detSabado) detSabado.textContent = `Coordinador: ${tienda.coord}`;
+} 
 
-    const detCampana = document.getElementById('det-v-m');
-    if (detCampana) {
-        detCampana.innerText = `Asignado a: ${tienda.coord}`;
-    }
+// CRUD 
+function crearTienda(nuevaTienda) {
+    tiendas.push(nuevaTienda);
+    filtrarYCargarTabla();
+}
+
+function eliminarTienda(id) {
+    tiendas = tiendas.filter(t => t.id !== id);
+    filtrarYCargarTabla();
 }
