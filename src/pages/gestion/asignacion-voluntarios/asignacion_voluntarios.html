@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asignación de Voluntarios</title>
+<link rel="stylesheet" href="../../../assets/css/style_gestion.css">
+</head>
+
+<body>
+
+<header class="main-header">
+  <div class="logo-area">
+    <img src="../../../../assets/images/LOGO_BANCOSOL_FOOTER.png"> 
+    <div>
+      <h1>GESTIÓN DE CAMPAÑAS</h1>
+      <h2>Asignación de Voluntarios</h2>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard">
+
+<!-- FILTROS -->
+<section class="filters">
+  <div class="filter-group">
+    <label>USUARIO</label>
+    <span id="usuario-display" style="font-weight:bold; padding: 4px 8px;"></span>
+
+    <label>LOCALIDAD</label>
+    <select id="filtro-localidad">
+      <option value="Todas">Todas</option>
+      <option value="ALMACHAR">ALMACHAR</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>CADENA</label>
+    <select id="filtro-cadena">
+      <option>Todas</option>
+      <option>Bancosol</option>
+    </select>
+  </div>
+</section>
+
+<div class="content-layout">
+
+<!-- TABLA -->
+<section class="table-container">
+<table>
+<thead>
+<tr>
+<th>TIENDA</th>
+<th>DOMICILIO</th>
+<th>LOCALIDAD</th>
+<th>CAPITÁN</th>
+<th>VIERNES MAÑANA</th>
+<th>VIERNES TARDE</th>
+<th>SÁBADO MAÑANA</th>
+<th>SÁBADO TARDE</th>
+<th>OBSERVACIONES</th>
+</tr>
+</thead>
+<tbody id="tabla-body"></tbody>
+</table>
+</section>
+
+<!-- PANEL DERECHO -->
+<aside class="details-panel">
+
+  <div class="panel-header">ASIGNACIÓN SELECCIONADA</div>
+
+  <p><b>TIENDA:</b> <span id="d-tienda"></span></p>
+  <p><b>DOMICILIO:</b> <span id="d-domicilio"></span></p>
+  <p><b>LOCALIDAD:</b> <span id="d-localidad"></span></p>
+  <p><b>CAPITÁN:</b> <span id="d-capitan"></span></p>
+
+  <div class="panel-header">ASIGNACIONES</div>
+
+  <p><b>Viernes Mañana:</b> <span id="d-viernes-manana"></span></p>
+  <p><b>Viernes Tarde:</b> <span id="d-viernes-tarde"></span></p>
+  <p><b>Sábado Mañana:</b> <span id="d-sabado-manana"></span></p>
+  <p><b>Sábado Tarde:</b> <span id="d-sabado-tarde"></span></p>
+
+  <div class="panel-header">OBSERVACIONES</div>
+  <p id="d-obs"></p>
+
+  <!-- Botones ADMIN: acceso completo -->
+  <div class="action-buttons" id="menu-admin" style="display:none;">
+    <button onclick="accion('anadir')">Añadir asignación</button>
+    <button onclick="accion('modificar')">Modificar</button>
+    <button onclick="accion('guardar')">Guardar</button>
+    <button onclick="accion('exportar')">Exportar</button>
+    <button onclick="accion('cancelar')">Cancelar</button>
+  </div>
+
+  <!-- Botones COORDINADOR: solo exportar -->
+  <div class="action-buttons" id="menu-coordinador" style="display:none;">
+    <button onclick="accion('exportar')">Exportar</button>
+  </div>
+
+</aside>
+
+</div>
+</main>
+
+<script src="asignacion_voluntarios.js"></script>
+
+</body>
+</html>
+
