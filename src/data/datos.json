@@ -1,6 +1,4 @@
 {
-  "$schema": "./node_modules/json-server/schema.json",
-
   "colaboradores": [
     {
       "id": "1",
@@ -65,7 +63,6 @@
       "pendienteValidacion": false
     }
   ],
-
   "coordinadores": [
     {
       "id": "1",
@@ -123,7 +120,6 @@
       "password": "password5"
     }
   ],
-
   "tiendas": [
     {
       "id": "CARREFOUR_001",
@@ -162,43 +158,33 @@
       "coord": "Arantxa"
     }
   ],
-
-    "asignaciones": [
+  "asignaciones": [
     {
       "id": "1",
-
       "tienda": "Carrefour Hiper",
       "domicilio": "c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA",
       "localidad": "RINCON DE LA VICTORIA",
-
       "capitan": "Juan Pérez",
-
       "viernes_manana": 3,
       "viernes_tarde": 2,
       "sabado_manana": 4,
       "sabado_tarde": 3,
-
       "observaciones": "Equipo completo",
       "pendienteValidacion": false
     },
     {
       "id": "2",
-
       "tienda": "Carrefour Market",
       "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
       "localidad": "RINCON DE LA VICTORIA",
-
       "capitan": "María López",
-
       "viernes_manana": 1,
       "viernes_tarde": 2,
       "sabado_manana": 2,
       "sabado_tarde": 1,
-
       "observaciones": "Faltan voluntarios sábado",
       "pendienteValidacion": true
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
-
-

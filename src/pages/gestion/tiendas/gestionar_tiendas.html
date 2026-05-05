@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Campañas - Bancosol</title>
+    <title>Gestión de Tiendas - Bancosol</title>
     <link rel="stylesheet" href="../../../assets/css/style_gestion.css">
 </head>
 
@@ -13,81 +13,92 @@
         <div class="logo-area">
             <img src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo">
             <div>
-                <h1>GESTIÓN DE CAMPAÑAS TIENDAS</h1>
+                <h1>GESTIÓN DE TIENDAS</h1>
             </div>
         </div>
     </header>
 
     <main class="dashboard">
+
+        <!-- ── FILTROS ── -->
         <section class="filters">
             <div class="filter-group">
                 <label>CADENA</label>
                 <select id="filtro-cadena">
                     <option value="Todas">Todas</option>
-                    <option value="CARREFOUR">CARREFOUR</option>
-                    <option value="ALDI">ALDI</option>
                 </select>
 
                 <label>LOCALIDAD</label>
                 <select id="filtro-localidad">
                     <option value="Todas">Todas</option>
-                    <option value="RINCON DE LA VICTORIA">RINCON DE LA VICTORIA</option>
-                    <option value="MALAGA">MALAGA</option>
                 </select>
             </div>
             <div class="filter-group">
                 <label>ZONA GEOGRÁFICA</label>
-                <select id="filtro-zonaGeografica">
+                <select id="filtro-zona">
                     <option value="Todas">Todas</option>
-                    <!--Pendiente de añadir filtros, no se que va aqui-->
                 </select>
 
                 <label>COORDINADOR</label>
                 <select id="filtro-coordinador">
                     <option value="Todas">Todas</option>
-                    <option value="JM Cobos">JM Cobos</option>
-                    <option value="Aranxa">Aranxa</option>
                 </select>
             </div>
         </section>
 
         <div class="content-layout">
+
+            <!-- ── TABLA ── -->
             <section class="table-container">
                 <table>
                     <thead>
                         <tr>
                             <th>TIENDA</th>
-                            <th>P</th>
+                            <th>CADENA</th>
                             <th>DOMICILIO</th>
                             <th>LOCALIDAD</th>
                             <th>COORDINADOR GR</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla-body">
-                        </tbody>
+                    <tbody id="tabla-body"></tbody>
                 </table>
             </section>
 
+            <!-- ── PANEL LATERAL ── -->
             <aside class="details-panel">
-                <div class="panel-header">TIENDA SELECCIONADA</div>
-                <div class="detail-grid" id="detalle-tienda">
-                    <div class="detail-row"><span>ID CADENA:</span> <strong id="det-id">---</strong></div>
+                <div class="panel-header" id="panel-titulo">TIENDA SELECCIONADA</div>
+
+                <!-- Vista de detalle: visible por defecto -->
+                <div id="vista-detalle">
+                    <div class="detail-row"><span>ID:</span>        <strong id="det-id">---</strong></div>
+                    <div class="detail-row"><span>CADENA:</span>    <strong id="det-cadena">---</strong></div>
                     <div class="detail-row"><span>DOMICILIO:</span> <strong id="det-dom">---</strong></div>
                     <div class="detail-row"><span>LOCALIDAD:</span> <strong id="det-loc">---</strong></div>
-                    
-                    <div class="campaign-info">
-                        <div class="panel-header">DATOS DE LA CAMPAÑA</div>
-                        <p>VIERNES MAÑANA: <br><small id="det-v-m">Sin asignar</small></p>
-                        <p>SÁBADO MAÑANA: <br><small id="det-s-m">Sin asignar</small></p>
+                    <div class="detail-row"><span>ZONA:</span>      <strong id="det-zona">---</strong></div>
+                    <div class="detail-row"><span>COORD:</span>     <strong id="det-coord">---</strong></div>
+                </div>
+
+                <!-- Vista de formulario: oculta hasta que se pulse Añadir o Modificar -->
+                <div id="vista-formulario" style="display:none">
+                    <div class="detail-row"><span>ID</span>        <input type="text" id="f-id"></div>
+                    <div class="detail-row"><span>NOMBRE</span>    <input type="text" id="f-nombre"></div>
+                    <div class="detail-row"><span>CADENA</span>    <input type="text" id="f-cadena"></div>
+                    <div class="detail-row"><span>ZONA</span>      <input type="text" id="f-zona"></div>
+                    <div class="detail-row"><span>DOMICILIO</span> <input type="text" id="f-domicilio"></div>
+                    <div class="detail-row"><span>LOCALIDAD</span> <input type="text" id="f-localidad"></div>
+                    <div class="detail-row"><span>COORD</span>     <input type="text" id="f-coord"></div>
+
+                    <div class="action-buttons">
+                        <button id="btn-confirmar">Guardar</button>
+                        <button id="btn-cancelar">Cancelar</button>
                     </div>
                 </div>
 
-                <div class="action-buttons" id="admin-menu">
-                    <button>Añadir tienda</button>
-                    <button>Modificar tienda</button>
-                    <button>Eliminar tienda</button>
-                    <button>Guardar</button>
-                    <button>Exportar</button>
+                <!-- Botones de acción: solo visibles para admin -->
+                <div class="action-buttons" id="admin-menu" style="display:none">
+                    <button id="btn-anadir">Añadir tienda</button>
+                    <button id="btn-modificar">Modificar tienda</button>
+                    <button id="btn-eliminar">Eliminar tienda</button>
                 </div>
             </aside>
         </div>
