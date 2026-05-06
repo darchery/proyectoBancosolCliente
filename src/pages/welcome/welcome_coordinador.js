@@ -1,7 +1,8 @@
 const rutasPorGestion = {
     tiendas: '../gestion/gestionar_tiendas.html',
     colaboradores: '../gestion/gestionar_colaboradores.html',
-    login: '../login/index_login.html'
+    login: '../login/index_login.html',
+    voluntarios: '../gestion/asignacion-voluntarios/asignacion_voluntarios.html',
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Vinculamos cada botón de tu HTML con su ruta correspondiente
     configurarBoton('btn-tienda-coor', 'tiendas');
     configurarBoton('btn-colaboradores-coor', 'colaboradores');
-
+    configurarBoton('btn-voluntarios-coor', 'voluntarios');
     // CERRAR SESIÓN
     const btnLogout = document.querySelector('.boton-logout'); // usamos class porque no hay ID
 
