@@ -28,6 +28,7 @@ header h1 {
 }
 
 .logo-area { display: flex; align-items: center; gap: 15px; }
+.logo-area .title-area { margin-left: auto; }
 .logo-area img { height: 60px; }
 
 .admin-badge {
