@@ -1,7 +1,8 @@
 const rutasPorGestion = {
     tiendas: '../gestion/tiendas/gestionar_tiendas.html',
     colaboradores: '../gestion/colaboradores/gestionar_colaboradores.html',
-    login: '../login/index_login.html'
+    login: '../login/index_login.html', 
+    bandeja_entrada: '../gestion/bandeja-entrada/gestionar_bandeja_entrada.html'
 };
 
 document.addEventListener('DOMContentLoaded', () => {
