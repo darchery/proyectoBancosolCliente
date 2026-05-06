@@ -1,36 +1,33 @@
-// npx json-server --port 3001 src/data/datos.json
-// VARIABLES GLOBALE
+// VARIABLES GLOBALES
 
-let tiendas = [];               // Array con todas las tiendas del JSON
-let tiendaSeleccionadaId = null; // ID de la tienda que el usuario ha pulsado
-let modoModal = 'anadir';       // Controla si el modal es para añadir o modificar
-
-const API_URL = 'http://localhost:3001'; // json-server
-const rolActual = localStorage.getItem('userRole') || 'admin';
-
-// Referencias DOM (se rellenan en DOMContentLoaded)
+let tiendas = [];
+let tiendaSeleccionadaId = null; 
+let modoModal = 'anadir'; 
 let tablaBody, menuAdmin;
 
+const API_URL = 'http://localhost:3001'; // json-server
+
+// almacenamos rol actual porque segun cual sea tendrá diferentes funciones
+const rolActual = localStorage.getItem('userRole') || 'admin';
+
 // INICIALIZACIÓN
-// Se ejecuta cuando el HTML está completamente cargado.
-// Es async porque dentro usamos await para esperar el fetch
 document.addEventListener('DOMContentLoaded', async function () {
 
-    // 1. Obtenemos referencias a los elementos del HTML
+    // 1º elementos del HTML
     tablaBody = document.getElementById('tabla-body');
     menuAdmin = document.getElementById('admin-menu');
 
-    // 2. Permisos: solo admin ve los botones de acción
+    // 2º Permisos
     if (rolActual === 'admin') {
         menuAdmin.style.display = 'grid';
     }
 
-    // 3. Cargamos los datos del JSON y pintamos la tabla
+    // 3º Cargamos y mostramos tablas
     await cargarTiendas();
     filtrarYCargarTabla();
     popularFiltros();
 
-    // 4. Eventos de los filtros — cada cambio repinta la tabla
+    // 4º Filtramos
     document.getElementById('filtro-cadena')
         .addEventListener('change', filtrarYCargarTabla);
     document.getElementById('filtro-localidad')
@@ -40,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('filtro-coordinador')
         .addEventListener('change', filtrarYCargarTabla);
 
-    // 5. Eventos de los botones de acción
+    // 5º Botones CRUD
     document.getElementById('btn-anadir')
         .addEventListener('click', abrirModalAnadir);
 
@@ -50,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('btn-eliminar')
         .addEventListener('click', eliminarTienda);
 
-    // 6. Eventos del modal
+    // 6º Eventos del modal
     document.getElementById('btn-confirmar')
         .addEventListener('click', confirmarModal);
 
@@ -58,12 +55,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         .addEventListener('click', cerrarModal);
 });
 
-// CARGAR TIENDAS DESDE EL JSON-SERVER
-//
-// fetch() devuelve una promesa. Con await esperamos a que
-// se resuelva antes de continuar con el resto del código.
-// .json() también es asíncrono: lee el cuerpo de la respuesta
-// y lo convierte en objeto JavaScript
+// FUNCIONES
+// Traemos datos del JSON y los guardamos en la vble tienda
 async function cargarTiendas() {
     try {
         const respuesta = await fetch(`${API_URL}/tiendas`);
@@ -82,14 +75,10 @@ async function cargarTiendas() {
 }
 
 // POPULAR LOS FILTROS DINÁMICAMENTE
-//
-// En lugar de escribir las opciones a mano en el HTML,
-// las generamos a partir de los datos reales del JSON.
+// Generamos opciones a partir de los datos reales del JSON.
 // Usamos Set para eliminar valores duplicados
 function popularFiltros() {
 
-    // Set es una colección que no permite valores repetidos.
-    // Al hacer new Set(tiendas.map(...)) obtenemos los valores únicos.
     const cadenas       = new Set(tiendas.map(t => t.cadena));
     const localidades   = new Set(tiendas.map(t => t.localidad));
     const zonas         = new Set(tiendas.map(t => t.zona));
@@ -117,23 +106,20 @@ function rellenarSelect(idSelect, valores) {
     }
 }
 
-// FILTRAR Y PINTAR LA TABLA
-//
-// Lee los valores actuales de los cuatro <select> de filtro.
-// Usa .filter() para quedarse solo con las tiendas que cumplen
-// todas las condiciones a la vez
+// FILTRAR Y MOSTRAR LA TABLA
 function filtrarYCargarTabla() {
 
     if (!tablaBody) return;
 
+    //leemos valor del filtro
     const cadenaSel    = document.getElementById('filtro-cadena')?.value     || 'Todas';
     const localidadSel = document.getElementById('filtro-localidad')?.value  || 'Todas';
     const zonaSel      = document.getElementById('filtro-zona')?.value        || 'Todas';
     const coordSel     = document.getElementById('filtro-coordinador')?.value || 'Todas';
 
-    // Vaciamos la tabla antes de repintarla
     tablaBody.innerHTML = '';
 
+    //solo pasa la tienda que cumpla todas las condiciones: Si no hay resultados mostramos msj 
     const filtradas = tiendas.filter(tienda => {
         return (
             (cadenaSel    === 'Todas' || tienda.cadena    === cadenaSel)    &&
@@ -146,16 +132,12 @@ function filtrarYCargarTabla() {
     if (filtradas.length === 0) {
         tablaBody.innerHTML = `
             <tr>
-                <td colspan="5" style="text-align:center; padding:20px;">
-                    No hay tiendas con esos filtros
-                </td>
+                <td> No hay tiendas con esos filtros </td>
             </tr>`;
         return;
     }
 
-    // Creamos una fila por cada tienda filtrada.
-    // Usamos createElement + addEventListener en lugar de onclick="..."
-    // porque el temario desaconseja los manejadores en línea en el HTML.
+    // Recorremos las tiendas ya filtradas
     filtradas.forEach(tienda => {
         const fila = document.createElement('tr');
         fila.style.cursor = 'pointer';
@@ -181,7 +163,6 @@ function filtrarYCargarTabla() {
 }
 
 // MOSTRAR DETALLE EN EL PANEL LATERAL
-//
 // .find() busca el primer elemento del array que cumpla la
 // condición y lo devuelve, o undefined si no lo encuentra
 function mostrarDetalle(id) {
@@ -203,7 +184,6 @@ function mostrarDetalle(id) {
 }
 
 // ABRIR MODAL PARA AÑADIR
-//
 // Limpia todos los campos y abre el modal en modo 'anadir'
 function abrirModalAnadir() {
     modoModal = 'anadir';
@@ -218,7 +198,6 @@ function abrirModalAnadir() {
 }
 
 // ABRIR MODAL PARA MODIFICAR
-//
 // Rellena los campos con los datos de la tienda seleccionada
 // y abre el modal en modo 'modificar'
 function abrirModalModificar() {
@@ -249,9 +228,7 @@ function abrirModalModificar() {
     abrirModal();
 }
 
-// CONFIRMAR MODAL (botón Guardar)
-//
-// Delega en crearTienda o actualizarTienda según el modo
+// EDITAR/CREAR
 function confirmarModal() {
     if (modoModal === 'anadir') {
         crearTienda();
@@ -260,11 +237,7 @@ function confirmarModal() {
     }
 }
 
-// CREAR TIENDA — POST al servidor
-//
-// Recoge los valores del formulario, construye un objeto y
-// lo envía al servidor con fetch POST.
-//
+// CREAR TIENDA — post
 // fetch con opciones:
 //   method: 'POST'   → tipo de petición HTTP
 //   headers          → le decimos al servidor que enviamos JSON
@@ -320,10 +293,8 @@ async function crearTienda() {
     }
 }
 
-// ACTUALIZAR TIENDA — PUT al servidor
-//
+// ACTUALIZAR TIENDA — put
 // PUT reemplaza el recurso completo en el servidor.
-// La URL incluye el ID de la tienda a modificar: /tiendas/:i
 async function actualizarTienda() {
 
     const nombre = document.getElementById('f-nombre').value.trim();
@@ -368,10 +339,8 @@ async function actualizarTienda() {
     }
 }
 
-// ELIMINAR TIENDA — DELETE al servidor
-//
+// ELIMINAR TIENDA — delete
 // Pide confirmación antes de hacer la petición DELETE.
-// La URL incluye el ID del recurso: /tiendas/:i
 async function eliminarTienda() {
 
     if (!tiendaSeleccionadaId) {
@@ -414,7 +383,7 @@ async function eliminarTienda() {
     }
 }
 
-// HELPERS DEL MODA
+// Modales
 function abrirModal() {
     document.getElementById('vista-detalle').style.display    = 'none';
     document.getElementById('vista-formulario').style.display = 'block';
