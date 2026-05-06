@@ -162,9 +162,7 @@ function filtrarYCargarTabla() {
     });
 }
 
-// MOSTRAR DETALLE EN EL PANEL LATERAL
-// .find() busca el primer elemento del array que cumpla la
-// condición y lo devuelve, o undefined si no lo encuentra
+// Datos panel lateral
 function mostrarDetalle(id) {
 
     tiendaSeleccionadaId = id;
