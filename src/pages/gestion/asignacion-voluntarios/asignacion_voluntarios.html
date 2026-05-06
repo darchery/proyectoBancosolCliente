@@ -64,38 +64,33 @@
 </table>
 </section>
 
+
+
 <!-- PANEL DERECHO -->
 <aside class="details-panel">
 
   <div class="panel-header">ASIGNACIÓN SELECCIONADA</div>
 
-  <p><b>TIENDA:</b> <span id="d-tienda"></span></p>
-  <p><b>DOMICILIO:</b> <span id="d-domicilio"></span></p>
-  <p><b>LOCALIDAD:</b> <span id="d-localidad"></span></p>
-  <p><b>CAPITÁN:</b> <span id="d-capitan"></span></p>
+  <div class="detail-row"><span>TIENDA:</span>    <strong id="d-tienda">---</strong></div>
+  <div class="detail-row"><span>DOMICILIO:</span> <strong id="d-domicilio">---</strong></div>
+  <div class="detail-row"><span>LOCALIDAD:</span> <strong id="d-localidad">---</strong></div>
+  <div class="detail-row"><span>CAPITÁN:</span>   <strong id="d-capitan">---</strong></div>
 
   <div class="panel-header">ASIGNACIONES</div>
 
-  <p><b>Viernes Mañana:</b> <span id="d-viernes-manana"></span></p>
-  <p><b>Viernes Tarde:</b> <span id="d-viernes-tarde"></span></p>
-  <p><b>Sábado Mañana:</b> <span id="d-sabado-manana"></span></p>
-  <p><b>Sábado Tarde:</b> <span id="d-sabado-tarde"></span></p>
+  <div class="detail-row"><span>Viernes Mañana:</span> <strong id="d-viernes-manana">---</strong></div>
+  <div class="detail-row"><span>Viernes Tarde:</span>  <strong id="d-viernes-tarde">---</strong></div>
+  <div class="detail-row"><span>Sábado Mañana:</span>  <strong id="d-sabado-manana">---</strong></div>
+  <div class="detail-row"><span>Sábado Tarde:</span>   <strong id="d-sabado-tarde">---</strong></div>
 
   <div class="panel-header">OBSERVACIONES</div>
-  <p id="d-obs"></p>
+  <p id="d-obs" style="padding: 8px 12px;">---</p>
 
-  <!-- Botones ADMIN: acceso completo -->
+  <!-- Solo admin -->
   <div class="action-buttons" id="menu-admin" style="display:none;">
-    <button onclick="accion('anadir')">Añadir asignación</button>
-    <button onclick="accion('modificar')">Modificar</button>
-    <button onclick="accion('guardar')">Guardar</button>
-    <button onclick="accion('exportar')">Exportar</button>
-    <button onclick="accion('cancelar')">Cancelar</button>
-  </div>
-
-  <!-- Botones COORDINADOR: solo exportar -->
-  <div class="action-buttons" id="menu-coordinador" style="display:none;">
-    <button onclick="accion('exportar')">Exportar</button>
+    <button id="btn-anadir">Añadir asignación</button>
+    <button id="btn-modificar">Modificar</button>
+    <button id="btn-exportar">Exportar</button>
   </div>
 
 </aside>
