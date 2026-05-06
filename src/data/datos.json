@@ -162,7 +162,7 @@
     {
       "id": "1",
       "tienda": "Carrefour Hiper",
-      "cadena": "---",
+      "cadena": "CARREFOUR",
       "domicilio": "c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA",
       "localidad": "RINCON DE LA VICTORIA",
       "capitan": "Juan Pérez",
@@ -175,6 +175,7 @@
     {
       "id": "2",
       "tienda": "Carrefour Market",
+      "cadena": "CARREFOUR",
       "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
       "localidad": "RINCON DE LA VICTORIA",
       "capitan": "María López",
