@@ -1,6 +1,6 @@
 const rutasPorGestion = {
-    tiendas: '../gestion/gestionar_tiendas.html',
-    colaboradores: '../gestion/gestionar_colaboradores.html',
+    tiendas: '../gestion/tiendas/gestionar_tiendas.html',
+    colaboradores: '../gestion/colaboradores/gestionar_colaboradores.html',
     login: '../login/index_login.html',
     voluntarios: '../gestion/asignacion-voluntarios/asignacion_voluntarios.html',
 };
