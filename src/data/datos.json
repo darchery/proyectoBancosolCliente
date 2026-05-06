@@ -162,19 +162,20 @@
     {
       "id": "1",
       "tienda": "Carrefour Hiper",
+      "cadena": "CARREFOUR",
       "domicilio": "c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA",
       "localidad": "RINCON DE LA VICTORIA",
       "capitan": "Juan Pérez",
-      "viernes_manana": 3,
-      "viernes_tarde": 2,
-      "sabado_manana": 4,
-      "sabado_tarde": 3,
-      "observaciones": "Equipo completo",
-      "pendienteValidacion": false
+      "viernes_manana": "3",
+      "viernes_tarde": "2",
+      "sabado_manana": "4",
+      "sabado_tarde": "3",
+      "observaciones": "Equipo completo"
     },
     {
       "id": "2",
       "tienda": "Carrefour Market",
+      "cadena": "CARREFOUR",
       "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
       "localidad": "RINCON DE LA VICTORIA",
       "capitan": "María López",
