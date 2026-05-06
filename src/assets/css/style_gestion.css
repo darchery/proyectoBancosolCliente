@@ -1,4 +1,5 @@
 /* --- VARIABLES GLOBALES --- */
+
 :root {
     --blue-bancosol: #004a99;
     --border-color: #bdc3c7;
@@ -28,6 +29,7 @@ header h1 {
 }
 
 .logo-area { display: flex; align-items: center; gap: 15px; }
+.logo-area .title-area { margin-left: auto; }
 .logo-area img { height: 60px; }
 
 .admin-badge {
