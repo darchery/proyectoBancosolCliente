@@ -162,15 +162,15 @@
     {
       "id": "1",
       "tienda": "Carrefour Hiper",
+      "cadena": "---",
       "domicilio": "c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA",
       "localidad": "RINCON DE LA VICTORIA",
       "capitan": "Juan Pérez",
-      "viernes_manana": 3,
-      "viernes_tarde": 2,
-      "sabado_manana": 4,
-      "sabado_tarde": 3,
-      "observaciones": "Equipo completo",
-      "pendienteValidacion": false
+      "viernes_manana": "3",
+      "viernes_tarde": "2",
+      "sabado_manana": "4",
+      "sabado_tarde": "3",
+      "observaciones": "Equipo completo"
     },
     {
       "id": "2",
@@ -187,21 +187,73 @@
     }
   ],
   "campanyas": [
-    { "id": "primavera", "nombre": "PRIMAVERA", "activa": false },
-    { "id": "gran-recogida", "nombre": "GRAN RECOGIDA", "activa": true }
+    {
+      "id": "primavera",
+      "nombre": "PRIMAVERA",
+      "activa": false
+    },
+    {
+      "id": "gran-recogida",
+      "nombre": "GRAN RECOGIDA",
+      "activa": true
+    }
   ],
   "cadenas": [
-    { "id": "alcampo", "nombre": "ALCAMPO", "seleccionada": true },
-    { "id": "aldi", "nombre": "ALDI", "seleccionada": true },
-    { "id": "makro", "nombre": "MAKRO", "seleccionada": false },
-    { "id": "carrefour", "nombre": "CARREFOUR", "seleccionada": false },
-    { "id": "mas", "nombre": "MAS", "seleccionada": true },
-    { "id": "dia", "nombre": "DIA", "seleccionada": true },
-    { "id": "mercadona", "nombre": "MERCADONA", "seleccionada": true },
-    { "id": "eci", "nombre": "EL CORTE INGLES", "seleccionada": false },
-    { "id": "suma", "nombre": "SUMA", "seleccionada": false },
-    { "id": "eljamon", "nombre": "EL JAMON", "seleccionada": true },
-    { "id": "eroski", "nombre": "EROSKI", "seleccionada": false }
-  ]
-  ,"$schema": "./node_modules/json-server/schema.json"
+    {
+      "id": "alcampo",
+      "nombre": "ALCAMPO",
+      "seleccionada": true
+    },
+    {
+      "id": "aldi",
+      "nombre": "ALDI",
+      "seleccionada": true
+    },
+    {
+      "id": "makro",
+      "nombre": "MAKRO",
+      "seleccionada": false
+    },
+    {
+      "id": "carrefour",
+      "nombre": "CARREFOUR",
+      "seleccionada": false
+    },
+    {
+      "id": "mas",
+      "nombre": "MAS",
+      "seleccionada": true
+    },
+    {
+      "id": "dia",
+      "nombre": "DIA",
+      "seleccionada": true
+    },
+    {
+      "id": "mercadona",
+      "nombre": "MERCADONA",
+      "seleccionada": true
+    },
+    {
+      "id": "eci",
+      "nombre": "EL CORTE INGLES",
+      "seleccionada": false
+    },
+    {
+      "id": "suma",
+      "nombre": "SUMA",
+      "seleccionada": false
+    },
+    {
+      "id": "eljamon",
+      "nombre": "EL JAMON",
+      "seleccionada": true
+    },
+    {
+      "id": "eroski",
+      "nombre": "EROSKI",
+      "seleccionada": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

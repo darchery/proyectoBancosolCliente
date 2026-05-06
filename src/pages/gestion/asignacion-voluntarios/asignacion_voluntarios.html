@@ -1,108 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asignación de Voluntarios</title>
-<link rel="stylesheet" href="../../../assets/css/style_gestion.css">
-<script src="asignacion_voluntarios.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignación de Voluntarios</title>
+    <link rel="stylesheet" href="../../../assets/css/style_gestion.css">
 </head>
 
 <body>
 
 <header class="main-header">
-  <div class="logo-area">
-            <img src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo">
-    <div>
-      <h1>ASIGNACIÓN DE VOLUNTARIOS</h1>
+    <div class="logo-area">
+        <img src="../../../../assets/images/LOGO_BANCOSOL_FOOTER.png">
+        <div>
+            <h1>ASIGNACIÓN DE VOLUNTARIOS</h1>
+        </div>
     </div>
-  </div>
 </header>
 
 <main class="dashboard">
 
-<!-- FILTROS -->
-<section class="filters">
-  <div class="filter-group">
-    <label>USUARIO</label>
-    <span id="usuario-display" style="font-weight:bold; padding: 4px 8px;"></span>
+    <!-- FILTROS -->
+    <section class="filters">
+        <div class="filter-group">
+            <label>USUARIO</label>
+            <span id="usuario-display" style="font-weight:bold; padding:4px 8px;"></span>
 
-    <label>LOCALIDAD</label>
-    <select id="filtro-localidad">
-      <option value="Todas">Todas</option>
-      <option value="ALMACHAR">ALMACHAR</option>
-    </select>
-  </div>
+            <label>LOCALIDAD</label>
+            <select id="filtro-localidad">
+                <option value="Todas">Todas</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>CADENA</label>
+            <select id="filtro-cadena">
+                <option value="Todas">Todas</option>
+            </select>
+        </div>
+    </section>
 
-  <div class="filter-group">
-    <label>CADENA</label>
-    <select id="filtro-cadena">
-      <option>Todas</option>
-      <option>Bancosol</option>
-    </select>
-  </div>
-</section>
+    <div class="content-layout">
 
-<div class="content-layout">
+        <!-- TABLA -->
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>TIENDA</th>
+                        <th>DOMICILIO</th>
+                        <th>LOCALIDAD</th>
+                        <th>CAPITÁN</th>
+                        <th>VIERNES MAÑANA</th>
+                        <th>VIERNES TARDE</th>
+                        <th>SÁBADO MAÑANA</th>
+                        <th>SÁBADO TARDE</th>
+                        <th>OBSERVACIONES</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-body"></tbody>
+            </table>
+        </section>
 
-<!-- TABLA -->
-<section class="table-container">
-<table>
-<thead>
-<tr>
-<th>TIENDA</th>
-<th>DOMICILIO</th>
-<th>LOCALIDAD</th>
-<th>CAPITÁN</th>
-<th>VIERNES MAÑANA</th>
-<th>VIERNES TARDE</th>
-<th>SÁBADO MAÑANA</th>
-<th>SÁBADO TARDE</th>
-<th>OBSERVACIONES</th>
-</tr>
-</thead>
-<tbody id="tabla-body"></tbody>
-</table>
-</section>
+        <!-- PANEL LATERAL -->
+        <aside class="details-panel">
+            <div class="panel-header" id="panel-titulo">ASIGNACIÓN SELECCIONADA</div>
 
+            <!-- Vista detalle: visible por defecto -->
+            <div id="vista-detalle">
+                <div class="detail-row"><span>TIENDA:</span>          <strong id="d-tienda">---</strong></div>
+                <div class="detail-row"><span>DOMICILIO:</span>       <strong id="d-domicilio">---</strong></div>
+                <div class="detail-row"><span>LOCALIDAD:</span>       <strong id="d-localidad">---</strong></div>
+                <div class="detail-row"><span>CAPITÁN:</span>         <strong id="d-capitan">---</strong></div>
+                <div class="detail-row"><span>VIERNES MAÑANA:</span>  <strong id="d-viernes-manana">---</strong></div>
+                <div class="detail-row"><span>VIERNES TARDE:</span>   <strong id="d-viernes-tarde">---</strong></div>
+                <div class="detail-row"><span>SÁBADO MAÑANA:</span>   <strong id="d-sabado-manana">---</strong></div>
+                <div class="detail-row"><span>SÁBADO TARDE:</span>    <strong id="d-sabado-tarde">---</strong></div>
+                <div class="detail-row"><span>OBSERVACIONES:</span>   <strong id="d-obs">---</strong></div>
+            </div>
 
+            <!-- Vista formulario: oculta hasta Añadir/Modificar -->
+            <div id="vista-formulario" style="display:none">
+                <div class="detail-row"><span>ID</span>             <input type="text" id="f-id"></div>
+                <div class="detail-row"><span>TIENDA</span>         <input type="text" id="f-tienda"></div>
+                <div class="detail-row"><span>CADENA</span>         <input type="text" id="f-cadena"></div>
+                <div class="detail-row"><span>DOMICILIO</span>      <input type="text" id="f-domicilio"></div>
+                <div class="detail-row"><span>LOCALIDAD</span>      <input type="text" id="f-localidad"></div>
+                <div class="detail-row"><span>CAPITÁN</span>        <input type="text" id="f-capitan"></div>
+                <div class="detail-row"><span>VIE. MAÑANA</span>    <input type="text" id="f-viernes-manana"></div>
+                <div class="detail-row"><span>VIE. TARDE</span>     <input type="text" id="f-viernes-tarde"></div>
+                <div class="detail-row"><span>SÁB. MAÑANA</span>    <input type="text" id="f-sabado-manana"></div>
+                <div class="detail-row"><span>SÁB. TARDE</span>     <input type="text" id="f-sabado-tarde"></div>
+                <div class="detail-row"><span>OBSERVACIONES</span>  <input type="text" id="f-observaciones"></div>
 
-<!-- PANEL DERECHO -->
-<aside class="details-panel">
+                <div class="action-buttons">
+                    <button id="btn-confirmar">Guardar</button>
+                    <button id="btn-cancelar">Cancelar</button>
+                </div>
+            </div>
 
-  <div class="panel-header">ASIGNACIÓN SELECCIONADA</div>
+            <!-- Botones admin -->
+            <div class="action-buttons" id="menu-admin" style="display:none">
+                <button id="btn-anadir">Añadir asignación</button>
+                <button id="btn-modificar">Modificar</button>
+                <button id="btn-eliminar">Eliminar</button>
+            </div>
 
-  <div class="detail-row"><span>TIENDA:</span>    <strong id="d-tienda">---</strong></div>
-  <div class="detail-row"><span>DOMICILIO:</span> <strong id="d-domicilio">---</strong></div>
-  <div class="detail-row"><span>LOCALIDAD:</span> <strong id="d-localidad">---</strong></div>
-  <div class="detail-row"><span>CAPITÁN:</span>   <strong id="d-capitan">---</strong></div>
-
-  <div class="panel-header">ASIGNACIONES</div>
-
-  <div class="detail-row"><span>Viernes Mañana:</span> <strong id="d-viernes-manana">---</strong></div>
-  <div class="detail-row"><span>Viernes Tarde:</span>  <strong id="d-viernes-tarde">---</strong></div>
-  <div class="detail-row"><span>Sábado Mañana:</span>  <strong id="d-sabado-manana">---</strong></div>
-  <div class="detail-row"><span>Sábado Tarde:</span>   <strong id="d-sabado-tarde">---</strong></div>
-
-  <div class="panel-header">OBSERVACIONES</div>
-  <p id="d-obs" style="padding: 8px 12px;">---</p>
-
-  <!-- Solo admin -->
-  <div class="action-buttons" id="menu-admin" style="display:none;">
-    <button id="btn-anadir">Añadir asignación</button>
-    <button id="btn-modificar">Modificar</button>
-    <button id="btn-exportar">Exportar</button>
-  </div>
-
-</aside>
-
-</div>
+        </aside>
+    </div>
 </main>
 
-<footer>
-        <script src="../../../components/footer/footer_comun.js" defer></script>
-    </footer>
-
+<script src="asignacion_voluntarios.js"></script>
 </body>
 </html>
-
