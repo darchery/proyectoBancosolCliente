@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Campaña - Bancosol</title>
-    <script src="gestionar_campanyas.js" defer></script>
+    <script src="gestionar_campanya.js" defer></script>
     <link rel="stylesheet" href="../../../assets/css/style_gestion.css">
-
+    
 </head>
 <body class="page-campanya">
     <header class="main-header">
@@ -34,10 +34,9 @@
             </div>
 
             <div class="cadenas-actions">
-                <button id="btn-añadir">Añadir cadena</button>
+                <button id="btn-anyadir">Añadir cadena</button>
                 <button id="btn-eliminar">Eliminar cadena</button>
                 <button id="btn-modificar">Modificar cadena</button>
-                <button id="btn-cancelar">Cancelar</button>
                 <button id="btn-guardar">Guardar cambios</button>
             </div>
         </div>
@@ -51,10 +50,18 @@
             
             <div class="main-actions">
                 <button id="btn-generar">Generar campaña</button>
+                <button id="btn-historico">Ver histórico</button>
                 <button id="btn-salir-campanya">Salir</button>
             </div>
         </div>
     </main>
+
+    <!-- MODAL FLOTANTE PARA CRUD -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content" id="modal-content">
+            <!-- El contenido del modal se generará dinámicamente con JavaScript -->
+        </div>
+    </div>
     
 
     <footer>

@@ -217,16 +217,11 @@
     {
       "id": "carrefour",
       "nombre": "CARREFOUR",
-      "seleccionada": false
+      "seleccionada": true
     },
     {
       "id": "mas",
       "nombre": "MAS",
-      "seleccionada": true
-    },
-    {
-      "id": "dia",
-      "nombre": "DIA",
       "seleccionada": true
     },
     {
@@ -247,12 +242,76 @@
     {
       "id": "eljamon",
       "nombre": "EL JAMON",
-      "seleccionada": true
+      "seleccionada": false
     },
     {
       "id": "eroski",
       "nombre": "EROSKI",
       "seleccionada": false
+    },
+    {
+      "nombre": "DIA",
+      "seleccionada": false,
+      "id": "dia"
+    },
+    {
+      "nombre": "CONSUM",
+      "seleccionada": false,
+      "id": "consum"
+    },
+    {
+      "nombre": "LILD",
+      "seleccionada": false,
+      "id": "JRnvC61xgSo"
+    }
+  ],
+  "campanyas_generadas": [
+    {
+      "id": "primavera-2024",
+      "nombre": "PRIMAVERA 2024",
+      "activa": true,
+      "tipo": "primavera",
+      "cadenas": [
+        "alcampo",
+        "aldi",
+        "makro",
+        "carrefour",
+        "mas",
+        "mercadona"
+      ]
+    },
+    {
+      "id": "PaBB3dLo7Lg",
+      "nombre": "GRAN RECOGIDA - 6/5/2026",
+      "tipo": "gran-recogida",
+      "cadenas": [
+        "alcampo",
+        "aldi",
+        "mas",
+        "mercadona",
+        "eljamon",
+        "eroski",
+        "GAoVdc0G4pQ",
+        "OMOiSnvF5Ok"
+      ]
+    },
+    {
+      "id": "R8Zaut0pNqY",
+      "nombre": "GRAN RECOGIDA - 6/5/2026",
+      "tipo": "gran-recogida",
+      "cadenas": [
+        "alcampo",
+        "aldi",
+        "mercadona"
+      ]
+    },
+    {
+      "id": "KDZTyyARvgE",
+      "nombre": "PRIMAVERA - 6/5/2026",
+      "tipo": "primavera",
+      "cadenas": [
+        "aldi"
+      ]
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

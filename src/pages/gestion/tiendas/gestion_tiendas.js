@@ -1,3 +1,4 @@
+// npx json-server --port 3001 src/data/datos.json
 // VARIABLES GLOBALES
 
 let tiendas = [];
