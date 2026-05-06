@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById('btn-cancelar')
         .addEventListener('click', cerrarModal);
     document.getElementById('btn-exportar')
-    .addEventListener('click', exportarExcel);
+        .addEventListener('click', exportarAsignacionVoluntarios);
 });
 
 // CARGAR ASIGNACIONES
@@ -363,54 +363,30 @@ function limpiarModal() {
         .forEach(id => document.getElementById(id).value = '');
 }
 
-// EXPORTAR A EXCEL
-function exportarExcel() {
-
-    // Leemos los filtros activos para exportar solo lo que se ve en pantalla
-    const localidadSel = document.getElementById('filtro-localidad')?.value || 'Todas';
-    const cadenaSel    = document.getElementById('filtro-cadena')?.value    || 'Todas';
-
-    const filtradas = asignaciones.filter(a =>
-        (localidadSel === 'Todas' || a.localidad === localidadSel) &&
-        (cadenaSel    === 'Todas' || a.cadena    === cadenaSel)
-    );
-
-    if (!filtradas.length) {
-        alert('No hay datos para exportar con los filtros actuales.');
+// EXPORTAR ASIGNACIÓN DE VOLUNTARIOS A EXCEL
+function exportarAsignacionVoluntarios() {
+    if (asignaciones.length === 0) {
+        alert('No hay asignaciones de voluntarios para exportar.');
         return;
     }
 
-    // Construimos las filas con las cabeceras que queremos en el Excel
-    const filas = filtradas.map(a => ({
-        'TIENDA':          a.tienda,
-        'CADENA':          a.cadena        || '---',
-        'DOMICILIO':       a.domicilio,
-        'LOCALIDAD':       a.localidad,
-        'CAPITÁN':         a.capitan,
-        'VIERNES MAÑANA':  a.viernes_manana,
-        'VIERNES TARDE':   a.viernes_tarde,
-        'SÁBADO MAÑANA':   a.sabado_manana,
-        'SÁBADO TARDE':    a.sabado_tarde,
-        'OBSERVACIONES':   a.observaciones  || ''
+    const datos = asignaciones.map(a => ({
+        'ID':               a.id             || '',
+        'TIENDA':           a.tienda         || '',
+        'CADENA':           a.cadena         || '',
+        'DOMICILIO':        a.domicilio      || '',
+        'LOCALIDAD':        a.localidad      || '',
+        'CAPITÁN':          a.capitan        || '',
+        'VIERNES MAÑANA':   a.viernes_manana || '',
+        'VIERNES TARDE':    a.viernes_tarde  || '',
+        'SÁBADO MAÑANA':    a.sabado_manana  || '',
+        'SÁBADO TARDE':     a.sabado_tarde   || '',
+        'OBSERVACIONES':    a.observaciones  || '',
+        'PENDIENTE':        a.pendienteValidacion ? 'Sí' : 'No'
     }));
 
-    // SheetJS: array de objetos → hoja → libro → descarga
-    const hoja  = XLSX.utils.json_to_sheet(filas);
+    const hoja  = XLSX.utils.json_to_sheet(datos);
     const libro = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(libro, hoja, 'Asignaciones');
-
-    // Ajustamos el ancho de las columnas automáticamente
-    const anchos = Object.keys(filas[0]).map(cabecera => ({
-        wch: Math.max(
-            cabecera.length,
-            ...filas.map(f => String(f[cabecera] ?? '').length)
-        ) + 2
-    }));
-    hoja['!cols'] = anchos;
-
-    // Nombre del archivo con fecha actual
-    const fecha    = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-    const nombreArchivo = `asignaciones_${fecha}.xlsx`;
-
-    XLSX.writeFile(libro, nombreArchivo);
+    XLSX.writeFile(libro, 'asignacion_voluntarios.xlsx');
 }

@@ -179,12 +179,11 @@
       "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
       "localidad": "RINCON DE LA VICTORIA",
       "capitan": "María López",
-      "viernes_manana": 1,
-      "viernes_tarde": 2,
-      "sabado_manana": 2,
-      "sabado_tarde": 1,
-      "observaciones": "Faltan voluntarios sábado",
-      "pendienteValidacion": true
+      "viernes_manana": "1",
+      "viernes_tarde": "2",
+      "sabado_manana": "2",
+      "sabado_tarde": "1",
+      "observaciones": "Faltan voluntarios sábado"
     }
   ],
   "campanyas": [
