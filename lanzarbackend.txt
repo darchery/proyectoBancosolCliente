@@ -1,1 +1,1 @@
-npx json-server db.json --port 3001
+npx json-server --port 3001 src/data/datos.json
