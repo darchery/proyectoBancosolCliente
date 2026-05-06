@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (usuarioDisplay) usuarioDisplay.textContent = `${usuarioActual} (${rolActual})`;
 
     // Permisos
-    if (rolActual === 'admin') {
+    if (rolActual === 'admin' || rolActual === 'coordinador') {
         menuAdmin.style.display = 'grid';
     }
 
