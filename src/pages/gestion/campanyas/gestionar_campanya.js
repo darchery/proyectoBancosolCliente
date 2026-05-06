@@ -1,25 +1,3 @@
-// Datos iniciales de campañas y cadenas
-const datosCampanya = {
-    campanyas: [
-        { id: 'primavera', nombre: 'PRIMAVERA', activa: false },
-        { id: 'gran-recogida', nombre: 'GRAN RECOGIDA', activa: true }
-    ],
-    cadenas: [
-        { id: 'alcampo', nombre: 'ALCAMPO', seleccionada: true },
-        { id: 'lidl', nombre: 'LIDL', seleccionada: true },
-        { id: 'aldi', nombre: 'ALDI', seleccionada: true },
-        { id: 'makro', nombre: 'MAKRO', seleccionada: false },
-        { id: 'carrefour', nombre: 'CARREFOUR', seleccionada: false },
-        { id: 'mas', nombre: 'MAS', seleccionada: true },
-        { id: 'dia', nombre: 'DIA', seleccionada: true },
-        { id: 'mercadona', nombre: 'MERCADONA', seleccionada: true },
-        { id: 'eci', nombre: 'EL CORTE INGLES', seleccionada: false },
-        { id: 'suma', nombre: 'SUMA', seleccionada: false },
-        { id: 'eljamon', nombre: 'EL JAMON', seleccionada: true },
-        { id: 'eroski', nombre: 'EROSKI', seleccionada: false }
-    ]
-};
-
 const rutasPorGestion = {
     home_admin: '../../welcome/welcome_admin.html',
 };
