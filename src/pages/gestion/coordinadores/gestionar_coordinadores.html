@@ -18,7 +18,24 @@
     </header>
 
     <main class="dashboard">
+
+        <!-- ── FILTROS ── -->
+        <section class="filters">
+            <div class="filter-group">
+                <label>ENTIDAD</label>
+                <select id="filtro-entidad">
+                    <option value="Todas">Todas</option>
+                </select>
+
+                <label>ÁREA</label>
+                <select id="filtro-area">
+                    <option value="Todas">Todas</option>
+                </select>
+            </div>
+        </section>
+
         <div class="content-layout">   
+            <!-- ── TABLA ── -->
             <section class="table-container">
                 <table>
                     <thead>
@@ -33,19 +50,48 @@
                             <th>CONTRASEÑA</th>
                         </tr>
                     </thead>
-                    <tbody id="tabla-body">
-                        </tbody>
+                    <tbody id="tabla-body"></tbody>
                 </table>
             </section>
 
+            <!-- ── PANEL LATERAL ── -->
             <aside class="details-panel">
-                <div class="action-buttons" id="admin-menu" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
-                    <button>Añadir</button>
-                    <button>Modificar</button>
-                    <button>Eliminar</button>
-                    <button>Guardar</button>
-                    <button>Cancelar</button>
-                    <button>Exportar</button>
+                <div class="panel-header" id="panel-titulo">COORDINADOR SELECCIONADO</div>
+
+                <!-- Vista de detalle: visible por defecto -->
+                <div id="vista-detalle">
+                    <div class="detail-row"><span>ID:</span>        <strong id="det-id">---</strong></div>
+                    <div class="detail-row"><span>ENTIDAD:</span>   <strong id="det-entidad">---</strong></div>
+                    <div class="detail-row"><span>ÁREA:</span>      <strong id="det-area">---</strong></div>
+                    <div class="detail-row"><span>TELÉFONO:</span>  <strong id="det-tlf">---</strong></div>
+                    <div class="detail-row"><span>CORREO:</span>    <strong id="det-email">---</strong></div>
+                    <div class="detail-row"><span>TIENDAS:</span>   <strong id="det-tiendas">---</strong></div>
+                    <div class="detail-row"><span>USUARIO:</span>   <strong id="det-usuario">---</strong></div>
+                </div>
+
+                <!-- Vista de formulario: oculta hasta que se pulse Añadir o Modificar -->
+                <div id="vista-formulario" style="display:none">
+                    <div class="detail-row"><span>ID</span>        <input type="text" id="f-id"></div>
+                    <div class="detail-row"><span>NOMBRE</span>    <input type="text" id="f-nombre"></div>
+                    <div class="detail-row"><span>ENTIDAD</span>   <input type="text" id="f-entidad"></div>
+                    <div class="detail-row"><span>ÁREA</span>      <input type="text" id="f-area"></div>
+                    <div class="detail-row"><span>TELÉFONO</span>  <input type="text" id="f-tlf"></div>
+                    <div class="detail-row"><span>CORREO</span>    <input type="text" id="f-email"></div>
+                    <div class="detail-row"><span>TIENDAS</span>   <input type="number" id="f-tiendas"></div>
+                    <div class="detail-row"><span>USUARIO</span>   <input type="text" id="f-usuario"></div>
+                    <div class="detail-row"><span>PASSWORD</span>  <input type="password" id="f-pass"></div>
+
+                    <div class="action-buttons">
+                        <button id="btn-confirmar">Guardar</button>
+                        <button id="btn-cancelar">Cancelar</button>
+                    </div>
+                </div>
+
+                <!-- Botones de acción: solo visibles para admin -->
+                <div class="action-buttons" id="admin-menu" style="display:none">
+                    <button id="btn-anadir">Añadir coordinador</button>
+                    <button id="btn-modificar">Modificar coordinador</button>
+                    <button id="btn-eliminar">Eliminar coordinador</button>
                 </div>
             </aside>
         </div>
