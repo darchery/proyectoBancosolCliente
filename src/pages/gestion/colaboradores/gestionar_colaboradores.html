@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-
 <header class="main-header">
     <div class="logo-area">
         <img src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo">
@@ -70,17 +69,17 @@
                 <div class="detail-row"><span>COORDINADOR:</span>  <strong id="det-coord">---</strong></div>
                 <div class="detail-row"><span>TIENDA ID:</span>    <strong id="det-tienda">---</strong></div>
 
-                <div class="panel-header" style="margin-top:10px;">CONTACTOS</div>
+                <div class="panel-header mt-10">CONTACTOS</div>
                 <div class="detail-row"><span>Contacto 1:</span>   <strong id="det-c1">---</strong></div>
                 <div class="detail-row"><span>Contacto 2:</span>   <strong id="det-c2">---</strong></div>
                 <div class="detail-row"><span>Contacto 3:</span>   <strong id="det-c3">---</strong></div>
 
-                <div class="panel-header" style="margin-top:10px;">OBSERVACIONES</div>
+                <div class="panel-header mt-10">OBSERVACIONES</div>
                 <div class="detail-row"><strong id="det-obs">---</strong></div>
             </div>
 
             <!-- Vista formulario: oculta hasta que se pulse Añadir o Modificar -->
-            <div id="vista-formulario" style="display:none; overflow-y:auto; max-height:70vh;">
+            <div id="vista-formulario" class="hidden max-h-70vh">
                 <div class="detail-row"><span>NOMBRE *</span>      <input type="text" id="f-nombre"></div>
                 <div class="detail-row"><span>DOMICILIO</span>     <input type="text" id="f-domicilio"></div>
                 <div class="detail-row"><span>CP</span>            <input type="text" id="f-cp"></div>
@@ -88,46 +87,46 @@
                 <div class="detail-row"><span>COLABORA EN</span>   <input type="text" id="f-colabora"></div>
                 <div class="detail-row"><span>COORDINADOR</span>   <input type="text" id="f-coord-input"></div>
 
-                <div style="padding: 4px 0; font-weight:bold; font-size:.85em; margin-top:6px;">CONTACTO 1</div>
+                <div class="py-4 fw-bold fs-085 mt-10">CONTACTO 1</div>
                 <div class="detail-row"><span>Nombre</span>        <input type="text" id="f-c1-nombre"></div>
                 <div class="detail-row"><span>Teléfono</span>      <input type="text" id="f-c1-tel"></div>
 
-                <div style="padding: 4px 0; font-weight:bold; font-size:.85em; margin-top:6px;">CONTACTO 2</div>
+                <div class="py-4 fw-bold fs-085 mt-10">CONTACTO 2</div>
                 <div class="detail-row"><span>Nombre</span>        <input type="text" id="f-c2-nombre"></div>
                 <div class="detail-row"><span>Teléfono</span>      <input type="text" id="f-c2-tel"></div>
 
-                <div style="padding: 4px 0; font-weight:bold; font-size:.85em; margin-top:6px;">CONTACTO 3</div>
+                <div class="py-4 fw-bold fs-085 mt-10">CONTACTO 3</div>
                 <div class="detail-row"><span>Nombre</span>        <input type="text" id="f-c3-nombre"></div>
                 <div class="detail-row"><span>Teléfono</span>      <input type="text" id="f-c3-tel"></div>
 
-                <div style="padding: 4px 0; font-weight:bold; font-size:.85em; margin-top:6px;">OBSERVACIONES</div>
+                <div class="py-4 fw-bold fs-085 mt-10">OBSERVACIONES</div>
                 <div class="detail-row">
-                    <textarea id="f-obs" rows="3" style="width:100%; padding:4px; box-sizing:border-box;"></textarea>
+                    <textarea id="f-obs" rows="3" class="w-100 p-4"></textarea>
                 </div>
 
-                <div class="action-buttons" style="margin-top:10px;">
+                <div class="action-buttons mt-10">
                     <button id="btn-confirmar">Guardar</button>
                     <button id="btn-cancelar">Cancelar</button>
                 </div>
             </div>
 
             <!-- Vista asignar tienda -->
-            <div id="vista-asignar" style="display:none;">
-                <p style="font-size:.9em; margin-bottom:8px;">Selecciona la tienda a asignar al colaborador:</p>
+            <div id="vista-asignar" class="hidden">
+                <p class="fs-09 mb-8">Selecciona la tienda a asignar al colaborador:</p>
                 <div class="detail-row">
                     <span>TIENDA</span>
-                    <select id="f-tienda-id" style="width:100%; padding:4px;">
+                    <select id="f-tienda-id" class="w-100 p-4">
                         <option value="">-- Sin asignar --</option>
                     </select>
                 </div>
-                <div class="action-buttons" style="margin-top:10px;">
+                <div class="action-buttons mt-10">
                     <button id="btn-confirmar-asignar">Asignar</button>
                     <button id="btn-cancelar-asignar">Cancelar</button>
                 </div>
             </div>
 
             <!-- Botones admin -->
-            <div class="action-buttons" id="admin-menu" style="display:none; margin-top:10px;">
+            <div class="action-buttons hidden mt-10" id="admin-menu">
                 <button id="btn-anadir">Añadir colaborador</button>
                 <button id="btn-modificar">Modificar colaborador</button>
                 <button id="btn-eliminar">Eliminar colaborador</button>
@@ -136,7 +135,7 @@
             </div>
 
             <!-- Botones coordinador -->
-            <div class="action-buttons" id="coord-menu" style="display:none; margin-top:10px;">
+            <div class="action-buttons hidden mt-10" id="coord-menu">
                 <button id="btn-anadir-pendiente">Añadir (pendiente validación)</button>
                 <button id="btn-exportar-coord">Exportar</button>
             </div>

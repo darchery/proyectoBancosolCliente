@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 2º Permisos
     if (rolActual === 'admin') {
-        if (menuAdmin) menuAdmin.style.display = 'grid';
+        if (menuAdmin) menuAdmin.classList.remove('hidden');
     }
 
     // 3º Cargamos y mostramos tablas
@@ -359,19 +359,19 @@ async function eliminarCoordinador() {
 function abrirModal() {
     const vistaDetalle = document.querySelector('#vista-detalle');
     const vistaForm = document.querySelector('#vista-formulario');
-    if (vistaDetalle) vistaDetalle.style.display = 'none';
-    if (vistaForm) vistaForm.style.display = 'block';
+    if (vistaDetalle) vistaDetalle.classList.add('hidden');
+    if (vistaForm) vistaForm.classList.remove('hidden');
 }
 
 function cerrarModal() {
     const vistaDetalle = document.querySelector('#vista-detalle');
     const vistaForm = document.querySelector('#vista-formulario');
-    if (vistaForm) vistaForm.style.display = 'none';
-    if (vistaDetalle) vistaDetalle.style.display = 'block';
-    
+    if (vistaForm) vistaForm.classList.add('hidden');
+    if (vistaDetalle) vistaDetalle.classList.remove('hidden');
+
     const panelTitulo = document.querySelector('#panel-titulo');
     if (panelTitulo) panelTitulo.textContent = 'COORDINADOR SELECCIONADO';
-    
+
     limpiarModal();
 }
 

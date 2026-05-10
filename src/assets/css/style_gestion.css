@@ -95,6 +95,44 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     margin-top: 20px;
 }
 
+/* --- CLASES DE UTILIDAD (Para limpiar estilos in-line) --- */
+.hidden { display: none !important; }
+.mt-10 { margin-top: 10px !important; }
+.mt-20 { margin-top: 20px !important; }
+.mb-8  { margin-bottom: 8px !important; }
+.p-4   { padding: 4px !important; }
+.py-4  { padding: 4px 0 !important; }
+.px-8  { padding: 4px 8px !important; }
+.w-100 { width: 100% !important; box-sizing: border-box; }
+.fw-bold { font-weight: bold !important; }
+.fs-085 { font-size: 0.85em !important; }
+.fs-09  { font-size: 0.9em !important; }
+.text-center { text-align: center !important; }
+.opacity-05 { opacity: 0.5 !important; }
+.grayscale { filter: grayscale(1) !important; }
+.max-h-70vh { max-height: 70vh; overflow-y: auto; }
+
+/* --- ESTILOS ESPECÍFICOS REUBICADOS --- */
+.usuario-badge {
+    font-weight: bold;
+    padding: 4px 8px;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #666;
+    margin-top: 20px;
+}
+
+.panel-section-header {
+    background: var(--blue-bancosol);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /* --- ESPECÍFICO: GESTIONAR_CAMPANYA.HTML --- */
 .page-campanya .management-container {
     display: flex;

@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 2º Permisos
     if (rolActual === 'admin') {
-        adminMenu.style.display = 'grid';
+        if (adminMenu) adminMenu.classList.remove('hidden');
     } else if (rolActual === 'coordinador' || rolActual === 'capitan_coordinador') {
-        coordMenu.style.display = 'grid';
+        if (coordMenu) coordMenu.classList.remove('hidden');
     }
 
     // 3º Cargamos y mostramos tablas
@@ -191,9 +191,22 @@ function mostrarDetalle(id) {
 
 // CONTROL DE VISTAS DEL PANEL
 function mostrarVista(cual) {
-    document.getElementById('vista-detalle').style.display   = cual === 'detalle'  ? 'block' : 'none';
-    document.getElementById('vista-formulario').style.display = cual === 'formulario' ? 'block' : 'none';
-    document.getElementById('vista-asignar').style.display   = cual === 'asignar'  ? 'block' : 'none';
+    const vistaDetalle = document.getElementById('vista-detalle');
+    const vistaForm = document.getElementById('vista-formulario');
+    const vistaAsignar = document.getElementById('vista-asignar');
+
+    if (vistaDetalle) {
+        if (cual === 'detalle') vistaDetalle.classList.remove('hidden');
+        else vistaDetalle.classList.add('hidden');
+    }
+    if (vistaForm) {
+        if (cual === 'formulario') vistaForm.classList.remove('hidden');
+        else vistaForm.classList.add('hidden');
+    }
+    if (vistaAsignar) {
+        if (cual === 'asignar') vistaAsignar.classList.remove('hidden');
+        else vistaAsignar.classList.add('hidden');
+    }
 }
 
 // AÑADIR

@@ -9,10 +9,9 @@
 </head>
 
 <body>
-
 <header class="main-header">
     <div class="logo-area">
-        <img src="../../../../assets/images/LOGO_BANCOSOL_FOOTER.png">
+        <img src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo">
         <div>
             <h1>ASIGNACIÓN DE VOLUNTARIOS</h1>
         </div>
@@ -25,7 +24,7 @@
     <section class="filters">
         <div class="filter-group">
             <label>USUARIO</label>
-            <span id="usuario-display" style="font-weight:bold; padding:4px 8px;"></span>
+            <span id="usuario-display" class="usuario-badge"></span>
 
             <label>LOCALIDAD</label>
             <select id="filtro-localidad">
@@ -80,7 +79,7 @@
             </div>
 
             <!-- Vista formulario: oculta hasta Añadir/Modificar -->
-            <div id="vista-formulario" style="display:none">
+            <div id="vista-formulario" class="hidden">
                 <div class="detail-row"><span>ID</span>             <input type="text" id="f-id"></div>
                 <div class="detail-row"><span>TIENDA</span>         <input type="text" id="f-tienda"></div>
                 <div class="detail-row"><span>CADENA</span>         <input type="text" id="f-cadena"></div>
@@ -100,7 +99,7 @@
             </div>
 
             <!-- Botones admin -->
-            <div class="action-buttons" id="menu-admin" style="display:none">
+            <div class="action-buttons hidden" id="menu-admin">
                 <button id="btn-anadir">Añadir asignación</button>
                 <button id="btn-modificar">Modificar</button>
                 <button id="btn-eliminar">Eliminar</button>

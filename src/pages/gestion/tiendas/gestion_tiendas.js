@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     // 2º Permisos
     if (rolActual === 'admin') {
-        menuAdmin.style.display = 'grid';
+        if (menuAdmin) menuAdmin.classList.remove('hidden');
     }
 
     // 3º Cargamos y mostramos tablas
@@ -384,13 +384,13 @@ async function eliminarTienda() {
 
 // Modales
 function abrirModal() {
-    document.getElementById('vista-detalle').style.display    = 'none';
-    document.getElementById('vista-formulario').style.display = 'block';
+    document.getElementById('vista-detalle').classList.add('hidden');
+    document.getElementById('vista-formulario').classList.remove('hidden');
 }
 
 function cerrarModal() {
-    document.getElementById('vista-formulario').style.display = 'none';
-    document.getElementById('vista-detalle').style.display    = 'block';
+    document.getElementById('vista-formulario').classList.add('hidden');
+    document.getElementById('vista-detalle').classList.remove('hidden');
     document.getElementById('panel-titulo').textContent       = 'TIENDA SELECCIONADA';
     limpiarModal();
 }
