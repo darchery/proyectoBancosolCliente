@@ -285,7 +285,7 @@ async function actualizarAsignacion() {
 
     try {
         const respuesta = await fetch(`${API_URL}/asignaciones/${asignacionSeleccionadaId}`, {
-            method:  'PUT',
+            method:  'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify(actualizada)
         });
