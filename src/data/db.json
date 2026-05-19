@@ -1,34 +1,29 @@
 {
   "usuarios": [
     {
-      "usuario": "admin",
-      "clave": "admin",
-      "rol": "admin",
-      "id": "uyMFQV2x0CE"
+        "usuario": "admin",
+        "clave": "admin",
+        "rol": "admin"
     },
     {
-      "usuario": "capitan",
-      "clave": "capitan",
-      "rol": "capitan",
-      "id": "na1OqaL41iU"
+        "usuario": "capitan",
+        "clave": "capitan",
+        "rol": "capitan"
     },
     {
-      "usuario": "coordinador",
-      "clave": "coordinador",
-      "rol": "coordinador",
-      "id": "VVgflUsIXBw"
+        "usuario": "coordinador",
+        "clave": "coordinador",
+        "rol": "coordinador"
     },
     {
-      "usuario": "capitan_coordinador",
-      "clave": "capitan_coordinador",
-      "rol": "capitan_coordinador",
-      "id": "2XoGGBcjWUU"
+        "usuario": "capitan_coordinador",
+        "clave": "capitan_coordinador",
+        "rol": "capitan_coordinador"
     },
     {
-      "usuario": "entidad_colaboradora",
-      "clave": "entidad_colaboradora",
-      "rol": "entidad_colaboradora",
-      "id": "sa4NilbkVZY"
+        "usuario": "entidad_colaboradora",
+        "clave": "entidad_colaboradora",
+        "rol": "entidad_colaboradora"
     }
   ],
   "colaboradores": [
@@ -199,7 +194,7 @@
       "localidad": "RINCON DE LA VICTORIA",
       "capitan": "Juan Pérez",
       "viernes_manana": "3",
-      "viernes_tarde": "5",
+      "viernes_tarde": "2",
       "sabado_manana": "4",
       "sabado_tarde": "3",
       "observaciones": "Equipo completo"
