@@ -140,7 +140,7 @@ function rellenarCheckboxCampanyas(idCampanyasContainer, valores) {
         // Creamos un div para cada checkbox y su etiqueta
         const divCheckbox = document.createElement('div');
         divCheckbox.className = 'checkbox-item';
-        divCheckbox.style.marginTop = '10px';
+        divCheckbox.classList.add('mt-10');
 
         // Creamos el checkbox
         const input = document.createElement('input');
@@ -155,7 +155,7 @@ function rellenarCheckboxCampanyas(idCampanyasContainer, valores) {
         const label = document.createElement('label');
         label.htmlFor = valor.id;
         label.textContent = valor.nombre
-        label.style.marginLeft = '8px';
+        label.classList.add('ml-8');
 
         // Añadimos el checkbox y su etiqueta al div, y luego el div al contenedor
         divCheckbox.appendChild(input);
@@ -304,8 +304,7 @@ function mostrarModalEliminar() {
     // Instrucción al usuario
     const instruccion = document.createElement('p');
     instruccion.textContent = 'Selecciona la cadena que deseas eliminar:';
-    instruccion.style.color = '#666';
-    instruccion.style.marginBottom = '16px';
+    instruccion.classList.add('text-muted', 'mb-16');
     divBody.appendChild(instruccion);
 
     // --- LISTAR TODAS LAS CADENAS CON RADIO BUTTONS ---
@@ -392,8 +391,7 @@ function mostrarModalModificar() {
     // Instrucción al usuario
     const instruccion = document.createElement('p');
     instruccion.textContent = 'Selecciona la cadena que deseas modificar:';
-    instruccion.style.color = '#666';
-    instruccion.style.marginBottom = '16px';
+    instruccion.classList.add('text-muted', 'mb-16');
     divBody.appendChild(instruccion);
 
     // --- LISTAR TODAS LAS CADENAS CON RADIO BUTTONS ---
@@ -427,8 +425,7 @@ function mostrarModalModificar() {
     // --- CREAR FORMULARIO DE EDICIÓN (oculto inicialmente) ---
     const divFormEdicion = document.createElement('div');
     divFormEdicion.id = 'form-edicion';
-    divFormEdicion.style.marginTop = '20px';
-    divFormEdicion.style.display = 'none';
+    divFormEdicion.classList.add('mt-20', 'hidden');
 
     // Grupo de formulario
     const divFormGroup = document.createElement('div');
@@ -467,7 +464,7 @@ function mostrarModalModificar() {
     btnGuardar.id = 'btn-confirmar-edit';
     btnGuardar.className = 'btn-modal primary';
     btnGuardar.textContent = 'Guardar cambios';
-    btnGuardar.style.display = 'none';
+    btnGuardar.classList.add('hidden');
     btnGuardar.onclick = confirmarEdicionCadena;
 
     // Añadir botones al footer
@@ -517,29 +514,24 @@ function mostrarModalGuardar() {
     // Título de cadenas seleccionadas
     const subtitulo = document.createElement('p');
     subtitulo.innerHTML = '<strong>Cadenas seleccionadas:</strong>';
-    subtitulo.style.color = '#333';
-    subtitulo.style.marginBottom = '16px';
+    subtitulo.classList.add('text-dark', 'mb-16');
     divBody.appendChild(subtitulo);
 
     // --- MOSTRAR CADENAS EN UN CONTENEDOR ---
     const divContenedorCadenasSeleccionadas = document.createElement('div');
-    divContenedorCadenasSeleccionadas.style.backgroundColor = '#f0f0f0';
-    divContenedorCadenasSeleccionadas.style.padding = '12px';
-    divContenedorCadenasSeleccionadas.style.borderRadius = '6px';
-    divContenedorCadenasSeleccionadas.style.marginBottom = '16px';
+    divContenedorCadenasSeleccionadas.classList.add('bg-light-gray', 'p-12', 'rounded-6', 'mb-16');
 
     // Listar cadenas seleccionadas
     const cadenasText = document.createElement('p');
     cadenasText.textContent = cadenasSeleccionadas || 'Ninguna cadena seleccionada';
-    cadenasText.style.margin = '0';
-    cadenasText.style.color = '#666';
+    cadenasText.classList.add('m-0', 'text-muted');
     divContenedorCadenasSeleccionadas.appendChild(cadenasText);
     divBody.appendChild(divContenedorCadenasSeleccionadas);
 
     // Pregunta de confirmación
     const pregunta = document.createElement('p');
     pregunta.textContent = '¿Deseas guardar estos cambios?';
-    pregunta.style.color = '#666';
+    pregunta.classList.add('text-muted');
     divBody.appendChild(pregunta);
 
     // --- CREAR FOOTER DEL MODAL ---
@@ -678,8 +670,8 @@ function seleccionarCadenaParaEditar(idCadena) {
     // cargar los datos de la cadena en el input correspondiente
     if (formEdicion && btnConfirmarEdit && cadenaEnEdicion) {
         // Mostrar el formulario de edición y el botón de confirmar cambios
-        formEdicion.style.display = 'block';
-        btnConfirmarEdit.style.display = 'block';
+        formEdicion.classList.remove('hidden');
+        btnConfirmarEdit.classList.remove('hidden');
         
         // Cargar el nombre de la cadena seleccionada en el input del formulario de edición
         document.querySelector('#nombre-cadena-edit').value = cadenaEnEdicion.nombre;
