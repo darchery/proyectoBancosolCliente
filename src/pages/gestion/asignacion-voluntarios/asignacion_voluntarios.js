@@ -113,10 +113,9 @@ function filtrarYCargarTabla() {
 
     filtradas.forEach(a => {
         const fila = document.createElement('tr');
-        fila.style.cursor = 'pointer';
 
         if (a.id === asignacionSeleccionadaId) {
-            fila.style.backgroundColor = '#fde8e8';
+            fila.classList.add('fila-seleccionada');  
         }
 
         const pendiente = a.pendienteValidacion
