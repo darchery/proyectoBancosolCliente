@@ -391,11 +391,19 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
 
 /* --- CLASES ADICIONALES PARA REFACTORIZACIÓN --- */
 .mb-16 { margin-bottom: 16px !important; }
+.mb-10 { margin-bottom: 10px !important; }
 .ml-8 { margin-left: 8px !important; }
+.my-4 { margin: 4px 0 !important; }
 .text-muted { color: #666 !important; }
 .text-dark { color: #333 !important; }
+.text-secondary { color: #555 !important; }
 .d-block { display: block !important; }
 .bg-light-gray { background-color: #f0f0f0 !important; }
+.bg-off-white { background-color: #f9f9f9 !important; }
 .p-12 { padding: 12px !important; }
 .rounded-6 { border-radius: 6px !important; }
+.rounded-4 { border-radius: 4px !important; }
 .m-0 { margin: 0 !important; }
+.border-bottom-light { border-bottom: 1px solid #ddd !important; }
+.max-h-400px { max-height: 400px !important; overflow-y: auto !important; }
+.fs-12 { font-size: 12px !important; }

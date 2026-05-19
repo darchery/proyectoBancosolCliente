@@ -895,50 +895,40 @@ async function mostrarModalHistorico() {
     if (campanyasGeneradas.length === 0) {
         const mensaje = document.createElement('p');
         mensaje.textContent = 'No hay campañas generadas aún.';
-        mensaje.style.color = '#666';
-        mensaje.style.textAlign = 'center';
+        mensaje.classList.add('text-muted', 'text-center');
         divBody.appendChild(mensaje);
     } else {
         // Crear tabla o lista de campañas generadas
         const divLista = document.createElement('div');
-        divLista.style.maxHeight = '400px';
-        divLista.style.overflowY = 'auto';
+        divLista.classList.add('max-h-400px');
 
         campanyasGeneradas.forEach((campanya, index) => {
             // Contenedor de cada campaña
             const divCampanya = document.createElement('div');
-            divCampanya.style.borderBottom = '1px solid #ddd';
-            divCampanya.style.padding = '12px';
-            divCampanya.style.marginBottom = '10px';
-            divCampanya.style.backgroundColor = '#f9f9f9';
-            divCampanya.style.borderRadius = '4px';
+            divCampanya.classList.add('border-bottom-light', 'p-12', 'mb-10', 'bg-off-white', 'rounded-4');
 
             // ID de campaña
             const idElem = document.createElement('p');
             idElem.innerHTML = `<strong>ID:</strong> ${campanya.id}`;
-            idElem.style.margin = '4px 0';
-            idElem.style.fontSize = '12px';
+            idElem.classList.add('my-4', 'fs-12');
             divCampanya.appendChild(idElem);
 
             // Nombre de campaña
             const nombreElem = document.createElement('p');
             nombreElem.innerHTML = `<strong>Nombre:</strong> ${campanya.nombre}`;
-            nombreElem.style.margin = '4px 0';
+            nombreElem.classList.add('my-4');
             divCampanya.appendChild(nombreElem);
 
             // Tipo de campaña
             const tipoElem = document.createElement('p');
             tipoElem.innerHTML = `<strong>Tipo:</strong> ${campanya.tipo}`;
-            tipoElem.style.margin = '4px 0';
-            tipoElem.style.fontSize = '12px';
+            tipoElem.classList.add('my-4', 'fs-12');
             divCampanya.appendChild(tipoElem);
 
             // Cadenas participantes
             const cadenasElem = document.createElement('p');
             cadenasElem.innerHTML = `<strong>Cadenas:</strong> ${campanya.cadenas.join(', ')}`;
-            cadenasElem.style.margin = '4px 0';
-            cadenasElem.style.fontSize = '12px';
-            cadenasElem.style.color = '#555';
+            cadenasElem.classList.add('my-4', 'fs-12', 'text-secondary');
             divCampanya.appendChild(cadenasElem);
 
             divLista.appendChild(divCampanya);
