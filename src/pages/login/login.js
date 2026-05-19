@@ -36,8 +36,9 @@ if (btnEntrar) {
     }
 
     try {
-       const respuesta = await fetch('../../data/usuarios.json');
-      const usuariosDB = await respuesta.json();
+       const respuesta = await fetch('../../data/db.json');
+      const db = await respuesta.json();
+      const usuariosDB = db.usuarios;
 
       // Buscamos al usuario
       const usuarioValido = usuariosDB.find((u) => 
@@ -55,7 +56,7 @@ if (btnEntrar) {
       }
 
     } catch (error) {
-      console.error("Error al acceder a usuarios.json:", error);
+      console.error("Error al acceder a db.json:", error);
       alert("Error de conexión con la base de datos");
     }
   });

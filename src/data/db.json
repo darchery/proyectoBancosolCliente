@@ -1,0 +1,345 @@
+{
+  "usuarios": [
+    {
+        "usuario": "admin",
+        "clave": "admin",
+        "rol": "admin"
+    },
+    {
+        "usuario": "capitan",
+        "clave": "capitan",
+        "rol": "capitan"
+    },
+    {
+        "usuario": "coordinador",
+        "clave": "coordinador",
+        "rol": "coordinador"
+    },
+    {
+        "usuario": "capitan_coordinador",
+        "clave": "capitan_coordinador",
+        "rol": "capitan_coordinador"
+    },
+    {
+        "usuario": "entidad_colaboradora",
+        "clave": "entidad_colaboradora",
+        "rol": "entidad_colaboradora"
+    }
+  ],
+  "colaboradores": [
+    {
+      "id": "1",
+      "nombre": "A0362-AYUNTAMIENTO DE ALMACHAR",
+      "domicilio": "Calle Almería, 14",
+      "localidad": "ALMACHAR",
+      "cp": "29718",
+      "colabora": "RINCON DE LA VICTORIA",
+      "coord": "JM Cobos",
+      "contactos": [
+        {
+          "tipo": "contacto1",
+          "nombre": "Mario Torre (Concejal)",
+          "email": "",
+          "tel": "555 555 555"
+        },
+        {
+          "tipo": "contacto2",
+          "nombre": "María Vallejo",
+          "email": "",
+          "tel": "333 333 333"
+        },
+        {
+          "tipo": "contacto3",
+          "nombre": "Fijo Ayuntamiento",
+          "email": "",
+          "tel": "999 999 999"
+        }
+      ],
+      "observaciones": "10 voluntarios - Formación jueves 19:45",
+      "pendienteValidacion": false
+    },
+    {
+      "id": "2",
+      "nombre": "Guardia Civil",
+      "domicilio": "---",
+      "localidad": "---",
+      "cp": "---",
+      "colabora": "---",
+      "coord": "JM Cobos",
+      "contactos": [
+        {
+          "tipo": "contacto1",
+          "nombre": "---",
+          "email": "",
+          "tel": "---"
+        },
+        {
+          "tipo": "contacto2",
+          "nombre": "---",
+          "email": "",
+          "tel": "---"
+        },
+        {
+          "tipo": "contacto3",
+          "nombre": "---",
+          "email": "",
+          "tel": "---"
+        }
+      ],
+      "observaciones": "",
+      "pendienteValidacion": false
+    }
+  ],
+  "coordinadores": [
+    {
+      "id": "1",
+      "nombre": "Arantxa",
+      "entidad": "BANCOSOL",
+      "area": "MALAGA",
+      "telefono": "600111222",
+      "email": "ara@sol.es",
+      "tiendas": 72,
+      "usuario": "Arantxa",
+      "password": "password1"
+    },
+    {
+      "id": "2",
+      "nombre": "Cristóbal Aragón",
+      "entidad": "BANCOSOL",
+      "area": "INTERIOR",
+      "telefono": "600333444",
+      "email": "cris@sol.es",
+      "tiendas": 48,
+      "usuario": "Aragón",
+      "password": "password2"
+    },
+    {
+      "id": "3",
+      "nombre": "Diego Vazquez",
+      "entidad": "BANCOSOL",
+      "area": "COSTA OCCIDENTAL",
+      "telefono": "",
+      "email": "",
+      "tiendas": 43,
+      "usuario": "Diego",
+      "password": "password3"
+    },
+    {
+      "id": "4",
+      "nombre": "Fran Jimenez",
+      "entidad": "LOS OLIVOS",
+      "area": "MALAGA",
+      "telefono": "600010101",
+      "email": "",
+      "tiendas": 12,
+      "usuario": "FranJim",
+      "password": "password4"
+    },
+    {
+      "id": "5",
+      "nombre": "José M Cobos",
+      "entidad": "BANCOSOL",
+      "area": "AXARQUIA",
+      "telefono": "",
+      "email": "",
+      "tiendas": 40,
+      "usuario": "JMCobos",
+      "password": "password5"
+    }
+  ],
+  "tiendas": [
+    {
+      "id": "CARREFOUR_001",
+      "nombre": "Carrefour Hiper",
+      "cadena": "CARREFOUR",
+      "zona": "Axarquía",
+      "domicilio": "c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA",
+      "localidad": "RINCON DE LA VICTORIA",
+      "coord": "JM Cobos"
+    },
+    {
+      "id": "CARREFOUR_002",
+      "nombre": "Carrefour Market",
+      "cadena": "CARREFOUR",
+      "zona": "Axarquía",
+      "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
+      "localidad": "RINCON DE LA VICTORIA",
+      "coord": "Ejemplo coord"
+    },
+    {
+      "id": "CARREFOUR_003",
+      "nombre": "Carrefour Express",
+      "cadena": "CARREFOUR",
+      "zona": "Costa del Sol",
+      "domicilio": "c/ Ronda, s/n",
+      "localidad": "RINCON DE LA VICTORIA",
+      "coord": "JM Cobos"
+    },
+    {
+      "id": "CARREFOUR_004",
+      "nombre": "CARREFOUR EXPRESS",
+      "cadena": "CARREFOUR",
+      "zona": "Málaga Capital",
+      "domicilio": "Pasaje Tamayo y Baus, 2",
+      "localidad": "MALAGA",
+      "coord": "Arantxa"
+    }
+  ],
+  "asignaciones": [
+    {
+      "id": "1",
+      "tienda": "Carrefour Hiper",
+      "cadena": "CARREFOUR",
+      "domicilio": "c/ Arroyo de Totalán, nº 36 - CC LA VICTORIA",
+      "localidad": "RINCON DE LA VICTORIA",
+      "capitan": "Juan Pérez",
+      "viernes_manana": "3",
+      "viernes_tarde": "2",
+      "sabado_manana": "4",
+      "sabado_tarde": "3",
+      "observaciones": "Equipo completo"
+    },
+    {
+      "id": "2",
+      "tienda": "Carrefour Market",
+      "cadena": "CARREFOUR",
+      "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
+      "localidad": "RINCON DE LA VICTORIA",
+      "capitan": "María López",
+      "viernes_manana": "1",
+      "viernes_tarde": "2",
+      "sabado_manana": "2",
+      "sabado_tarde": "1",
+      "observaciones": "Faltan voluntarios sábado"
+    }
+  ],
+  "campanyas": [
+    {
+      "id": "primavera",
+      "nombre": "PRIMAVERA",
+      "activa": false
+    },
+    {
+      "id": "gran-recogida",
+      "nombre": "GRAN RECOGIDA",
+      "activa": true
+    }
+  ],
+  "cadenas": [
+    {
+      "id": "alcampo",
+      "nombre": "ALCAMPO",
+      "seleccionada": true
+    },
+    {
+      "id": "aldi",
+      "nombre": "ALDI",
+      "seleccionada": true
+    },
+    {
+      "id": "makro",
+      "nombre": "MAKRO",
+      "seleccionada": false
+    },
+    {
+      "id": "carrefour",
+      "nombre": "CARREFOUR",
+      "seleccionada": true
+    },
+    {
+      "id": "mas",
+      "nombre": "MAS",
+      "seleccionada": true
+    },
+    {
+      "id": "mercadona",
+      "nombre": "MERCADONA",
+      "seleccionada": true
+    },
+    {
+      "id": "eci",
+      "nombre": "EL CORTE INGLES",
+      "seleccionada": false
+    },
+    {
+      "id": "suma",
+      "nombre": "SUMA",
+      "seleccionada": false
+    },
+    {
+      "id": "eljamon",
+      "nombre": "EL JAMON",
+      "seleccionada": false
+    },
+    {
+      "id": "eroski",
+      "nombre": "EROSKI",
+      "seleccionada": false
+    },
+    {
+      "nombre": "DIA",
+      "seleccionada": false,
+      "id": "dia"
+    },
+    {
+      "nombre": "CONSUM",
+      "seleccionada": false,
+      "id": "consum"
+    },
+    {
+      "nombre": "LILD",
+      "seleccionada": false,
+      "id": "JRnvC61xgSo"
+    }
+  ],
+  "campanyas_generadas": [
+    {
+      "id": "primavera-2024",
+      "nombre": "PRIMAVERA 2024",
+      "activa": true,
+      "tipo": "primavera",
+      "cadenas": [
+        "alcampo",
+        "aldi",
+        "makro",
+        "carrefour",
+        "mas",
+        "mercadona"
+      ]
+    },
+    {
+      "id": "PaBB3dLo7Lg",
+      "nombre": "GRAN RECOGIDA - 6/5/2026",
+      "tipo": "gran-recogida",
+      "cadenas": [
+        "alcampo",
+        "aldi",
+        "mas",
+        "mercadona",
+        "eljamon",
+        "eroski",
+        "GAoVdc0G4pQ",
+        "OMOiSnvF5Ok"
+      ]
+    },
+    {
+      "id": "R8Zaut0pNqY",
+      "nombre": "GRAN RECOGIDA - 6/5/2026",
+      "tipo": "gran-recogida",
+      "cadenas": [
+        "alcampo",
+        "aldi",
+        "mercadona"
+      ]
+    },
+    {
+      "id": "KDZTyyARvgE",
+      "nombre": "PRIMAVERA - 6/5/2026",
+      "tipo": "primavera",
+      "cadenas": [
+        "aldi"
+      ]
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

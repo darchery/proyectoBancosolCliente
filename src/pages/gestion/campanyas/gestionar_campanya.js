@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     botonGuardar.addEventListener('click', abrirModalGuardar);
 })
 
-// CARGAR CAMPAÑAS Y CADENAS DESDE EL JSON-SERVER(datos.json)
+// CARGAR CAMPAÑAS Y CADENAS DESDE EL JSON-SERVER(db.json)
 //
 // fetch() devuelve una promesa. Con await esperamos a que
 // se resuelva antes de continuar con el resto del código.
