@@ -3,8 +3,8 @@ let correoGuardado = "";
 // Esperamos a que el DOM esté completamente cargado para agregar el evento al formulario
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
-    const inputCorreo = document.getElementById("correo_solicitud");
-    const info = document.getElementById("info_solicitud");
+    const inputCorreo = document.querySelector("#correo_solicitud");
+    const info = document.querySelector("#info_solicitud");
 
     // Agregamos un evento submit al formulario para manejar el envío de la solicitud de acceso
     form.addEventListener("submit", function (e) {

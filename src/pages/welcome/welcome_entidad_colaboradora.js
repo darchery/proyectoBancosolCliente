@@ -7,7 +7,7 @@ const rutasPorGestion = {
 document.addEventListener('DOMContentLoaded', () => {
 
     function configurarBoton(idBoton, claveRuta) {
-        const boton = document.getElementById(idBoton);
+        const boton = document.querySelector('#' + idBoton);
         if (boton) {
             boton.addEventListener('click', () => {
                 const destino = rutasPorGestion[claveRuta];

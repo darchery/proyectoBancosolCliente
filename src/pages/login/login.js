@@ -24,7 +24,7 @@ function redirigirUsuario(rol) {
   }
 }
 
-const btnEntrar = document.getElementById("btn-entrar");
+const btnEntrar = document.querySelector("#btn-entrar");
 
 // Agregamos el evento click al botón de inicio de sesión
 if (btnEntrar) {
@@ -32,8 +32,8 @@ if (btnEntrar) {
     evento.preventDefault();
 
     // Obtenemos los valores ingresados por el usuario
-    const userIngresado = document.getElementById("input-usuario").value.trim();
-    const passIngresada = document.getElementById("input-password").value.trim();
+    const userIngresado = document.querySelector("#input-usuario").value.trim();
+    const passIngresada = document.querySelector("#input-password").value.trim();
 
     // Validamos que ambos campos estén completos
     if (!userIngresado || !passIngresada) {

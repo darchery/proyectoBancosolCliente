@@ -1,5 +1,5 @@
-const btnLogin = document.getElementById("boton-login");
-const btnSolicitar = document.getElementById("boton-solicitar-acceso");
+const btnLogin = document.querySelector("#boton-login");
+const btnSolicitar = document.querySelector("#boton-solicitar-acceso");
 
 if (btnLogin) {
     // Agregamos un evento click al botón de inicio de sesión para redirigir al usuario a la página de login
