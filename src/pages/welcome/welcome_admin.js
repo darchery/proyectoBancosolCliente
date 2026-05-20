@@ -11,7 +11,7 @@ const rutasPorGestion = {
 document.addEventListener('DOMContentLoaded', () => {
     
     function configurarBoton(idBoton, claveRuta) {
-        const boton = document.getElementById(idBoton);
+        const boton = document.querySelector('#' + idBoton);
         if (boton) {
             boton.addEventListener('click', () => {
                 const destino = rutasPorGestion[claveRuta];
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Cerrar sesión
-    const btnLogout = document.getElementById('logout-btn-admin');
+    const btnLogout = document.querySelector('#logout-btn-admin');
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
             localStorage.clear(); 

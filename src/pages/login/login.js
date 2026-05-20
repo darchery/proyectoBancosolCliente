@@ -21,14 +21,14 @@ function redirigirUsuario(rol) {
   }
 }
 
-const btnEntrar = document.getElementById("btn-entrar");
+const btnEntrar = document.querySelector("#btn-entrar");
 
 if (btnEntrar) {
   btnEntrar.addEventListener("click", async (evento) => {
     evento.preventDefault();
 
-    const userIngresado = document.getElementById("input-usuario").value.trim();
-    const passIngresada = document.getElementById("input-password").value.trim();
+    const userIngresado = document.querySelector("#input-usuario").value.trim();
+    const passIngresada = document.querySelector("#input-password").value.trim();
 
     if (!userIngresado || !passIngresada) {
       alert("Rellene ambos campos");
