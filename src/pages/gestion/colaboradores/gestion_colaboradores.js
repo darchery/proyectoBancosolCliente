@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         ?.addEventListener('click', abrirVistaAsignar);
     document.querySelector('#btn-exportar')
         ?.addEventListener('click', exportarExcel);
+    document.getElementById('btn-validar')
+        ?.addEventListener('click', validarColaborador);
 
     // Botones CRUD — coordinador
     document.querySelector('#btn-anadir-pendiente')
@@ -185,6 +187,16 @@ function mostrarDetalle(id) {
     document.querySelector('#det-c3').textContent =
         c.contacto3?.nombre ? `${c.contacto3.nombre} — ${c.contacto3.tel}` : '---';
 
+    // Mostrar botón validar solo si es admin y el colaborador está pendiente
+    const btnValidar = document.getElementById('btn-validar');
+    if (btnValidar) {
+        if (rolActual === 'admin' && c.pendienteValidacion) {
+            btnValidar.classList.remove('hidden');
+        } else {
+            btnValidar.classList.add('hidden');
+        }
+    }
+
     mostrarVista('detalle');
     filtrarYCargarTabla();
 }
@@ -313,9 +325,9 @@ async function actualizarColaborador() {
 
     const actualizado = {
         ...construirObjeto(),
-        id:                   colaboradorSeleccionadoId,
-        tiendaId:             original?.tiendaId             || null,
-        pendienteValidacion:  original?.pendienteValidacion  || false
+        id:                  colaboradorSeleccionadoId,
+        tiendaId:            original?.tiendaId            || null,
+        pendienteValidacion: original?.pendienteValidacion || false
     };
 
     try {
@@ -373,6 +385,42 @@ async function eliminarColaborador() {
     } catch (err) {
         console.error('Error al eliminar colaborador:', err);
         alert('No se pudo eliminar el colaborador. ¿Está arrancado json-server?');
+    }
+}
+
+// VALIDAR COLABORADOR — quita el flag pendienteValidacion (solo admin)
+async function validarColaborador() {
+    if (!colaboradorSeleccionadoId) return;
+
+    const original = colaboradores.find(x => x.id === colaboradorSeleccionadoId);
+    if (!original) return;
+
+    const confirmado = confirm(
+        `¿Validar al colaborador "${original.nombre}"?\nSe quitará la marca de pendiente.`
+    );
+    if (!confirmado) return;
+
+    const actualizado = { ...original, pendienteValidacion: false };
+
+    try {
+        const res = await fetch(`${API_URL}/colaboradores/${colaboradorSeleccionadoId}`, {
+            method:  'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(actualizado)
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        await cargarColaboradores();
+        popularFiltros();
+        filtrarYCargarTabla();
+        mostrarDetalle(colaboradorSeleccionadoId);
+
+        alert(`Colaborador "${original.nombre}" validado correctamente.`);
+
+    } catch (err) {
+        console.error('Error al validar colaborador:', err);
+        alert('No se pudo validar el colaborador. ¿Está arrancado json-server?');
     }
 }
 
@@ -445,26 +493,26 @@ function exportarExcel() {
     }
 
     const datos = colaboradores.map(c => ({
-        'ID':               c.id            || '',
-        'NOMBRE':           c.nombre        || '',
-        'DOMICILIO':        c.domicilio     || '',
-        'CP':               c.cp            || '',
-        'LOCALIDAD':        c.localidad     || '',
-        'COLABORA EN':      c.colabora      || '',
-        'COORDINADOR':      c.coord         || '',
-        'TIENDA ID':        c.tiendaId      || '',
-        'CONTACTO 1':       c.contacto1?.nombre || '',
-        'TEL 1':            c.contacto1?.tel    || '',
-        'CONTACTO 2':       c.contacto2?.nombre || '',
-        'TEL 2':            c.contacto2?.tel    || '',
-        'CONTACTO 3':       c.contacto3?.nombre || '',
-        'TEL 3':            c.contacto3?.tel    || '',
-        'OBSERVACIONES':    c.observaciones || '',
-        'PENDIENTE':        c.pendienteValidacion ? 'Sí' : 'No'
+        'ID':            c.id            || '',
+        'NOMBRE':        c.nombre        || '',
+        'DOMICILIO':     c.domicilio     || '',
+        'CP':            c.cp            || '',
+        'LOCALIDAD':     c.localidad     || '',
+        'COLABORA EN':   c.colabora      || '',
+        'COORDINADOR':   c.coord         || '',
+        'TIENDA ID':     c.tiendaId      || '',
+        'CONTACTO 1':    c.contacto1?.nombre || '',
+        'TEL 1':         c.contacto1?.tel    || '',
+        'CONTACTO 2':    c.contacto2?.nombre || '',
+        'TEL 2':         c.contacto2?.tel    || '',
+        'CONTACTO 3':    c.contacto3?.nombre || '',
+        'TEL 3':         c.contacto3?.tel    || '',
+        'OBSERVACIONES': c.observaciones || '',
+        'PENDIENTE':     c.pendienteValidacion ? 'Sí' : 'No'
     }));
 
-    const hoja   = XLSX.utils.json_to_sheet(datos);
-    const libro  = XLSX.utils.book_new();
+    const hoja  = XLSX.utils.json_to_sheet(datos);
+    const libro = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(libro, hoja, 'Colaboradores');
     XLSX.writeFile(libro, 'colaboradores.xlsx');
 }
@@ -516,4 +564,8 @@ function limpiarDetalle() {
         .forEach(id => {
             document.querySelector('#' + id).textContent = '---';
         });
+
+    // Ocultamos el botón validar al limpiar el detalle
+    const btnValidar = document.getElementById('btn-validar');
+    if (btnValidar) btnValidar.classList.add('hidden');
 }
