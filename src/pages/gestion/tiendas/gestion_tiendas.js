@@ -15,8 +15,8 @@ const rolActual = localStorage.getItem('userRole') || 'admin';
 document.addEventListener('DOMContentLoaded', async function () {
 
     // 1º elementos del HTML
-    tablaBody = document.getElementById('tabla-body');
-    menuAdmin = document.getElementById('admin-menu');
+    tablaBody = document.querySelector('#tabla-body');
+    menuAdmin = document.querySelector('#admin-menu');
 
     // 2º Permisos
     if (rolActual === 'admin') {
@@ -29,31 +29,31 @@ document.addEventListener('DOMContentLoaded', async function () {
     popularFiltros();
 
     // 4º Filtramos
-    document.getElementById('filtro-cadena')
-        .addEventListener('change', filtrarYCargarTabla);
-    document.getElementById('filtro-localidad')
-        .addEventListener('change', filtrarYCargarTabla);
-    document.getElementById('filtro-zona')
-        .addEventListener('change', filtrarYCargarTabla);
-    document.getElementById('filtro-coordinador')
-        .addEventListener('change', filtrarYCargarTabla);
+    document.querySelector('#filtro-cadena')
+        ?.addEventListener('change', filtrarYCargarTabla);
+    document.querySelector('#filtro-localidad')
+        ?.addEventListener('change', filtrarYCargarTabla);
+    document.querySelector('#filtro-zona')
+        ?.addEventListener('change', filtrarYCargarTabla);
+    document.querySelector('#filtro-coordinador')
+        ?.addEventListener('change', filtrarYCargarTabla);
 
     // 5º Botones CRUD
-    document.getElementById('btn-anadir')
-        .addEventListener('click', abrirModalAnadir);
+    document.querySelector('#btn-anadir')
+        ?.addEventListener('click', abrirModalAnadir);
 
-    document.getElementById('btn-modificar')
-        .addEventListener('click', abrirModalModificar);
+    document.querySelector('#btn-modificar')
+        ?.addEventListener('click', abrirModalModificar);
 
-    document.getElementById('btn-eliminar')
-        .addEventListener('click', eliminarTienda);
+    document.querySelector('#btn-eliminar')
+        ?.addEventListener('click', eliminarTienda);
 
     // 6º Eventos del modal
-    document.getElementById('btn-confirmar')
-        .addEventListener('click', confirmarModal);
+    document.querySelector('#btn-confirmar')
+        ?.addEventListener('click', confirmarModal);
 
-    document.getElementById('btn-cancelar')
-        .addEventListener('click', cerrarModal);
+    document.querySelector('#btn-cancelar')
+        ?.addEventListener('click', cerrarModal);
 });
 
 // FUNCIONES
@@ -93,7 +93,8 @@ function popularFiltros() {
 
 // Añade las opciones a un <select> dado su id y un Set de valores
 function rellenarSelect(idSelect, valores) {
-    const select = document.getElementById(idSelect);
+    const select = document.querySelector('#' + idSelect);
+    if (!select) return;
 
     // Conservamos solo la primera opción ("Todas")
     select.innerHTML = '<option value="Todas">Todas</option>';
@@ -113,10 +114,10 @@ function filtrarYCargarTabla() {
     if (!tablaBody) return;
 
     //leemos valor del filtro
-    const cadenaSel    = document.getElementById('filtro-cadena')?.value     || 'Todas';
-    const localidadSel = document.getElementById('filtro-localidad')?.value  || 'Todas';
-    const zonaSel      = document.getElementById('filtro-zona')?.value        || 'Todas';
-    const coordSel     = document.getElementById('filtro-coordinador')?.value || 'Todas';
+    const cadenaSel    = document.querySelector('#filtro-cadena')?.value     || 'Todas';
+    const localidadSel = document.querySelector('#filtro-localidad')?.value  || 'Todas';
+    const zonaSel      = document.querySelector('#filtro-zona')?.value        || 'Todas';
+    const coordSel     = document.querySelector('#filtro-coordinador')?.value || 'Todas';
 
     tablaBody.innerHTML = '';
 
@@ -171,12 +172,12 @@ function mostrarDetalle(id) {
     const tienda = tiendas.find(t => t.id === id);
     if (!tienda) return;
 
-    document.getElementById('det-id').textContent     = tienda.id;
-    document.getElementById('det-cadena').textContent = tienda.cadena;
-    document.getElementById('det-dom').textContent    = tienda.domicilio;
-    document.getElementById('det-loc').textContent    = tienda.localidad;
-    document.getElementById('det-zona').textContent   = tienda.zona;
-    document.getElementById('det-coord').textContent  = tienda.coord;
+    document.querySelector('#det-id').textContent     = tienda.id;
+    document.querySelector('#det-cadena').textContent = tienda.cadena;
+    document.querySelector('#det-dom').textContent    = tienda.domicilio;
+    document.querySelector('#det-loc').textContent    = tienda.localidad;
+    document.querySelector('#det-zona').textContent   = tienda.zona;
+    document.querySelector('#det-coord').textContent  = tienda.coord;
 
     // Repintamos la tabla para que se vea la fila resaltada
     filtrarYCargarTabla();
@@ -186,12 +187,12 @@ function mostrarDetalle(id) {
 // Limpia todos los campos y abre el modal en modo 'anadir'
 function abrirModalAnadir() {
     modoModal = 'anadir';
-    document.getElementById('panel-titulo').textContent = 'AÑADIR TIENDA';
+    document.querySelector('#panel-titulo').textContent = 'AÑADIR TIENDA';
 
     limpiarModal();
 
     // El campo ID es editable al añadir (el usuario lo escribe)
-    document.getElementById('f-id').disabled = false;
+    document.querySelector('#f-id').disabled = false;
 
     abrirModal();
 }
@@ -210,19 +211,19 @@ function abrirModalModificar() {
     if (!tienda) return;
 
     modoModal = 'modificar';
-    document.getElementById('panel-titulo').textContent = 'MODIFICAR TIENDA';
+    document.querySelector('#panel-titulo').textContent = 'MODIFICAR TIENDA';
 
     // Rellenamos los campos con los datos actuales de la tienda
-    document.getElementById('f-id').value        = tienda.id;
-    document.getElementById('f-nombre').value    = tienda.nombre;
-    document.getElementById('f-cadena').value    = tienda.cadena;
-    document.getElementById('f-zona').value      = tienda.zona;
-    document.getElementById('f-domicilio').value = tienda.domicilio;
-    document.getElementById('f-localidad').value = tienda.localidad;
-    document.getElementById('f-coord').value     = tienda.coord;
+    document.querySelector('#f-id').value        = tienda.id;
+    document.querySelector('#f-nombre').value    = tienda.nombre;
+    document.querySelector('#f-cadena').value    = tienda.cadena;
+    document.querySelector('#f-zona').value      = tienda.zona;
+    document.querySelector('#f-domicilio').value = tienda.domicilio;
+    document.querySelector('#f-localidad').value = tienda.localidad;
+    document.querySelector('#f-coord').value     = tienda.coord;
 
     // El ID no se puede cambiar al modificar
-    document.getElementById('f-id').disabled = true;
+    document.querySelector('#f-id').disabled = true;
 
     abrirModal();
 }
@@ -243,8 +244,8 @@ function confirmarModal() {
 //   body             → datos convertidos a texto con JSON.stringif
 async function crearTienda() {
 
-    const id     = document.getElementById('f-id').value.trim();
-    const nombre = document.getElementById('f-nombre').value.trim();
+    const id     = document.querySelector('#f-id').value.trim();
+    const nombre = document.querySelector('#f-nombre').value.trim();
 
     if (!id || !nombre) {
         alert('El ID y el Nombre son obligatorios.');
@@ -261,11 +262,11 @@ async function crearTienda() {
     const nuevaTienda = {
         id,
         nombre,
-        cadena:    document.getElementById('f-cadena').value.trim()    || '---',
-        zona:      document.getElementById('f-zona').value.trim()       || '---',
-        domicilio: document.getElementById('f-domicilio').value.trim() || '---',
-        localidad: document.getElementById('f-localidad').value.trim() || '---',
-        coord:     document.getElementById('f-coord').value.trim()     || '---'
+        cadena:    document.querySelector('#f-cadena').value.trim()    || '---',
+        zona:      document.querySelector('#f-zona').value.trim()       || '---',
+        domicilio: document.querySelector('#f-domicilio').value.trim() || '---',
+        localidad: document.querySelector('#f-localidad').value.trim() || '---',
+        coord:     document.querySelector('#f-coord').value.trim()     || '---'
     };
 
     try {
@@ -296,7 +297,7 @@ async function crearTienda() {
 // PUT reemplaza el recurso completo en el servidor.
 async function actualizarTienda() {
 
-    const nombre = document.getElementById('f-nombre').value.trim();
+    const nombre = document.querySelector('#f-nombre').value.trim();
 
     if (!nombre) {
         alert('El Nombre es obligatorio.');
@@ -306,11 +307,11 @@ async function actualizarTienda() {
     const tiendaActualizada = {
         id:        tiendaSeleccionadaId,
         nombre,
-        cadena:    document.getElementById('f-cadena').value.trim()    || '---',
-        zona:      document.getElementById('f-zona').value.trim()       || '---',
-        domicilio: document.getElementById('f-domicilio').value.trim() || '---',
-        localidad: document.getElementById('f-localidad').value.trim() || '---',
-        coord:     document.getElementById('f-coord').value.trim()     || '---'
+        cadena:    document.querySelector('#f-cadena').value.trim()    || '---',
+        zona:      document.querySelector('#f-zona').value.trim()       || '---',
+        domicilio: document.querySelector('#f-domicilio').value.trim() || '---',
+        localidad: document.querySelector('#f-localidad').value.trim() || '---',
+        coord:     document.querySelector('#f-coord').value.trim()     || '---'
     };
 
     try {
@@ -334,7 +335,7 @@ async function actualizarTienda() {
 
     } catch (error) {
         console.error('Error al modificar tienda:', error);
-        alert('No se pudo modificar la tienda. ¿Está arrancado json-server?');
+        alert('No se pudo modificar the tienda. ¿Está arrancado json-server?');
     }
 }
 
@@ -367,7 +368,8 @@ async function eliminarTienda() {
         tiendaSeleccionadaId = null;
         ['det-id','det-cadena','det-dom','det-loc','det-zona','det-coord']
             .forEach(id => {
-                document.getElementById(id).textContent = '---';
+                const el = document.querySelector('#' + id);
+                if (el) el.textContent = '---';
             });
 
         await cargarTiendas();
@@ -384,20 +386,27 @@ async function eliminarTienda() {
 
 // Modales
 function abrirModal() {
-    document.getElementById('vista-detalle').classList.add('hidden');
-    document.getElementById('vista-formulario').classList.remove('hidden');
+    const vistaDetalle = document.querySelector('#vista-detalle');
+    const vistaFormulario = document.querySelector('#vista-formulario');
+    if (vistaDetalle) vistaDetalle.classList.add('hidden');
+    if (vistaFormulario) vistaFormulario.classList.remove('hidden');
 }
 
 function cerrarModal() {
-    document.getElementById('vista-formulario').classList.add('hidden');
-    document.getElementById('vista-detalle').classList.remove('hidden');
-    document.getElementById('panel-titulo').textContent       = 'TIENDA SELECCIONADA';
+    const vistaFormulario = document.querySelector('#vista-formulario');
+    const vistaDetalle = document.querySelector('#vista-detalle');
+    const panelTitulo = document.querySelector('#panel-titulo');
+
+    if (vistaFormulario) vistaFormulario.classList.add('hidden');
+    if (vistaDetalle) vistaDetalle.classList.remove('hidden');
+    if (panelTitulo) panelTitulo.textContent = 'TIENDA SELECCIONADA';
     limpiarModal();
 }
 
 function limpiarModal() {
     ['f-id','f-nombre','f-cadena','f-zona','f-domicilio','f-localidad','f-coord']
         .forEach(id => {
-            document.getElementById(id).value = '';
+            const el = document.querySelector('#' + id);
+            if (el) el.value = '';
         });
 }

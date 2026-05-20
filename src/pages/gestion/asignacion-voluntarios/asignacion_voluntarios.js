@@ -13,11 +13,11 @@ const usuarioActual = localStorage.getItem('userName') || rolActual;
 // INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', async function () {
 
-    tablaBody = document.getElementById('tabla-body');
-    menuAdmin = document.getElementById('menu-admin');
+    tablaBody = document.querySelector('#tabla-body');
+    menuAdmin = document.querySelector('#menu-admin');
 
     // Mostrar usuario
-    const usuarioDisplay = document.getElementById('usuario-display');
+    const usuarioDisplay = document.querySelector('#usuario-display');
     if (usuarioDisplay) usuarioDisplay.textContent = `${usuarioActual} (${rolActual})`;
 
     // Permisos
@@ -31,25 +31,25 @@ document.addEventListener('DOMContentLoaded', async function () {
     popularFiltros();
 
     // Eventos filtros
-    document.getElementById('filtro-localidad')
+    document.querySelector('#filtro-localidad')
         ?.addEventListener('change', filtrarYCargarTabla);
-    document.getElementById('filtro-cadena')
+    document.querySelector('#filtro-cadena')
         ?.addEventListener('change', filtrarYCargarTabla);
 
     // Eventos botones CRUD
-    document.getElementById('btn-anadir')
+    document.querySelector('#btn-anadir')
         .addEventListener('click', abrirModalAnadir);
-    document.getElementById('btn-modificar')
+    document.querySelector('#btn-modificar')
         .addEventListener('click', abrirModalModificar);
-    document.getElementById('btn-eliminar')
+    document.querySelector('#btn-eliminar')
         .addEventListener('click', eliminarAsignacion);
 
     // Eventos modal
-    document.getElementById('btn-confirmar')
+    document.querySelector('#btn-confirmar')
         .addEventListener('click', confirmarModal);
-    document.getElementById('btn-cancelar')
+    document.querySelector('#btn-cancelar')
         .addEventListener('click', cerrarModal);
-    document.getElementById('btn-exportar')
+    document.querySelector('#btn-exportar')
         .addEventListener('click', exportarAsignacionVoluntarios);
 });
 
@@ -76,7 +76,7 @@ function popularFiltros() {
 }
 
 function rellenarSelect(idSelect, valores) {
-    const select = document.getElementById(idSelect);
+    const select = document.querySelector('#' + idSelect);
     if (!select) return;
     select.innerHTML = '<option value="Todas">Todas</option>';
     for (const valor of valores) {
@@ -91,8 +91,8 @@ function rellenarSelect(idSelect, valores) {
 function filtrarYCargarTabla() {
     if (!tablaBody) return;
 
-    const localidadSel = document.getElementById('filtro-localidad')?.value || 'Todas';
-    const cadenaSel    = document.getElementById('filtro-cadena')?.value    || 'Todas';
+    const localidadSel = document.querySelector('#filtro-localidad')?.value || 'Todas';
+    const cadenaSel    = document.querySelector('#filtro-cadena')?.value    || 'Todas';
 
     tablaBody.innerHTML = '';
 
@@ -113,10 +113,9 @@ function filtrarYCargarTabla() {
 
     filtradas.forEach(a => {
         const fila = document.createElement('tr');
-        fila.style.cursor = 'pointer';
 
         if (a.id === asignacionSeleccionadaId) {
-            fila.style.backgroundColor = '#fde8e8';
+            fila.classList.add('fila-seleccionada');  
         }
 
         const pendiente = a.pendienteValidacion
@@ -146,15 +145,15 @@ function mostrarDetalle(id) {
     const a = asignaciones.find(x => x.id === id);
     if (!a) return;
 
-    document.getElementById('d-tienda').textContent         = a.tienda;
-    document.getElementById('d-domicilio').textContent      = a.domicilio;
-    document.getElementById('d-localidad').textContent      = a.localidad;
-    document.getElementById('d-capitan').textContent        = a.capitan;
-    document.getElementById('d-viernes-manana').textContent = a.viernes_manana;
-    document.getElementById('d-viernes-tarde').textContent  = a.viernes_tarde;
-    document.getElementById('d-sabado-manana').textContent  = a.sabado_manana;
-    document.getElementById('d-sabado-tarde').textContent   = a.sabado_tarde;
-    document.getElementById('d-obs').textContent            = a.observaciones;
+    document.querySelector('#d-tienda').textContent         = a.tienda;
+    document.querySelector('#d-domicilio').textContent      = a.domicilio;
+    document.querySelector('#d-localidad').textContent      = a.localidad;
+    document.querySelector('#d-capitan').textContent        = a.capitan;
+    document.querySelector('#d-viernes-manana').textContent = a.viernes_manana;
+    document.querySelector('#d-viernes-tarde').textContent  = a.viernes_tarde;
+    document.querySelector('#d-sabado-manana').textContent  = a.sabado_manana;
+    document.querySelector('#d-sabado-tarde').textContent   = a.sabado_tarde;
+    document.querySelector('#d-obs').textContent            = a.observaciones;
 
     filtrarYCargarTabla();
 }
@@ -162,10 +161,10 @@ function mostrarDetalle(id) {
 // MODAL — AÑADIR
 function abrirModalAnadir() {
     modoModal = 'anadir';
-    document.getElementById('panel-titulo').textContent = 'AÑADIR ASIGNACIÓN';
+    document.querySelector('#panel-titulo').textContent = 'AÑADIR ASIGNACIÓN';
 
     limpiarModal();
-    document.getElementById('f-id').disabled = false;
+    document.querySelector('#f-id').disabled = false;
 
     abrirModal();
 }
@@ -181,21 +180,21 @@ function abrirModalModificar() {
     if (!a) return;
 
     modoModal = 'modificar';
-    document.getElementById('panel-titulo').textContent = 'MODIFICAR ASIGNACIÓN';
+    document.querySelector('#panel-titulo').textContent = 'MODIFICAR ASIGNACIÓN';
 
-    document.getElementById('f-id').value             = a.id;
-    document.getElementById('f-tienda').value         = a.tienda;
-    document.getElementById('f-cadena').value         = a.cadena        || '';
-    document.getElementById('f-domicilio').value      = a.domicilio;
-    document.getElementById('f-localidad').value      = a.localidad;
-    document.getElementById('f-capitan').value        = a.capitan;
-    document.getElementById('f-viernes-manana').value = a.viernes_manana;
-    document.getElementById('f-viernes-tarde').value  = a.viernes_tarde;
-    document.getElementById('f-sabado-manana').value  = a.sabado_manana;
-    document.getElementById('f-sabado-tarde').value   = a.sabado_tarde;
-    document.getElementById('f-observaciones').value  = a.observaciones;
+    document.querySelector('#f-id').value             = a.id;
+    document.querySelector('#f-tienda').value         = a.tienda;
+    document.querySelector('#f-cadena').value         = a.cadena        || '';
+    document.querySelector('#f-domicilio').value      = a.domicilio;
+    document.querySelector('#f-localidad').value      = a.localidad;
+    document.querySelector('#f-capitan').value        = a.capitan;
+    document.querySelector('#f-viernes-manana').value = a.viernes_manana;
+    document.querySelector('#f-viernes-tarde').value  = a.viernes_tarde;
+    document.querySelector('#f-sabado-manana').value  = a.sabado_manana;
+    document.querySelector('#f-sabado-tarde').value   = a.sabado_tarde;
+    document.querySelector('#f-observaciones').value  = a.observaciones;
 
-    document.getElementById('f-id').disabled = true;
+    document.querySelector('#f-id').disabled = true;
 
     abrirModal();
 }
@@ -211,8 +210,8 @@ function confirmarModal() {
 
 // CREAR — POST
 async function crearAsignacion() {
-    const id     = document.getElementById('f-id').value.trim();
-    const tienda = document.getElementById('f-tienda').value.trim();
+    const id     = document.querySelector('#f-id').value.trim();
+    const tienda = document.querySelector('#f-tienda').value.trim();
 
     if (!id || !tienda) {
         alert('El ID y la Tienda son obligatorios.');
@@ -228,15 +227,15 @@ async function crearAsignacion() {
     const nueva = {
         id,
         tienda,
-        cadena:         document.getElementById('f-cadena').value.trim()         || '---',
-        domicilio:      document.getElementById('f-domicilio').value.trim()      || '---',
-        localidad:      document.getElementById('f-localidad').value.trim()      || '---',
-        capitan:        document.getElementById('f-capitan').value.trim()        || '---',
-        viernes_manana: document.getElementById('f-viernes-manana').value.trim() || '---',
-        viernes_tarde:  document.getElementById('f-viernes-tarde').value.trim()  || '---',
-        sabado_manana:  document.getElementById('f-sabado-manana').value.trim()  || '---',
-        sabado_tarde:   document.getElementById('f-sabado-tarde').value.trim()   || '---',
-        observaciones:  document.getElementById('f-observaciones').value.trim()  || ''
+        cadena:         document.querySelector('#f-cadena').value.trim()         || '---',
+        domicilio:      document.querySelector('#f-domicilio').value.trim()      || '---',
+        localidad:      document.querySelector('#f-localidad').value.trim()      || '---',
+        capitan:        document.querySelector('#f-capitan').value.trim()        || '---',
+        viernes_manana: document.querySelector('#f-viernes-manana').value.trim() || '---',
+        viernes_tarde:  document.querySelector('#f-viernes-tarde').value.trim()  || '---',
+        sabado_manana:  document.querySelector('#f-sabado-manana').value.trim()  || '---',
+        sabado_tarde:   document.querySelector('#f-sabado-tarde').value.trim()   || '---',
+        observaciones:  document.querySelector('#f-observaciones').value.trim()  || ''
     };
 
     try {
@@ -263,7 +262,7 @@ async function crearAsignacion() {
 
 // ACTUALIZAR — PUT
 async function actualizarAsignacion() {
-    const tienda = document.getElementById('f-tienda').value.trim();
+    const tienda = document.querySelector('#f-tienda').value.trim();
 
     if (!tienda) {
         alert('El campo Tienda es obligatorio.');
@@ -273,20 +272,20 @@ async function actualizarAsignacion() {
     const actualizada = {
         id:             asignacionSeleccionadaId,
         tienda,
-        cadena:         document.getElementById('f-cadena').value.trim()         || '---',
-        domicilio:      document.getElementById('f-domicilio').value.trim()      || '---',
-        localidad:      document.getElementById('f-localidad').value.trim()      || '---',
-        capitan:        document.getElementById('f-capitan').value.trim()        || '---',
-        viernes_manana: document.getElementById('f-viernes-manana').value.trim() || '---',
-        viernes_tarde:  document.getElementById('f-viernes-tarde').value.trim()  || '---',
-        sabado_manana:  document.getElementById('f-sabado-manana').value.trim()  || '---',
-        sabado_tarde:   document.getElementById('f-sabado-tarde').value.trim()   || '---',
-        observaciones:  document.getElementById('f-observaciones').value.trim()  || ''
+        cadena:         document.querySelector('#f-cadena').value.trim()         || '---',
+        domicilio:      document.querySelector('#f-domicilio').value.trim()      || '---',
+        localidad:      document.querySelector('#f-localidad').value.trim()      || '---',
+        capitan:        document.querySelector('#f-capitan').value.trim()        || '---',
+        viernes_manana: document.querySelector('#f-viernes-manana').value.trim() || '---',
+        viernes_tarde:  document.querySelector('#f-viernes-tarde').value.trim()  || '---',
+        sabado_manana:  document.querySelector('#f-sabado-manana').value.trim()  || '---',
+        sabado_tarde:   document.querySelector('#f-sabado-tarde').value.trim()   || '---',
+        observaciones:  document.querySelector('#f-observaciones').value.trim()  || ''
     };
 
     try {
         const respuesta = await fetch(`${API_URL}/asignaciones/${asignacionSeleccionadaId}`, {
-            method:  'PUT',
+            method:  'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify(actualizada)
         });
@@ -330,7 +329,7 @@ async function eliminarAsignacion() {
         asignacionSeleccionadaId = null;
         ['d-tienda','d-domicilio','d-localidad','d-capitan',
          'd-viernes-manana','d-viernes-tarde','d-sabado-manana','d-sabado-tarde','d-obs']
-            .forEach(id => document.getElementById(id).textContent = '---');
+            .forEach(id => document.querySelector('#' + id).textContent = '---');
 
         await cargarAsignaciones();
         popularFiltros();
@@ -346,21 +345,21 @@ async function eliminarAsignacion() {
 
 // HELPERS MODAL
 function abrirModal() {
-    document.getElementById('vista-detalle').classList.add('hidden');
-    document.getElementById('vista-formulario').classList.remove('hidden');
+    document.querySelector('#vista-detalle').classList.add('hidden');
+    document.querySelector('#vista-formulario').classList.remove('hidden');
 }
 
 function cerrarModal() {
-    document.getElementById('vista-formulario').classList.add('hidden');
-    document.getElementById('vista-detalle').classList.remove('hidden');
-    document.getElementById('panel-titulo').textContent       = 'ASIGNACIÓN SELECCIONADA';
+    document.querySelector('#vista-formulario').classList.add('hidden');
+    document.querySelector('#vista-detalle').classList.remove('hidden');
+    document.querySelector('#panel-titulo').textContent       = 'ASIGNACIÓN SELECCIONADA';
     limpiarModal();
 }
 
 function limpiarModal() {
     ['f-id','f-tienda','f-cadena','f-domicilio','f-localidad','f-capitan',
      'f-viernes-manana','f-viernes-tarde','f-sabado-manana','f-sabado-tarde','f-observaciones']
-        .forEach(id => document.getElementById(id).value = '');
+        .forEach(id => document.querySelector('#' + id).value = '');
 }
 
 // EXPORTAR ASIGNACIÓN DE VOLUNTARIOS A EXCEL

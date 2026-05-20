@@ -273,7 +273,7 @@ function mostrarModalAnadir() {
     modalContent.appendChild(divFooter);
     
     // Mostrar el modal (activar clase 'active')
-    document.getElementById('modal-overlay').classList.add('active');
+    document.querySelector('#modal-overlay').classList.add('active');
 }
 
 function mostrarModalEliminar() {
@@ -770,7 +770,7 @@ async function guardarCambiosCadenas() {
 }
 
 // Botón para salir de la gestión de campañas (limpiar localStorage y redirigir a home)
-const btnSalir = document.getElementById('btn-salir-campanya');
+const btnSalir = document.querySelector('#btn-salir-campanya');
 if (btnSalir) {
     btnSalir.addEventListener('click', () => {
         // Limpiar localStorage para eliminar cualquier dato relacionado con la sesión o gestión actual
@@ -840,7 +840,7 @@ async function generarCampanya() {
 }
 
 // Boton para generar campaña
-const btnGenerar = document.getElementById('btn-generar');
+const btnGenerar = document.querySelector('#btn-generar');
 if (btnGenerar) {
     btnGenerar.addEventListener('click', generarCampanya);
 }
@@ -958,7 +958,7 @@ async function mostrarModalHistorico() {
 }
 
 // Botón para ver histórico
-const btnHistorico = document.getElementById('btn-historico');
+const btnHistorico = document.querySelector('#btn-historico');
 if (btnHistorico) {
     btnHistorico.addEventListener('click', abrirModalHistorico);
 }

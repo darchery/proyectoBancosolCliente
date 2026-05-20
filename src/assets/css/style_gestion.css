@@ -347,6 +347,8 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     color: white;
 }
 
+.fila-seleccionada { background-color: #fde8e8; }
+
 /* --- CLASES ADICIONALES PARA REFACTORIZACIÓN --- */
 .mb-16 { margin-bottom: 16px !important; }
 .mb-10 { margin-bottom: 10px !important; }

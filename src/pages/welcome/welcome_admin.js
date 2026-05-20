@@ -10,7 +10,6 @@ const rutasPorGestion = {
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Función genérica para redirigir según el ID del botón
     function configurarBoton(idBoton, claveRuta) {
         const boton = document.getElementById(idBoton);
         if (boton) {
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Vinculamos cada botón de tu HTML con su ruta correspondiente
+    // Vincular cada botón con su ruta
     configurarBoton('btn-tienda-admin', 'tiendas');
     configurarBoton('btn-voluntarios-admin', 'voluntarios');
     configurarBoton('btn-campana-admin', 'campana');
@@ -34,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarBoton('btn-bandeja-entrada-admin', 'bandeja_entrada');
 
 
-    // CERRAR SESIÓN 
+    // Cerrar sesión
     const btnLogout = document.getElementById('logout-btn-admin');
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
