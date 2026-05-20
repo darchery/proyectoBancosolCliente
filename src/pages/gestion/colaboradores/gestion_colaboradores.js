@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         ?.addEventListener('click', abrirVistaAsignar);
     document.querySelector('#btn-exportar')
         ?.addEventListener('click', exportarExcel);
-    document.getElementById('btn-validar')
+    document.querySelector('#btn-validar')
         ?.addEventListener('click', validarColaborador);
 
     // Botones CRUD — coordinador
@@ -188,7 +188,7 @@ function mostrarDetalle(id) {
         c.contacto3?.nombre ? `${c.contacto3.nombre} — ${c.contacto3.tel}` : '---';
 
     // Mostrar botón validar solo si es admin y el colaborador está pendiente
-    const btnValidar = document.getElementById('btn-validar');
+    const btnValidar = document.querySelector('#btn-validar');
     if (btnValidar) {
         if (rolActual === 'admin' && c.pendienteValidacion) {
             btnValidar.classList.remove('hidden');
@@ -566,6 +566,6 @@ function limpiarDetalle() {
         });
 
     // Ocultamos el botón validar al limpiar el detalle
-    const btnValidar = document.getElementById('btn-validar');
+    const btnValidar = document.querySelector('#btn-validar');
     if (btnValidar) btnValidar.classList.add('hidden');
 }
