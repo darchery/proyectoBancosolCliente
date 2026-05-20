@@ -1,12 +1,12 @@
 // npx json-server --port 3001 src/data/db.json
 // VARIABLES GLOBALES
-
 let coordinadores = [];
 let coordinadorSeleccionadoId = null; 
 let modoModal = 'anadir'; 
 let tablaBody, menuAdmin;
+let vistaDetalle, vistaFormulario, panelTitulo;
 
-const API_URL = 'http://localhost:3001'; // json-server
+const API_URL = 'http://localhost:3001';
 
 // almacenamos rol actual porque segun cual sea tendrá diferentes funciones
 const rolActual = localStorage.getItem('userRole') || 'admin';
@@ -26,34 +26,37 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 3º Cargamos y mostramos tablas
     await cargarCoordinadores();
     filtrarYCargarTabla();
-    popularFiltros();
+    rellenarFiltros();
 
     // 4º Filtramos
-    document.querySelector('#filtro-entidad')
-        ?.addEventListener('change', filtrarYCargarTabla);
-    document.querySelector('#filtro-area')
-        ?.addEventListener('change', filtrarYCargarTabla);
+    const filtroEntidad = document.querySelector('#filtro-entidad');
+    const filtroArea = document.querySelector('#filtro-area');
+
+    filtroEntidad.addEventListener('change', filtrarYCargarTabla);
+    filtroArea.addEventListener('change', filtrarYCargarTabla);
 
     // 5º Botones CRUD
-    document.querySelector('#btn-anadir')
-        ?.addEventListener('click', abrirModalAnadir);
+    const btnAnadir = document.querySelector('#btn-anadir');
+    const btnModificar = document.querySelector('#btn-modificar');
+    const btnEliminar = document.querySelector('#btn-eliminar');
 
-    document.querySelector('#btn-modificar')
-        ?.addEventListener('click', abrirModalModificar);
-
-    document.querySelector('#btn-eliminar')
-        ?.addEventListener('click', eliminarCoordinador);
-
+    btnAnadir.addEventListener('click', abrirModalAnadir);
+    btnModificar.addEventListener('click', abrirModalModificar);
+    btnEliminar.addEventListener('click', eliminarCoordinador);
+    
     // 6º Eventos del modal
-    document.querySelector('#btn-confirmar')
-        ?.addEventListener('click', confirmarModal);
+    const btnConfirmar = document.querySelector('#btn-confirmar');
+    const btnCancelar = document.querySelector('#btn-cancelar');
 
-    document.querySelector('#btn-cancelar')
-        ?.addEventListener('click', cerrarModal);
+    btnConfirmar.addEventListener('click', confirmarModal);
+    btnCancelar.addEventListener('click', cerrarModal);
+
+    vistaDetalle = document.querySelector('#vista-detalle');
+    vistaFormulario = document.querySelector('#vista-formulario');
+    panelTitulo = document.querySelector('#panel-titulo');
 });
 
 // FUNCIONES
-// Traemos datos del JSON y los guardamos en la vble coordinadores
 async function cargarCoordinadores() {
     try {
         const respuesta = await fetch(`${API_URL}/coordinadores`);
@@ -71,26 +74,28 @@ async function cargarCoordinadores() {
     }
 }
 
-// POPULAR LOS FILTROS DINÁMICAMENTE
-function popularFiltros() {
-    // Usamos Sets para obtener valores únicos de entidades y áreas
-    const entidades = new Set(coordinadores.map(c => c.entidad).filter(Boolean));
-    const areas     = new Set(coordinadores.map(c => c.area).filter(Boolean));
+// Generamos opciones a partir de los datos reales del JSON.
+// Usamos Set para eliminar valores duplicados
+function rellenarFiltros() {
+    // Obtener valores únicos
+    const entidadesUnicas = coordinadores.map(c => c.entidad);
+    const areasUnicas = coordinadores.map(c => c.area);
 
-    // Rellenamos los <select> con las opciones obtenidas
+    // Eliminar duplicados
+    const entidades = [...new Set(entidadesUnicas)];
+    const areas = [...new Set(areasUnicas)];
+
+    // Rellenar selects
     rellenarSelect('#filtro-entidad', entidades);
-    rellenarSelect('#filtro-area',    areas);
+    rellenarSelect('#filtro-area', areas);
 }
 
-// Añade las opciones a un <select> dado su selector y un Set de valores
+
 function rellenarSelect(selector, valores) {
     const select = document.querySelector(selector);
-    if (!select) return;
 
-    // Conservamos solo la primera opción ("Todas")
     select.innerHTML = '<option value="Todas">Todas</option>';
 
-    // Añadimos las opciones únicas al select
     for (const valor of valores) {
         const option = document.createElement('option');
         option.value = valor;
@@ -104,36 +109,38 @@ function filtrarYCargarTabla() {
 
     if (!tablaBody) return;
 
-    // Obtenemos los valores seleccionados en los filtros
-    const entidadSel = document.querySelector('#filtro-entidad')?.value || 'Todas';
-    const areaSel    = document.querySelector('#filtro-area')?.value    || 'Todas';
+    const filtroEntidad = document.querySelector('#filtro-entidad');
+    const filtroArea = document.querySelector('#filtro-area');
+
+    const entidadSel = filtroEntidad.value || 'Todas';
+    const areaSel = filtroArea.value || 'Todas';
 
     tablaBody.innerHTML = '';
 
     // Filtramos los coordinadores según los criterios seleccionados
     const filtrados = coordinadores.filter(c => {
-        return (
-            (entidadSel === 'Todas' || c.entidad === entidadSel) &&
-            (areaSel    === 'Todas' || c.area    === areaSel)
-        );
+
+        const coincideEntidad = entidadSel==='Todas' || c.entidad===entidadSel;
+        const coincideArea = areaSel==='Todas' || c.area===areaSel;
+
+        return coincideEntidad && coincideArea;
     });
 
-    // Si no hay coordinadores que mostrar, mostramos un mensaje en la tabla
     if (filtrados.length === 0) {
         tablaBody.innerHTML = `
             <tr>
                 <td colspan="8"> No hay coordinadores con esos filtros </td>
-            </tr>`;
+            </tr>
+        `;
         return;
     }
 
     // Creamos las filas de la tabla con los coordinadores filtrados
     filtrados.forEach(c => {
         const fila = document.createElement('tr');
-        fila.style.cursor = 'pointer';
 
         if (c.id === coordinadorSeleccionadoId) {
-            fila.style.backgroundColor = '#fde8e8';
+            fila.classList.add('fila-seleccionada');  
         }
 
         // Rellenamos las celdas de la fila con los datos del coordinador
@@ -158,18 +165,25 @@ function mostrarDetalle(id) {
 
     coordinadorSeleccionadoId = id;
 
-    // Buscamos el coordinador seleccionado en la lista completa (no filtrada)
-    const c = coordinadores.find(coord => coord.id === id);
-    if (!c) return;
+    const coord = coordinadores.find(coord => coord.id === id);
+    if (!coord) return;
 
     // Rellenamos el panel lateral con los datos del coordinador seleccionado
-    document.querySelector('#det-id').textContent      = c.id;
-    document.querySelector('#det-entidad').textContent = c.entidad || '---';
-    document.querySelector('#det-area').textContent    = c.area || '---';
-    document.querySelector('#det-tlf').textContent     = c.telefono || '---';
-    document.querySelector('#det-email').textContent   = c.email || '---';
-    document.querySelector('#det-tiendas').textContent = c.tiendas || '0';
-    document.querySelector('#det-usuario').textContent = c.usuario || '---';
+    const detId = document.querySelector('#det-id');
+    const detEntidad = document.querySelector('#det-entidad');
+    const detArea = document.querySelector('#det-area');
+    const detTlf = document.querySelector('#det-tlf');
+    const detEmail = document.querySelector('#det-email');
+    const detTiendas = document.querySelector('#det-tiendas');
+    const detUsuario = document.querySelector('#det-usuario');
+
+    detId.textContent = coord.id;
+    detEntidad.textContent = coord.entidad;
+    detArea.textContent = coord.area;
+    detTlf.textContent = coord.telefono;
+    detEmail.textContent = coord.email;
+    detTiendas.textContent = coord.tiendas || '0';
+    detUsuario.textContent = coord.usuario;
 
     filtrarYCargarTabla();
 }
@@ -179,11 +193,9 @@ function abrirModalAnadir() {
     modoModal = 'anadir';
     document.querySelector('#panel-titulo').textContent = 'AÑADIR COORDINADOR';
 
-    // Limpiamos el formulario y habilitamos el campo ID para la creación
     limpiarModal();
     document.querySelector('#f-id').disabled = false;
 
-    // Abrimos el modal para añadir un nuevo coordinador
     abrirModal();
 }
 
@@ -195,23 +207,31 @@ function abrirModalModificar() {
         return;
     }
 
-    // Buscamos el coordinador seleccionado en la lista completa (no filtrada)
-    const c = coordinadores.find(coord => coord.id === coordinadorSeleccionadoId);
-    if (!c) return;
+    const coord = coordinadores.find(c => c.id === coordinadorSeleccionadoId);
+    if (!coord) return;
 
     modoModal = 'modificar';
     document.querySelector('#panel-titulo').textContent = 'MODIFICAR COORDINADOR';
 
-    // Rellenamos el formulario con los datos del coordinador seleccionado
-    document.querySelector('#f-id').value      = c.id;
-    document.querySelector('#f-nombre').value  = c.nombre;
-    document.querySelector('#f-entidad').value = c.entidad || '';
-    document.querySelector('#f-area').value    = c.area || '';
-    document.querySelector('#f-tlf').value     = c.telefono || '';
-    document.querySelector('#f-email').value   = c.email || '';
-    document.querySelector('#f-tiendas').value = c.tiendas || 0;
-    document.querySelector('#f-usuario').value = c.usuario || '';
-    document.querySelector('#f-pass').value    = c.password || '';
+    const inputId = document.querySelector('#f-id');
+    const inputNombre = document.querySelector('#f-nombre');
+    const inputEntidad = document.querySelector('#f-entidad');
+    const inputArea = document.querySelector('#f-area');
+    const inputTlf = document.querySelector('#f-tlf');
+    const inputEmail = document.querySelector('#f-email');
+    const inputTiendas = document.querySelector('#f-tiendas');
+    const inputUsuario = document.querySelector('#f-usuario');
+    const inputPass = document.querySelector('#f-pass');
+
+    inputId.value = coord.id;
+    inputNombre.value = coord.nombre;
+    inputEntidad.value = coord.entidad;
+    inputArea.value = coord.area;
+    inputTlf.value = coord.telefono;
+    inputEmail.value = coord.email;
+    inputTiendas.value = coord.tiendas || 0;
+    inputUsuario.value = coord.usuario;
+    inputPass.value = coord.password;
 
     document.querySelector('#f-id').disabled = true;
 
@@ -220,7 +240,6 @@ function abrirModalModificar() {
 
 // EDITAR/CREAR
 function confirmarModal() {
-    // Según el modo del modal, llamamos a la función correspondiente para crear o actualizar el coordinador
     if (modoModal === 'anadir') {
         crearCoordinador();
     } else {
@@ -230,37 +249,36 @@ function confirmarModal() {
 
 // FUNCIONES CRUD
 async function crearCoordinador() {
+    const inputId = document.querySelector('#f-id'); 
+    const inputNombre = document.querySelector('#f-nombre'); 
 
-    const id     = document.querySelector('#f-id').value.trim();
-    const nombre = document.querySelector('#f-nombre').value.trim();
+    const id = inputId.value;
+    const nombre = inputNombre.value;
 
-    // Validamos que el ID y el Nombre estén completos, ya que son campos obligatorios para crear un nuevo coordinador
     if (!id || !nombre) {
         alert('El ID y el Nombre son obligatorios.');
         return;
     }
 
-    // Verificamos que no exista otro coordinador con el mismo ID para evitar duplicados
     const existe = coordinadores.find(c => c.id === id);
     if (existe) {
         alert(`Ya existe un coordinador con el ID "${id}".`);
         return;
     }
 
-    // Creamos un nuevo objeto coordinador con los datos ingresados en el formulario
+    // Crear obj
     const nuevoCoord = {
         id,
         nombre,
-        entidad:  document.querySelector('#f-entidad').value.trim(),
-        area:     document.querySelector('#f-area').value.trim(),
-        telefono: document.querySelector('#f-tlf').value.trim(),
-        email:    document.querySelector('#f-email').value.trim(),
-        tiendas:  parseInt(document.querySelector('#f-tiendas').value) || 0,
-        usuario:  document.querySelector('#f-usuario').value.trim(),
-        password: document.querySelector('#f-pass').value.trim()
+        entidad: document.querySelector('#f-entidad').value,
+        area: document.querySelector('#f-area').value,
+        telefono: document.querySelector('#f-tlf').value,
+        email: document.querySelector('#f-email').value,
+        tiendas: parseInt(document.querySelector('#f-tiendas').value) || 0,
+        usuario: document.querySelector('#f-usuario').value,
+        password: document.querySelector('#f-pass').value
     };
 
-    // Enviamos una solicitud POST al servidor para crear el nuevo coordinador
     try {
         const respuesta = await fetch(`${API_URL}/coordinadores`, {
             method: 'POST',
@@ -272,9 +290,8 @@ async function crearCoordinador() {
             throw new Error(`Error HTTP: ${respuesta.status}`);
         }
 
-        // Si la creación fue exitosa, recargamos los coordinadores, actualizamos los filtros y la tabla, y cerramos el modal
         await cargarCoordinadores();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
         cerrarModal();
 
@@ -289,7 +306,8 @@ async function crearCoordinador() {
 // Función para actualizar un coordinador existente con los datos ingresados en el formulario
 async function actualizarCoordinador() {
 
-    const nombre = document.querySelector('#f-nombre').value.trim();
+    const inputNombre = document.querySelector('#f-nombre');
+    const nombre = inputNombre.value;
 
     if (!nombre) {
         alert('El Nombre es obligatorio.');
@@ -300,16 +318,15 @@ async function actualizarCoordinador() {
     const coordActualizado = {
         id:       coordinadorSeleccionadoId,
         nombre,
-        entidad:  document.querySelector('#f-entidad').value.trim(),
-        area:     document.querySelector('#f-area').value.trim(),
-        telefono: document.querySelector('#f-tlf').value.trim(),
-        email:    document.querySelector('#f-email').value.trim(),
+        entidad:  document.querySelector('#f-entidad').value,
+        area:     document.querySelector('#f-area').value,
+        telefono: document.querySelector('#f-tlf').value,
+        email:    document.querySelector('#f-email').value,
         tiendas:  parseInt(document.querySelector('#f-tiendas').value) || 0,
-        usuario:  document.querySelector('#f-usuario').value.trim(),
-        password: document.querySelector('#f-pass').value.trim()
+        usuario:  document.querySelector('#f-usuario').value,
+        password: document.querySelector('#f-pass').value
     };
 
-    // Enviamos una solicitud PUT al servidor para actualizar el coordinador seleccionado con los nuevos datos
     try {
         const respuesta = await fetch(`${API_URL}/coordinadores/${coordinadorSeleccionadoId}`, {
             method: 'PUT',
@@ -321,10 +338,8 @@ async function actualizarCoordinador() {
             throw new Error(`Error HTTP: ${respuesta.status}`);
         }
 
-        // Si la actualización fue exitosa, recargamos los coordinadores, actualizamos los filtros y la tabla, mostramos 
-        // el detalle del coordinador actualizado y cerramos el modal
         await cargarCoordinadores();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
         mostrarDetalle(coordinadorSeleccionadoId);
         cerrarModal();
@@ -345,7 +360,6 @@ async function eliminarCoordinador() {
         return;
     }
 
-    // Buscamos el coordinador seleccionado en la lista completa (no filtrada) para mostrar su nombre en la confirmación
     const c = coordinadores.find(coord => coord.id === coordinadorSeleccionadoId);
     const confirmado = confirm(
         `¿Seguro que quieres eliminar a "${c?.nombre}"?\nEsta acción no se puede deshacer.`
@@ -353,7 +367,6 @@ async function eliminarCoordinador() {
 
     if (!confirmado) return;
 
-    // Enviamos una solicitud DELETE al servidor para eliminar el coordinador seleccionado
     try {
         const respuesta = await fetch(`${API_URL}/coordinadores/${coordinadorSeleccionadoId}`, {
             method: 'DELETE'
@@ -366,15 +379,23 @@ async function eliminarCoordinador() {
         // Si la eliminación fue exitosa, recargamos los coordinadores, actualizamos los filtros y la tabla, 
         // limpiamos el panel lateral y mostramos un mensaje de éxito
         coordinadorSeleccionadoId = null;
-        ['#det-id','#det-entidad','#det-area','#det-tlf','#det-email','#det-tiendas','#det-usuario']
-            .forEach(selector => {
-                const el = document.querySelector(selector);
-                if (el) el.textContent = '---';
+        const camposDetalle = [
+            'det-id',
+            'det-entidad',
+            'det-area',
+            'det-tlf',
+            'det-email',
+            'det-tiendas', 
+            'det-usuario'
+        ];
+        camposDetalle.forEach(id => {
+                const elemento = document.getElementById(id);
+                if (elemento) elemento.textContent = '---';
             });
 
         // Recargamos los coordinadores y actualizamos la tabla y los filtros para reflejar la eliminación
         await cargarCoordinadores();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
 
         alert('Coordinador eliminado correctamente.');
@@ -387,32 +408,31 @@ async function eliminarCoordinador() {
 
 // Modales
 function abrirModal() {
-    const vistaDetalle = document.querySelector('#vista-detalle');
-    const vistaForm = document.querySelector('#vista-formulario');
-    // Para mostrar el formulario del modal, ocultamos el panel de detalle y mostramos el formulario
-    if (vistaDetalle) vistaDetalle.classList.add('hidden');
-    if (vistaForm) vistaForm.classList.remove('hidden');
+    vistaDetalle.classList.add('hidden');
+    vistaFormulario.classList.remove('hidden');
 }
 
 function cerrarModal() {
-    const vistaDetalle = document.querySelector('#vista-detalle');
-    const vistaForm = document.querySelector('#vista-formulario');
-    // Para cerrar el modal, ocultamos el formulario y mostramos el panel de detalle
-    if (vistaForm) vistaForm.classList.add('hidden');
-    if (vistaDetalle) vistaDetalle.classList.remove('hidden');
-    
-    const panelTitulo = document.querySelector('#panel-titulo');
-    // Al cerrar el modal, restablecemos el título del panel lateral a su estado original
-    if (panelTitulo) panelTitulo.textContent = 'COORDINADOR SELECCIONADO';
-
+    vistaFormulario.classList.add('hidden');
+    vistaDetalle.classList.remove('hidden');
+    panelTitulo.textContent = 'COORDINADOR SELECCIONADO';
     limpiarModal();
 }
 
 function limpiarModal() {
-    // Limpiamos los campos del formulario para que no queden datos residuales al abrir el modal para añadir o modificar
-    ['#f-id','#f-nombre','#f-entidad','#f-area','#f-tlf','#f-email','#f-tiendas','#f-usuario', '#f-pass']
-        .forEach(selector => {
-            const el = document.querySelector(selector);
-            if (el) el.value = '';
-        });
+    const inputs = [
+        'f-id',
+        'f-nombre',
+        'f-entidad',
+        'f-area',
+        'f-tlf',
+        'f-email',
+        'f-tiendas', 
+        'f-usuario', 
+        'f-pass'
+    ];
+
+    inputs.forEach(id => {
+        document.getElementById(id).value = '';
+    });
 }

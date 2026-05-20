@@ -4,6 +4,7 @@ let tiendas = [];
 let tiendaSeleccionadaId = null; 
 let modoModal = 'anadir'; 
 let tablaBody, menuAdmin;
+let vistaDetalle, vistaFormulario, panelTitulo;
 
 const API_URL = 'http://localhost:3001';
 
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     // 3º Cargamos y mostramos tablas
     await cargarTiendas();
     filtrarYCargarTabla();
-    popularFiltros();
+    rellenarFiltros();
 
     // 4º Filtramos
     const filtroCadena = document.querySelector('#filtro-cadena');
@@ -53,6 +54,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     btnConfirmar.addEventListener('click', confirmarModal);
     btnCancelar.addEventListener('click', cerrarModal);
+
+    vistaDetalle = document.querySelector('#vista-detalle');
+    vistaFormulario = document.querySelector('#vista-formulario');
+    panelTitulo = document.querySelector('#panel-titulo');
 });
 
 // FUNCIONES
@@ -75,7 +80,7 @@ async function cargarTiendas() {
 
 // Generamos opciones a partir de los datos reales del JSON.
 // Usamos Set para eliminar valores duplicados
-function popularFiltros() {
+function rellenarFiltros() {
     // Obtener valores únicos
     const cadenasUnicas = tiendas.map(tienda => tienda.cadena);
     const localidadesUnicas = tiendas.map(tienda => tienda.localidad);
@@ -89,15 +94,15 @@ function popularFiltros() {
     const coordinadores = [...new Set(coordinadoresUnicos)];
 
     // Rellenar selects
-    rellenarSelect('filtro-cadena', cadenas);
-    rellenarSelect('filtro-localidad', localidades);
-    rellenarSelect('filtro-zona', zonas);
-    rellenarSelect('filtro-coordinador', coordinadores);
+    rellenarSelect('#filtro-cadena', cadenas);
+    rellenarSelect('#filtro-localidad', localidades);
+    rellenarSelect('#filtro-zona', zonas);
+    rellenarSelect('#filtro-coordinador', coordinadores);
 }
 
 
-function rellenarSelect(idSelect, valores) {
-    const select = document.getElementById(idSelect);
+function rellenarSelect(selector, valores) {
+    const select = document.querySelector(selector);
 
     select.innerHTML = '<option value="Todas">Todas</option>';
 
@@ -256,8 +261,8 @@ async function crearTienda() {
     const inputId = document.querySelector('#f-id');
     const inputNombre = document.querySelector('#f-nombre');
 
-    const id = inputId.value();
-    const nombre = inputNombre.value();
+    const id = inputId.value;
+    const nombre = inputNombre.value;
 
     if (!id || !nombre) {
         alert('El ID y el Nombre son obligatorios.');
@@ -270,22 +275,15 @@ async function crearTienda() {
         return;
     }
 
-    //NUEVA TIENDA
-    const inputCadena = document.getElementById('f-cadena');
-    const inputZona = document.getElementById('f-zona');
-    const inputDomicilio = document.getElementById('f-domicilio');
-    const inputLocalidad = document.getElementById('f-localidad');
-    const inputCoord = document.getElementById('f-coord');
-
     // Crear objeto
     const nuevaTienda = {
         id,
         nombre,
-        cadena: valor(inputCadena) || '---',
-        zona: valor(inputZona) || '---',
-        domicilio: valor(inputDomicilio) || '---',
-        localidad: valor(inputLocalidad) || '---',
-        coord: valor(inputCoord)|| '---'
+        cadena: document.querySelector('#f-cadena').value,
+        zona: document.querySelector('#f-zona').value,
+        domicilio: document.querySelector('#f-domicilio').value,
+        localidad: document.querySelector('#f-localidad').value,
+        coord: document.querySelector('#f-coord').value
     };
 
     try {
@@ -300,7 +298,7 @@ async function crearTienda() {
         }
 
         await cargarTiendas();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
         cerrarModal();
 
@@ -316,7 +314,7 @@ async function crearTienda() {
 async function actualizarTienda() {
     
     const inputNombre = document.getElementById('f-nombre');
-    const nombre = inputNombre.value();
+    const nombre = inputNombre.value;
     
     if (!nombre) {
         alert('El Nombre es obligatorio.');
@@ -332,11 +330,11 @@ async function actualizarTienda() {
     const tiendaActualizada = {
         id: tiendaSeleccionadaId,
         nombre,
-        cadena: cadenaInput.value() || '---',
-        zona: zonaInput.value() || '---',
-        domicilio: domicilioInput.value() || '---',
-        localidad: localidadInput.value() || '---',
-        coord: coordInput.value() || '---'
+        cadena: cadenaInput.value,
+        zona: zonaInput.value,
+        domicilio: domicilioInput.value,
+        localidad: localidadInput.value,
+        coord: coordInput.value
     };
 
     try {
@@ -351,7 +349,7 @@ async function actualizarTienda() {
         }
 
         await cargarTiendas();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
         mostrarDetalle(tiendaSeleccionadaId);
         cerrarModal();
@@ -405,7 +403,7 @@ async function eliminarTienda() {
         });
 
         await cargarTiendas();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
 
         alert('Tienda eliminada correctamente.');
@@ -417,10 +415,6 @@ async function eliminarTienda() {
 }
 
 // Modales
-const vistaDetalle = document.querySelector('#vista-detalle');
-const vistaFormulario = document.querySelector('#vista-formulario');
-const panelTitulo = document.querySelector('#panel-titulo');
-
 function abrirModal() {
     vistaDetalle.classList.add('hidden');
     vistaFormulario.classList.remove('hidden');
