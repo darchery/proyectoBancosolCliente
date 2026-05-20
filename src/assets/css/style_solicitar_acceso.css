@@ -1,3 +1,4 @@
+/* --- ESTILO PARA LA PÁGINA DE SOLICITAR ACCESO --- */
 body {
     display: flex;
     flex-direction: column;
@@ -6,14 +7,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f8f9fa;
 }
-
+/* --- ESTILO PARA EL TÍTULO PRINCIPAL EN EL MAIN --- */
 h1 {
     color: #293189;
     text-align: center;
     margin: 2rem 0 1rem 0;
 }
-
-
+/* --- ESTILO PARA EL FORMULARIO DE SOLICITAR ACCESO --- */
 form {
     width: 100%;
     max-width: 400px;
@@ -25,12 +25,11 @@ form {
     flex-direction: column;
     gap: 1rem;
 }
-
+/* --- ESTILO PARA LAS ETIQUETAS Y CAMPOS DE ENTRADA DEL FORMULARIO --- */
 form label {
     font-weight: bold;
     color: #293189;
 }
-
 form input {
     width: 100%;
     padding: 12px;
@@ -38,12 +37,12 @@ form input {
     border-radius: 8px;
     outline: none;
 }
-
 form input:focus {
     border-color: #293189;
     box-shadow: 0 0 5px rgba(41, 49, 137, 0.2);
 }
 
+/* --- ESTILO PARA EL BOTÓN DE ENVÍO DEL FORMULARIO --- */
 form button {
     width: 100%;
     padding: 12px;
@@ -60,16 +59,13 @@ form button:hover {
     background-color: #c0c0c2;
 }
 
-
+/* --- ESTILO PARA EL MENSAJE DE ÉXITO DESPUÉS DE ENVIAR EL FORMULARIO --- */
 .mensaje-ok {
     color: green;
     font-weight: bold;
     text-align: center;
 }
-
-
-
-
+/* --- ESTILO PARA EL MENSAJE DE ERROR DESPUÉS DE ENVIAR EL FORMULARIO --- */
 #img-footer {
     width: 25em;
     max-width: 90%;

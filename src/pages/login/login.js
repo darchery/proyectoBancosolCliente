@@ -1,3 +1,4 @@
+// Mapeo de roles a rutas de bienvenida
 const rutasPorRol = {
     'admin': '/src/pages/welcome/welcome_admin.html',
     'capitan': '/src/pages/welcome/welcome_capitan.html',
@@ -7,6 +8,7 @@ const rutasPorRol = {
     'responsable_tienda': '/src/pages/welcome/welcome_responsable_tienda.html'
 };
 
+// Función para redirigir al usuario según su rol
 function redirigirUsuario(rol) {
   const rutaDestino = rutasPorRol[rol];
 
@@ -14,6 +16,7 @@ function redirigirUsuario(rol) {
     // IMPORTANTE: Sin esta línea, los botones de acción nunca aparecerán
     localStorage.setItem('userRole', rol); 
     
+    // Redirigimos al usuario a la página correspondiente
     window.location.href = rutaDestino;
   } else {
     console.error('ERROR: El rol no se reconoce (' + rol + ')');
@@ -23,20 +26,24 @@ function redirigirUsuario(rol) {
 
 const btnEntrar = document.getElementById("btn-entrar");
 
+// Agregamos el evento click al botón de inicio de sesión
 if (btnEntrar) {
   btnEntrar.addEventListener("click", async (evento) => {
     evento.preventDefault();
 
+    // Obtenemos los valores ingresados por el usuario
     const userIngresado = document.getElementById("input-usuario").value.trim();
     const passIngresada = document.getElementById("input-password").value.trim();
 
+    // Validamos que ambos campos estén completos
     if (!userIngresado || !passIngresada) {
       alert("Rellene ambos campos");
       return;
     }
 
+    // Intentamos acceder a la base de datos y validar al usuario
     try {
-       const respuesta = await fetch('../../data/db.json');
+      const respuesta = await fetch('../../data/db.json');
       const db = await respuesta.json();
       const usuariosDB = db.usuarios;
 
@@ -50,6 +57,7 @@ if (btnEntrar) {
         localStorage.removeItem('userRole'); 
         
         console.log("Inicio de sesión correcto. Rol:", usuarioValido.rol);
+        // Redirigimos al usuario según su rol
         redirigirUsuario(usuarioValido.rol);
       } else {
         alert("Usuario o contraseña incorrectos.");

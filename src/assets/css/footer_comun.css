@@ -1,3 +1,4 @@
+/* --- ESTILOS COMUNES PARA EL FOOTER --- */
 footer {
     color: #4a4a4a;
     text-align: center;
@@ -12,7 +13,7 @@ footer {
     flex-grow: 0;
     flex-shrink: 0;
 }
-
+/* --- ESTILO PARA LOS ENLACES DENTRO DEL FOOTER --- */
 footer p {
     margin: 0;
 }

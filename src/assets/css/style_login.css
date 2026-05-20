@@ -1,9 +1,10 @@
+/* --- ESTILO PARA LA PÁGINA DE LOGIN --- */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: white;
 }
-
+/* --- ESTILO PARA EL CONTENEDOR PRINCIPAL DEL LOGIN --- */
 .login-box {
   width: 320px;
   margin: 60px auto;
@@ -14,14 +15,12 @@ body {
   box-shadow: 0 10px 25px rgba(13, 71, 161, 0.2);
   text-align: center;
 }
-
-
+/* --- ESTILO PARA EL TÍTULO DEL LOGIN --- */
 .login-box h2 {
   color: #0d47a1;
   margin-bottom: 20px;
 }
-
-
+/* --- ESTILO PARA LOS CAMPOS DE ENTRADA Y BOTONES --- */
 .login-box label {
   display: block;
   text-align: left;
@@ -29,8 +28,7 @@ body {
   font-weight: bold;
   color: #0d47a1;
 }
-
-
+/* --- ESTILO PARA LOS CAMPOS DE ENTRADA --- */
 .login-box input {
   width: 100%;
   padding: 10px;
@@ -39,13 +37,12 @@ body {
   border-radius: 8px;
   outline: none;
 }
-
+/* --- ESTILO PARA LOS CAMPOS DE ENTRADA CUANDO ESTÁN ENFOCADOS --- */
 .login-box input:focus {
   border-color: #0d47a1;
   box-shadow: 0 0 5px rgba(13, 71, 161, 0.3);
 }
-
-
+/* --- ESTILO PARA EL BOTÓN DE LOGIN --- */
 .login-box button {
   width: 100%;
   padding: 10px;
@@ -57,19 +54,17 @@ body {
   cursor: pointer;
   font-size: 16px;
 }
-
+/* --- ESTILO PARA EL BOTÓN DE LOGIN CUANDO SE HACE HOVER --- */
 .login-box button:hover {
   background: #1565c0;
 }
-
-
+/* --- ESTILO PARA LOS ENLACES DENTRO DEL LOGIN --- */
 .login-box a {
   display: block;
   margin-top: 15px;
   color: #0d47a1;
   text-decoration: none;
 }
-
 .login-box a:hover {
   text-decoration: underline;
 }

@@ -1,14 +1,14 @@
-/* ¡ESTA ES LA REGLA NUEVA QUE ARREGLA EL PROBLEMA! */
+/* --- ESTILOS COMUNES PARA EL HEADER --- */
 header {
     width: 100%;
 }
-
+/* --- ESTILO PARA EL TÍTULO PRINCIPAL EN EL HEADER --- */
 header h1 {
     color: #293189;
     text-align: center;
     margin-bottom: 0.5rem;
 }
-
+/* --- ESTRUCTURA COMÚN (Header y Dashboard) --- */
 .main-header {
     display: flex;
     justify-content: flex-start; 
@@ -19,7 +19,7 @@ header h1 {
     width: 100%; 
     box-sizing: border-box; 
 }
-
+/* --- LOGO Y ÁREA DE TÍTULO --- */
 #logo {
     height: 60px; 
     width: auto; 
