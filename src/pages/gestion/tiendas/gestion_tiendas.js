@@ -14,8 +14,8 @@ const rolActual = localStorage.getItem('userRole') || 'admin';
 document.addEventListener('DOMContentLoaded', async function () {
 
     // 1º elementos del HTML
-    tablaBody = document.getElementById('tabla-body');
-    menuAdmin = document.getElementById('admin-menu');
+    tablaBody = document.querySelector('#tabla-body');
+    menuAdmin = document.querySelector('#admin-menu');
 
     // 2º Permisos
     if (rolActual === 'admin') {
@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     popularFiltros();
 
     // 4º Filtramos
-    const filtroCadena = document.getElementById('filtro-cadena');
-    const filtroLocalidad = document.getElementById('filtro-localidad');
-    const filtroZona = document.getElementById('filtro-zona');
-    const filtroCoordinador = document.getElementById('filtro-coordinador');
+    const filtroCadena = document.querySelector('#filtro-cadena');
+    const filtroLocalidad = document.querySelector('#filtro-localidad');
+    const filtroZona = document.querySelector('#filtro-zona');
+    const filtroCoordinador = document.querySelector('#filtro-coordinador');
 
     filtroCadena.addEventListener('change', filtrarYCargarTabla);
     filtroLocalidad.addEventListener('change', filtrarYCargarTabla);
@@ -39,17 +39,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     filtroCoordinador.addEventListener('change', filtrarYCargarTabla);
 
     // 5º Botones CRUD
-    const btnAnadir = document.getElementById('btn-anadir');
-    const btnModificar = document.getElementById('btn-modificar');
-    const btnEliminar = document.getElementById('btn-eliminar');
+    const btnAnadir = document.querySelector('#btn-anadir');
+    const btnModificar = document.querySelector('#btn-modificar');
+    const btnEliminar = document.querySelector('#btn-eliminar');
 
     btnAnadir.addEventListener('click', abrirModalAnadir);
     btnModificar.addEventListener('click', abrirModalModificar);
     btnEliminar.addEventListener('click', eliminarTienda);
 
     // 6º Eventos del modal
-    const btnConfirmar = document.getElementById('btn-confirmar');
-    const btnCancelar = document.getElementById('btn-cancelar');
+    const btnConfirmar = document.querySelector('#btn-confirmar');
+    const btnCancelar = document.querySelector('#btn-cancelar');
 
     btnConfirmar.addEventListener('click', confirmarModal);
     btnCancelar.addEventListener('click', cerrarModal);
@@ -114,11 +114,11 @@ function filtrarYCargarTabla() {
 
     if (!tablaBody) return;
 
-    const filtroCadena = document.getElementById('filtro-cadena');
-    const filtroLocalidad = document.getElementById('filtro-localidad');
-    const filtroZona = document.getElementById('filtro-zona');
-    const filtroCoordinador = document.getElementById('filtro-coordinador');
-        
+    const filtroCadena = document.querySelector('#filtro-cadena');
+    const filtroLocalidad = document.querySelector('#filtro-localidad');
+    const filtroZona = document.querySelector('#filtro-zona');
+    const filtroCoordinador = document.querySelector('#filtro-coordinador');
+            
     const cadenaSel = filtroCadena.value || 'Todas';
     const localidadSel = filtroLocalidad.value || 'Todas';
     const zonaSel = filtroZona.value || 'Todas';
@@ -175,12 +175,12 @@ function mostrarDetalle(id) {
     const tienda = tiendas.find(t => t.id === id);
     if (!tienda) return;
 
-    const detalleId = document.getElementById('det-id');
-    const detalleCadena = document.getElementById('det-cadena');
-    const detalleDomicilio = document.getElementById('det-dom');
-    const detalleLocalidad = document.getElementById('det-loc');
-    const detalleZona = document.getElementById('det-zona');
-    const detalleCoordinador = document.getElementById('det-coord');
+    const detalleId = document.querySelector('#det-id');
+    const detalleCadena = document.querySelector('#det-cadena');
+    const detalleDomicilio = document.querySelector('#det-dom');
+    const detalleLocalidad = document.querySelector('#det-loc');
+    const detalleZona = document.querySelector('#det-zona');
+    const detalleCoordinador = document.querySelector('#det-coord');
 
     detalleId.textContent = tienda.id;
     detalleCadena.textContent = tienda.cadena;
@@ -217,13 +217,13 @@ function abrirModalModificar() {
     modoModal = 'modificar';
     document.getElementById('panel-titulo').textContent = 'MODIFICAR TIENDA';
 
-    const inputId = document.getElementById('f-id');
-    const inputNombre = document.getElementById('f-nombre');
-    const inputCadena = document.getElementById('f-cadena');
-    const inputZona = document.getElementById('f-zona');
-    const inputDomicilio = document.getElementById('f-domicilio');
-    const inputLocalidad = document.getElementById('f-localidad');
-    const inputCoordinador = document.getElementById('f-coord');
+    const inputId = document.querySelector('#f-id');
+    const inputNombre = document.querySelector('#f-nombre');
+    const inputCadena = document.querySelector('#f-cadena');
+    const inputZona = document.querySelector('#f-zona');
+    const inputDomicilio = document.querySelector('#f-domicilio');
+    const inputLocalidad = document.querySelector('#f-localidad');
+    const inputCoordinador = document.querySelector('#f-coord');
 
     inputId.value = tienda.id;
     inputNombre.value = tienda.nombre;
@@ -253,8 +253,8 @@ function confirmarModal() {
 //   headers          → le decimos al servidor que enviamos JSON
 //   body             → datos convertidos a texto con JSON.stringif
 async function crearTienda() {
-    const inputId = document.getElementById('f-id');
-    const inputNombre = document.getElementById('f-nombre');
+    const inputId = document.querySelector('#f-id');
+    const inputNombre = document.querySelector('#f-nombre');
 
     const id = inputId.value();
     const nombre = inputNombre.value();
@@ -417,9 +417,9 @@ async function eliminarTienda() {
 }
 
 // Modales
-const vistaDetalle = document.getElementById('vista-detalle');
-const vistaFormulario = document.getElementById('vista-formulario');
-const panelTitulo = document.getElementById('panel-titulo');
+const vistaDetalle = document.querySelector('#vista-detalle');
+const vistaFormulario = document.querySelector('#vista-formulario');
+const panelTitulo = document.querySelector('#panel-titulo');
 
 function abrirModal() {
     vistaDetalle.classList.add('hidden');
