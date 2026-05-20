@@ -74,29 +74,6 @@
       "id": "2",
       "tiendaId": "CARREFOUR_004",
       "pendienteValidacion": false
-    },
-    {
-      "nombre": "MSKME",
-      "domicilio": "RRR",
-      "cp": "20902",
-      "localidad": "22",
-      "colabora": "2",
-      "coord": "2",
-      "contacto1": {
-        "nombre": "2",
-        "tel": "2"
-      },
-      "contacto2": {
-        "nombre": "3",
-        "tel": "4"
-      },
-      "contacto3": {
-        "nombre": "3",
-        "tel": "4"
-      },
-      "observaciones": "HOLI",
-      "pendienteValidacion": false,
-      "id": "SP94l-s"
     }
   ],
   "coordinadores": [
