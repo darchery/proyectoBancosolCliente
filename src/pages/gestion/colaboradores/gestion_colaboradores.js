@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         ?.addEventListener('click', abrirVistaAsignar);
     document.getElementById('btn-exportar')
         ?.addEventListener('click', exportarExcel);
+    document.getElementById('btn-validar')
+        ?.addEventListener('click', validarColaborador);
 
     // Botones CRUD — coordinador
     document.getElementById('btn-anadir-pendiente')
@@ -169,14 +171,14 @@ function mostrarDetalle(id) {
     const c = colaboradores.find(x => x.id === id);
     if (!c) return;
 
-    document.getElementById('det-nombre').textContent   = c.nombre        || '---';
-    document.getElementById('det-dom').textContent      = c.domicilio     || '---';
-    document.getElementById('det-cp').textContent       = c.cp            || '---';
-    document.getElementById('det-localidad').textContent = c.localidad    || '---';
-    document.getElementById('det-colabora').textContent = c.colabora      || '---';
-    document.getElementById('det-coord').textContent    = c.coord         || '---';
-    document.getElementById('det-tienda').textContent   = c.tiendaId      || '---';
-    document.getElementById('det-obs').textContent      = c.observaciones || '---';
+    document.getElementById('det-nombre').textContent    = c.nombre        || '---';
+    document.getElementById('det-dom').textContent       = c.domicilio     || '---';
+    document.getElementById('det-cp').textContent        = c.cp            || '---';
+    document.getElementById('det-localidad').textContent = c.localidad     || '---';
+    document.getElementById('det-colabora').textContent  = c.colabora      || '---';
+    document.getElementById('det-coord').textContent     = c.coord         || '---';
+    document.getElementById('det-tienda').textContent    = c.tiendaId      || '---';
+    document.getElementById('det-obs').textContent       = c.observaciones || '---';
 
     document.getElementById('det-c1').textContent =
         c.contacto1?.nombre ? `${c.contacto1.nombre} — ${c.contacto1.tel}` : '---';
@@ -185,15 +187,25 @@ function mostrarDetalle(id) {
     document.getElementById('det-c3').textContent =
         c.contacto3?.nombre ? `${c.contacto3.nombre} — ${c.contacto3.tel}` : '---';
 
+    // Mostrar botón validar solo si es admin y el colaborador está pendiente
+    const btnValidar = document.getElementById('btn-validar');
+    if (btnValidar) {
+        if (rolActual === 'admin' && c.pendienteValidacion) {
+            btnValidar.classList.remove('hidden');
+        } else {
+            btnValidar.classList.add('hidden');
+        }
+    }
+
     mostrarVista('detalle');
     filtrarYCargarTabla();
 }
 
 // CONTROL DE VISTAS DEL PANEL
 function mostrarVista(cual) {
-    const vistaDetalle = document.getElementById('vista-detalle');
-    const vistaForm = document.getElementById('vista-formulario');
-    const vistaAsignar = document.getElementById('vista-asignar');
+    const vistaDetalle  = document.getElementById('vista-detalle');
+    const vistaForm     = document.getElementById('vista-formulario');
+    const vistaAsignar  = document.getElementById('vista-asignar');
 
     if (vistaDetalle) {
         if (cual === 'detalle') vistaDetalle.classList.remove('hidden');
@@ -238,19 +250,19 @@ function abrirModalModificar() {
     document.getElementById('panel-titulo').textContent = 'MODIFICAR COLABORADOR';
 
     // Rellenamos el formulario con los datos actuales
-    document.getElementById('f-nombre').value     = c.nombre        || '';
-    document.getElementById('f-domicilio').value  = c.domicilio     || '';
-    document.getElementById('f-cp').value         = c.cp            || '';
-    document.getElementById('f-localidad').value  = c.localidad     || '';
-    document.getElementById('f-colabora').value   = c.colabora      || '';
-    document.getElementById('f-coord-input').value = c.coord        || '';
-    document.getElementById('f-c1-nombre').value  = c.contacto1?.nombre || '';
-    document.getElementById('f-c1-tel').value     = c.contacto1?.tel    || '';
-    document.getElementById('f-c2-nombre').value  = c.contacto2?.nombre || '';
-    document.getElementById('f-c2-tel').value     = c.contacto2?.tel    || '';
-    document.getElementById('f-c3-nombre').value  = c.contacto3?.nombre || '';
-    document.getElementById('f-c3-tel').value     = c.contacto3?.tel    || '';
-    document.getElementById('f-obs').value        = c.observaciones || '';
+    document.getElementById('f-nombre').value      = c.nombre        || '';
+    document.getElementById('f-domicilio').value   = c.domicilio     || '';
+    document.getElementById('f-cp').value          = c.cp            || '';
+    document.getElementById('f-localidad').value   = c.localidad     || '';
+    document.getElementById('f-colabora').value    = c.colabora      || '';
+    document.getElementById('f-coord-input').value = c.coord         || '';
+    document.getElementById('f-c1-nombre').value   = c.contacto1?.nombre || '';
+    document.getElementById('f-c1-tel').value      = c.contacto1?.tel    || '';
+    document.getElementById('f-c2-nombre').value   = c.contacto2?.nombre || '';
+    document.getElementById('f-c2-tel').value      = c.contacto2?.tel    || '';
+    document.getElementById('f-c3-nombre').value   = c.contacto3?.nombre || '';
+    document.getElementById('f-c3-tel').value      = c.contacto3?.tel    || '';
+    document.getElementById('f-obs').value         = c.observaciones || '';
 
     mostrarVista('formulario');
 }
@@ -313,9 +325,9 @@ async function actualizarColaborador() {
 
     const actualizado = {
         ...construirObjeto(),
-        id:                   colaboradorSeleccionadoId,
-        tiendaId:             original?.tiendaId             || null,
-        pendienteValidacion:  original?.pendienteValidacion  || false
+        id:                  colaboradorSeleccionadoId,
+        tiendaId:            original?.tiendaId            || null,
+        pendienteValidacion: original?.pendienteValidacion || false
     };
 
     try {
@@ -373,6 +385,42 @@ async function eliminarColaborador() {
     } catch (err) {
         console.error('Error al eliminar colaborador:', err);
         alert('No se pudo eliminar el colaborador. ¿Está arrancado json-server?');
+    }
+}
+
+// VALIDAR COLABORADOR — quita el flag pendienteValidacion (solo admin)
+async function validarColaborador() {
+    if (!colaboradorSeleccionadoId) return;
+
+    const original = colaboradores.find(x => x.id === colaboradorSeleccionadoId);
+    if (!original) return;
+
+    const confirmado = confirm(
+        `¿Validar al colaborador "${original.nombre}"?\nSe quitará la marca de pendiente.`
+    );
+    if (!confirmado) return;
+
+    const actualizado = { ...original, pendienteValidacion: false };
+
+    try {
+        const res = await fetch(`${API_URL}/colaboradores/${colaboradorSeleccionadoId}`, {
+            method:  'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(actualizado)
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        await cargarColaboradores();
+        popularFiltros();
+        filtrarYCargarTabla();
+        mostrarDetalle(colaboradorSeleccionadoId);
+
+        alert(`Colaborador "${original.nombre}" validado correctamente.`);
+
+    } catch (err) {
+        console.error('Error al validar colaborador:', err);
+        alert('No se pudo validar el colaborador. ¿Está arrancado json-server?');
     }
 }
 
@@ -445,26 +493,26 @@ function exportarExcel() {
     }
 
     const datos = colaboradores.map(c => ({
-        'ID':               c.id            || '',
-        'NOMBRE':           c.nombre        || '',
-        'DOMICILIO':        c.domicilio     || '',
-        'CP':               c.cp            || '',
-        'LOCALIDAD':        c.localidad     || '',
-        'COLABORA EN':      c.colabora      || '',
-        'COORDINADOR':      c.coord         || '',
-        'TIENDA ID':        c.tiendaId      || '',
-        'CONTACTO 1':       c.contacto1?.nombre || '',
-        'TEL 1':            c.contacto1?.tel    || '',
-        'CONTACTO 2':       c.contacto2?.nombre || '',
-        'TEL 2':            c.contacto2?.tel    || '',
-        'CONTACTO 3':       c.contacto3?.nombre || '',
-        'TEL 3':            c.contacto3?.tel    || '',
-        'OBSERVACIONES':    c.observaciones || '',
-        'PENDIENTE':        c.pendienteValidacion ? 'Sí' : 'No'
+        'ID':            c.id            || '',
+        'NOMBRE':        c.nombre        || '',
+        'DOMICILIO':     c.domicilio     || '',
+        'CP':            c.cp            || '',
+        'LOCALIDAD':     c.localidad     || '',
+        'COLABORA EN':   c.colabora      || '',
+        'COORDINADOR':   c.coord         || '',
+        'TIENDA ID':     c.tiendaId      || '',
+        'CONTACTO 1':    c.contacto1?.nombre || '',
+        'TEL 1':         c.contacto1?.tel    || '',
+        'CONTACTO 2':    c.contacto2?.nombre || '',
+        'TEL 2':         c.contacto2?.tel    || '',
+        'CONTACTO 3':    c.contacto3?.nombre || '',
+        'TEL 3':         c.contacto3?.tel    || '',
+        'OBSERVACIONES': c.observaciones || '',
+        'PENDIENTE':     c.pendienteValidacion ? 'Sí' : 'No'
     }));
 
-    const hoja   = XLSX.utils.json_to_sheet(datos);
-    const libro  = XLSX.utils.book_new();
+    const hoja  = XLSX.utils.json_to_sheet(datos);
+    const libro = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(libro, hoja, 'Colaboradores');
     XLSX.writeFile(libro, 'colaboradores.xlsx');
 }
@@ -473,12 +521,12 @@ function exportarExcel() {
 // Construye el objeto colaborador desde los campos del formulario
 function construirObjeto() {
     return {
-        nombre:     document.getElementById('f-nombre').value.trim()      || '',
-        domicilio:  document.getElementById('f-domicilio').value.trim()   || '---',
-        cp:         document.getElementById('f-cp').value.trim()          || '---',
-        localidad:  document.getElementById('f-localidad').value.trim()   || '---',
-        colabora:   document.getElementById('f-colabora').value.trim()    || '---',
-        coord:      document.getElementById('f-coord-input').value.trim() || '---',
+        nombre:    document.getElementById('f-nombre').value.trim()      || '',
+        domicilio: document.getElementById('f-domicilio').value.trim()   || '---',
+        cp:        document.getElementById('f-cp').value.trim()          || '---',
+        localidad: document.getElementById('f-localidad').value.trim()   || '---',
+        colabora:  document.getElementById('f-colabora').value.trim()    || '---',
+        coord:     document.getElementById('f-coord-input').value.trim() || '---',
         contacto1: {
             nombre: document.getElementById('f-c1-nombre').value.trim() || '---',
             tel:    document.getElementById('f-c1-tel').value.trim()    || '---'
@@ -516,4 +564,8 @@ function limpiarDetalle() {
         .forEach(id => {
             document.getElementById(id).textContent = '---';
         });
+
+    // Ocultamos el botón validar al limpiar el detalle
+    const btnValidar = document.getElementById('btn-validar');
+    if (btnValidar) btnValidar.classList.add('hidden');
 }
