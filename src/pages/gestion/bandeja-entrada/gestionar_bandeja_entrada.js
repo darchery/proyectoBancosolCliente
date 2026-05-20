@@ -33,6 +33,7 @@ function cargarTabla() {
     const tbody = document.querySelector('#tabla-mensajes');
     tbody.innerHTML = '';
 
+    // Recorremos el array de mensajes y creamos una fila para cada uno, mostrando su fecha, remitente, asunto y estado.
     mensajesMock.forEach(mensaje => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -53,6 +54,7 @@ function cargarTabla() {
  */
 function mostrarDetalle(mensaje) {
     const contenedor = document.querySelector('#contenido-detalle');
+    // Mostramos el detalle del mensaje seleccionado, incluyendo remitente, fecha, asunto y contenido completo.
     contenedor.innerHTML = `
         <div class="mensaje-detalle">
             <p><strong>De:</strong> ${mensaje.remitente}</p>
@@ -66,6 +68,7 @@ function mostrarDetalle(mensaje) {
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
+    // Cargamos los mensajes en la tabla al cargar la página
     cargarTabla();
 
     // Configurar botones de acción

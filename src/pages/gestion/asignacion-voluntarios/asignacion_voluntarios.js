@@ -6,6 +6,7 @@ let asignacionSeleccionadaId = null;
 let modoModal = 'anadir';
 let tablaBody, menuAdmin;
 
+// CONSTANTES
 const API_URL       = 'http://localhost:3001';
 const rolActual     = localStorage.getItem('userRole') || 'admin';
 const usuarioActual = localStorage.getItem('userName') || rolActual;
@@ -71,6 +72,7 @@ function popularFiltros() {
     const localidades = new Set(asignaciones.map(a => a.localidad));
     const cadenas     = new Set(asignaciones.map(a => a.cadena));
 
+    // Rellenamos los selects de filtros con las opciones únicas obtenidas de las asignaciones
     rellenarSelect('filtro-localidad', localidades);
     rellenarSelect('filtro-cadena',    cadenas);
 }
@@ -79,6 +81,8 @@ function rellenarSelect(idSelect, valores) {
     const select = document.querySelector('#' + idSelect);
     if (!select) return;
     select.innerHTML = '<option value="Todas">Todas</option>';
+ 
+    // Agregamos cada valor único como una opción en el select correspondiente
     for (const valor of valores) {
         const option = document.createElement('option');
         option.value = valor;
@@ -96,11 +100,13 @@ function filtrarYCargarTabla() {
 
     tablaBody.innerHTML = '';
 
+    // Filtramos las asignaciones según los criterios seleccionados en los filtros de localidad y cadena
     const filtradas = asignaciones.filter(a =>
         (localidadSel === 'Todas' || a.localidad === localidadSel) &&
         (cadenaSel    === 'Todas' || a.cadena    === cadenaSel)
     );
 
+    // Si no hay asignaciones que coincidan con los filtros, mostramos un mensaje en la tabla indicando que no se encontraron resultados
     if (!filtradas.length) {
         tablaBody.innerHTML = `
             <tr>
@@ -111,6 +117,8 @@ function filtrarYCargarTabla() {
         return;
     }
 
+    // Pintamos las filas de la tabla con las asignaciones que cumplen los criterios de filtrado, 
+    // y agregamos un evento click a cada fila para mostrar el detalle de la asignación al hacer clic
     filtradas.forEach(a => {
         const fila = document.createElement('tr');
 
@@ -121,6 +129,8 @@ function filtrarYCargarTabla() {
         const pendiente = a.pendienteValidacion
             ? ' <span style="color:orange;font-size:.75em;">(pendiente)</span>' : '';
 
+        // Agregamos el contenido de cada celda de la fila con los datos de la asignación, y si la 
+        // asignación está pendiente de validación, añadimos un indicador visual junto al nombre de la tienda    
         fila.innerHTML = `
             <td>${a.tienda}${pendiente}</td>
             <td>${a.domicilio}</td>
@@ -133,6 +143,7 @@ function filtrarYCargarTabla() {
             <td>${a.observaciones}</td>
         `;
 
+        // Agregamos un evento click a cada fila para mostrar el detalle de la asignación al hacer clic
         fila.addEventListener('click', () => mostrarDetalle(a.id));
         tablaBody.appendChild(fila);
     });
@@ -142,9 +153,11 @@ function filtrarYCargarTabla() {
 function mostrarDetalle(id) {
     asignacionSeleccionadaId = id;
 
+    // Buscamos la asignación seleccionada en el array de asignaciones utilizando su ID para obtener todos sus detalles y mostrarlos en el panel lateral
     const a = asignaciones.find(x => x.id === id);
     if (!a) return;
 
+    // Al hacer clic en una fila de la tabla, mostramos el detalle de la asignación seleccionada en el panel lateral,
     document.querySelector('#d-tienda').textContent         = a.tienda;
     document.querySelector('#d-domicilio').textContent      = a.domicilio;
     document.querySelector('#d-localidad').textContent      = a.localidad;
@@ -155,6 +168,7 @@ function mostrarDetalle(id) {
     document.querySelector('#d-sabado-tarde').textContent   = a.sabado_tarde;
     document.querySelector('#d-obs').textContent            = a.observaciones;
 
+    // Además, al seleccionar una asignación, resaltamos la fila correspondiente en la tabla para indicar visualmente cuál está activa
     filtrarYCargarTabla();
 }
 
@@ -162,10 +176,10 @@ function mostrarDetalle(id) {
 function abrirModalAnadir() {
     modoModal = 'anadir';
     document.querySelector('#panel-titulo').textContent = 'AÑADIR ASIGNACIÓN';
-
+    
     limpiarModal();
     document.querySelector('#f-id').disabled = false;
-
+    
     abrirModal();
 }
 
@@ -176,6 +190,8 @@ function abrirModalModificar() {
         return;
     }
 
+    // Buscamos la asignación seleccionada en el array de asignaciones utilizando su ID para obtener todos sus detalles 
+    // y mostrarlos en el formulario del modal para que el usuario pueda modificarlos
     const a = asignaciones.find(x => x.id === asignacionSeleccionadaId);
     if (!a) return;
 
@@ -201,6 +217,7 @@ function abrirModalModificar() {
 
 // CONFIRMAR MODAL
 function confirmarModal() {
+    // Dependiendo del modo en que se haya abierto el modal (añadir o modificar)
     if (modoModal === 'anadir') {
         crearAsignacion();
     } else {
@@ -213,17 +230,21 @@ async function crearAsignacion() {
     const id     = document.querySelector('#f-id').value.trim();
     const tienda = document.querySelector('#f-tienda').value.trim();
 
+    // Validamos que los campos obligatorios (ID y Tienda) estén completos antes de intentar crear una nueva asignación,
     if (!id || !tienda) {
         alert('El ID y la Tienda son obligatorios.');
         return;
     }
 
+    // Antes de crear una nueva asignación, verificamos que no exista ya una con el mismo ID para evitar duplicados, 
+    // ya que el ID es un identificador único para cada asignación
     const existe = asignaciones.find(a => a.id === id);
     if (existe) {
         alert(`Ya existe una asignación con el ID "${id}".`);
         return;
     }
 
+    // Si la validación es correcta, creamos un nuevo objeto de asignación con los datos ingresados en el formulario del modal,
     const nueva = {
         id,
         tienda,
@@ -238,6 +259,9 @@ async function crearAsignacion() {
         observaciones:  document.querySelector('#f-observaciones').value.trim()  || ''
     };
 
+    // Luego, enviamos una solicitud POST al servidor para guardar la nueva asignación en la base de datos, 
+    // y si la operación es exitosa, recargamos la lista de asignaciones, actualizamos los filtros y la tabla, 
+    // cerramos el modal y mostramos un mensaje de confirmación al usuario indicando que la asignación se ha añadido correctamente
     try {
         const respuesta = await fetch(`${API_URL}/asignaciones`, {
             method:  'POST',
@@ -269,6 +293,7 @@ async function actualizarAsignacion() {
         return;
     }
 
+    // Antes de intentar modificar la asignación, verificamos que exista una asignación seleccionada para actualizar,
     const actualizada = {
         id:             asignacionSeleccionadaId,
         tienda,
@@ -282,7 +307,8 @@ async function actualizarAsignacion() {
         sabado_tarde:   document.querySelector('#f-sabado-tarde').value.trim()   || '---',
         observaciones:  document.querySelector('#f-observaciones').value.trim()  || ''
     };
-
+    
+    // Si la validación es correcta, enviamos una solicitud PATCH al servidor para actualizar la asignación seleccionada en la base de datos,
     try {
         const respuesta = await fetch(`${API_URL}/asignaciones/${asignacionSeleccionadaId}`, {
             method:  'PATCH',
@@ -292,6 +318,9 @@ async function actualizarAsignacion() {
 
         if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
 
+        // Si la operación es exitosa, recargamos la lista de asignaciones, actualizamos los filtros y la tabla, 
+        // mostramos el detalle de la asignación modificada, cerramos el modal y mostramos un mensaje de confirmación 
+        // al usuario indicando que la asignación se ha modificado correctamente
         await cargarAsignaciones();
         popularFiltros();
         filtrarYCargarTabla();
@@ -313,12 +342,15 @@ async function eliminarAsignacion() {
         return;
     }
 
+    // Antes de intentar eliminar la asignación, verificamos que exista una asignación seleccionada para eliminar,
     const a = asignaciones.find(x => x.id === asignacionSeleccionadaId);
+    // Si la validación es correcta, mostramos un mensaje de confirmación al usuario para asegurarnos de que realmente desea eliminar la asignación seleccionada
     const confirmado = confirm(
         `¿Seguro que quieres eliminar la asignación de "${a?.tienda}"?\nEsta acción no se puede deshacer.`
     );
     if (!confirmado) return;
 
+    // Si el usuario confirma la eliminación, enviamos una solicitud DELETE al servidor para eliminar la asignación seleccionada de la base de datos,
     try {
         const respuesta = await fetch(`${API_URL}/asignaciones/${asignacionSeleccionadaId}`, {
             method: 'DELETE'
@@ -326,11 +358,13 @@ async function eliminarAsignacion() {
 
         if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
 
+        // Si la operación es exitosa, recargamos la lista de asignaciones, actualizamos los filtros y la tabla
         asignacionSeleccionadaId = null;
         ['d-tienda','d-domicilio','d-localidad','d-capitan',
          'd-viernes-manana','d-viernes-tarde','d-sabado-manana','d-sabado-tarde','d-obs']
             .forEach(id => document.querySelector('#' + id).textContent = '---');
 
+        // Después de eliminar una asignación, recargamos la lista de asignaciones, actualizamos los filtros y la tabla para reflejar los cambios,
         await cargarAsignaciones();
         popularFiltros();
         filtrarYCargarTabla();
@@ -345,11 +379,14 @@ async function eliminarAsignacion() {
 
 // HELPERS MODAL
 function abrirModal() {
+    // Al abrir el modal, ocultamos el panel de detalle para mostrar solo el formulario del modal
     document.querySelector('#vista-detalle').classList.add('hidden');
     document.querySelector('#vista-formulario').classList.remove('hidden');
 }
 
 function cerrarModal() {
+    // Al cerrar el modal, ocultamos el formulario y volvemos a mostrar el panel de detalle, 
+    // además de limpiar los campos del formulario para que no queden datos residuales al abrirlo nuevamente
     document.querySelector('#vista-formulario').classList.add('hidden');
     document.querySelector('#vista-detalle').classList.remove('hidden');
     document.querySelector('#panel-titulo').textContent       = 'ASIGNACIÓN SELECCIONADA';
@@ -357,6 +394,7 @@ function cerrarModal() {
 }
 
 function limpiarModal() {
+    // Limpiamos los campos del formulario del modal para que no queden datos residuales al abrirlo nuevamente
     ['f-id','f-tienda','f-cadena','f-domicilio','f-localidad','f-capitan',
      'f-viernes-manana','f-viernes-tarde','f-sabado-manana','f-sabado-tarde','f-observaciones']
         .forEach(id => document.querySelector('#' + id).value = '');
@@ -369,6 +407,7 @@ function exportarAsignacionVoluntarios() {
         return;
     }
 
+    // Para exportar la asignación de voluntarios a un archivo Excel, primero transformamos el array de asignaciones en un formato adecuado para la librería XLSX
     const datos = asignaciones.map(a => ({
         'ID':               a.id             || '',
         'TIENDA':           a.tienda         || '',
@@ -384,6 +423,8 @@ function exportarAsignacionVoluntarios() {
         'PENDIENTE':        a.pendienteValidacion ? 'Sí' : 'No'
     }));
 
+    // Luego, utilizamos la librería XLSX para crear un libro de Excel a partir de los datos transformados, y finalmente descargamos el archivo 
+    // con el nombre "asignacion_voluntarios.xlsx"
     const hoja  = XLSX.utils.json_to_sheet(datos);
     const libro = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(libro, hoja, 'Asignaciones');

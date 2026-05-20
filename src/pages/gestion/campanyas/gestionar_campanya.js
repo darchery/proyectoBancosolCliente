@@ -76,7 +76,7 @@ async function cargarCampanyas() {
     }
 }
 
-
+// Función para cargar las cadenas desde el servidor y almacenarlas en la variable global 'cadenas'
 async function cargarCadenas() {
     try {
         const respuesta = await fetch(`${API_URL}/cadenas`);
