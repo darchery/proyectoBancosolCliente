@@ -14,9 +14,9 @@ const usuarioActual = localStorage.getItem('userName') || rolActual;
 document.addEventListener('DOMContentLoaded', async function () {
 
     // 1º elementos del HTML
-    tablaBody = document.getElementById('tabla-body');
-    adminMenu = document.getElementById('admin-menu');
-    coordMenu = document.getElementById('coord-menu');
+    tablaBody = document.querySelector('#tabla-body');
+    adminMenu = document.querySelector('#admin-menu');
+    coordMenu = document.querySelector('#coord-menu');
 
     // 2º Permisos
     if (rolActual === 'admin') {
@@ -33,39 +33,39 @@ document.addEventListener('DOMContentLoaded', async function () {
     popularFiltros();
 
     // Filtros
-    document.getElementById('filtro-localidad')
+    document.querySelector('#filtro-localidad')
         .addEventListener('change', filtrarYCargarTabla);
-    document.getElementById('filtro-coord')
+    document.querySelector('#filtro-coord')
         .addEventListener('change', filtrarYCargarTabla);
 
     // Botones CRUD — admin
-    document.getElementById('btn-anadir')
+    document.querySelector('#btn-anadir')
         ?.addEventListener('click', abrirModalAnadir);
-    document.getElementById('btn-modificar')
+    document.querySelector('#btn-modificar')
         ?.addEventListener('click', abrirModalModificar);
-    document.getElementById('btn-eliminar')
+    document.querySelector('#btn-eliminar')
         ?.addEventListener('click', eliminarColaborador);
-    document.getElementById('btn-asignar')
+    document.querySelector('#btn-asignar')
         ?.addEventListener('click', abrirVistaAsignar);
-    document.getElementById('btn-exportar')
+    document.querySelector('#btn-exportar')
         ?.addEventListener('click', exportarExcel);
 
     // Botones CRUD — coordinador
-    document.getElementById('btn-anadir-pendiente')
+    document.querySelector('#btn-anadir-pendiente')
         ?.addEventListener('click', abrirModalAniadirPendiente);
-    document.getElementById('btn-exportar-coord')
+    document.querySelector('#btn-exportar-coord')
         ?.addEventListener('click', exportarExcel);
 
     // Botones del formulario
-    document.getElementById('btn-confirmar')
+    document.querySelector('#btn-confirmar')
         .addEventListener('click', confirmarModal);
-    document.getElementById('btn-cancelar')
+    document.querySelector('#btn-cancelar')
         .addEventListener('click', cerrarFormulario);
 
     // Botones de asignar tienda
-    document.getElementById('btn-confirmar-asignar')
+    document.querySelector('#btn-confirmar-asignar')
         .addEventListener('click', confirmarAsignar);
-    document.getElementById('btn-cancelar-asignar')
+    document.querySelector('#btn-cancelar-asignar')
         .addEventListener('click', cerrarVistaAsignar);
 });
 
@@ -103,7 +103,7 @@ function popularFiltros() {
 }
 
 function rellenarSelect(idSelect, valores) {
-    const select = document.getElementById(idSelect);
+    const select = document.querySelector('#' + idSelect);
     select.innerHTML = '<option value="Todas">Todas</option>';
     for (const valor of valores) {
         const opt = document.createElement('option');
@@ -117,8 +117,8 @@ function rellenarSelect(idSelect, valores) {
 function filtrarYCargarTabla() {
     if (!tablaBody) return;
 
-    const localidadSel = document.getElementById('filtro-localidad')?.value || 'Todas';
-    const coordSel     = document.getElementById('filtro-coord')?.value     || 'Todas';
+    const localidadSel = document.querySelector('#filtro-localidad')?.value || 'Todas';
+    const coordSel     = document.querySelector('#filtro-coord')?.value     || 'Todas';
 
     tablaBody.innerHTML = '';
 
@@ -169,20 +169,20 @@ function mostrarDetalle(id) {
     const c = colaboradores.find(x => x.id === id);
     if (!c) return;
 
-    document.getElementById('det-nombre').textContent   = c.nombre        || '---';
-    document.getElementById('det-dom').textContent      = c.domicilio     || '---';
-    document.getElementById('det-cp').textContent       = c.cp            || '---';
-    document.getElementById('det-localidad').textContent = c.localidad    || '---';
-    document.getElementById('det-colabora').textContent = c.colabora      || '---';
-    document.getElementById('det-coord').textContent    = c.coord         || '---';
-    document.getElementById('det-tienda').textContent   = c.tiendaId      || '---';
-    document.getElementById('det-obs').textContent      = c.observaciones || '---';
+    document.querySelector('#det-nombre').textContent   = c.nombre        || '---';
+    document.querySelector('#det-dom').textContent      = c.domicilio     || '---';
+    document.querySelector('#det-cp').textContent       = c.cp            || '---';
+    document.querySelector('#det-localidad').textContent = c.localidad    || '---';
+    document.querySelector('#det-colabora').textContent = c.colabora      || '---';
+    document.querySelector('#det-coord').textContent    = c.coord         || '---';
+    document.querySelector('#det-tienda').textContent   = c.tiendaId      || '---';
+    document.querySelector('#det-obs').textContent      = c.observaciones || '---';
 
-    document.getElementById('det-c1').textContent =
+    document.querySelector('#det-c1').textContent =
         c.contacto1?.nombre ? `${c.contacto1.nombre} — ${c.contacto1.tel}` : '---';
-    document.getElementById('det-c2').textContent =
+    document.querySelector('#det-c2').textContent =
         c.contacto2?.nombre ? `${c.contacto2.nombre} — ${c.contacto2.tel}` : '---';
-    document.getElementById('det-c3').textContent =
+    document.querySelector('#det-c3').textContent =
         c.contacto3?.nombre ? `${c.contacto3.nombre} — ${c.contacto3.tel}` : '---';
 
     mostrarVista('detalle');
@@ -191,9 +191,9 @@ function mostrarDetalle(id) {
 
 // CONTROL DE VISTAS DEL PANEL
 function mostrarVista(cual) {
-    const vistaDetalle = document.getElementById('vista-detalle');
-    const vistaForm = document.getElementById('vista-formulario');
-    const vistaAsignar = document.getElementById('vista-asignar');
+    const vistaDetalle = document.querySelector('#vista-detalle');
+    const vistaForm = document.querySelector('#vista-formulario');
+    const vistaAsignar = document.querySelector('#vista-asignar');
 
     if (vistaDetalle) {
         if (cual === 'detalle') vistaDetalle.classList.remove('hidden');
@@ -212,14 +212,14 @@ function mostrarVista(cual) {
 // AÑADIR
 function abrirModalAnadir() {
     modoModal = 'anadir';
-    document.getElementById('panel-titulo').textContent = 'AÑADIR COLABORADOR';
+    document.querySelector('#panel-titulo').textContent = 'AÑADIR COLABORADOR';
     limpiarFormulario();
     mostrarVista('formulario');
 }
 
 function abrirModalAniadirPendiente() {
     modoModal = 'anadir-pendiente';
-    document.getElementById('panel-titulo').textContent = 'AÑADIR COLABORADOR (Pendiente validación)';
+    document.querySelector('#panel-titulo').textContent = 'AÑADIR COLABORADOR (Pendiente validación)';
     limpiarFormulario();
     mostrarVista('formulario');
 }
@@ -235,22 +235,22 @@ function abrirModalModificar() {
     if (!c) return;
 
     modoModal = 'modificar';
-    document.getElementById('panel-titulo').textContent = 'MODIFICAR COLABORADOR';
+    document.querySelector('#panel-titulo').textContent = 'MODIFICAR COLABORADOR';
 
     // Rellenamos el formulario con los datos actuales
-    document.getElementById('f-nombre').value     = c.nombre        || '';
-    document.getElementById('f-domicilio').value  = c.domicilio     || '';
-    document.getElementById('f-cp').value         = c.cp            || '';
-    document.getElementById('f-localidad').value  = c.localidad     || '';
-    document.getElementById('f-colabora').value   = c.colabora      || '';
-    document.getElementById('f-coord-input').value = c.coord        || '';
-    document.getElementById('f-c1-nombre').value  = c.contacto1?.nombre || '';
-    document.getElementById('f-c1-tel').value     = c.contacto1?.tel    || '';
-    document.getElementById('f-c2-nombre').value  = c.contacto2?.nombre || '';
-    document.getElementById('f-c2-tel').value     = c.contacto2?.tel    || '';
-    document.getElementById('f-c3-nombre').value  = c.contacto3?.nombre || '';
-    document.getElementById('f-c3-tel').value     = c.contacto3?.tel    || '';
-    document.getElementById('f-obs').value        = c.observaciones || '';
+    document.querySelector('#f-nombre').value     = c.nombre        || '';
+    document.querySelector('#f-domicilio').value  = c.domicilio     || '';
+    document.querySelector('#f-cp').value         = c.cp            || '';
+    document.querySelector('#f-localidad').value  = c.localidad     || '';
+    document.querySelector('#f-colabora').value   = c.colabora      || '';
+    document.querySelector('#f-coord-input').value = c.coord        || '';
+    document.querySelector('#f-c1-nombre').value  = c.contacto1?.nombre || '';
+    document.querySelector('#f-c1-tel').value     = c.contacto1?.tel    || '';
+    document.querySelector('#f-c2-nombre').value  = c.contacto2?.nombre || '';
+    document.querySelector('#f-c2-tel').value     = c.contacto2?.tel    || '';
+    document.querySelector('#f-c3-nombre').value  = c.contacto3?.nombre || '';
+    document.querySelector('#f-c3-tel').value     = c.contacto3?.tel    || '';
+    document.querySelector('#f-obs').value        = c.observaciones || '';
 
     mostrarVista('formulario');
 }
@@ -267,7 +267,7 @@ function confirmarModal() {
 // CRUD
 // CREAR COLABORADOR — POST
 async function crearColaborador() {
-    const nombre = document.getElementById('f-nombre').value.trim();
+    const nombre = document.querySelector('#f-nombre').value.trim();
 
     if (!nombre) {
         alert('El campo NOMBRE es obligatorio.');
@@ -301,7 +301,7 @@ async function crearColaborador() {
 
 // ACTUALIZAR COLABORADOR — PUT
 async function actualizarColaborador() {
-    const nombre = document.getElementById('f-nombre').value.trim();
+    const nombre = document.querySelector('#f-nombre').value.trim();
 
     if (!nombre) {
         alert('El campo NOMBRE es obligatorio.');
@@ -384,7 +384,7 @@ function abrirVistaAsignar() {
     }
 
     // Populamos el select de tiendas
-    const select = document.getElementById('f-tienda-id');
+    const select = document.querySelector('#f-tienda-id');
     select.innerHTML = '<option value="">-- Sin asignar --</option>';
 
     tiendas.forEach(t => {
@@ -398,12 +398,12 @@ function abrirVistaAsignar() {
     const c = colaboradores.find(x => x.id === colaboradorSeleccionadoId);
     if (c?.tiendaId) select.value = c.tiendaId;
 
-    document.getElementById('panel-titulo').textContent = 'ASIGNAR A TIENDA';
+    document.querySelector('#panel-titulo').textContent = 'ASIGNAR A TIENDA';
     mostrarVista('asignar');
 }
 
 async function confirmarAsignar() {
-    const tiendaId = document.getElementById('f-tienda-id').value || null;
+    const tiendaId = document.querySelector('#f-tienda-id').value || null;
 
     const original    = colaboradores.find(x => x.id === colaboradorSeleccionadoId);
     const actualizado = { ...original, tiendaId };
@@ -433,7 +433,7 @@ async function confirmarAsignar() {
 }
 
 function cerrarVistaAsignar() {
-    document.getElementById('panel-titulo').textContent = 'COLABORADOR SELECCIONADO';
+    document.querySelector('#panel-titulo').textContent = 'COLABORADOR SELECCIONADO';
     mostrarVista('detalle');
 }
 
@@ -473,25 +473,25 @@ function exportarExcel() {
 // Construye el objeto colaborador desde los campos del formulario
 function construirObjeto() {
     return {
-        nombre:     document.getElementById('f-nombre').value.trim()      || '',
-        domicilio:  document.getElementById('f-domicilio').value.trim()   || '---',
-        cp:         document.getElementById('f-cp').value.trim()          || '---',
-        localidad:  document.getElementById('f-localidad').value.trim()   || '---',
-        colabora:   document.getElementById('f-colabora').value.trim()    || '---',
-        coord:      document.getElementById('f-coord-input').value.trim() || '---',
+        nombre:     document.querySelector('#f-nombre').value.trim()      || '',
+        domicilio:  document.querySelector('#f-domicilio').value.trim()   || '---',
+        cp:         document.querySelector('#f-cp').value.trim()          || '---',
+        localidad:  document.querySelector('#f-localidad').value.trim()   || '---',
+        colabora:   document.querySelector('#f-colabora').value.trim()    || '---',
+        coord:      document.querySelector('#f-coord-input').value.trim() || '---',
         contacto1: {
-            nombre: document.getElementById('f-c1-nombre').value.trim() || '---',
-            tel:    document.getElementById('f-c1-tel').value.trim()    || '---'
+            nombre: document.querySelector('#f-c1-nombre').value.trim() || '---',
+            tel:    document.querySelector('#f-c1-tel').value.trim()    || '---'
         },
         contacto2: {
-            nombre: document.getElementById('f-c2-nombre').value.trim() || '---',
-            tel:    document.getElementById('f-c2-tel').value.trim()    || '---'
+            nombre: document.querySelector('#f-c2-nombre').value.trim() || '---',
+            tel:    document.querySelector('#f-c2-tel').value.trim()    || '---'
         },
         contacto3: {
-            nombre: document.getElementById('f-c3-nombre').value.trim() || '---',
-            tel:    document.getElementById('f-c3-tel').value.trim()    || '---'
+            nombre: document.querySelector('#f-c3-nombre').value.trim() || '---',
+            tel:    document.querySelector('#f-c3-tel').value.trim()    || '---'
         },
-        observaciones: document.getElementById('f-obs').value.trim() || ''
+        observaciones: document.querySelector('#f-obs').value.trim() || ''
     };
 }
 
@@ -499,13 +499,13 @@ function limpiarFormulario() {
     ['f-nombre','f-domicilio','f-cp','f-localidad','f-colabora','f-coord-input',
      'f-c1-nombre','f-c1-tel','f-c2-nombre','f-c2-tel','f-c3-nombre','f-c3-tel','f-obs']
         .forEach(id => {
-            const el = document.getElementById(id);
+            const el = document.querySelector('#' + id);
             if (el) el.value = '';
         });
 }
 
 function cerrarFormulario() {
-    document.getElementById('panel-titulo').textContent = 'COLABORADOR SELECCIONADO';
+    document.querySelector('#panel-titulo').textContent = 'COLABORADOR SELECCIONADO';
     mostrarVista('detalle');
     limpiarFormulario();
 }
@@ -514,6 +514,6 @@ function limpiarDetalle() {
     ['det-nombre','det-dom','det-cp','det-localidad','det-colabora',
      'det-coord','det-tienda','det-obs','det-c1','det-c2','det-c3']
         .forEach(id => {
-            document.getElementById(id).textContent = '---';
+            document.querySelector('#' + id).textContent = '---';
         });
 }

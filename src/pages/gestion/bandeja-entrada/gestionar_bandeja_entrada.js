@@ -30,7 +30,7 @@ const mensajesMock = [
  * Carga los mensajes en la tabla
  */
 function cargarTabla() {
-    const tbody = document.getElementById('tabla-mensajes');
+    const tbody = document.querySelector('#tabla-mensajes');
     tbody.innerHTML = '';
 
     mensajesMock.forEach(mensaje => {
@@ -52,7 +52,7 @@ function cargarTabla() {
  * Muestra el contenido de un mensaje en el panel lateral
  */
 function mostrarDetalle(mensaje) {
-    const contenedor = document.getElementById('contenido-detalle');
+    const contenedor = document.querySelector('#contenido-detalle');
     contenedor.innerHTML = `
         <div class="mensaje-detalle">
             <p><strong>De:</strong> ${mensaje.remitente}</p>
@@ -69,15 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarTabla();
 
     // Configurar botones de acción
-    document.getElementById('btn-responder')?.addEventListener('click', () => {
+    document.querySelector('#btn-responder')?.addEventListener('click', () => {
         alert('Funcionalidad de respuesta no implementada aún.');
     });
 
-    document.getElementById('btn-archivar')?.addEventListener('click', () => {
+    document.querySelector('#btn-archivar')?.addEventListener('click', () => {
         alert('Mensaje archivado correctamente.');
     });
 
-    document.getElementById('btn-eliminar')?.addEventListener('click', () => {
+    document.querySelector('#btn-eliminar')?.addEventListener('click', () => {
         if(confirm('¿Está seguro de que desea eliminar este mensaje?')) {
             alert('Mensaje eliminado.');
         }

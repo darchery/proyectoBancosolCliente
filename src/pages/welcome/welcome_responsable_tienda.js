@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Vinculamos cada botón de tu HTML con su ruta correspondiente
+    // Vincular botón con su ruta
     configurarBoton('btn-tienda-resp-tienda', 'tiendas');
     configurarBoton('btn-colaboradores-resp-tienda', 'colaboradores');
 
-    // CERRAR SESIÓN
-    const btnLogout = document.querySelector('.boton-logout'); // usamos class porque no hay ID
+    // Cerrar sesión
+    const btnLogout = document.querySelector('.boton-logout');
 
     if (btnLogout) {
         btnLogout.addEventListener('click', () => {
