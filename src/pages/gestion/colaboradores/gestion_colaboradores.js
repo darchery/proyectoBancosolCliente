@@ -30,13 +30,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     await cargarTiendas();
 
     filtrarYCargarTabla();
-    popularFiltros();
+    rellenarFiltros();
+
 
     // Filtros
     document.querySelector('#filtro-localidad')
         .addEventListener('change', filtrarYCargarTabla);
     document.querySelector('#filtro-coord')
         .addEventListener('change', filtrarYCargarTabla);
+
 
     // Botones CRUD — admin
     document.querySelector('#btn-anadir')
@@ -96,7 +98,7 @@ async function cargarTiendas() {
 }
 
 // FILTROS
-function popularFiltros() {
+function rellenarFiltros() {
     const localidades   = new Set(colaboradores.map(c => c.localidad));
     const coordinadores = new Set(colaboradores.map(c => c.coord));
 
@@ -299,7 +301,7 @@ async function crearColaborador() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         await cargarColaboradores();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
         cerrarFormulario();
 
@@ -340,7 +342,7 @@ async function actualizarColaborador() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         await cargarColaboradores();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
         mostrarDetalle(colaboradorSeleccionadoId);
         cerrarFormulario();
@@ -377,7 +379,7 @@ async function eliminarColaborador() {
         limpiarDetalle();
 
         await cargarColaboradores();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
 
         alert('Colaborador eliminado correctamente.');
@@ -412,7 +414,7 @@ async function validarColaborador() {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         await cargarColaboradores();
-        popularFiltros();
+        rellenarFiltros();
         filtrarYCargarTabla();
         mostrarDetalle(colaboradorSeleccionadoId);
 
