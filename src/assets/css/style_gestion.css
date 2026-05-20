@@ -28,10 +28,12 @@ header h1 {
     border-bottom: 3px solid var(--blue-bancosol);
 }
 
+/* --- LOGO Y ÁREA DE TÍTULO --- */
 .logo-area { display: flex; align-items: center; gap: 15px; }
 .logo-area .title-area { margin-left: auto; }
 .logo-area img { height: 60px; }
 
+/* --- BADGE DE ADMINISTRADOR (Indicador visual) --- */
 .admin-badge {
     background: var(--orange-admin);
     color: white;
@@ -40,6 +42,7 @@ header h1 {
     border-radius: 4px;
 }
 
+/* --- DASHBOARD (Contenedor principal de contenido) --- */
 .dashboard { padding: 20px; }
 
 /* --- FILTROS (Común en listados) --- */
@@ -53,6 +56,7 @@ header h1 {
     margin-bottom: 20px;
 }
 
+/* --- GRUPO DE FILTRO (Etiqueta + Campo) --- */
 .filter-group { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: center; }
 
 /* --- LAYOUT TABLA-PANEL (Común) --- */
@@ -69,6 +73,7 @@ table {
     background: white;
 }
 
+/* --- ESTILOS DE TABLA --- */
 th { background: var(--blue-bancosol); color: white; padding: 10px; border: 1px solid #ccc; }
 td { padding: 8px; border: 1px solid #ccc; font-size: 0.9em; }
 tr:hover { background-color: var(--light-blue); cursor: pointer; }
@@ -80,6 +85,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     padding: 15px;
 }
 
+/* --- CABECERA DE PANEL (Título del detalle) --- */
 .panel-header {
     background: var(--blue-bancosol);
     color: white;
@@ -88,6 +94,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     margin-bottom: 10px;
 }
 
+/* --- BOTONES DE ACCIÓN (Editar, Eliminar, etc.) --- */
 .action-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -101,12 +108,14 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     padding: 4px 8px;
 }
 
+/* --- MENSAJE DE VACÍO (Cuando no hay datos para mostrar) --- */
 .empty-msg {
     text-align: center;
     color: #666;
     margin-top: 20px;
 }
 
+/* --- SECCIÓN DE PANEL (Subtítulos dentro del panel de detalles) --- */
 .panel-section-header {
     background: var(--blue-bancosol);
     color: white;
@@ -124,7 +133,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     align-items: flex-start;
     justify-content: center;
 }
-
 .page-campanya .box {
     border: 2px solid #293189;
     border-radius: 8px;
@@ -132,42 +140,36 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     padding: 15px;
     position: relative;
 }
-
 .page-campanya .box h2 {
     color: #293189;
     text-align: center;
     margin-bottom: 20px;
     text-transform: uppercase;
 }
-
 .page-campanya .campanya-column {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 250px;
 }
-
 .page-campanya .cadenas-box {
     width: 500px;
     min-height: 450px;
     display: flex;
     flex-direction: column;
 }
-
 .page-campanya .checkbox-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-bottom: 2em;
 }
-
 .page-campanya .checkbox-item {
     display: flex;
     align-items: center;
     gap: 8px;
     font-weight: bold;
 }
-
 .page-campanya .cadenas-actions {
     margin-top: auto;
     align-self: flex-end;
@@ -176,7 +178,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     gap: 8px;
     width: 180px;
 }
-
 .page-campanya .right-column {
     display: flex;
     flex-direction: column;
@@ -184,7 +185,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     gap: 20px;
     width: 300px;
 }
-
 .page-campanya button {
     background: white;
     border: 1.5px solid #293189;
@@ -193,18 +193,15 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     border-radius: 6px;
     font-weight: bold;
 }
-
 .page-campanya button:hover {
     background: #293189;
     color: white;
 }
-
 .page-campanya .character-container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-
 .page-campanya .character-container img {
     max-width: 250px; /* Tamaño controlado para evitar que sea gigante */
     height: auto;
@@ -224,11 +221,9 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     align-items: center;
     justify-content: center;
 }
-
 .page-campanya .modal-overlay.active {
     display: flex;
 }
-
 .page-campanya .modal-content {
     background: white;
     border: 2px solid #293189;
@@ -239,7 +234,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     overflow-y: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
 .page-campanya .modal-header {
     background: #293189;
     color: white;
@@ -249,13 +243,11 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     align-items: center;
     border-bottom: 2px solid #293189;
 }
-
 .page-campanya .modal-header h2 {
     margin: 0;
     font-size: 1.2em;
     font-weight: bold;
 }
-
 .page-campanya .modal-close-btn {
     background: none;
     border: none;
@@ -265,26 +257,21 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     font-weight: bold;
     transition: opacity 0.2s;
 }
-
 .page-campanya .modal-close-btn:hover {
     opacity: 0.8;
 }
-
 .page-campanya .modal-body {
     padding: 20px;
 }
-
 .page-campanya .form-group {
     margin-bottom: 15px;
 }
-
 .page-campanya .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     color: #293189;
 }
-
 .page-campanya .form-group input,
 .page-campanya .form-group textarea {
     width: 100%;
@@ -295,26 +282,22 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     font-size: 0.95em;
     box-sizing: border-box;
 }
-
 .page-campanya .form-group textarea {
     min-height: 80px;
     resize: vertical;
 }
-
 .page-campanya .form-group input:focus,
 .page-campanya .form-group textarea:focus {
     outline: none;
     border-color: #293189;
     background-color: #f9f9f9;
 }
-
 .page-campanya .items-list {
     border: 1px solid #bdc3c7;
     border-radius: 4px;
     max-height: 300px;
     overflow-y: auto;
 }
-
 .page-campanya .item-row {
     padding: 10px 15px;
     border-bottom: 1px solid #e0e0e0;
@@ -323,20 +306,16 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     gap: 10px;
     cursor: pointer;
 }
-
 .page-campanya .item-row:last-child {
     border-bottom: none;
 }
-
 .page-campanya .item-row:hover {
     background-color: #f5f5f5;
 }
-
 .page-campanya .item-name {
     flex: 1;
     color: #333;
 }
-
 .page-campanya .modal-footer {
     padding: 15px 20px;
     border-top: 1px solid #bdc3c7;
@@ -345,7 +324,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     justify-content: flex-end;
     background-color: #f9f9f9;
 }
-
 .page-campanya .btn-modal {
     padding: 8px 15px;
     border: 1.5px solid #293189;
@@ -356,17 +334,14 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     cursor: pointer;
     transition: all 0.2s;
 }
-
 .page-campanya .btn-modal:hover {
     background: #293189;
     color: white;
 }
-
 .page-campanya .btn-modal.danger {
     border-color: #dc3545;
     color: #dc3545;
 }
-
 .page-campanya .btn-modal.danger:hover {
     background: #dc3545;
     color: white;
@@ -393,7 +368,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
 .max-h-400px { max-height: 400px !important; overflow-y: auto !important; }
 .fs-12 { font-size: 12px !important; }
 
-/* --- CLASES DE UTILIDAD (Para limpiar estilos in-line) --- */
 .hidden { display: none !important; }
 .mt-10 { margin-top: 10px !important; }
 .mt-20 { margin-top: 20px !important; }
