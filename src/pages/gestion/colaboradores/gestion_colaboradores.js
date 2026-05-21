@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     tablaBody = document.querySelector('#tabla-body');
     adminMenu = document.querySelector('#admin-menu');
     coordMenu = document.querySelector('#coord-menu');
+    
 
     // 2º Permisos
     if (rolActual === 'admin') {
@@ -50,6 +51,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.querySelector('#filtro-localidad')
         .addEventListener('change', filtrarYCargarTabla);
     document.querySelector('#filtro-coord')
+        .addEventListener('change', filtrarYCargarTabla);
+    document.querySelector('#filtro-zona')
         .addEventListener('change', filtrarYCargarTabla);
 
 
@@ -118,9 +121,11 @@ async function cargarTiendas() {
 function rellenarFiltros() {
     const localidades   = new Set(colaboradores.map(c => c.localidad));
     const coordinadores = new Set(colaboradores.map(c => c.coord));
+    const zonas         = new Set(colaboradores.map(c => c.zona));
 
     rellenarSelect('filtro-localidad', localidades);
     rellenarSelect('filtro-coord',     coordinadores);
+    rellenarSelect('filtro-zona',      zonas); 
 }
 
 function rellenarSelect(idSelect, valores) {
@@ -140,12 +145,14 @@ function filtrarYCargarTabla() {
 
     const localidadSel = document.querySelector('#filtro-localidad')?.value || 'Todas';
     const coordSel     = document.querySelector('#filtro-coord')?.value     || 'Todas';
+    const zonaSel      = document.querySelector('#filtro-zona')?.value      || 'Todas';
 
     tablaBody.innerHTML = '';
 
     const filtrados = colaboradores.filter(c =>
         (localidadSel === 'Todas' || c.localidad === localidadSel) &&
-        (coordSel     === 'Todas' || c.coord     === coordSel)
+        (coordSel     === 'Todas' || c.coord     === coordSel) &&
+        (zonaSel      === 'Todas' || c.zona      === zonaSel)
     );
 
     if (filtrados.length === 0) {
@@ -274,6 +281,7 @@ function abrirModalModificar() {
     document.querySelector('#f-cp').value         = c.cp            || '';
     document.querySelector('#f-localidad').value  = c.localidad     || '';
     document.querySelector('#f-colabora').value   = c.colabora      || '';
+    document.querySelector('#f-zona').value        = c.zona          || '';
     document.querySelector('#f-coord-input').value = c.coord        || '';
     document.querySelector('#f-c1-nombre').value  = c.contacto1?.nombre || '';
     document.querySelector('#f-c1-tel').value     = c.contacto1?.tel    || '';
@@ -517,6 +525,7 @@ function exportarExcel() {
         'DOMICILIO':     c.domicilio     || '',
         'CP':            c.cp            || '',
         'LOCALIDAD':     c.localidad     || '',
+        'ZONA':          c.zona          || '',
         'COLABORA EN':   c.colabora      || '',
         'COORDINADOR':   c.coord         || '',
         'TIENDA ID':     c.tiendaId      || '',
@@ -545,6 +554,7 @@ function construirObjeto() {
         cp:         document.querySelector('#f-cp').value.trim()          || '---',
         localidad:  document.querySelector('#f-localidad').value.trim()   || '---',
         colabora:   document.querySelector('#f-colabora').value.trim()    || '---',
+        zona:       document.querySelector('#f-zona').value.trim()        || '---',
         coord:      document.querySelector('#f-coord-input').value.trim() || '---',
         contacto1: {
             nombre: document.querySelector('#f-c1-nombre').value.trim() || '---',
@@ -563,7 +573,7 @@ function construirObjeto() {
 }
 
 function limpiarFormulario() {
-    ['f-nombre','f-domicilio','f-cp','f-localidad','f-colabora','f-coord-input',
+    ['f-nombre','f-domicilio','f-cp','f-localidad','f-colabora','f-zona','f-coord-input',
      'f-c1-nombre','f-c1-tel','f-c2-nombre','f-c2-tel','f-c3-nombre','f-c3-tel','f-obs']
         .forEach(id => {
             const el = document.querySelector('#' + id);

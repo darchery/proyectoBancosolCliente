@@ -3,39 +3,45 @@
     {
       "usuario": "admin",
       "clave": "admin",
-      "rol": "admin"
+      "rol": "admin",
+      "id": "iSZFuG3ZDhs"
     },
     {
       "usuario": "capitan",
       "clave": "capitan",
-      "rol": "capitan"
+      "rol": "capitan",
+      "id": "ZPPHw2CEdZY"
     },
     {
       "usuario": "coordinador",
       "clave": "coordinador",
-      "rol": "coordinador"
+      "rol": "coordinador",
+      "id": "oWs1a-dcbFA"
     },
     {
       "usuario": "capitan_coordinador",
       "clave": "capitan_coordinador",
-      "rol": "capitan_coordinador"
+      "rol": "capitan_coordinador",
+      "id": "lLQyLcV8TzU"
     },
     {
       "usuario": "entidad_colaboradora",
       "clave": "entidad_colaboradora",
-      "rol": "entidad_colaboradora"
+      "rol": "entidad_colaboradora",
+      "id": "h0bImoEep2Y"
     }
   ],
   "colaboradores": [
     {
       "id": "1",
       "nombre": "A0362-AYUNTAMIENTO DE ALMACHAR",
+      "zona": "Axarquía",
       "domicilio": "Calle Almería, 14",
       "localidad": "ALMACHAR",
       "cp": "29718",
       "colabora": "RINCON DE LA VICTORIA",
       "coord": "JM Cobos",
-      "tiendaId": "CARREFOUR_002",
+      "tiendaId": "CARREFOUR_003",
       "contacto1": {
         "nombre": "Mario Torre",
         "tel": "555 555 555"
@@ -57,9 +63,10 @@
       "cp": "29600",
       "localidad": "Marbella",
       "colabora": "RINCON DE LA VICTORIA",
-      "coord": "JM Ruiz",
+      "zona": "Costa del Sol",
+      "coord": "JM Cobos",
       "contacto1": {
-        "nombre": "Maria Ruiz",
+        "nombre": "Mario Torre",
         "tel": "555 555 555"
       },
       "contacto2": {
