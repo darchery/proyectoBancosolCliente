@@ -1,7 +1,9 @@
+/* Garantizamos que el padding no afecte al ancho total */
 * {
     box-sizing: border-box;
 }
 
+/* Fondo y alineación del formulario de solicitud */
 body {
     display: flex;
     flex-direction: column;
@@ -14,10 +16,12 @@ body {
     min-height: 100vh;
 }
 
+/* Header superior */
 header {
     width: 100%;
 }
 
+/* Título de la sección de acceso */
 h1 {
     color: #293189;
     text-align: center;
@@ -25,6 +29,7 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* Área central para el formulario */
 main {
     flex: 1;
     display: flex;
@@ -35,6 +40,7 @@ main {
     padding-bottom: 40px;
 }
 
+/* Caja blanca con sombra para el formulario */
 form {
     background: white;
     padding: 40px;
@@ -45,6 +51,7 @@ form {
     height: auto;
 }
 
+/* Estilo del label del correo */
 form label {
     display: block;
     color: #0d47a1;
@@ -53,6 +60,7 @@ form label {
     font-size: 1.1em;
 }
 
+/* Campo de entrada de email */
 form input {
     width: 100%;
     padding: 12px;
@@ -62,6 +70,7 @@ form input {
     font-size: 1em;
 }
 
+/* Botón para enviar la solicitud */
 form button {
     width: 100%;
     padding: 14px;
@@ -75,10 +84,12 @@ form button {
     margin-bottom: 0;
 }
 
+/* Feedback al pasar el ratón */
 form button:hover {
     background-color: #1565c0;
 }
 
+/* Mensaje que aparece al solicitar */
 #info_solicitud {
     margin-top: 15px;
     margin-bottom: 0;
@@ -86,10 +97,12 @@ form button:hover {
     text-align: center;
 }
 
+/* Estilo para mensajes de éxito */
 .mensaje-ok {
     color: green;
 }
 
+/* Footer pegado al fondo */
 footer {
     width: 100%;
 }

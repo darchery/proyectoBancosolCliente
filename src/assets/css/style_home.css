@@ -1,7 +1,9 @@
+/* Reset de bordes y rellenos para que no fallen los anchos */
 * {
     box-sizing: border-box;
 }
 
+/* Configuración del fondo y centrado de la página Home */
 body {
     display: flex;
     flex-direction: column;
@@ -14,10 +16,12 @@ body {
     background-color: #f8f9fa;
 }
 
+/* Cabecera a ancho completo */
 header {
     width: 100%;
 }
 
+/* Título principal de bienvenida */
 h1 {
     color: #293189;
     text-align: center;
@@ -25,6 +29,7 @@ h1 {
     margin-bottom: 25px;
 }
 
+/* Contenedor para centrar la caja en pantalla */
 main {
     flex: 1;
     display: flex;
@@ -35,6 +40,7 @@ main {
     padding-bottom: 40px;
 }
 
+/* Caja blanca con sombra para los botones */
 .home-box {
     background: white;
     padding: 40px;
@@ -47,6 +53,7 @@ main {
     align-items: center;
 }
 
+/* Organización de los elementos internos */
 section {
     width: 100%;
     display: flex;
@@ -54,6 +61,7 @@ section {
     align-items: center;
 }
 
+/* Estilo para los botones principales */
 section button {
     display: block;
     margin: 10px auto;
@@ -70,11 +78,13 @@ section button {
     transition: background-color 0.3s, transform 0.2s;
 }
 
+/* Efecto visual al pasar el ratón */
 section button:hover {
     background-color: #1565c0;
     transform: translateY(-2px);
 }
 
+/* Pie de página al fondo */
 footer {
     width: 100%;
 }
