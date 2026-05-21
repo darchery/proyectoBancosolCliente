@@ -1,4 +1,8 @@
 /* --- ESTILO PARA LA PÁGINA DE SOLICITAR ACCESO --- */
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;

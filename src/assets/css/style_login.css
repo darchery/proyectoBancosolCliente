@@ -1,4 +1,8 @@
 /* --- ESTILO PARA LA PÁGINA DE LOGIN --- */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -6,11 +10,11 @@ body {
 }
 /* --- ESTILO PARA EL CONTENEDOR PRINCIPAL DEL LOGIN --- */
 .login-box {
-  width: 320px;
+  width: 100%;
+  max-width: 360px;
   margin: 60px auto;
   background: white;
-  padding: 25px;
-  padding-right: 3em;
+  padding: 30px;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(13, 71, 161, 0.2);
   text-align: center;
