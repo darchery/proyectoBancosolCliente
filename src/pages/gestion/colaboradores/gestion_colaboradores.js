@@ -10,7 +10,7 @@ const API_URL = 'http://localhost:3001';
 const rolActual     = localStorage.getItem('userRole') || 'admin';
 const usuarioActual = localStorage.getItem('userName') || rolActual;
 
-// Función auxiliar para obtener el dashboard según el rol
+// funcion para obtener el dashboard según el rol 
 function getDashboardURL() {
     const dashboards = {
         'admin': '../../welcome/welcome_admin.html',
@@ -23,23 +23,23 @@ function getDashboardURL() {
     return dashboards[rolActual] || '../../welcome/welcome_admin.html';
 }
 
-// INICIALIZACIÓN
+// Incializacion
 document.addEventListener('DOMContentLoaded', async function () {
 
-    // 1º elementos del HTML
+    
     tablaBody = document.querySelector('#tabla-body');
     adminMenu = document.querySelector('#admin-menu');
     coordMenu = document.querySelector('#coord-menu');
     
 
-    //Permisos
+    //Permisos depenediente del rol
     if (rolActual === 'admin') {
         if (adminMenu) adminMenu.classList.remove('hidden');
     } else if (rolActual === 'coordinador' || rolActual === 'capitan_coordinador') {
         if (coordMenu) coordMenu.classList.remove('hidden');
     }
 
-    //Cargamos y mostramos tablas
+    
     await cargarColaboradores();
     await cargarTiendas();
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         .addEventListener('change', filtrarYCargarTabla);
 
 
-    // Botones CRUD — admin
+    // Botones CRUD del admin
     document.querySelector('#btn-anadir')
         ?.addEventListener('click', abrirModalAnadir);
     document.querySelector('#btn-modificar')
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.querySelector('#btn-validar')
         ?.addEventListener('click', validarColaborador);
 
-    // Botones CRUD — coordinador
+    // Botones CRUD del coordinador
     document.querySelector('#btn-anadir-pendiente')
         ?.addEventListener('click', abrirModalAniadirPendiente);
     document.querySelector('#btn-exportar-coord')
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.querySelector('#btn-cancelar-asignar')
         .addEventListener('click', cerrarVistaAsignar);
 
-    // Botón volver al menú principal
+    // Boton para volver al menu principal
     document.querySelector('#btn-volver-menu')
         ?.addEventListener('click', () => window.location.href = getDashboardURL());
 });
@@ -123,14 +123,14 @@ function mostrarErrorCarga(mensaje) {
     const contenedor = document.querySelector('.dashboard');
     if (!contenedor) return;
 
-    // Evitar duplicados
+   
     if (document.querySelector('.mensaje-error-carga')) return;
 
     const div = document.createElement('div');
     div.className = 'mensaje-error-carga';
     div.textContent = mensaje;
     
-    // Insertar al principio del dashboard
+    
     contenedor.prepend(div);
 }
 
@@ -149,7 +149,7 @@ function rellenarSelect(idSelect, valores) {
     const select = document.querySelector('#' + idSelect);
     
     // Limpiamos y añadimos la opción por defecto usando los métodos de clase
-    select.innerHTML = ''; // Limpieza permitida
+    select.innerHTML = ''; 
     const optDefault = document.createElement('option');
     optDefault.value = 'Todas';
     optDefault.textContent = 'Todas';
@@ -171,7 +171,7 @@ function filtrarYCargarTabla() {
     const coordSel     = document.querySelector('#filtro-coord')?.value     || 'Todas';
     const zonaSel      = document.querySelector('#filtro-zona')?.value      || 'Todas';
 
-    tablaBody.innerHTML = ''; // Limpieza permitida
+    tablaBody.innerHTML = ''; 
 
     const filtrados = colaboradores.filter(c =>
         (localidadSel === 'Todas' || c.localidad === localidadSel) &&
@@ -198,7 +198,7 @@ function filtrarYCargarTabla() {
             fila.classList.add('fila-seleccionada');
         }
 
-        // Celda Nombre + Badge Pendiente
+        
         const tdNombre = document.createElement('td');
         tdNombre.textContent = c.nombre;
         if (c.pendienteValidacion) {
@@ -209,7 +209,7 @@ function filtrarYCargarTabla() {
         }
         fila.appendChild(tdNombre);
 
-        // Resto de celdas
+        
         const campos = [
             c.domicilio     || '---',
             c.localidad     || '---',
@@ -344,7 +344,7 @@ function confirmarModal() {
 }
 
 // CRUD
-// CREAR COLABORADOR — POST
+// CREAR COLABORADOR 
 async function crearColaborador() {
     const nombre = document.querySelector('#f-nombre').value.trim();
 
@@ -378,7 +378,7 @@ async function crearColaborador() {
     }
 }
 
-// ACTUALIZAR COLABORADOR — PUT
+// ACTUALIZAR COLABORADOR 
 async function actualizarColaborador() {
     const nombre = document.querySelector('#f-nombre').value.trim();
 
@@ -420,7 +420,7 @@ async function actualizarColaborador() {
     }
 }
 
-// ELIMINAR COLABORADOR — DELETE
+// ELIMINAR COLABORADOR
 async function eliminarColaborador() {
     if (!colaboradorSeleccionadoId) {
         alert('Selecciona primero un colaborador de la tabla.');
@@ -455,7 +455,7 @@ async function eliminarColaborador() {
     }
 }
 
-// VALIDAR COLABORADOR — quita el flag pendienteValidacion (solo admin)
+// VALIDAR COLABORADOR — quita pendienteValidacion (solo lo puede hacer el admin)
 async function validarColaborador() {
     if (!colaboradorSeleccionadoId) return;
 
@@ -498,7 +498,7 @@ function abrirVistaAsignar() {
         return;
     }
 
-    // Populamos el select de tiendas
+    
     const select = document.querySelector('#f-tienda-id');
     select.innerHTML = ''; // Limpieza permitida
     const optDefault = document.createElement('option');
