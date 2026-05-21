@@ -4,75 +4,92 @@
 
 body {
   margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
 }
 
-/* Contenedor principal del login */
-.login-box {
+header {
   width: 100%;
-  max-width: 360px;
-  margin: 60px auto;
+}
+
+h1 {
+    color: #293189;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+.login-box {
+  width: 90%;
+  max-width: 400px;
   background: white;
-  padding: 30px;
+  padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(13, 71, 161, 0.2);
+  box-shadow: 0 10px 25px rgba(13, 71, 161, 0.15);
   text-align: center;
 }
 
-.login-box h2 {
-  color: #0d47a1;
-  margin-bottom: 20px;
-}
-
-/* Estilo de las labels de los campos de entrada */
 .login-box label {
   display: block;
   text-align: left;
-  margin-top: 10px;
+  margin-bottom: 8px;
   font-weight: bold;
   color: #0d47a1;
 }
 
-/* Estilo de los campos de entrada */
 .login-box input {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: 1px solid #cfd8dc;
+  padding: 12px;
+  margin-bottom: 25px;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  outline: none;
 }
 
-.login-box input:focus {
-  border-color: #0d47a1;
-  box-shadow: 0 0 5px rgba(13, 71, 161, 0.3);
-}
-
-/* Botón de login */
 .login-box button {
   width: 100%;
-  padding: 10px;
-  margin-top: 15px;
+  padding: 14px;
   background: #0d47a1;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .login-box button:hover {
   background: #1565c0;
 }
 
-/* Enlaces del login */
 .login-box a {
   display: block;
-  margin-top: 15px;
+  margin-top: 30px;
   color: #0d47a1;
   text-decoration: none;
+  font-weight: bold;
 }
+
 .login-box a:hover {
   text-decoration: underline;
+}
+
+footer {
+  width: 100%;
 }
