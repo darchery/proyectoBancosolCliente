@@ -204,6 +204,11 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     gap: 20px;
     width: 300px;
 }
+.page-campanya .actions-frame {
+    border: 2px solid #293189;
+    padding: 15px;
+    background-color: #fafafa;
+}
 .page-campanya button {
     background-color: #f0f0f0;
     border: 1px solid #999;
