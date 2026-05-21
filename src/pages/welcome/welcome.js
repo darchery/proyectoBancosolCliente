@@ -1,4 +1,3 @@
-
 const btnLogOut = document.querySelector(".boton-logout");
 
 if (btnLogOut) {
