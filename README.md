@@ -1,186 +1,430 @@
 # Proyecto Bancosol TCAW
 
-# Propuesta de esqueleto de cliente web para el caso práctico
+**Sistema de Gestión de Voluntarios y Colaboradores** para la organización Bancosol TCAW.
 
-En la carpeta `cliente` hay una serie de archivos HTML, CSS y JavaScript (el CSS es mínimo, solo para usar una ventana modal) en los que se propone una base mínima para la estructura de la parte de cliente que se pide en el caso práctico. En la carpeta `servidor` hay un pequeño servidor Node.js / Express que simula parte del funcionamiento esperado del servidor (ni siquiera tiene base de datos, trata los datos con una variable en un archivo JSON).
+Aplicación web fullstack para administrar campañas de voluntariado, asignación de voluntarios, gestión de tiendas y colaboradores con control de acceso basado en roles.
 
-# Cliente
+---
 
-El cliente simula una aplicación a la que hay que acceder de manera autenticada con un nombre de usuario y una contraseña. Cada usuario tendrá uno de los tres perfiles disponibles (_admin_, _manager_, _worker_). Cada uno de los usuarios tendrá su propia página en la que se podrá acceder a las acciones que tiene permitidas.
+## Descripción General
 
-## Comunicación con el servidor
+El proyecto Bancosol TCAW es una aplicación web diseñada para gestionar de manera integral las operaciones de una organización de voluntariado. Permite a diferentes tipos de usuarios (administradores, coordinadores, capitanes, responsables de tiendas, etc.) colaborar en la gestión de campañas, tiendas, colaboradores y voluntarios.
 
-La comunicación entre el cliente y el servidor se hace en base a métodos HTTP GET y POST, que están definidos en los archivos del servidor.
+**Principales características:**
+- Autenticación de usuarios con roles diferenciados
+- Gestión de campañas de voluntariado
+- Administración de tiendas y colaboradores
+- Asignación de voluntarios
+- Control de acceso basado en roles (RBAC)
+- Exportación de datos a Excel
+- Gestión de bandeja de entrada
+- Sistema de permisos por rol
 
-## Autenticación
+---
 
-La primera página del cliente es la de inicio, que consta solo de un formulario en el que se pide el nombre de usuario y la contraseña de la persona que va a iniciar sesión. Los usuarios y sus contraseñas están definidos en el archivo `usersDB.js` del servidor.
-
-La acción asociada al botón del formulario es un envío HTTP GET con la función `fecth`, aportando los datos del formulario. Si el servidor devuelve una respuesta de éxito, incluye en la respuesta un JSON Web Token (JWT), que el cliente guardará en la memoria local (es Session Storage, concretamente) para identificarse en peticiones posteriores.
-
-## Paso a la página inicial
-
-Si la autenticación es correcta, se pasará a la página inicial del perfil del usuario autenticado. El cambio a la nueva página se consigue asignando a la propiedad `window.location.href` una cadena de caracteres con la URL de la nueva página.
-
-## Página inicial del administrador
-
-El administrador es el único usuario del que hay algo implementado. En la página inicial tiene tres enlaces, uno a la misma página (poco útil), otro a la página de personal y otro a la página de configuración (aún sin implementar).
-
-El código inicial de la página comprueba que hay un perfil de usuario guardado en la memoria Session Storage y que este es el de administrador. En caso contrario, redirige a la página de inicio de sesión.
-
-Hay un botón de cierre de sesión que borra el contenido de la memoria de Session Storage y redirige a la página de inicio de sesión.
-
-## Página de personal
-
-La página de personal tiene una parte de elementos HTML estáticos (cabecera, lista de enlaces, botón de cerrar sesión, cabecera "Zona de administración de usuarios", cabecera de la tabla ("Nombre", "Email", "Perfil") y pie de página) y una parte de elementos HTML dinámicos. Esta parte constituye el cuerpo de la tabla y contiene la información de los empleados registrados en el servidor.
-
-La información sobre los empleados se trae con una consulta GET del servidor (función `cargarUsuarios()` del archivo `api.js`) y se añaden los elementos necesarios al DOM de la página para que aparezca una fila en la tabla por cada uno de los trabajadores.
-
-Cada fila tiene un botón a la derecha que sirve para cambiar la información sobre cada empleado. Al pulsar sobre el botón se abre una ventana modal cuyos campos están rellenados inicialmente con los datos del empleado de la misma fila. El usuario puede modificarlos y enviar una petición de cambio al servidor (función `putUsuarioActualizado()` del archivo `api.js`). En una aplicación real, se actualizaría la tabla con los nuevos datos si el la respuesta del servidor es correcta, pero en el ejemplo no está implementada esa funcionalidad.
-
-## Funciones de conexión con el servidor
-
-Todas las funciones de conexión con el servidor a través de operaciones HTTP (GET, POST y PUT) se han agrupado en el archivo `api.js`. Todas tienen una estructura similar: son operaciones asíncrona (`async`), que usan una operación `fetch` para hacer la petición con el servidor y devuelven una promesa con el resultado o elevan una excepción si ha habido un error.
-
-En la página de personal, su uso es similar en todos los casos. El resultado de la llamada a la función se asigna a una promesa dentro de una sentencia `try-catch`. La rama `catch` del `try-catch` se ejecutará si la respuesta es incorrecta (fuera del rango 200-299) o si la lectura del contenido JSON de la respuesta da algún error (campo `success` es falso). La sentencia `catch` correspondiente a la promesa se ejecutará si hay algún problema de acceso al servidor y la función `fetch()` rechaza la promesa.
-
-## Identificación con JWT
-
-Las funciones que acceden al servidor, a través de la operación `fetch`, ya sea para hacer un GET o un PUT, usan el JWT obtenido en el inicio de sesión y almacenado en el Session Storage para identificarse.
-
-El JWT se incluye como parte de la cabecera, con la propiedad `Authorization`, que debe tener el valor `Bearer `, seguido del token. El código concreto es:
+## Estructura del Proyecto
 
 ```
-async function cargarUsuarios() {
-  const usuariosCargadosDesdeServidor = await fetch(API_ENDPOINT, {
-    headers: {
-      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    }
-  });
-
-. . .
-async function putUsuarioActualizado(datosActualizados) {
-  const response = await fetch(API_ENDPOINT + '/' + datosActualizados.id, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
-    },
-    body: JSON.stringify(datosActualizados)
-  });
-. . .
+proyectoBancosolTCAW/
+├── src/                          # Código del cliente (Frontend)
+│   ├── assets/
+│   │   ├── css/                  # Estilos globales
+│   │   └── images/               # Recursos gráficos (logos)
+│   ├── components/
+│   │   ├── footer/               # Componente pie de página reutilizable
+│   │   └── header/               # Componente cabecera reutilizable
+│   ├── data/
+│   │   ├── datos.json            # Datos generales
+│   │   ├── db.json               # Base de datos simulada (json-server)
+│   │   └── usuarios.json         # Base de datos de usuarios
+│   └── pages/
+│       ├── gestion/              # Páginas de administración
+│       │   ├── asignacion-voluntarios/
+│       │   ├── bandeja-entrada/
+│       │   ├── campanyas/
+│       │   ├── colaboradores/
+│       │   ├── coordinadores/
+│       │   └── tiendas/
+│       ├── home/                 # Página de inicio
+│       ├── login/                # Página de login
+│       ├── solicitar-acceso/     # Solicitud de acceso
+│       └── welcome/              # Páginas de bienvenida por rol
+├── servidor/                     # Backend (json-server)
+│   └── .env                      # Configuración del servidor
+├── esqueleto_profe/              # Esqueleto del profesor
+├── package.json                  # Dependencias del proyecto
+├── README.md                     # Este archivo
+├── ESTRUCTURA_DIRECTORIOS.md     # Documentación de estructura
+├── DIAGRAMA_NAVEGACION.md        # Diagrama de navegación
+└── RequisitosFuncionales.txt     # Requisitos del proyecto
 ```
 
-# Simulador de API de Servidor
+---
 
-Este es un servidor Node.js / Express mínimo que simula algunas características de un servidor real para poder responder a peticiones de un cliente basado en HTML/CSS/JavaScrip. Maneja la autenticación con JWT y proporciona puntos de conexión a la API protegidos.
+## Roles de Usuario
 
-## Estructura de archivos
+El sistema soporta los siguientes roles de usuario:
 
-```
-servidor/
-├── servidor.js                  ← Punto de entrada - inicia Express
-├── usersDB.js                 ← Almacenamiento en memoria del usuario (sustituir por base de datos)
-├── users.js                   ← Operaciones de consulta y actualización de usuarios
-├── routes/
-│   └── auth.js                ← POST /auth/login
-├── middleware/
-│   └── authenticate.js        ← Validación JWT + control de perfiles
-├── generate-hashes.js         ← Función auxiliar de un solo uso para hash de passwords
-├── .env                       ← Variables de entorno (no incluir en commit en repositorios)
-├── .gitignore
-└── package.json
-```
+| Rol | Permisos | Acceso |
+|-----|----------|--------|
+| **Administrador** | Control total del sistema | Gestión de todo |
+| **Coordinador** | Gestión de colaboradores y voluntarios | Tiendas, colaboradores, voluntarios |
+| **Capitán** | Visualización y reportes | Tiendas, colaboradores |
+| **Coordinador + Capitán** | Combinación de permisos | Tiendas, colaboradores, bandeja entrada |
+| **Responsable Colaboradora** | Gestión de colaboradores de su entidad | Tiendas, colaboradores |
+| **Responsable Tienda** | Gestión de su tienda | Tiendas, colaboradores |
 
-## Inicio rápido
+---
+
+## Instalación y Configuración
+
+### Requisitos Previos
+- **Node.js** v14 o superior
+- **npm** o **yarn**
+- Navegador web moderno (Chrome, Firefox, Safari, Edge)
+
+### 1. Clonar el Repositorio
 
 ```bash
-# 1. Instalación de dependencias
+git clone <url-del-repositorio>
+cd proyectoBancosolTCAW
+```
+
+### 2. Instalar Dependencias
+
+```bash
 npm install
-
-# 2. Generar hashes reales de contraseñas (solo en la primera ejecución)
-node generate-hashes.js
-# Copiar las contraseñas generadas en usersDB.js
-
-# 3. Editar .env — poner un JWT_SECRET fuerte
-
-# 4. Inicializar el servidor
-npm start
-
-# Desarrollo (auto-reinicio cuando haya cambios en los archivos)
-npm run dev
 ```
 
-El servidor atiende en http://localhost:3000 por defecto.
+### 3. Iniciar el Backend (json-server)
 
-## API
+En una terminal, ejecuta:
 
-### POST /auth/login (public)
-
-Cuero de la petición:
-
-```json
-{ "nombreUsuario": "admin", "contrasena": "admin123" }
+```bash
+npx json-server --port 3001 src/data/db.json
 ```
 
-Success `200`:
+O usa el comando guardado en `LANZAR_BACKEND.txt`:
+
+```bash
+npm run start:backend
+```
+
+### 4. Iniciar el Frontend
+
+Abre el archivo `src/pages/home/index_home.html` en tu navegador web, o usa un servidor local:
+
+```bash
+# Con Python 3
+python -m http.server 8000
+
+# Con Node.js (http-server)
+npx http-server
+```
+
+Luego accede a `http://localhost:8000` en tu navegador.
+
+---
+
+## Páginas y Funcionalidad
+
+### Páginas Principales
+
+#### Home (`src/pages/home/`)
+- Página de inicio de la aplicación
+- Botones de acceso rápido:
+  - Iniciar sesión
+  - Solicitar acceso
+
+#### Login (`src/pages/login/`)
+- Formulario de autenticación
+- Validación de credenciales contra `db.json`
+- Redirección según rol del usuario
+- Almacenamiento de rol en `localStorage`
+
+#### Welcome (Bienvenida) (`src/pages/welcome/`)
+Páginas específicas por rol:
+- `welcome_admin.html` - Panel de administrador
+- `welcome_coordinador.html` - Panel de coordinador
+- `welcome_capitan.html` - Panel de capitán
+- `welcome_capitan_coordinador.html` - Panel de capitán+coordinador
+- `welcome_entidad_colaboradora.html` - Panel de responsable colaboradora
+- `welcome_responsable_tienda.html` - Panel de responsable tienda
+
+#### Gestión de Tiendas (`src/pages/gestion/tiendas/`)
+- Listar tiendas
+- Añadir nueva tienda
+- Modificar información de tienda
+- Eliminar tienda
+- Asignar coordinadores a tienda
+- Registrar incidencias
+- Búsqueda filtrada por cadena, coordinador, zona geográfica y localidad
+
+#### Gestión de Colaboradores (`src/pages/gestion/colaboradores/`)
+- Listar colaboradores
+- Añadir colaborador a campaña
+- Modificar datos del colaborador
+- Eliminar colaborador
+- Asignar a tienda
+- Exportar listado a Excel
+- Registrar incidencias
+- Búsqueda filtrada por coordinador, usuario, localidad y zona geográfica
+
+#### Asignación de Voluntarios (`src/pages/gestion/asignacion-voluntarios/`)
+- Añadir voluntarios a campaña
+- Guardar datos sin confirmar
+- Cancelar cambios
+- Exportar datos a Excel
+
+#### Gestión de Campañas (`src/pages/gestion/campanyas/`)
+- Crear nueva campaña
+- Gestionar información de campaña
+- Salir de gestión
+
+#### Bandeja de Entrada (`src/pages/gestion/bandeja-entrada/`)
+- Ver mensajes/notificaciones
+- Acceso restringido a ciertos roles
+
+#### Gestión de Coordinadores (`src/pages/gestion/coordinadores/`)
+- Listar coordinadores
+- CRUD de coordinadores
+
+#### Solicitar Acceso (`src/pages/solicitar-acceso/`)
+- Formulario para solicitar nuevo acceso al sistema
+
+---
+
+## Comunicación con el Servidor
+
+### Backend (API)
+
+El proyecto utiliza **json-server** como simulador de API REST. 
+
+**Puerto:** `3001`
+**Archivo de datos:** `src/data/db.json`
+
+### Endpoints Principales
+
+El servidor expone los siguientes endpoints REST:
+
+```
+GET     /colaboradores        - Obtener lista de colaboradores
+POST    /colaboradores        - Crear nuevo colaborador
+GET     /colaboradores/:id    - Obtener colaborador por ID
+PUT     /colaboradores/:id    - Actualizar colaborador
+DELETE  /colaboradores/:id    - Eliminar colaborador
+
+GET     /tiendas              - Obtener lista de tiendas
+POST    /tiendas              - Crear nueva tienda
+PUT     /tiendas/:id          - Actualizar tienda
+DELETE  /tiendas/:id          - Eliminar tienda
+
+GET     /voluntarios          - Obtener lista de voluntarios
+POST    /voluntarios          - Crear nuevo voluntario
+```
+
+### Llamadas a la API
+
+Todas las llamadas se realizan mediante `fetch()` de JavaScript con configuración de encabezados:
+
+```javascript
+const API_URL = 'http://localhost:3001';
+
+// GET
+const response = await fetch(`${API_URL}/colaboradores`);
+const data = await response.json();
+
+// POST
+const response = await fetch(`${API_URL}/colaboradores`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(nuevoColaborador)
+});
+
+// PUT
+const response = await fetch(`${API_URL}/colaboradores/${id}`, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(datosActualizados)
+});
+
+// DELETE
+const response = await fetch(`${API_URL}/colaboradores/${id}`, {
+  method: 'DELETE'
+});
+```
+
+---
+
+## Autenticación y Seguridad
+
+### Sistema de Autenticación
+
+1. **Login:** El usuario ingresa credenciales (usuario/contraseña)
+2. **Validación:** Se valida contra `src/data/db.json`
+3. **Almacenamiento:** El rol se guarda en `localStorage`:
+   - `userRole` - Rol del usuario
+   - `userName` - Nombre del usuario (opcional)
+
+### Ejemplo de db.json
 
 ```json
 {
-  "success": true,
-  "token": "<JWT>",
-  "user": {
-    "id": 1,
-    "nombre": "Hugo Moreno",
-    "puesto": "admin",
-    "nombreUsuario": "admin"
-  }
+  "usuarios": [
+    {
+      "id": 1,
+      "usuario": "admin",
+      "clave": "admin123",
+      "rol": "admin",
+      "nombre": "Administrador"
+    },
+    {
+      "id": 2,
+      "usuario": "coord1",
+      "clave": "coord123",
+      "rol": "coordinador",
+      "nombre": "Coordinador 1"
+    }
+  ]
 }
 ```
 
-Failure `401`:
+### Verificación de Rol
 
-```json
-{ "success": false, "message": "Invalid username or password." }
+En cada página de gestión se verifica el rol del usuario:
+
+```javascript
+const rolActual = localStorage.getItem('userRole') || 'admin';
+
+if (rolActual === 'admin') {
+    // Mostrar opciones de admin
+}
 ```
 
 ---
 
-### GET /me (authenticated)
+## Estructura de Estilos
 
-Cabecera: `Authorization: Bearer <token>`
+- **Global:** `src/assets/css/`
+- **Por página:** Cada página tiene su propio CSS
+- **Componentes:** `src/components/{footer,header}/`
 
-Devuelve la carga útil del token decodificada.
+### Estilos Disponibles
 
----
-
-### GET /schedule?from=YYYY-MM-DD&to=YYYY-MM-DD (manager / admin)
-
-Cabecerra: `Authorization: Bearer <token>`
-
-Devuelve la planificación en el rango de fechas
-
----
-
-### GET /health (public)
-
-Devuelve `{ "status": "ok", "time": "..." }`.
+- `header_comun.css` - Estilos de cabecera
+- `footer_comun.css` - Estilos de pie de página
+- `style_home.css` - Home
+- `style_login.css` - Login
+- `style_welcome.css` - Páginas de bienvenida
+- `style_gestion.css` - Páginas de gestión
+- `style_solicitar_acceso.css` - Solicitud de acceso
 
 ---
 
-## Usuarios iniciales
+## Datos
 
-| username | password | role    |
-| -------- | -------- | ------- |
-| admin    | admin123 | admin   |
-| manager  | manager1 | manager |
-| ana      | worker1  | worker  |
-| carlos   | worker2  | worker  |
+### Estructura de db.json
 
-## Consejos de seguridad
+```json
+{
+  "usuarios": [...],
+  "colaboradores": [...],
+  "tiendas": [...],
+  "voluntarios": [...],
+  "campanyas": [...]
+}
+```
 
-- Cambia `JWT_SECRET` en `.env` por una cadena larga aleatoria antes de desplegar el servidor.
-- Sustituye el contenido de `usersDB.js` con consultas reales a una base de datos.
-- Habilita HTTPS en producciónn (termina TLS en un _proxy_ inverso como nginx).
-- Añade una política de _rate-limiting_ to `/auth/login` (p.ej. `express-rate-limit`) para prevenir ataques de fuerza bruta.
-- En un sistema real no incluyas nunca `.env` en los _commit_ del control de versiones cuando ya se le ha dado un valor bueno a `JWT_SECRET`.
+---
+
+## Flujo de Navegación
+
+Ver `DIAGRAMA_NAVEGACION.md` para el diagrama completo.
+
+**Resumen:**
+- `HOME` → `LOGIN` → `WELCOME_{ROL}` → Páginas de gestión
+- Las páginas de gestión pueden volver al `WELCOME_{ROL}` correspondiente
+- Los datos se persisten en `localStorage` durante la sesión
+
+---
+
+## Requisitos Funcionales Implementados
+
+- **RF1:** Gestionar Cadena (Añadir, Eliminar, Modificar, Cancelar, Guardar)
+- **RF2:** Gestionar Roles (Añadir, Eliminar, Modificar)
+- **RF3:** Gestionar Colaboradores (CRUD completo, Exportar Excel, Búsqueda filtrada)
+- **RF4:** Gestionar Campaña (Generar, Salir)
+- **RF5:** Gestionar Tienda (CRUD, Asignar coordinadores, Búsqueda filtrada)
+- **RF6:** Gestionar Asignación de Voluntarios (Añadir, Guardar, Cancelar, Exportar)
+
+---
+
+## Tecnologías Utilizadas
+
+- **Frontend:**
+  - HTML5
+  - CSS3
+  - JavaScript (Vanilla)
+  - Fetch API
+
+- **Backend:**
+  - Node.js
+  - json-server (simulador de API REST)
+  - npm
+
+- **Persistencia:**
+  - JSON (simulación de base de datos)
+  - localStorage (sesiones de cliente)
+
+---
+
+## Archivos de Configuración
+
+### package.json
+Define las dependencias del proyecto:
+- `json-server@^1.0.0-beta.15` - Servidor API simulado
+
+### LANZAR_BACKEND.txt
+Comando rápido para iniciar el servidor:
+```bash
+npx json-server --port 3001 src/data/db.json
+```
+
+---
+
+## Troubleshooting
+
+### El servidor no inicia en puerto 3001
+```bash
+# Cambiar puerto
+npx json-server --port 3002 src/data/db.json
+# Y actualizar API_URL en los archivos JS
+```
+
+### localStorage no funciona
+- Asegúrate de que la aplicación se ejecuta en `http://` o `https://`, no en `file://`
+- Usa un servidor local (ver sección Instalación)
+
+### Los datos no se guardan
+- Verifica que `src/data/db.json` existe y es válido JSON
+- Recarga la página para ver cambios del servidor
+
+### CORS error
+- json-server incluye CORS por defecto
+- Si aún hay problemas, accede desde `http://localhost:8000`
+
+---
+
+## Documentación Adicional
+
+- `ESTRUCTURA_DIRECTORIOS.md` - Estructura completa de directorios
+- `DIAGRAMA_NAVEGACION.md` - Diagrama de flujo de navegación
+- `RequisitosFuncionales.txt` - Requisitos del proyecto
+- `LANZAR_BACKEND.txt` - Comando para iniciar backend
+
+---
+
