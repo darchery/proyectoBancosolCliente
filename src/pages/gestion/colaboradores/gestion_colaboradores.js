@@ -130,7 +130,14 @@ function rellenarFiltros() {
 
 function rellenarSelect(idSelect, valores) {
     const select = document.querySelector('#' + idSelect);
-    select.innerHTML = '<option value="Todas">Todas</option>';
+    
+    // Limpiamos y añadimos la opción por defecto usando los métodos de clase
+    select.innerHTML = ''; // Limpieza permitida
+    const optDefault = document.createElement('option');
+    optDefault.value = 'Todas';
+    optDefault.textContent = 'Todas';
+    select.appendChild(optDefault);
+
     for (const valor of valores) {
         const opt = document.createElement('option');
         opt.value       = valor;
@@ -147,7 +154,7 @@ function filtrarYCargarTabla() {
     const coordSel     = document.querySelector('#filtro-coord')?.value     || 'Todas';
     const zonaSel      = document.querySelector('#filtro-zona')?.value      || 'Todas';
 
-    tablaBody.innerHTML = '';
+    tablaBody.innerHTML = ''; // Limpieza permitida
 
     const filtrados = colaboradores.filter(c =>
         (localidadSel === 'Todas' || c.localidad === localidadSel) &&
@@ -156,34 +163,50 @@ function filtrarYCargarTabla() {
     );
 
     if (filtrados.length === 0) {
-        tablaBody.innerHTML = `
-            <tr>
-                <td> No hay colaboradores con esos filtros</td>
-            </tr>`;
+        const filaVacia = document.createElement('tr');
+        const celdaVacia = document.createElement('td');
+        celdaVacia.setAttribute('colspan', '7');
+        celdaVacia.classList.add('empty-row-msg');
+        celdaVacia.textContent = 'No hay colaboradores con esos filtros';
+        filaVacia.appendChild(celdaVacia);
+        tablaBody.appendChild(filaVacia);
         return;
     }
 
     filtrados.forEach(c => {
         const fila = document.createElement('tr');
-        fila.style.cursor = 'pointer';
+        fila.classList.add('cursor-pointer');
 
         if (c.id === colaboradorSeleccionadoId) {
-            fila.style.backgroundColor = '#fde8e8';
+            fila.classList.add('fila-seleccionada');
         }
 
-        const pendiente = c.pendienteValidacion
-            ? ' <span style="color:orange;font-size:.75em;">(pendiente)</span>'
-            : '';
+        // Celda Nombre + Badge Pendiente
+        const tdNombre = document.createElement('td');
+        tdNombre.textContent = c.nombre;
+        if (c.pendienteValidacion) {
+            const spanPendiente = document.createElement('span');
+            spanPendiente.classList.add('badge-pendiente');
+            spanPendiente.textContent = ' (pendiente)';
+            tdNombre.appendChild(spanPendiente);
+        }
+        fila.appendChild(tdNombre);
 
-        fila.innerHTML = `
-            <td>${c.nombre}${pendiente}</td>
-            <td>${c.domicilio  || '---'}</td>
-            <td>${c.localidad  || '---'}</td>
-            <td>${c.colabora   || '---'}</td>
-            <td>${c.coord      || '---'}</td>
-            <td>${c.contacto1?.nombre || '---'}</td>
-            <td>${c.observaciones || ''}</td>
-        `;
+        // Resto de celdas
+        const campos = [
+            c.domicilio     || '---',
+            c.localidad     || '---',
+            c.colabora      || '---',
+            c.coord         || '---',
+            c.contacto1?.nombre || '---',
+            c.observaciones || ''
+        ];
+
+        campos.forEach(texto => {
+            const td = document.createElement('td');
+            td.textContent = texto;
+            fila.appendChild(td);
+        });
 
         fila.addEventListener('click', () => mostrarDetalle(c.id));
         tablaBody.appendChild(fila);
@@ -460,7 +483,11 @@ function abrirVistaAsignar() {
 
     // Populamos el select de tiendas
     const select = document.querySelector('#f-tienda-id');
-    select.innerHTML = '<option value="">-- Sin asignar --</option>';
+    select.innerHTML = ''; // Limpieza permitida
+    const optDefault = document.createElement('option');
+    optDefault.value = '';
+    optDefault.textContent = '-- Sin asignar --';
+    select.appendChild(optDefault);
 
     tiendas.forEach(t => {
         const opt = document.createElement('option');

@@ -389,7 +389,10 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     color: white;
 }
 
-.fila-seleccionada { background-color: #fde8e8; }
+.fila-seleccionada { background-color: #fde8e8 !important; }
+.badge-pendiente { color: orange; font-size: 0.75em; font-weight: bold; }
+.cursor-pointer { cursor: pointer; }
+.empty-row-msg { text-align: center; font-style: italic; color: #666; }
 
 /* --- CLASES ADICIONALES PARA REFACTORIZACIÓN --- */
 .mb-16 { margin-bottom: 16px !important; }

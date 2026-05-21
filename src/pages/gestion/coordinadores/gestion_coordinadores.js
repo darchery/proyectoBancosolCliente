@@ -111,7 +111,11 @@ function rellenarFiltros() {
 function rellenarSelect(selector, valores) {
     const select = document.querySelector(selector);
 
-    select.innerHTML = '<option value="Todas">Todas</option>';
+    select.innerHTML = ''; // Limpieza permitida
+    const optDefault = document.createElement('option');
+    optDefault.value = 'Todas';
+    optDefault.textContent = 'Todas';
+    select.appendChild(optDefault);
 
     for (const valor of valores) {
         const option = document.createElement('option');
@@ -132,7 +136,7 @@ function filtrarYCargarTabla() {
     const entidadSel = filtroEntidad.value || 'Todas';
     const areaSel = filtroArea.value || 'Todas';
 
-    tablaBody.innerHTML = '';
+    tablaBody.innerHTML = ''; // Limpieza permitida
 
     // Filtramos los coordinadores según los criterios seleccionados
     const filtrados = coordinadores.filter(c => {
@@ -144,33 +148,45 @@ function filtrarYCargarTabla() {
     });
 
     if (filtrados.length === 0) {
-        tablaBody.innerHTML = `
-            <tr>
-                <td colspan="8"> No hay coordinadores con esos filtros </td>
-            </tr>
-        `;
+        const filaVacia = document.createElement('tr');
+        const celdaVacia = document.createElement('td');
+        celdaVacia.setAttribute('colspan', '8');
+        celdaVacia.classList.add('empty-row-msg');
+        celdaVacia.textContent = 'No hay coordinadores con esos filtros';
+        filaVacia.appendChild(celdaVacia);
+        tablaBody.appendChild(filaVacia);
         return;
     }
 
     // Creamos las filas de la tabla con los coordinadores filtrados
     filtrados.forEach(c => {
         const fila = document.createElement('tr');
+        fila.classList.add('cursor-pointer');
 
         if (c.id === coordinadorSeleccionadoId) {
             fila.classList.add('fila-seleccionada');  
         }
 
-        // Rellenamos las celdas de la fila con los datos del coordinador
-        fila.innerHTML = `
-            <td>${c.nombre}</td>
-            <td>${c.entidad}</td>
-            <td>${c.area}</td>
-            <td>${c.telefono || ''}</td>
-            <td>${c.email || ''}</td>
-            <td style="text-align:center">${c.tiendas || 0}</td>
-            <td>${c.usuario || ''}</td>
-            <td>************</td>
-        `;
+        const campos = [
+            c.nombre,
+            c.entidad,
+            c.area,
+            c.telefono || '',
+            c.email || '',
+            c.tiendas || 0,
+            c.usuario || '',
+            '************'
+        ];
+
+        campos.forEach((texto, index) => {
+            const td = document.createElement('td');
+            td.textContent = texto;
+            // El campo de tiendas (índice 5) debe estar centrado
+            if (index === 5) {
+                td.classList.add('text-center');
+            }
+            fila.appendChild(td);
+        });
 
         fila.addEventListener('click', () => mostrarDetalle(c.id));
         tablaBody.appendChild(fila);

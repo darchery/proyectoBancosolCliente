@@ -526,7 +526,9 @@ function mostrarModalGuardar() {
 
     // Título de cadenas seleccionadas
     const subtitulo = document.createElement('p');
-    subtitulo.innerHTML = '<strong>Cadenas seleccionadas:</strong>';
+    const strongSub = document.createElement('strong');
+    strongSub.textContent = 'Cadenas seleccionadas:';
+    subtitulo.appendChild(strongSub);
     subtitulo.classList.add('text-dark', 'mb-16');
     divBody.appendChild(subtitulo);
 
@@ -920,25 +922,37 @@ async function mostrarModalHistorico() {
 
             // ID de campaña
             const idElem = document.createElement('p');
-            idElem.innerHTML = `<strong>ID:</strong> ${campanya.id}`;
+            const strongId = document.createElement('strong');
+            strongId.textContent = 'ID:';
+            idElem.appendChild(strongId);
+            idElem.appendChild(document.createTextNode(` ${campanya.id}`));
             idElem.classList.add('my-4', 'fs-12');
             divCampanya.appendChild(idElem);
 
             // Nombre de campaña
             const nombreElem = document.createElement('p');
-            nombreElem.innerHTML = `<strong>Nombre:</strong> ${campanya.nombre}`;
+            const strongNombre = document.createElement('strong');
+            strongNombre.textContent = 'Nombre:';
+            nombreElem.appendChild(strongNombre);
+            nombreElem.appendChild(document.createTextNode(` ${campanya.nombre}`));
             nombreElem.classList.add('my-4');
             divCampanya.appendChild(nombreElem);
 
             // Tipo de campaña
             const tipoElem = document.createElement('p');
-            tipoElem.innerHTML = `<strong>Tipo:</strong> ${campanya.tipo}`;
+            const strongTipo = document.createElement('strong');
+            strongTipo.textContent = 'Tipo:';
+            tipoElem.appendChild(strongTipo);
+            tipoElem.appendChild(document.createTextNode(` ${campanya.tipo}`));
             tipoElem.classList.add('my-4', 'fs-12');
             divCampanya.appendChild(tipoElem);
 
             // Cadenas participantes
             const cadenasElem = document.createElement('p');
-            cadenasElem.innerHTML = `<strong>Cadenas:</strong> ${campanya.cadenas.join(', ')}`;
+            const strongCadenas = document.createElement('strong');
+            strongCadenas.textContent = 'Cadenas:';
+            cadenasElem.appendChild(strongCadenas);
+            cadenasElem.appendChild(document.createTextNode(` ${campanya.cadenas.join(', ')}`));
             cadenasElem.classList.add('my-4', 'fs-12', 'text-secondary');
             divCampanya.appendChild(cadenasElem);
 

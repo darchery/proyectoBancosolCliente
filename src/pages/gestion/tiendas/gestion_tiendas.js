@@ -121,7 +121,11 @@ function rellenarFiltros() {
 function rellenarSelect(selector, valores) {
     const select = document.querySelector(selector);
 
-    select.innerHTML = '<option value="Todas">Todas</option>';
+    select.innerHTML = ''; // Limpieza permitida
+    const optDefault = document.createElement('option');
+    optDefault.value = 'Todas';
+    optDefault.textContent = 'Todas';
+    select.appendChild(optDefault);
 
     for (const valor of valores) {
         const option = document.createElement('option');
@@ -146,7 +150,7 @@ function filtrarYCargarTabla() {
     const zonaSel = filtroZona.value || 'Todas';
     const coordSel = filtroCoordinador.value || 'Todas';
 
-    tablaBody.innerHTML = '';
+    tablaBody.innerHTML = ''; // Limpieza permitida
 
     //solo pasa la tienda que cumpla todas las condiciones: Si no hay resultados mostramos msj 
     const filtradas = tiendas.filter(tienda => {
@@ -160,29 +164,38 @@ function filtrarYCargarTabla() {
     });
 
     if (filtradas.length === 0) {
-        tablaBody.innerHTML = `
-            <tr>
-                <td> No hay tiendas con esos filtros </td>
-            </tr>
-        `;
+        const filaVacia = document.createElement('tr');
+        const celdaVacia = document.createElement('td');
+        celdaVacia.setAttribute('colspan', '5');
+        celdaVacia.classList.add('empty-row-msg');
+        celdaVacia.textContent = 'No hay tiendas con esos filtros';
+        filaVacia.appendChild(celdaVacia);
+        tablaBody.appendChild(filaVacia);
         return;
     }
 
     // Recorremos las tiendas ya filtradas
     filtradas.forEach(tienda => {
         const fila = document.createElement('tr');
+        fila.classList.add('cursor-pointer');
 
         if (tienda.id === tiendaSeleccionadaId) {
             fila.classList.add('fila-seleccionada');  
         }
 
-        fila.innerHTML = `
-            <td>${tienda.nombre}</td>
-            <td>${tienda.cadena}</td>
-            <td>${tienda.domicilio}</td>
-            <td>${tienda.localidad}</td>
-            <td>${tienda.coord}</td>
-        `;
+        const campos = [
+            tienda.nombre,
+            tienda.cadena,
+            tienda.domicilio,
+            tienda.localidad,
+            tienda.coord
+        ];
+
+        campos.forEach(texto => {
+            const td = document.createElement('td');
+            td.textContent = texto;
+            fila.appendChild(td);
+        });
 
         fila.addEventListener('click', () => mostrarDetalle(tienda.id));
         tablaBody.appendChild(fila);

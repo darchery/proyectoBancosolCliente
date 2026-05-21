@@ -97,7 +97,12 @@ function popularFiltros() {
 function rellenarSelect(idSelect, valores) {
     const select = document.querySelector('#' + idSelect);
     if (!select) return;
-    select.innerHTML = '<option value="Todas">Todas</option>';
+    
+    select.innerHTML = ''; // Limpieza permitida
+    const optDefault = document.createElement('option');
+    optDefault.value = 'Todas';
+    optDefault.textContent = 'Todas';
+    select.appendChild(optDefault);
  
     // Agregamos cada valor único como una opción en el select correspondiente
     for (const valor of valores) {
@@ -115,7 +120,7 @@ function filtrarYCargarTabla() {
     const localidadSel = document.querySelector('#filtro-localidad')?.value || 'Todas';
     const cadenaSel    = document.querySelector('#filtro-cadena')?.value    || 'Todas';
 
-    tablaBody.innerHTML = '';
+    tablaBody.innerHTML = ''; // Limpieza permitida
 
     // Filtramos las asignaciones según los criterios seleccionados en los filtros de localidad y cadena
     const filtradas = asignaciones.filter(a =>
@@ -123,42 +128,54 @@ function filtrarYCargarTabla() {
         (cadenaSel    === 'Todas' || a.cadena    === cadenaSel)
     );
 
-    // Si no hay asignaciones que coincidan con los filtros, mostramos un mensaje en la tabla indicando que no se encontraron resultados
+    // Si no hay asignaciones que coincidan con los filtros, mostramos un mensaje en la tabla
     if (!filtradas.length) {
-        tablaBody.innerHTML = `
-            <tr>
-                <td colspan="9" style="text-align:center; padding:20px;">
-                    No hay asignaciones con esos filtros
-                </td>
-            </tr>`;
+        const filaVacia = document.createElement('tr');
+        const celdaVacia = document.createElement('td');
+        celdaVacia.setAttribute('colspan', '9');
+        celdaVacia.classList.add('empty-row-msg');
+        celdaVacia.textContent = 'No hay asignaciones con esos filtros';
+        filaVacia.appendChild(celdaVacia);
+        tablaBody.appendChild(filaVacia);
         return;
     }
 
-    // Pintamos las filas de la tabla con las asignaciones que cumplen los criterios de filtrado, 
-    // y agregamos un evento click a cada fila para mostrar el detalle de la asignación al hacer clic
+    // Pintamos las filas de la tabla con las asignaciones que cumplen los criterios
     filtradas.forEach(a => {
         const fila = document.createElement('tr');
+        fila.classList.add('cursor-pointer');
 
         if (a.id === asignacionSeleccionadaId) {
             fila.classList.add('fila-seleccionada');  
         }
 
-        const pendiente = a.pendienteValidacion
-            ? ' <span style="color:orange;font-size:.75em;">(pendiente)</span>' : '';
+        // Celda Tienda + Badge Pendiente
+        const tdTienda = document.createElement('td');
+        tdTienda.textContent = a.tienda;
+        if (a.pendienteValidacion) {
+            const spanPendiente = document.createElement('span');
+            spanPendiente.classList.add('badge-pendiente');
+            spanPendiente.textContent = ' (pendiente)';
+            tdTienda.appendChild(spanPendiente);
+        }
+        fila.appendChild(tdTienda);
 
-        // Agregamos el contenido de cada celda de la fila con los datos de la asignación, y si la 
-        // asignación está pendiente de validación, añadimos un indicador visual junto al nombre de la tienda    
-        fila.innerHTML = `
-            <td>${a.tienda}${pendiente}</td>
-            <td>${a.domicilio}</td>
-            <td>${a.localidad}</td>
-            <td>${a.capitan}</td>
-            <td>${a.viernes_manana}</td>
-            <td>${a.viernes_tarde}</td>
-            <td>${a.sabado_manana}</td>
-            <td>${a.sabado_tarde}</td>
-            <td>${a.observaciones}</td>
-        `;
+        const campos = [
+            a.domicilio,
+            a.localidad,
+            a.capitan,
+            a.viernes_manana,
+            a.viernes_tarde,
+            a.sabado_manana,
+            a.sabado_tarde,
+            a.observaciones
+        ];
+
+        campos.forEach(texto => {
+            const td = document.createElement('td');
+            td.textContent = texto;
+            fila.appendChild(td);
+        });
 
         // Agregamos un evento click a cada fila para mostrar el detalle de la asignación al hacer clic
         fila.addEventListener('click', () => mostrarDetalle(a.id));

@@ -47,17 +47,26 @@ const mensajesMock = [
  */
 function cargarTabla() {
     const tbody = document.querySelector('#tabla-mensajes');
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Limpieza permitida
 
-    // Recorremos el array de mensajes y creamos una fila para cada uno, mostrando su fecha, remitente, asunto y estado.
+    // Recorremos el array de mensajes y creamos una fila para cada uno
     mensajesMock.forEach(mensaje => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${mensaje.fecha}</td>
-            <td>${mensaje.remitente}</td>
-            <td>${mensaje.asunto}</td>
-            <td><span class="badge ${mensaje.estado.toLowerCase()}">${mensaje.estado}</span></td>
-        `;
+        
+        const campos = [mensaje.fecha, mensaje.remitente, mensaje.asunto];
+        campos.forEach(texto => {
+            const td = document.createElement('td');
+            td.textContent = texto;
+            tr.appendChild(td);
+        });
+
+        // Celda de estado con badge
+        const tdEstado = document.createElement('td');
+        const spanEstado = document.createElement('span');
+        spanEstado.classList.add('badge', mensaje.estado.toLowerCase());
+        spanEstado.textContent = mensaje.estado;
+        tdEstado.appendChild(spanEstado);
+        tr.appendChild(tdEstado);
         
         // Evento para ver detalles al hacer clic en la fila
         tr.addEventListener('click', () => mostrarDetalle(mensaje));
@@ -70,16 +79,32 @@ function cargarTabla() {
  */
 function mostrarDetalle(mensaje) {
     const contenedor = document.querySelector('#contenido-detalle');
-    // Mostramos el detalle del mensaje seleccionado, incluyendo remitente, fecha, asunto y contenido completo.
-    contenedor.innerHTML = `
-        <div class="mensaje-detalle">
-            <p><strong>De:</strong> ${mensaje.remitente}</p>
-            <p><strong>Fecha:</strong> ${mensaje.fecha}</p>
-            <p><strong>Asunto:</strong> ${mensaje.asunto}</p>
-            <hr>
-            <p style="margin-top: 15px; line-height: 1.5;">${mensaje.contenido}</p>
-        </div>
-    `;
+    contenedor.innerHTML = ''; // Limpieza permitida
+
+    const div = document.createElement('div');
+    div.classList.add('mensaje-detalle');
+
+    const crearP = (etiqueta, valor) => {
+        const p = document.createElement('p');
+        const strong = document.createElement('strong');
+        strong.textContent = etiqueta + ': ';
+        p.appendChild(strong);
+        p.appendChild(document.createTextNode(valor));
+        return p;
+    };
+
+    div.appendChild(crearP('De', mensaje.remitente));
+    div.appendChild(crearP('Fecha', mensaje.fecha));
+    div.appendChild(crearP('Asunto', mensaje.asunto));
+    
+    div.appendChild(document.createElement('hr'));
+
+    const pContenido = document.createElement('p');
+    pContenido.classList.add('mt-10'); // Usando clase del CSS en lugar de inline style
+    pContenido.textContent = mensaje.contenido;
+    div.appendChild(pContenido);
+
+    contenedor.appendChild(div);
 }
 
 // Inicializar cuando el DOM esté listo
