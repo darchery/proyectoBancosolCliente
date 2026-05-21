@@ -1,7 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -9,70 +14,96 @@ body {
     background-color: #f8f9fa;
 }
 
-body h1 {
+header {
+    width: 100%;
+}
+
+h1, h2 {
     color: #293189;
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 40px;
 }
 
 .panel-control {
     color: #293189;
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
     text-align: center;
     font-weight: bold;
 }
 
-section, .dashboard {
+.welcome-box {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(13, 71, 161, 0.15);
+    width: 90%;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-section button, .card {
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section button {
     display: block;
-    margin: 10px auto;
-    width: 300px;
-    padding: 1.2em;
-    border-radius: 10px;
-    background-color: #d0d0d2;
+    margin: 12px auto;
+    width: 100%;
+    max-width: 350px;
+    padding: 14px;
+    border-radius: 8px;
+    background-color: #0d47a1;
     border: none;
     cursor: pointer;
-    text-decoration: none;
     text-align: center;
-    box-sizing: border-box;
-    
-    color: #293189;
-    font-family: Arial, Helvetica, sans-serif;
+    color: white;
     font-weight: bold;
-    font-size: 1rem;
-    
+    font-size: 16px;
     transition: background-color 0.3s, transform 0.2s;
 }
 
-section button:hover, .card:hover {
-    background-color: #c0c0c2;
+section button:hover {
+    background-color: #1565c0;
     transform: translateY(-2px);
 }
 
 .logout-container {
     margin-top: 20px;
     margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .boton-logout {
     display: inline-block;
-    padding: 8px 20px;
+    padding: 10px 30px;
     color: #293189;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: bold;
-    border: 1px solid #293189;
-    border-radius: 20px;
+    border: 2px solid #293189;
+    border-radius: 25px;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: inherit;
 }
 
 .boton-logout:hover {
@@ -80,3 +111,6 @@ section button:hover, .card:hover {
     color: white;
 }
 
+footer {
+    width: 100%;
+}

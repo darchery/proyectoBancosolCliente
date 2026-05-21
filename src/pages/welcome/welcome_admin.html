@@ -14,12 +14,10 @@
         <script src="../../components/header/header_comun.js" defer></script>
     </header>
 
-    <h1>Bienvenido administrador</h1>
-
-
     <main>
-        <p class="panel-control">Seleccione qué desea gestionar:</p>
-        <section>
+        <h1>Bienvenido Administrador</h1>
+        <div class="welcome-box">
+            <p class="panel-control">Seleccione qué desea gestionar:</p>
             <section>
                 <button class="btn-colaboradores" id="btn-colaboradores-admin">Colaboradores</button>
                 <button class="btn-campana" id="btn-campana-admin">Campaña</button>
@@ -27,12 +25,13 @@
                 <button class="btn-voluntarios" id="btn-voluntarios-admin">Voluntarios</button>
                 <button class="btn-coordinadores" id="btn-coordinadores-admin">Coordinadores</button>
                 <button class="btn-bandeja-entrada" id="btn-bandeja-entrada-admin">Bandeja de entrada</button>
+                
+                <div class="logout-container">
+                    <button id="logout-btn-admin" class="boton-logout">Cerrar sesión</button>
+                </div>
             </section>
+        </div>
     </main>
-
-    <div class="logout-container">
-        <button id="logout-btn-admin" class="boton-logout">Cerrar sesión</button>
-    </div>
 
     <footer>
         <script src="../../components/footer/footer_comun.js" defer></script>
