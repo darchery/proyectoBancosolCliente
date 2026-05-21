@@ -1,4 +1,8 @@
+
+//El usuario puede introducir su correo, se envía al servidor mediante una petición post y se muestra el estado del proceso.
+
 let correoGuardado = "";
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");

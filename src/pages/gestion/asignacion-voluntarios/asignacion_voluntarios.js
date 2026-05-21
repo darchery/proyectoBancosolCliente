@@ -6,12 +6,12 @@ let asignacionSeleccionadaId = null;
 let modoModal = 'anadir';
 let tablaBody, menuAdmin;
 
-// CONSTANTES
+
 const API_URL       = 'http://localhost:3001';
 const rolActual     = localStorage.getItem('userRole') || 'admin';
 const usuarioActual = localStorage.getItem('userName') || rolActual;
 
-// Función auxiliar para obtener el dashboard según el rol
+// Función para obtener el dashboard según el rol
 function getDashboardURL() {
     const dashboards = {
         'admin': '../../welcome/welcome_admin.html',
@@ -131,7 +131,7 @@ function filtrarYCargarTabla() {
     const localidadSel = document.querySelector('#filtro-localidad')?.value || 'Todas';
     const cadenaSel    = document.querySelector('#filtro-cadena')?.value    || 'Todas';
 
-    tablaBody.innerHTML = ''; // Limpieza permitida
+    tablaBody.innerHTML = ''; 
 
     // Filtramos las asignaciones según los criterios seleccionados en los filtros de localidad y cadena
     const filtradas = asignaciones.filter(a =>
@@ -235,8 +235,7 @@ function abrirModalModificar() {
         return;
     }
 
-    // Buscamos la asignación seleccionada en el array de asignaciones utilizando su ID para obtener todos sus detalles 
-    // y mostrarlos en el formulario del modal para que el usuario pueda modificarlos
+    
     const a = asignaciones.find(x => x.id === asignacionSeleccionadaId);
     if (!a) return;
 
@@ -275,21 +274,20 @@ async function crearAsignacion() {
     const id     = document.querySelector('#f-id').value.trim();
     const tienda = document.querySelector('#f-tienda').value.trim();
 
-    // Validamos que los campos obligatorios (ID y Tienda) estén completos antes de intentar crear una nueva asignación,
+    
     if (!id || !tienda) {
         alert('El ID y la Tienda son obligatorios.');
         return;
     }
 
-    // Antes de crear una nueva asignación, verificamos que no exista ya una con el mismo ID para evitar duplicados, 
-    // ya que el ID es un identificador único para cada asignación
+    
     const existe = asignaciones.find(a => a.id === id);
     if (existe) {
         alert(`Ya existe una asignación con el ID "${id}".`);
         return;
     }
 
-    // Si la validación es correcta, creamos un nuevo objeto de asignación con los datos ingresados en el formulario del modal,
+    
     const nueva = {
         id,
         tienda,
@@ -304,9 +302,8 @@ async function crearAsignacion() {
         observaciones:  document.querySelector('#f-observaciones').value.trim()  || ''
     };
 
-    // Luego, enviamos una solicitud POST al servidor para guardar la nueva asignación en la base de datos, 
-    // y si la operación es exitosa, recargamos la lista de asignaciones, actualizamos los filtros y la tabla, 
-    // cerramos el modal y mostramos un mensaje de confirmación al usuario indicando que la asignación se ha añadido correctamente
+    
+    
     try {
         const respuesta = await fetch(`${API_URL}/asignaciones`, {
             method:  'POST',
@@ -363,9 +360,7 @@ async function actualizarAsignacion() {
 
         if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
 
-        // Si la operación es exitosa, recargamos la lista de asignaciones, actualizamos los filtros y la tabla, 
-        // mostramos el detalle de la asignación modificada, cerramos el modal y mostramos un mensaje de confirmación 
-        // al usuario indicando que la asignación se ha modificado correctamente
+        
         await cargarAsignaciones();
         popularFiltros();
         filtrarYCargarTabla();
@@ -387,15 +382,15 @@ async function eliminarAsignacion() {
         return;
     }
 
-    // Antes de intentar eliminar la asignación, verificamos que exista una asignación seleccionada para eliminar,
+    
     const a = asignaciones.find(x => x.id === asignacionSeleccionadaId);
-    // Si la validación es correcta, mostramos un mensaje de confirmación al usuario para asegurarnos de que realmente desea eliminar la asignación seleccionada
+    
     const confirmado = confirm(
         `¿Seguro que quieres eliminar la asignación de "${a?.tienda}"?\nEsta acción no se puede deshacer.`
     );
     if (!confirmado) return;
 
-    // Si el usuario confirma la eliminación, enviamos una solicitud DELETE al servidor para eliminar la asignación seleccionada de la base de datos,
+    
     try {
         const respuesta = await fetch(`${API_URL}/asignaciones/${asignacionSeleccionadaId}`, {
             method: 'DELETE'
@@ -403,13 +398,13 @@ async function eliminarAsignacion() {
 
         if (!respuesta.ok) throw new Error(`Error HTTP: ${respuesta.status}`);
 
-        // Si la operación es exitosa, recargamos la lista de asignaciones, actualizamos los filtros y la tabla
+        
         asignacionSeleccionadaId = null;
         ['d-tienda','d-domicilio','d-localidad','d-capitan',
          'd-viernes-manana','d-viernes-tarde','d-sabado-manana','d-sabado-tarde','d-obs']
             .forEach(id => document.querySelector('#' + id).textContent = '---');
 
-        // Después de eliminar una asignación, recargamos la lista de asignaciones, actualizamos los filtros y la tabla para reflejar los cambios,
+        
         await cargarAsignaciones();
         popularFiltros();
         filtrarYCargarTabla();
@@ -430,8 +425,8 @@ function abrirModal() {
 }
 
 function cerrarModal() {
-    // Al cerrar el modal, ocultamos el formulario y volvemos a mostrar el panel de detalle, 
-    // además de limpiar los campos del formulario para que no queden datos residuales al abrirlo nuevamente
+    // Al cerrar el modal, ocultamos el formulario y volvemos a mostrar el panel de detalle
+    // limpiamos los campos
     document.querySelector('#vista-formulario').classList.add('hidden');
     document.querySelector('#vista-detalle').classList.remove('hidden');
     document.querySelector('#panel-titulo').textContent       = 'ASIGNACIÓN SELECCIONADA';
@@ -439,7 +434,7 @@ function cerrarModal() {
 }
 
 function limpiarModal() {
-    // Limpiamos los campos del formulario del modal para que no queden datos residuales al abrirlo nuevamente
+    // Limpiamos los campos
     ['f-id','f-tienda','f-cadena','f-domicilio','f-localidad','f-capitan',
      'f-viernes-manana','f-viernes-tarde','f-sabado-manana','f-sabado-tarde','f-observaciones']
         .forEach(id => document.querySelector('#' + id).value = '');
@@ -452,7 +447,7 @@ function exportarAsignacionVoluntarios() {
         return;
     }
 
-    // Para exportar la asignación de voluntarios a un archivo Excel, primero transformamos el array de asignaciones en un formato adecuado para la librería XLSX
+    // transformamos el array
     const datos = asignaciones.map(a => ({
         'ID':               a.id             || '',
         'TIENDA':           a.tienda         || '',
@@ -468,8 +463,8 @@ function exportarAsignacionVoluntarios() {
         'PENDIENTE':        a.pendienteValidacion ? 'Sí' : 'No'
     }));
 
-    // Luego, utilizamos la librería XLSX para crear un libro de Excel a partir de los datos transformados, y finalmente descargamos el archivo 
-    // con el nombre "asignacion_voluntarios.xlsx"
+    
+    
     const hoja  = XLSX.utils.json_to_sheet(datos);
     const libro = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(libro, hoja, 'Asignaciones');
