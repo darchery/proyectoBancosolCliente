@@ -1,11 +1,9 @@
 let correoGuardado = "";
 
-
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
     const inputCorreo = document.querySelector("#correo_solicitud");
     const info = document.querySelector("#info_solicitud");
-
 
     form.addEventListener("submit", async function (e) {
     e.preventDefault();

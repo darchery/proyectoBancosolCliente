@@ -13,7 +13,6 @@ h1 {
     margin: 2rem 0 1rem 0;
 }
 
-
 form {
     width: 100%;
     max-width: 400px;
@@ -60,15 +59,11 @@ form button:hover {
     background-color: #c0c0c2;
 }
 
-
 .mensaje-ok {
     color: green;
     font-weight: bold;
     text-align: center;
 }
-
-
-
 
 #img-footer {
     width: 25em;
