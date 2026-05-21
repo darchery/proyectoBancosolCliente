@@ -1,11 +1,9 @@
-/* --- VARIABLES GLOBALES --- */
-
+/* Colores en variables */
 :root {
     --blue-bancosol: #004a99;
     --border-color: #bdc3c7;
 }
 
-/* --- ESTILOS BASE --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -18,7 +16,6 @@ header h1 {
     margin-bottom: 0.5rem;
 }
 
-/* --- ESTRUCTURA COMÚN (Header y Dashboard) --- */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -28,12 +25,11 @@ header h1 {
     border-bottom: 3px solid var(--blue-bancosol);
 }
 
-/* --- LOGO Y ÁREA DE TÍTULO --- */
 .logo-area { display: flex; align-items: center; gap: 15px; }
 .logo-area .title-area { margin-left: auto; }
 .logo-area img { height: 60px; }
 
-/* --- BADGE DE ADMINISTRADOR (Indicador visual) --- */
+/* Badge del administrador */
 .admin-badge {
     background: var(--orange-admin);
     color: white;
@@ -42,10 +38,10 @@ header h1 {
     border-radius: 4px;
 }
 
-/* --- DASHBOARD (Contenedor principal de contenido) --- */
+/* Contenedor principal de contenido */
 .dashboard { padding: 20px; }
 
-/* --- FILTROS (Común en listados) --- */
+/* Filtros */
 .filters {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -56,36 +52,35 @@ header h1 {
     margin-bottom: 20px;
 }
 
-/* --- GRUPO DE FILTRO (Etiqueta + Campo) --- */
 .filter-group { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: center; }
 
-/* --- LAYOUT TABLA-PANEL (Común) --- */
+/* Layout de contenido de tabla */
 .content-layout {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 20px;
 }
 
-/* --- TABLAS (Listados de datos) --- */
+/* Tablas */
 table {
     width: 100%;
     border-collapse: collapse;
     background: white;
 }
 
-/* --- ESTILOS DE TABLA --- */
+/* Estilo de tabla */
 th { background: var(--blue-bancosol); color: white; padding: 10px; border: 1px solid #ccc; }
 td { padding: 8px; border: 1px solid #ccc; font-size: 0.9em; }
 tr:hover { background-color: var(--light-blue); cursor: pointer; }
 
-/* --- PANEL DE DETALLES (Lateral derecho) --- */
+/* Panel de detalles */
 .details-panel {
     background: white;
     border: 2px solid var(--blue-bancosol);
     padding: 15px;
 }
 
-/* --- CABECERA DE PANEL (Título del detalle) --- */
+/* Cabecera del panel */
 .panel-header {
     background: var(--blue-bancosol);
     color: white;
@@ -94,7 +89,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     margin-bottom: 10px;
 }
 
-/* --- BOTONES DE ACCIÓN (Editar, Eliminar, etc.) --- */
+/* Botones de acción */
 .action-buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -102,7 +97,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     margin-top: 20px;
 }
 
-/* --- BOTÓN VOLVER AL MENÚ PRINCIPAL --- */
+/* Menú para volver al menú */
 .btn-volver-menu {
     background-color: #6c757d;
     color: white;
@@ -122,20 +117,20 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     background-color: #4e555b;
 }
 
-/* --- ESTILOS ESPECÍFICOS REUBICADOS --- */
+/* Badge de usuario */
 .usuario-badge {
     font-weight: bold;
     padding: 4px 8px;
 }
 
-/* --- MENSAJE DE VACÍO (Cuando no hay datos para mostrar) --- */
+/* Mensaje vacío */
 .empty-msg {
     text-align: center;
     color: #666;
     margin-top: 20px;
 }
 
-/* --- SECCIÓN DE PANEL (Subtítulos dentro del panel de detalles) --- */
+/* Sección del panel */
 .panel-section-header {
     background: var(--blue-bancosol);
     color: white;
@@ -145,7 +140,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     margin-bottom: 10px;
 }
 
-/* --- ESPECÍFICO: GESTIONAR_CAMPANYA.HTML --- */
+/* Gestionar campaña */
 .page-campanya .management-container {
     display: flex;
     gap: 30px;
@@ -250,7 +245,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     opacity: 0.6;
 }
 
-/* --- MODAL FLOTANTE PARA CAMPAÑAS --- */
+/* Overlay modal */
 .page-campanya .modal-overlay {
     display: none;
     position: fixed;
@@ -403,7 +398,7 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     font-weight: bold;
 }
 
-/* --- CLASES ADICIONALES PARA REFACTORIZACIÓN --- */
+/* Clases de ayuda para refactorizar */
 .mb-16 { margin-bottom: 16px !important; }
 .mb-10 { margin-bottom: 10px !important; }
 .ml-8 { margin-left: 8px !important; }
@@ -421,7 +416,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
 .border-bottom-light { border-bottom: 1px solid #ddd !important; }
 .max-h-400px { max-height: 400px !important; overflow-y: auto !important; }
 .fs-12 { font-size: 12px !important; }
-
 .hidden { display: none !important; }
 .mt-10 { margin-top: 10px !important; }
 .mt-20 { margin-top: 20px !important; }
