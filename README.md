@@ -354,13 +354,15 @@ Ver `DIAGRAMA_NAVEGACION.md` para el diagrama completo.
 
 ## Requisitos Funcionales Implementados
 
-- **RF1:** Gestionar Cadena (Añadir, Eliminar, Modificar, Cancelar, Guardar)
-- **RF2:** Gestionar Roles (Añadir, Eliminar, Modificar)
-- **RF3:** Gestionar Colaboradores (CRUD completo, Exportar Excel, Búsqueda filtrada)
-- **RF4:** Gestionar Campaña (Generar, Salir)
-- **RF5:** Gestionar Tienda (CRUD, Asignar coordinadores, Búsqueda filtrada)
-- **RF6:** Gestionar Asignación de Voluntarios (Añadir, Guardar, Cancelar, Exportar)
-
+- **RF1:** Gestionar Cadena: (Añadir, Eliminar, Modificar, Cancelar, Guardar)
+- **RF2:** Gestionar Roles: (Añadir, Eliminar, Modificar)
+- **RF3:** Gestionar Colaboradores: (CRUD completo, Exportar Excel, Búsqueda filtrada)
+- **RF4:** Gestionar Campaña: (Generar, Salir)
+- **RF5:** Gestionar Tienda: (CRUD, Asignar coordinadores, Búsqueda filtrada)
+- **RF6:** Gestionar Asignación de Voluntarios: (Añadir, Guardar, Cancelar, Exportar)
+- **RF7:** Gestionar Datos: Capacidad genérica del sistema para que los administradores y coordinadores puedan modificar, añadir, eliminar y visualizar datos según sus permisos.
+- **RF8:** Gestionar Coordinadores / Capitanes: Operaciones de alta, baja, modificación, guardado/cancelación de cambios y exportación de información a formato Excel.
+- **RF10:** Gestionar Sesión: Sistema de autenticación simulado que permite iniciar sesión comprobando credenciales y cerrar sesión, destruyendo los datos almacenados en memoria (`localStorage`).
 ---
 
 ## Tecnologías Utilizadas
