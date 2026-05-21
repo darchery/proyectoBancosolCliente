@@ -32,14 +32,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     coordMenu = document.querySelector('#coord-menu');
     
 
-    // 2º Permisos
+    //Permisos
     if (rolActual === 'admin') {
         if (adminMenu) adminMenu.classList.remove('hidden');
     } else if (rolActual === 'coordinador' || rolActual === 'capitan_coordinador') {
         if (coordMenu) coordMenu.classList.remove('hidden');
     }
 
-    // 3º Cargamos y mostramos tablas
+    //Cargamos y mostramos tablas
     await cargarColaboradores();
     await cargarTiendas();
 
@@ -590,7 +590,6 @@ function exportarExcel() {
 }
 
 // HELPERS
-// Construye el objeto colaborador desde los campos del formulario
 function construirObjeto() {
     return {
         nombre:     document.querySelector('#f-nombre').value.trim()      || '',

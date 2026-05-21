@@ -337,17 +337,8 @@
       "correo": "marina@gmail.com",
       "fecha": "2026-05-21T15:40:38.303Z",
       "id": "LGXHb2F6B5M"
-    },
-    {
-      "correo": "marr@gmail.com",
-      "fecha": "2026-05-21T15:57:19.220Z",
-      "id": "gSKkSNqN7-s"
-    },
-    {
-      "correo": "marina@gmail.com",
-      "fecha": "2026-05-21T15:58:12.440Z",
-      "id": "duljAv3cW7g"
     }
+    
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }
