@@ -30,10 +30,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     tablaBody = document.querySelector('#tabla-body');
     menuAdmin = document.querySelector('#menu-admin');
 
-    // Mostrar usuario
-    const usuarioDisplay = document.querySelector('#usuario-display');
-    if (usuarioDisplay) usuarioDisplay.textContent = `${usuarioActual} (${rolActual})`;
-
+   
     // Permisos
     if (rolActual === 'admin' || rolActual === 'coordinador') {
         if (menuAdmin) menuAdmin.classList.remove('hidden');
