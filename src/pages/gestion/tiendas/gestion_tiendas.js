@@ -294,8 +294,8 @@ async function crearTienda() {
     const id = inputId.value;
     const nombre = inputNombre.value;
 
-    if (!id || !nombre) {
-        alert('El ID y el Nombre son obligatorios.');
+    if (!nombre) {
+        alert('Nombre obligatorio.');
         return;
     }
 
