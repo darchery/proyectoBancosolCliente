@@ -392,7 +392,16 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
 .fila-seleccionada { background-color: #fde8e8 !important; }
 .badge-pendiente { color: orange; font-size: 0.75em; font-weight: bold; }
 .cursor-pointer { cursor: pointer; }
-.empty-row-msg { text-align: center; font-style: italic; color: #666; }
+.mensaje-error-carga {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #f87171;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}
 
 /* --- CLASES ADICIONALES PARA REFACTORIZACIÓN --- */
 .mb-16 { margin-bottom: 16px !important; }

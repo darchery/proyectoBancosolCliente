@@ -85,6 +85,7 @@ async function cargarCampanyas() {
 
     } catch (error) {
         console.error(`Error al cargar las campañas: `, error);
+        mostrarErrorCarga('Error de conexión: No se pudieron cargar las campañas activas.');
         campanyas = [];
     }
 }
@@ -103,8 +104,20 @@ async function cargarCadenas() {
 
     } catch (error) {
         console.error(`Error al cargar las cadenas: `, error);
+        mostrarErrorCarga('Error de conexión: No se pudieron cargar las cadenas participantes.');
         cadenas = [];
     }
+}
+
+function mostrarErrorCarga(mensaje) {
+    const contenedor = document.querySelector('.management-container');
+    if (!contenedor) return;
+    if (document.querySelector('.mensaje-error-carga')) return;
+    const div = document.createElement('div');
+    div.className = 'mensaje-error-carga';
+    div.style.width = '100%';
+    div.textContent = mensaje;
+    contenedor.prepend(div);
 }
 
 // Función para rellenar los checkboxes de cadenas en el DOM

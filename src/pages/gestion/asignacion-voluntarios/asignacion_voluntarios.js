@@ -80,8 +80,19 @@ async function cargarAsignaciones() {
         console.log('Asignaciones cargadas:', asignaciones);
     } catch (error) {
         console.error('Error al cargar asignaciones:', error);
+        mostrarErrorCarga('Error de conexión: No se pudieron cargar las asignaciones de voluntarios.');
         asignaciones = [];
     }
+}
+
+function mostrarErrorCarga(mensaje) {
+    const contenedor = document.querySelector('.dashboard');
+    if (!contenedor) return;
+    if (document.querySelector('.mensaje-error-carga')) return;
+    const div = document.createElement('div');
+    div.className = 'mensaje-error-carga';
+    div.textContent = mensaje;
+    contenedor.prepend(div);
 }
 
 // POPULAR FILTROS DINÁMICAMENTE

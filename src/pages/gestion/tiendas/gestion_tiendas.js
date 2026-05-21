@@ -91,8 +91,19 @@ async function cargarTiendas() {
 
     } catch (error) {
         console.error('Error al cargar tiendas:', error);
+        mostrarErrorCarga('Error de conexión: No se pudieron cargar las tiendas.');
         tiendas = [];
     }
+}
+
+function mostrarErrorCarga(mensaje) {
+    const contenedor = document.querySelector('.dashboard');
+    if (!contenedor) return;
+    if (document.querySelector('.mensaje-error-carga')) return;
+    const div = document.createElement('div');
+    div.className = 'mensaje-error-carga';
+    div.textContent = mensaje;
+    contenedor.prepend(div);
 }
 
 // Generamos opciones a partir de los datos reales del JSON.

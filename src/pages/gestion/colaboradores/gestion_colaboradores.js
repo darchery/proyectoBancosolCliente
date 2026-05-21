@@ -102,6 +102,7 @@ async function cargarColaboradores() {
         colaboradores = await res.json();
     } catch (err) {
         console.error('Error cargando colaboradores:', err);
+        mostrarErrorCarga('No se pudo conectar con el servidor para cargar los colaboradores.');
         colaboradores = [];
     }
 }
@@ -113,8 +114,24 @@ async function cargarTiendas() {
         tiendas = await res.json();
     } catch (err) {
         console.error('Error cargando tiendas:', err);
+        mostrarErrorCarga('No se pudo conectar con el servidor para cargar las tiendas.');
         tiendas = [];
     }
+}
+
+function mostrarErrorCarga(mensaje) {
+    const contenedor = document.querySelector('.dashboard');
+    if (!contenedor) return;
+
+    // Evitar duplicados
+    if (document.querySelector('.mensaje-error-carga')) return;
+
+    const div = document.createElement('div');
+    div.className = 'mensaje-error-carga';
+    div.textContent = mensaje;
+    
+    // Insertar al principio del dashboard
+    contenedor.prepend(div);
 }
 
 // FILTROS
