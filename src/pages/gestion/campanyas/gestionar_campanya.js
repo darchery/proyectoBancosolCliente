@@ -8,6 +8,19 @@ const API_URL = 'http://localhost:3001'; // json-server (puerto correcto que ten
 // Rol del usuario actual 
 const rolActual = localStorage.getItem('userRole') || 'admin';
 
+// Función auxiliar para obtener el dashboard según el rol
+function getDashboardURL() {
+    const dashboards = {
+        'admin': '../../welcome/welcome_admin.html',
+        'coordinador': '../../welcome/welcome_coordinador.html',
+        'capitan': '../../welcome/welcome_capitan.html',
+        'capitan_coordinador': '../../welcome/welcome_capitan_coordinador.html',
+        'entidad_colaboradora': '../../welcome/welcome_entidad_colaboradora.html',
+        'responsable_tienda': '../../welcome/welcome_responsable_tienda.html'
+    };
+    return dashboards[rolActual] || '../../welcome/welcome_admin.html';
+}
+
 // Variables globales para almacenar los datos
 let campanyas = [];
 let cadenas = [];
@@ -769,13 +782,11 @@ async function guardarCambiosCadenas() {
     }
 }
 
-// Botón para salir de la gestión de campañas (limpiar localStorage y redirigir a home)
-const btnSalir = document.querySelector('#btn-salir-campanya');
-if (btnSalir) {
-    btnSalir.addEventListener('click', () => {
-        // Limpiar localStorage para eliminar cualquier dato relacionado con la sesión o gestión actual
-        localStorage.clear();
-        window.location.href = rutasPorGestion['home_admin'];
+// Botón para volver al menú principal
+const btnVolverMenu = document.querySelector('#btn-volver-menu');
+if (btnVolverMenu) {
+    btnVolverMenu.addEventListener('click', () => {
+        window.location.href = getDashboardURL();
     });
 }
 

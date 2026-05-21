@@ -1,3 +1,19 @@
+// Variable global para el rol actual
+const rolActual = localStorage.getItem('userRole') || 'admin';
+
+// Función auxiliar para obtener el dashboard según el rol
+function getDashboardURL() {
+    const dashboards = {
+        'admin': '../../welcome/welcome_admin.html',
+        'coordinador': '../../welcome/welcome_coordinador.html',
+        'capitan': '../../welcome/welcome_capitan.html',
+        'capitan_coordinador': '../../welcome/welcome_capitan_coordinador.html',
+        'entidad_colaboradora': '../../welcome/welcome_entidad_colaboradora.html',
+        'responsable_tienda': '../../welcome/welcome_responsable_tienda.html'
+    };
+    return dashboards[rolActual] || '../../welcome/welcome_admin.html';
+}
+
 // Datos de ejemplo para la bandeja de entrada
 const mensajesMock = [
     { 
@@ -85,4 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Mensaje eliminado.');
         }
     });
+
+    // Botón volver al menú principal
+    document.querySelector('#btn-volver-menu')
+        ?.addEventListener('click', () => window.location.href = getDashboardURL());
 });

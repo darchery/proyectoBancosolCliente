@@ -10,6 +10,19 @@ const API_URL = 'http://localhost:3001';
 const rolActual     = localStorage.getItem('userRole') || 'admin';
 const usuarioActual = localStorage.getItem('userName') || rolActual;
 
+// Función auxiliar para obtener el dashboard según el rol
+function getDashboardURL() {
+    const dashboards = {
+        'admin': '../../welcome/welcome_admin.html',
+        'coordinador': '../../welcome/welcome_coordinador.html',
+        'capitan': '../../welcome/welcome_capitan.html',
+        'capitan_coordinador': '../../welcome/welcome_capitan_coordinador.html',
+        'entidad_colaboradora': '../../welcome/welcome_entidad_colaboradora.html',
+        'responsable_tienda': '../../welcome/welcome_responsable_tienda.html'
+    };
+    return dashboards[rolActual] || '../../welcome/welcome_admin.html';
+}
+
 // INICIALIZACIÓN
 document.addEventListener('DOMContentLoaded', async function () {
 
@@ -71,6 +84,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         .addEventListener('click', confirmarAsignar);
     document.querySelector('#btn-cancelar-asignar')
         .addEventListener('click', cerrarVistaAsignar);
+
+    // Botón volver al menú principal
+    document.querySelector('#btn-volver-menu')
+        ?.addEventListener('click', () => window.location.href = getDashboardURL());
 });
 
 // FUNCIONES

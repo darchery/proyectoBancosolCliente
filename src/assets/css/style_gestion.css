@@ -102,6 +102,26 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     margin-top: 20px;
 }
 
+/* --- BOTÓN VOLVER AL MENÚ PRINCIPAL --- */
+.btn-volver-menu {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-volver-menu:hover {
+    background-color: #5a6268;
+}
+
+.btn-volver-menu:active {
+    background-color: #4e555b;
+}
+
 /* --- ESTILOS ESPECÍFICOS REUBICADOS --- */
 .usuario-badge {
     font-weight: bold;
@@ -135,7 +155,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
 }
 .page-campanya .box {
     border: 2px solid #293189;
-    border-radius: 8px;
     background: white;
     padding: 15px;
     position: relative;
@@ -186,16 +205,34 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
     width: 300px;
 }
 .page-campanya button {
-    background: white;
-    border: 1.5px solid #293189;
-    color: #293189;
-    padding: 8px 15px;
-    border-radius: 6px;
-    font-weight: bold;
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    margin-left: 5px;
 }
-.page-campanya button:hover {
-    background: #293189;
-    color: white;
+.page-campanya button:not(.btn-volver-menu):hover {
+    background-color: #e0e0e0;
+    border-color: #666;
+}
+.page-campanya button:active {
+    background-color: #d0d0d0;
+}
+.page-campanya .btn-volver-menu {
+    background-color: #6c757d !important;
+    border: none !important;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    margin-top: 10px !important;    
+}
+.page-campanya .btn-volver-menu:hover {
+    background-color: #5a6268 !important;
 }
 .page-campanya .character-container {
     width: 100%;
