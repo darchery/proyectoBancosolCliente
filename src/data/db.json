@@ -3,32 +3,27 @@
     {
       "usuario": "admin",
       "clave": "admin",
-      "rol": "admin",
-      "id": "GChaB-s7lIw"
+      "rol": "admin"
     },
     {
       "usuario": "capitan",
       "clave": "capitan",
-      "rol": "capitan",
-      "id": "K-RSACzxdh4"
+      "rol": "capitan"
     },
     {
       "usuario": "coordinador",
       "clave": "coordinador",
-      "rol": "coordinador",
-      "id": "EWFukGwPWLk"
+      "rol": "coordinador"
     },
     {
       "usuario": "capitan_coordinador",
       "clave": "capitan_coordinador",
-      "rol": "capitan_coordinador",
-      "id": "LRcqPUP1JTQ"
+      "rol": "capitan_coordinador"
     },
     {
       "usuario": "entidad_colaboradora",
       "clave": "entidad_colaboradora",
-      "rol": "entidad_colaboradora",
-      "id": "h_tlJqIdoS4"
+      "rol": "entidad_colaboradora"
     }
   ],
   "colaboradores": [
@@ -40,58 +35,44 @@
       "cp": "29718",
       "colabora": "RINCON DE LA VICTORIA",
       "coord": "JM Cobos",
-      "contactos": [
-        {
-          "tipo": "contacto1",
-          "nombre": "Mario Torre (Concejal)",
-          "email": "",
-          "tel": "555 555 555"
-        },
-        {
-          "tipo": "contacto2",
-          "nombre": "María Vallejo",
-          "email": "",
-          "tel": "333 333 333"
-        },
-        {
-          "tipo": "contacto3",
-          "nombre": "Fijo Ayuntamiento",
-          "email": "",
-          "tel": "999 999 999"
-        }
-      ],
-      "observaciones": "10 voluntarios - Formación jueves 19:45",
+      "tiendaId": "CARREFOUR_002",
+      "contacto1": {
+        "nombre": "Mario Torre",
+        "tel": "555 555 555"
+      },
+      "contacto2": {
+        "nombre": "María Vallejo",
+        "tel": "333 333 333"
+      },
+      "contacto3": {
+        "nombre": "Fijo Ayuntamiento",
+        "tel": "999 999 999"
+      },
+      "observaciones": "9 voluntarios",
       "pendienteValidacion": false
     },
     {
-      "id": "2",
       "nombre": "Guardia Civil",
-      "domicilio": "---",
-      "localidad": "---",
-      "cp": "---",
-      "colabora": "---",
-      "coord": "JM Cobos",
-      "contactos": [
-        {
-          "tipo": "contacto1",
-          "nombre": "---",
-          "email": "",
-          "tel": "---"
-        },
-        {
-          "tipo": "contacto2",
-          "nombre": "---",
-          "email": "",
-          "tel": "---"
-        },
-        {
-          "tipo": "contacto3",
-          "nombre": "---",
-          "email": "",
-          "tel": "---"
-        }
-      ],
-      "observaciones": "",
+      "domicilio": "Calle Lucenas, 13",
+      "cp": "29600",
+      "localidad": "Marbella",
+      "colabora": "RINCON DE LA VICTORIA",
+      "coord": "JM Ruiz",
+      "contacto1": {
+        "nombre": "Maria Ruiz",
+        "tel": "555 555 555"
+      },
+      "contacto2": {
+        "nombre": "Fernando Diaz",
+        "tel": "333 333 333"
+      },
+      "contacto3": {
+        "nombre": "Mario Fernández",
+        "tel": "999 999 999"
+      },
+      "observaciones": "10 voluntarios",
+      "id": "2",
+      "tiendaId": "CARREFOUR_004",
       "pendienteValidacion": false
     }
   ],
@@ -128,6 +109,28 @@
       "tiendas": 43,
       "usuario": "Diego",
       "password": "password3"
+    },
+    {
+      "id": "4",
+      "nombre": "Fran Jimenez",
+      "entidad": "LOS OLIVOS",
+      "area": "MALAGA",
+      "telefono": "600010101",
+      "email": "",
+      "tiendas": 12,
+      "usuario": "FranJim",
+      "password": "password4"
+    },
+    {
+      "id": "5",
+      "nombre": "José M Cobos",
+      "entidad": "BANCOSOL",
+      "area": "AXARQUIA",
+      "telefono": "",
+      "email": "",
+      "tiendas": 40,
+      "usuario": "JMCobos",
+      "password": "password5"
     }
   ],
   "tiendas": [
