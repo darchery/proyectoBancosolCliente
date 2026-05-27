@@ -13,6 +13,10 @@ function App() {
           path="/gestion/colaboradores"
           element={<GestionColaboradores />}
         />
+        <Route
+          path="/gestion/tiendas"
+          element={<GestionTiendas />}
+        />
       </Routes>
     </BrowserRouter>
   )
