@@ -1,36 +1,32 @@
-/* Regla para evitar que el padding rompa el diseño */
-* {
-  box-sizing: border-box;
+/* Reset de bordes y rellenos local */
+.login * {
+    box-sizing: border-box;
 }
 
-/* Fondo gris claro y estructura flex del login */
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-}
-
-/* Encabezado del login */
-header {
-  width: 100%;
+/* Contenedor principal para ocupar toda la pantalla */
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
 /* Título de la página */
-h1 {
+.login h1 {
     color: #293189;
     text-align: center;
     margin-top: 0;
     margin-bottom: 25px;
 }
 
-/* Espacio central para la caja blanca */
-main {
+/* Espacio central para centrar la caja */
+.login main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -41,7 +37,7 @@ main {
 }
 
 /* Caja de login con sombra y bordes redondeados */
-.login-box {
+.login .login-box {
   width: 90%;
   max-width: 400px;
   background: white;
@@ -52,7 +48,7 @@ main {
 }
 
 /* Etiquetas de los campos */
-.login-box label {
+.login .login-box label {
   display: block;
   text-align: left;
   margin-bottom: 8px;
@@ -61,7 +57,7 @@ main {
 }
 
 /* Estilo de los inputs */
-.login-box input {
+.login .login-box input {
   width: 100%;
   padding: 12px;
   margin-bottom: 25px;
@@ -70,7 +66,7 @@ main {
 }
 
 /* Botón principal de acceso */
-.login-box button {
+.login .login-box button {
   width: 100%;
   padding: 14px;
   background: #0d47a1;
@@ -84,12 +80,12 @@ main {
 }
 
 /* Cambio de color al pasar el ratón */
-.login-box button:hover {
+.login .login-box button:hover {
   background: #1565c0;
 }
 
 /* Enlace para regresar */
-.login-box a {
+.login .login-box a {
   display: block;
   margin-top: 30px;
   color: #0d47a1;
@@ -97,12 +93,6 @@ main {
   font-weight: bold;
 }
 
-/* Subrayado visual en el enlace */
-.login-box a:hover {
+.login .login-box a:hover {
   text-decoration: underline;
-}
-
-/* El pie de página se queda abajo */
-footer {
-  width: 100%;
 }
