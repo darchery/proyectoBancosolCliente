@@ -1,4 +1,6 @@
 import Home from './pages/home/Home';
+import NotFound from './pages/notFound/NotFound';
+
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { ProtectedRoute } from './ProtectedRoute';
 import { RolRequerido } from './RolRequerido';
@@ -16,15 +18,20 @@ import GestionColaboradoresCoordinador from './components/GestionColaboradoresCo
 import GestionTiendaCoordinador from './components/GestionTiendaCoordinador';
 */
 
+// TODO: Componente para no autorizado
+
 function App() {
   return (
     <>
       <ProveedorAuten>
         <BrowserRouter>
           <Routes>
+            {/* Rutas públicas */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/solicitar-acceso" element={<SolicitarAcceso />} />
 
-            <Route index element={<Login />} />
-
+            {/* Rutas protegidas => Requieren login*/}
             <Route element={<RutaProtegida />}>
 
               <Route element={<Cabecera />}>
@@ -44,6 +51,8 @@ function App() {
               </Route>
               
             </Route>
+
+            <Route path="*" element={<NotFound />} />
 
           </Routes>
         </BrowserRouter>
