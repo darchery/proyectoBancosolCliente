@@ -1,10 +1,11 @@
 import './App.css'
+import Home from './pages/home/index_home'
 
 function App() {
 
   return (
     <>
-      <h1>Bienvenido a Bancosol</h1>
+      <Home />
             
     </>
   )
