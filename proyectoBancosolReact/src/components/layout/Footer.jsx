@@ -1,7 +1,13 @@
-<link rel="stylesheet" href="/src/components/footer/footer_comun.css">
+import './Footer.css';
 
-<footer>
-    <p>
-        &copy; 2026 Bancosol | Grupo 4 | Tecnologías del Cliente para Aplicaciones Web
-    </p>
-</footer>
+function Footer() {
+    return (
+        <footer>
+            <p>
+                &copy; 2026 Bancosol | Grupo 4 | Tecnologías del Cliente para Aplicaciones Web
+            </p>
+        </footer>
+    );
+}
+
+export default Footer;
