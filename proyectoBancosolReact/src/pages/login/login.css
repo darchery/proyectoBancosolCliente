@@ -1,10 +1,10 @@
 /* Reset de bordes y rellenos local */
-.login * {
+.login-wrapper * {
     box-sizing: border-box;
 }
 
 /* Contenedor principal para ocupar toda la pantalla */
-.login {
+.login-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@
 }
 
 /* Título de la página */
-.login h1 {
+.login-wrapper h1 {
     color: #293189;
     text-align: center;
     margin-top: 0;
@@ -26,7 +26,7 @@
 }
 
 /* Espacio central para centrar la caja */
-.login main {
+.login-wrapper main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -36,8 +36,8 @@
     padding-bottom: 40px;
 }
 
-/* Caja de login con sombra y bordes redondeados */
-.login .login-box {
+/* Caja de login-wrapper con sombra y bordes redondeados */
+.login-wrapper .login-wrapper-box {
   width: 90%;
   max-width: 400px;
   background: white;
@@ -48,7 +48,7 @@
 }
 
 /* Etiquetas de los campos */
-.login .login-box label {
+.login-wrapper .login-wrapper-box label {
   display: block;
   text-align: left;
   margin-bottom: 8px;
@@ -57,7 +57,7 @@
 }
 
 /* Estilo de los inputs */
-.login .login-box input {
+.login-wrapper .login-wrapper-box input {
   width: 100%;
   padding: 12px;
   margin-bottom: 25px;
@@ -66,7 +66,7 @@
 }
 
 /* Botón principal de acceso */
-.login .login-box button {
+.login-wrapper .login-wrapper-box button {
   width: 100%;
   padding: 14px;
   background: #0d47a1;
@@ -80,12 +80,12 @@
 }
 
 /* Cambio de color al pasar el ratón */
-.login .login-box button:hover {
+.login-wrapper .login-wrapper-box button:hover {
   background: #1565c0;
 }
 
 /* Enlace para regresar */
-.login .login-box a {
+.login-wrapper .login-wrapper-box a {
   display: block;
   margin-top: 30px;
   color: #0d47a1;
@@ -93,6 +93,6 @@
   font-weight: bold;
 }
 
-.login .login-box a:hover {
+.login-wrapper .login-wrapper-box a:hover {
   text-decoration: underline;
 }

@@ -1,10 +1,10 @@
 /* Garantizamos que el padding no afecte al ancho total */
-* {
+.solicitar-acceso-wrapper * {
     box-sizing: border-box;
 }
 
 /* Fondo y alineación del formulario de solicitud */
-body {
+.solicitar-acceso-wrapper body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,12 +17,12 @@ body {
 }
 
 /* Header superior */
-header {
+.solicitar-acceso-wrapper header {
     width: 100%;
 }
 
 /* Título de la sección de acceso */
-h1 {
+.solicitar-acceso-wrapper h1 {
     color: #293189;
     text-align: center;
     margin-top: 0;
@@ -30,7 +30,7 @@ h1 {
 }
 
 /* Área central para el formulario */
-main {
+.solicitar-acceso-wrapper main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -41,7 +41,7 @@ main {
 }
 
 /* Caja blanca con sombra para el formulario */
-form {
+.solicitar-acceso-wrapper form {
     background: white;
     padding: 40px;
     border-radius: 12px;
@@ -52,7 +52,7 @@ form {
 }
 
 /* Estilo del label del correo */
-form label {
+.solicitar-acceso-wrapper form label {
     display: block;
     color: #0d47a1;
     font-weight: bold;
@@ -61,7 +61,7 @@ form label {
 }
 
 /* Campo de entrada de email */
-form input {
+.solicitar-acceso-wrapper form input {
     width: 100%;
     padding: 12px;
     margin-bottom: 25px;
@@ -71,7 +71,7 @@ form input {
 }
 
 /* Botón para enviar la solicitud */
-form button {
+.solicitar-acceso-wrapper form button {
     width: 100%;
     padding: 14px;
     background-color: #0d47a1;
@@ -85,12 +85,12 @@ form button {
 }
 
 /* Feedback al pasar el ratón */
-form button:hover {
+.solicitar-acceso-wrapper form button:hover {
     background-color: #1565c0;
 }
 
 /* Mensaje que aparece al solicitar */
-#info_solicitud {
+.solicitar-acceso-wrapper #info_solicitud {
     margin-top: 15px;
     margin-bottom: 0;
     font-weight: bold;
@@ -98,11 +98,11 @@ form button:hover {
 }
 
 /* Estilo para mensajes de éxito */
-.mensaje-ok {
+.solicitar-acceso-wrapper .mensaje-ok {
     color: green;
 }
 
 /* Footer pegado al fondo */
-footer {
+.solicitar-acceso-wrapper footer {
     width: 100%;
 }

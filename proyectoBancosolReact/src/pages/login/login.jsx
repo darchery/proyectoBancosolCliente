@@ -4,7 +4,7 @@ import Footer from '../../components/layout/Footer';
 
 function Login() {
     return (
-        <div className="login">
+        <div className="login-wrapper">
             <Header />
             <main>
                 <div className="login-box">

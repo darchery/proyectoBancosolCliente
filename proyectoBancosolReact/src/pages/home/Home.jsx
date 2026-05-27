@@ -4,7 +4,7 @@ import Footer from '../../components/layout/Footer';
 
 function Home() {
     return (
-        <div className="index-home">
+        <div className="index-home-wrapper">
             <Header />
             <main>
                 <h1>Bienvenido a Bancosol</h1>

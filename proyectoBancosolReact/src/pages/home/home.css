@@ -1,10 +1,10 @@
 /* Reset de bordes y rellenos para que no fallen los anchos */
-.index-home * {
+.index-home-wrapper * {
     box-sizing: border-box;
 }
 
 /* Configuración del fondo y centrado de la página Home */
-.index-home {
+.index-home-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@
 }
 
 /* Título principal de bienvenida */
-.index-home h1 {
+.index-home-wrapper h1 {
     color: #293189;
     text-align: center;
     margin-top: 0;
@@ -26,7 +26,7 @@
 }
 
 /* Contenedor para centrar la caja en pantalla */
-.index-home main {
+.index-home-wrapper main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -37,7 +37,7 @@
 }
 
 /* Caja blanca con sombra para los botones */
-.index-home .home-box {
+.index-home-wrapper .home-box {
     background: white;
     padding: 40px;
     border-radius: 12px;
@@ -50,7 +50,7 @@
 }
 
 /* Organización de los elementos internos */
-.index-home section {
+.index-home-wrapper section {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@
 }
 
 /* Estilo para los botones principales */
-.index-home section button {
+.index-home-wrapper section button {
     display: block;
     margin: 10px auto;
     width: 100%;
@@ -75,7 +75,7 @@
 }
 
 /* Efecto visual al pasar el ratón */
-.index-home section button:hover {
+.index-home-wrapper section button:hover {
     background-color: #1565c0;
     transform: translateY(-2px);
 }
