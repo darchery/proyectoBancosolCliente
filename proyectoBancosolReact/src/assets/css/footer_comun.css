@@ -1,0 +1,21 @@
+/* Contenedor del pie de página */
+footer {
+    color: #4a4a4a;
+    text-align: center;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    
+    /* Empuja el footer al final de la pantalla */
+    margin-top: auto; 
+    
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+/* Ajustes para el texto del footer */
+footer p {
+    margin: 0;
+}

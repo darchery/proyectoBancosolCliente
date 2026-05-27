@@ -1,0 +1,550 @@
+/* --- CONFIGURACIÓN GLOBAL Y VARIABLES --- */
+
+/* Reset de box-sizing para evitar errores en anchos y rellenos */
+* {
+    box-sizing: border-box;
+}
+
+/* Colores corporativos y neutros */
+:root {
+    --blue-bancosol: #004a99;
+    --border-color: #bdc3c7;
+}
+
+/* Estilo base de la aplicación de gestión */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f7f6;
+}
+
+/* Títulos de sección en la cabecera */
+header h1 {
+    color: #293189;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+/* Cabecera blanca superior con borde azul */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: white;
+    border-bottom: 3px solid var(--blue-bancosol);
+}
+
+/* Distribución del logo en la cabecera */
+.logo-area { display: flex; align-items: center; gap: 15px; }
+
+/* Margen del logo para separarlo del título */
+.logo-area .title-area { margin-left: auto; }
+
+/* Altura controlada de la imagen del logo */
+.logo-area img { height: 60px; }
+
+/* Indicador naranja de acceso administrador */
+.admin-badge {
+    background: var(--orange-admin);
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* Contenedor principal de los paneles de control */
+.dashboard { padding: 20px; }
+
+/* Caja gris de filtros superiores */
+.filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: white;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+/* Estructura de etiqueta y campo en cada filtro */
+.filter-group { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: center; }
+
+/* Layout de dos columnas: Tabla a la izquierda y Detalles a la derecha */
+.content-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+/* Estilos base de las tablas de datos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+/* Cabeceras de tabla en azul Bancosol */
+th { background: var(--blue-bancosol); color: white; padding: 10px; border: 1px solid #ccc; }
+
+/* Celdas de datos con tamaño de fuente ajustado */
+td { padding: 8px; border: 1px solid #ccc; font-size: 0.9em; }
+
+/* Resaltado de fila y cursor de mano al pasar el ratón */
+tr:hover { background-color: var(--light-blue); cursor: pointer; }
+
+/* Panel lateral para ver o editar información específica */
+.details-panel {
+    background: white;
+    border: 2px solid var(--blue-bancosol);
+    padding: 15px;
+}
+
+/* Encabezado azul de cada panel de detalle */
+.panel-header {
+    background: var(--blue-bancosol);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Botones inferiores de los formularios (Guardar, Cancelar...) */
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Botón gris para regresar al dashboard principal */
+.btn-volver-menu {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Oscurecimiento del botón al pasar el ratón */
+.btn-volver-menu:hover {
+    background-color: #5a6268;
+}
+
+/* Efecto de pulsación */
+.btn-volver-menu:active {
+    background-color: #4e555b;
+}
+
+/* Texto destacado para mostrar el nombre del usuario actual */
+.usuario-badge {
+    font-weight: bold;
+    padding: 4px 8px;
+}
+
+/* Texto gris para indicar que no hay registros tras filtrar */
+.empty-msg {
+    text-align: center;
+    color: #666;
+    margin-top: 20px;
+}
+
+/* Separadores de sección dentro de los paneles de detalle */
+.panel-section-header {
+    background: var(--blue-bancosol);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* --- ESTILOS ESPECÍFICOS PARA LA PÁGINA DE CAMPAÑAS --- */
+
+/* Contenedor flexible para el creador de campañas */
+.page-campanya .management-container {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Cajas blancas con borde azul para los pasos de creación */
+.page-campanya .box {
+    border: 2px solid #293189;
+    background: white;
+    padding: 15px;
+    position: relative;
+}
+
+/* Títulos dentro de las cajas de campaña */
+.page-campanya .box h2 {
+    color: #293189;
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Columna izquierda de selección de campaña */
+.page-campanya .campanya-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 250px;
+}
+
+/* Caja central de selección de cadenas */
+.page-campanya .cadenas-box {
+    width: 500px;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cuadrícula de dos columnas para los checkboxes de cadenas */
+.page-campanya .checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 2em;
+}
+
+/* Estilo para cada checkbox con su nombre */
+.page-campanya .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+/* Espaciado de las acciones de cadenas */
+.page-campanya .cadenas-actions {
+    margin-top: auto;
+    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 180px;
+}
+
+/* Columna derecha para los botones de acción final */
+.page-campanya .right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+}
+
+/* Marco sombreado para los botones de generación */
+.page-campanya .actions-frame {
+    border: 2px solid #293189;
+    padding: 15px;
+    background-color: #fafafa;
+}
+
+/* Estilo simplificado para botones internos de campaña */
+.page-campanya button {
+    background-color: #f0f0f0;
+    border: 1px solid #999;
+    color: #000;
+    padding: 4px 12px;
+    border-radius: 3px;
+    font-weight: 400;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    margin-left: 5px;
+}
+
+/* Cambio de fondo al pasar el ratón */
+.page-campanya button:not(.btn-volver-menu):hover {
+    background-color: #e0e0e0;
+    border-color: #666;
+}
+
+/* Efecto de pulsación en botones de campaña */
+.page-campanya button:active {
+    background-color: #d0d0d0;
+}
+
+/* Reset de estilos específicos para el botón volver menu en campaña */
+.page-campanya .btn-volver-menu {
+    background-color: #6c757d !important;
+    border: none !important;
+    color: white !important;
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    margin-top: 10px !important;    
+}
+
+/* Hover específico para el botón volver en campaña */
+.page-campanya .btn-volver-menu:hover {
+    background-color: #5a6268 !important;
+}
+
+/* Contenedor del logo decorativo */
+.page-campanya .character-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Logo traslúcido de fondo en la página de campañas */
+.page-campanya .character-container img {
+    max-width: 250px;
+    height: auto;
+    opacity: 0.6;
+}
+
+/* Capa oscura que bloquea la pantalla al abrir un modal */
+.page-campanya .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Clase que activa la visibilidad del modal */
+.page-campanya .modal-overlay.active {
+    display: flex;
+}
+
+/* Ventana blanca flotante del modal */
+.page-campanya .modal-content {
+    background: white;
+    border: 2px solid #293189;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Cabecera azul del modal */
+.page-campanya .modal-header {
+    background: #293189;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #293189;
+}
+
+/* Título blanco dentro del modal */
+.page-campanya .modal-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Botón de cerrar (X) en el modal */
+.page-campanya .modal-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+}
+
+/* Efecto hover de la X */
+.page-campanya .modal-close-btn:hover {
+    opacity: 0.8;
+}
+
+/* Cuerpo central de los formularios en modal */
+.page-campanya .modal-body {
+    padding: 20px;
+}
+
+/* Espaciado de cada bloque de formulario */
+.page-campanya .form-group {
+    margin-bottom: 15px;
+}
+
+/* Estilo de la etiqueta del input en modal */
+.page-campanya .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #293189;
+}
+
+/* Campos de entrada dentro de los modales */
+.page-campanya .form-group input,
+.page-campanya .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 0.95em;
+    box-sizing: border-box;
+}
+
+/* Altura mínima para el área de texto */
+.page-campanya .form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+/* Resaltado de campos al seleccionarlos */
+.page-campanya .form-group input:focus,
+.page-campanya .form-group textarea:focus {
+    outline: none;
+    border-color: #293189;
+    background-color: #f9f9f9;
+}
+
+/* Lista scrolleable dentro de los modales (ej: histórico) */
+.page-campanya .items-list {
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Fila de la lista en modales */
+.page-campanya .item-row {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+/* Eliminamos el borde de la última fila */
+.page-campanya .item-row:last-child {
+    border-bottom: none;
+}
+
+/* Resaltado hover de la fila */
+.page-campanya .item-row:hover {
+    background-color: #f5f5f5;
+}
+
+/* Texto del nombre del item en la lista */
+.page-campanya .item-name {
+    flex: 1;
+    color: #333;
+}
+
+/* Pie de página del modal con fondo grisáceo */
+.page-campanya .modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #bdc3c7;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    background-color: #f9f9f9;
+}
+
+/* Botones en el pie del modal */
+.page-campanya .btn-modal {
+    padding: 8px 15px;
+    border: 1.5px solid #293189;
+    background: white;
+    color: #293189;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Inversión de colores al pasar el ratón */
+.page-campanya .btn-modal:hover {
+    background: #293189;
+    color: white;
+}
+
+/* Botón rojo para acciones destructivas en modales */
+.page-campanya .btn-modal.danger {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+/* Hover para el botón de borrar */
+.page-campanya .btn-modal.danger:hover {
+    background: #dc3545;
+    color: white;
+}
+
+/* --- CLASES DE ESTADO Y UTILIDAD --- */
+
+/* Resaltado para la fila seleccionada en las tablas */
+.fila-seleccionada { background-color: #fde8e8 !important; }
+
+/* Texto naranja para indicar validación pendiente */
+.badge-pendiente { color: orange; font-size: 0.75em; font-weight: bold; }
+
+/* Cursor tipo mano para elementos clicables */
+.cursor-pointer { cursor: pointer; }
+
+/* Banner rojo que aparece si falla la conexión con la API */
+.mensaje-error-carga {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #f87171;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+/* --- CLASES DE UTILIDAD (Márgenes y espaciados) --- */
+.mb-16 { margin-bottom: 16px !important; }
+.mb-10 { margin-bottom: 10px !important; }
+.mb-8  { margin-bottom: 8px !important; }
+.mt-10 { margin-top: 10px !important; }
+.mt-20 { margin-top: 20px !important; }
+.ml-8 { margin-left: 8px !important; }
+.my-4 { margin: 4px 0 !important; }
+
+/* --- CLASES DE UTILIDAD (Tipografía y colores) --- */
+.text-muted { color: #666 !important; }
+.text-dark { color: #333 !important; }
+.text-secondary { color: #555 !important; }
+.fw-bold { font-weight: bold !important; }
+.text-center { text-align: center !important; }
+.fs-12 { font-size: 12px !important; }
+.fs-085 { font-size: 0.85em !important; }
+.fs-09  { font-size: 0.9em !important; }
+
+/* --- CLASES DE UTILIDAD (Layout y visualización) --- */
+.hidden { display: none !important; }
+.d-block { display: block !important; }
+.w-100 { width: 100% !important; box-sizing: border-box; }
+.opacity-05 { opacity: 0.5 !important; }
+.grayscale { filter: grayscale(1) !important; }
+
+/* --- CLASES DE UTILIDAD (Fondo y bordes) --- */
+.bg-light-gray { background-color: #f0f0f0 !important; }
+.bg-off-white { background-color: #f9f9f9 !important; }
+.p-12 { padding: 12px !important; }
+.p-4   { padding: 4px !important; }
+.py-4  { padding: 4px 0 !important; }
+.px-8  { padding: 4px 8px !important; }
+.rounded-6 { border-radius: 6px !important; }
+.rounded-4 { border-radius: 4px !important; }
+.m-0 { margin: 0 !important; }
+.border-bottom-light { border-bottom: 1px solid #ddd !important; }
+
+/* --- CLASES DE UTILIDAD (Dimensiones y scroll) --- */
+.max-h-400px { max-height: 400px !important; overflow-y: auto !important; }
+.max-h-70vh { max-height: 70vh; overflow-y: auto; }

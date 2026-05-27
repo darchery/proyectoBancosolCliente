@@ -1,0 +1,108 @@
+/* Regla para evitar que el padding rompa el diseño */
+* {
+  box-sizing: border-box;
+}
+
+/* Fondo gris claro y estructura flex del login */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+}
+
+/* Encabezado del login */
+header {
+  width: 100%;
+}
+
+/* Título de la página */
+h1 {
+    color: #293189;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+/* Espacio central para la caja blanca */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+/* Caja de login con sombra y bordes redondeados */
+.login-box {
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(13, 71, 161, 0.15);
+  text-align: center;
+}
+
+/* Etiquetas de los campos */
+.login-box label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #0d47a1;
+}
+
+/* Estilo de los inputs */
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 25px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Botón principal de acceso */
+.login-box button {
+  width: 100%;
+  padding: 14px;
+  background: #0d47a1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Cambio de color al pasar el ratón */
+.login-box button:hover {
+  background: #1565c0;
+}
+
+/* Enlace para regresar */
+.login-box a {
+  display: block;
+  margin-top: 30px;
+  color: #0d47a1;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Subrayado visual en el enlace */
+.login-box a:hover {
+  text-decoration: underline;
+}
+
+/* El pie de página se queda abajo */
+footer {
+  width: 100%;
+}
