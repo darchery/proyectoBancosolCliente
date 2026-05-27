@@ -1,0 +1,26 @@
+/* Reset de bordes y rellenos para que no fallen los anchos */
+.not-found-wrapper * {
+    box-sizing: border-box;
+}
+
+/* Configuración del fondo y centrado de la página NotFound */
+.not-found-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f9fa;
+    width: 100%;
+}
+
+/* Título principal */
+.not-found-wrapper h1 {
+    color: #293189;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
