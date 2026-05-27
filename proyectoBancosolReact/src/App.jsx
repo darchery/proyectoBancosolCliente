@@ -1,4 +1,4 @@
-import './App.css'
+import Home from './pages/home/Home';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { ProtectedRoute } from './ProtectedRoute';
 import { RolRequerido } from './RolRequerido';
@@ -52,4 +52,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

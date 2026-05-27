@@ -1,10 +1,10 @@
 /* Reset de bordes y rellenos para que no fallen los anchos */
-* {
+.index-home-wrapper * {
     box-sizing: border-box;
 }
 
 /* Configuración del fondo y centrado de la página Home */
-body {
+.index-home-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,15 +14,11 @@ body {
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f8f9fa;
-}
-
-/* Cabecera a ancho completo */
-header {
     width: 100%;
 }
 
 /* Título principal de bienvenida */
-h1 {
+.index-home-wrapper h1 {
     color: #293189;
     text-align: center;
     margin-top: 0;
@@ -30,7 +26,7 @@ h1 {
 }
 
 /* Contenedor para centrar la caja en pantalla */
-main {
+.index-home-wrapper main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -41,7 +37,7 @@ main {
 }
 
 /* Caja blanca con sombra para los botones */
-.home-box {
+.index-home-wrapper .home-box {
     background: white;
     padding: 40px;
     border-radius: 12px;
@@ -54,7 +50,7 @@ main {
 }
 
 /* Organización de los elementos internos */
-section {
+.index-home-wrapper section {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -62,7 +58,7 @@ section {
 }
 
 /* Estilo para los botones principales */
-section button {
+.index-home-wrapper section button {
     display: block;
     margin: 10px auto;
     width: 100%;
@@ -79,12 +75,7 @@ section button {
 }
 
 /* Efecto visual al pasar el ratón */
-section button:hover {
+.index-home-wrapper section button:hover {
     background-color: #1565c0;
     transform: translateY(-2px);
-}
-
-/* Pie de página al fondo */
-footer {
-    width: 100%;
 }
