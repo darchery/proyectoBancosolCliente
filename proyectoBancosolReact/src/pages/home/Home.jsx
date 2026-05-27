@@ -1,10 +1,10 @@
-import './index_home.css';
+import './home.css';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 
 function Home() {
     return (
-        <div className="home-page-wrapper">
+        <div className="index-home">
             <Header />
             <main>
                 <h1>Bienvenido a Bancosol</h1>
