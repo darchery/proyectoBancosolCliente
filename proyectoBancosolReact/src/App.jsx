@@ -36,13 +36,13 @@ function App() {
 
               <Route element={<Cabecera />}>
 
-                <Route element={<RolRequerido puestos={['admin']} />}>
+                <Route element={<RolRequerido roles={['admin']} />}>
                   <Route path="/welcome_admin" element={<WelcomeAdmin />} />
                   <Route path="/gestion/colaboradores_admin" element={<GestionColaboradoresAdmin />} />
                   <Route path="/gestion/tienda_admin" element={<GestionTiendaAdmin />} />
                 </Route>
 
-                <Route element={<RolRequerido puestos={['coordinador']} />}>
+                <Route element={<RolRequerido roles={['coordinador']} />}>
                   <Route path="/welcome_coordinador" element={<WelcomeCoordinador />} />
                   <Route path="/gestion/colaboradores_coordinador" element={<GestionColaboradoresCoordinador />} />
                   <Route path="/gestion/tienda_coordinador" element={<GestionTiendaCoordinador />} />
