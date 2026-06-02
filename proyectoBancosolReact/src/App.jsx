@@ -1,10 +1,10 @@
-import Home from './pages/home/Home';
-import NotFound from './pages/notFound/NotFound';
+//import Home from './pages/home/Home';
+//import NotFound from './pages/notFound/NotFound';
 
 import { BrowserRouter, Routes, Route } from 'react-router';
-import { ProtectedRoute } from './ProtectedRoute';
-import { RolRequerido } from './RolRequerido';
-import { ProveedorAuten } from './ProveedorAuten';
+//import { ProtectedRoute } from './ProtectedRoute';
+//import { RolRequerido } from './RolRequerido';
+import { ProveedorAuten } from './hooks/ProveedorAuten';
 
 // TODO: Poner ruta concreta
 /*
@@ -18,20 +18,35 @@ import GestionColaboradoresCoordinador from './components/GestionColaboradoresCo
 import GestionTiendaCoordinador from './components/GestionTiendaCoordinador';
 */
 
-// TODO: Componente para no autorizado
+import GestionTiendas from "./pages/gestion/tiendas/GestionTiendas";
 
+function App() {
+  return (
+    <ProveedorAuten>
+      <BrowserRouter>
+        <Routes>
+          {/* Ruta principal → Gestión de Tiendas */}
+          <Route path="/" element={<GestionTiendas />} />
+          <Route path="/tiendas" element={<GestionTiendas />} />
+        </Routes>
+      </BrowserRouter>
+    </ProveedorAuten>
+  );
+}
+
+/*
 function App() {
   return (
     <>
       <ProveedorAuten>
         <BrowserRouter>
           <Routes>
-            {/* Rutas públicas */}
+            Rutas públicas 
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/solicitar-acceso" element={<SolicitarAcceso />} />
 
-            {/* Rutas protegidas => Requieren login*/}
+            Rutas protegidas => Requieren login
             <Route element={<RutaProtegida />}>
 
               <Route element={<Cabecera />}>
@@ -60,5 +75,6 @@ function App() {
     </>
   );
 }
+*/
 
 export default App;

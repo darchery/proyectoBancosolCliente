@@ -1,18 +1,17 @@
 import { useState, useEffect, useMemo } from "react";
-import * as XLSX from "xlsx";
+
+// Importar los CSS del proyecto
+import "../../../assets/css/header_comun.css";
+import "../../../assets/css/footer_comun.css";
+import "../../../assets/css/style_gestion.css";
 
 const API_URL = "http://localhost:3001";
-
-const DASHBOARD_URLS = {
-  admin:       "../../welcome/welcome_admin.html",
-  coordinador: "../../welcome/welcome_coordinador.html",
-};
 
 const FORM_VACIO = {
   id: "", nombre: "", cadena: "", zona: "", domicilio: "", localidad: "", coord: "",
 };
 
-// ── Subcomponentes ────────────────────────────────────────────────────────────
+// Subcomponentes
 
 function FilaTabla({ t, seleccionado, onSeleccionar }) {
   const esSeleccionado = t.id === seleccionado;
@@ -22,10 +21,10 @@ function FilaTabla({ t, seleccionado, onSeleccionar }) {
       onClick={() => onSeleccionar(t.id)}
     >
       <td>{t.nombre}</td>
-      <td>{t.cadena   || "---"}</td>
-      <td>{t.domicilio || "---"}</td>
-      <td>{t.localidad || "---"}</td>
-      <td>{t.coord    || "---"}</td>
+      <td>{t.cadena}</td>
+      <td>{t.domicilio}</td>
+      <td>{t.localidad}</td>
+      <td>{t.coord}</td>
     </tr>
   );
 }
@@ -33,40 +32,47 @@ function FilaTabla({ t, seleccionado, onSeleccionar }) {
 function DetallePanel({ tienda }) {
   if (!tienda) {
     return (
-      <p className="text-muted text-center mt-10">
-        Selecciona una tienda de la tabla para ver sus detalles.
-      </p>
+      <div>
+        <div> ID: </div>
+        <div> NOMBRE: </div>
+        <div> CADENA: </div>
+        <div> DOMICILIO: </div>
+        <div> LOCALIDAD: </div>
+        <div> ZONA: </div>
+        <div> COORD: </div>
+      </div>
     );
   }
 
   const campos = [
-    ["ID",         tienda.id],
-    ["NOMBRE",     tienda.nombre],
-    ["CADENA",     tienda.cadena],
-    ["DOMICILIO",  tienda.domicilio],
-    ["LOCALIDAD",  tienda.localidad],
-    ["ZONA",       tienda.zona],
-    ["COORDINADOR",tienda.coord],
+    ["ID",          tienda.id],
+    ["NOMBRE",      tienda.nombre],
+    ["CADENA",      tienda.cadena],
+    ["DOMICILIO",   tienda.domicilio],
+    ["LOCALIDAD",   tienda.localidad],
+    ["ZONA",        tienda.zona],
+    ["COORDINADOR", tienda.coord],
   ];
 
   return (
-    <>
+    <div>
       {campos.map(([label, val]) => (
-        <div className="detail-row" key={label}>
-          <span>{label}:</span>
-          <strong>{val || "---"}</strong>
+        <div className="detail-row" key={label}
+          style={{ display: "flex", gap: "8px", marginBottom: "6px", fontSize: "0.9em" }}>
+          <span style={{ fontWeight: "bold", minWidth: "95px" }}>{label}:</span>
+          <span>{val}</span>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
 function FormularioPanel({ form, onChange, modoModal }) {
   const campo = (label, field, required = false, disabled = false) => (
-    <div className="detail-row" key={field}>
-      <span>{label}{required && " *"}</span>
+    <div key={field}
+      style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", fontSize: "0.9em" }}>
+      <span style={{ fontWeight: "bold", minWidth: "95px" }}>{label}{required && " *"}</span>
       <input
-        className="input-field"
         value={form[field]}
         disabled={disabled}
         onChange={(e) => onChange(field, e.target.value)}
@@ -75,7 +81,7 @@ function FormularioPanel({ form, onChange, modoModal }) {
   );
 
   return (
-    <div className="max-h-70vh">
+    <div className="max-h-70vh" style={{ padding: "10px 5px" }}>
       {campo("ID",          "id",        true,  modoModal === "modificar")}
       {campo("NOMBRE",      "nombre",    true)}
       {campo("CADENA",      "cadena")}
@@ -87,15 +93,10 @@ function FormularioPanel({ form, onChange, modoModal }) {
   );
 }
 
-// ── Componente principal ──────────────────────────────────────────────────────
-
+// Componente principal
 export default function GestionTiendas() {
   const rolActual = localStorage.getItem("userRole") || "admin";
   const esAdmin   = rolActual === "admin";
-
-  if (!esAdmin) {
-    return <p style={{ padding: 20 }}>No tienes permiso para acceder a esta página.</p>;
-  }
 
   const [tiendas,    setTiendas]    = useState([]);
   const [errorCarga, setErrorCarga] = useState(null);
@@ -112,7 +113,6 @@ export default function GestionTiendas() {
   const [panelTitulo, setPanelTitulo] = useState("TIENDA SELECCIONADA");
   const [form,        setForm]        = useState(FORM_VACIO);
 
-  // ── Carga inicial ──────────────────────────────────────────────────────────
   useEffect(() => {
     (async () => {
       setCargando(true);
@@ -126,17 +126,17 @@ export default function GestionTiendas() {
       const res = await fetch(`${API_URL}/tiendas`);
       if (!res.ok) throw new Error();
       setTiendas(await res.json());
+      setErrorCarga(null);
     } catch {
       setErrorCarga("No se pudo conectar con el servidor para cargar las tiendas.");
       setTiendas([]);
     }
   }
 
-  // ── Opciones de filtros (derivadas, no estado) ─────────────────────────────
-  const cadenas    = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.cadena).filter(Boolean))],    [tiendas]);
+  const cadenas     = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.cadena).filter(Boolean))],    [tiendas]);
   const localidades = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.localidad).filter(Boolean))], [tiendas]);
-  const zonas      = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.zona).filter(Boolean))],      [tiendas]);
-  const coords     = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.coord).filter(Boolean))],     [tiendas]);
+  const zonas       = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.zona).filter(Boolean))],      [tiendas]);
+  const coords      = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.coord).filter(Boolean))],     [tiendas]);
 
   const tiendasFiltradas = useMemo(() =>
     tiendas.filter((t) =>
@@ -150,14 +150,16 @@ export default function GestionTiendas() {
 
   const tiendaSeleccionada = tiendas.find((t) => t.id === selectedId) || null;
 
-  // ── Selección ──────────────────────────────────────────────────────────────
+  if (!esAdmin) {
+    return <p style={{ padding: 20 }}>No tienes permiso para acceder a esta página.</p>;
+  }
+
   function seleccionarTienda(id) {
     setSelectedId(id);
     setPanelTitulo("TIENDA SELECCIONADA");
     setVistaPanel("detalle");
   }
 
-  // ── Form helpers ───────────────────────────────────────────────────────────
   function cambiarForm(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
@@ -174,7 +176,6 @@ export default function GestionTiendas() {
     });
   }
 
-  // ── Abrir vistas ───────────────────────────────────────────────────────────
   function abrirAnadir() {
     setModoModal("anadir");
     setForm(FORM_VACIO);
@@ -198,17 +199,16 @@ export default function GestionTiendas() {
     setForm(FORM_VACIO);
   }
 
-  // ── CRUD ───────────────────────────────────────────────────────────────────
   async function confirmarModal() {
     if (!form.nombre.trim()) return alert("El campo NOMBRE es obligatorio.");
 
     const obj = {
       nombre:    form.nombre.trim(),
-      cadena:    form.cadena.trim()    || "---",
-      zona:      form.zona.trim()      || "---",
-      domicilio: form.domicilio.trim() || "---",
-      localidad: form.localidad.trim() || "---",
-      coord:     form.coord.trim()     || "---",
+      cadena:    form.cadena.trim(),
+      zona:      form.zona.trim(),
+      domicilio: form.domicilio.trim(),
+      localidad: form.localidad.trim(),
+      coord:     form.coord.trim(),
     };
 
     if (modoModal === "anadir") {
@@ -263,40 +263,25 @@ export default function GestionTiendas() {
     }
   }
 
-  // ── Exportar Excel ─────────────────────────────────────────────────────────
-  function exportarExcel() {
-    if (tiendas.length === 0) return alert("No hay tiendas para exportar.");
-    const datos = tiendas.map((t) => ({
-      "ID":          t.id        || "",
-      "NOMBRE":      t.nombre    || "",
-      "CADENA":      t.cadena    || "",
-      "ZONA":        t.zona      || "",
-      "DOMICILIO":   t.domicilio || "",
-      "LOCALIDAD":   t.localidad || "",
-      "COORDINADOR": t.coord     || "",
-    }));
-    const hoja  = XLSX.utils.json_to_sheet(datos);
-    const libro = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(libro, hoja, "Tiendas");
-    XLSX.writeFile(libro, "tiendas.xlsx");
-  }
-
-  function volverMenu() {
-    window.location.href = DASHBOARD_URLS[rolActual] || DASHBOARD_URLS.admin;
-  }
-
-  // ── Render ─────────────────────────────────────────────────────────────────
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", backgroundColor: "#f4f7f6" }}>
+
       {/* HEADER */}
       <header className="main-header">
         <div className="logo-area">
-          <img src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png" alt="Bancosol Logo" />
-          <h1>GESTIÓN DE TIENDAS</h1>
+          <img
+            id="logo"
+            src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png"
+            alt="Bancosol Logo"
+          />
+          <h1 style={{ color: "#293189", margin: 0, fontSize: "1.8em", fontWeight: "bold" }}>
+            GESTIÓN DE TIENDAS
+          </h1>
         </div>
       </header>
 
-      <main className="dashboard">
+      {/* MAIN */}
+      <main className="dashboard" style={{ flex: 1 }}>
 
         {/* BANNER ERROR */}
         {errorCarga && (
@@ -305,24 +290,27 @@ export default function GestionTiendas() {
 
         {/* FILTROS */}
         <section className="filters">
+          {/* Columna izquierda */}
           <div className="filter-group">
-            <label>CADENA</label>
+            <label style={{ fontWeight: "bold", fontSize: "13px" }}>CADENA</label>
             <select value={filtroCadena} onChange={(e) => setFiltroCadena(e.target.value)}>
               {cadenas.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
 
-            <label>LOCALIDAD</label>
+            <label style={{ fontWeight: "bold", fontSize: "13px" }}>LOCALIDAD</label>
             <select value={filtroLocalidad} onChange={(e) => setFiltroLocalidad(e.target.value)}>
               {localidades.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
+
+          {/* Columna derecha */}
           <div className="filter-group">
-            <label>ZONA GEOGRÁFICA</label>
+            <label style={{ fontWeight: "bold", fontSize: "13px" }}>ZONA GEOGRÁFICA</label>
             <select value={filtroZona} onChange={(e) => setFiltroZona(e.target.value)}>
               {zonas.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
 
-            <label>COORDINADOR</label>
+            <label style={{ fontWeight: "bold", fontSize: "13px" }}>COORDINADOR</label>
             <select value={filtroCoord} onChange={(e) => setFiltroCoord(e.target.value)}>
               {coords.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
@@ -334,22 +322,20 @@ export default function GestionTiendas() {
 
           {/* TABLA */}
           <section className="table-container">
-            {cargando ? (
-              <p className="text-muted text-center mt-10">Cargando tiendas…</p>
-            ) : (
+            
               <table>
+
                 <thead>
                   <tr>
                     {["TIENDA", "CADENA", "DOMICILIO", "LOCALIDAD", "COORDINADOR GR"]
                       .map((h) => <th key={h}>{h}</th>)}
                   </tr>
                 </thead>
+                
                 <tbody>
                   {tiendasFiltradas.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="empty-row-msg">
                         No hay tiendas con esos filtros
-                      </td>
                     </tr>
                   ) : (
                     tiendasFiltradas.map((t) => (
@@ -363,11 +349,12 @@ export default function GestionTiendas() {
                   )}
                 </tbody>
               </table>
-            )}
+
           </section>
 
           {/* PANEL LATERAL */}
           <aside className="details-panel">
+            {/* Cabecera del panel */}
             <div className="panel-header">{panelTitulo}</div>
 
             {/* Vista detalle */}
@@ -383,33 +370,42 @@ export default function GestionTiendas() {
                   onChange={cambiarForm}
                   modoModal={modoModal}
                 />
-                <div className="action-buttons mt-10">
-                  <button className="btn btn-primary"   onClick={confirmarModal}>Guardar</button>
-                  <button className="btn btn-secondary" onClick={cerrarFormulario}>Cancelar</button>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginTop: "10px" }}>
+                  <button onClick={confirmarModal}>Guardar</button>
+                  <button onClick={cerrarFormulario}>Cancelar</button>
                 </div>
               </>
             )}
 
-            {/* Botones admin */}
+            {/* Botones admin — sólo en vista detalle */}
             {esAdmin && vistaPanel === "detalle" && (
-              <div className="action-buttons mt-10" id="admin-menu">
-                <button className="btn btn-primary"            onClick={abrirAnadir}>Añadir tienda</button>
-                <button className="btn btn-primary"            onClick={abrirModificar}>Modificar tienda</button>
-                <button className="btn btn-danger"             onClick={eliminarTienda}>Eliminar tienda</button>
-                <button className="btn btn-secondary full-width" onClick={exportarExcel}>Exportar Excel</button>
+              <div id="admin-menu" style={{ marginTop: "12px" }}>
+                {/* Fila: Añadir + Modificar */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "8px" }}>
+                  <button onClick={abrirAnadir}>Añadir tienda</button>
+                  <button onClick={abrirModificar}>Modificar tienda</button>
+                </div>
+                {/* Fila: Eliminar (ancho completo) */}
+                <div>
+                  <button onClick={eliminarTienda}> Eliminar tienda </button>
+                </div>
               </div>
             )}
 
-            {/* Volver al menú */}
-            <div className="action-buttons mt-10">
-              <button className="btn-volver-menu full-width" onClick={volverMenu}>
-                Menú Principal
-              </button>
+            {/* Botón Menú Principal */}
+            <div>
+              <button onClick={() => alert("Menú principal no disponible en modo standalone.")}> Menú Principal </button>
             </div>
-          </aside>
 
+          </aside>
         </div>
       </main>
+
+      {/* FOOTER */}
+      <footer>
+        <p>© 2026 Bancosol | Grupo 4 | Tecnologías del Cliente para Aplicaciones Web</p>
+      </footer>
+
     </div>
   );
 }

@@ -31,7 +31,7 @@
       "id": "o9HWhoXu5ak"
     }
   ],
-   "colaboradores": [
+  "colaboradores": [
     {
       "id": "1",
       "nombre": "A0362-AYUNTAMIENTO DE ALMACHAR",
@@ -157,7 +157,7 @@
       "zona": "Axarquía",
       "domicilio": "Plaza Don Antonio Estrada, s/n - La Cala del Moral",
       "localidad": "RINCON DE LA VICTORIA",
-      "coord": "Ejemplo coord"
+      "coord": "coordinador"
     },
     {
       "id": "CARREFOUR_003",
@@ -340,7 +340,6 @@
       "fecha": "2026-05-21T15:40:38.303Z",
       "id": "LGXHb2F6B5M"
     }
-    
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }
