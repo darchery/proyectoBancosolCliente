@@ -1,3 +1,5 @@
+// T1: npx json-server --watch src/data/db.json --port 3001
+// T2: npm run dev 
 import { useState, useEffect, useMemo } from "react";
 
 // Importar los CSS del proyecto
