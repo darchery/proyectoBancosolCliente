@@ -20,6 +20,7 @@ import GestionTiendaCoordinador from './components/GestionTiendaCoordinador';
 */
 
 import GestionTiendas from "./pages/gestion/tiendas/GestionTiendas";
+import GestionCampanyas from "./pages/gestion/campanyas/GestionCampanyas";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           {/* Ruta principal → Gestión de Tiendas */}
           <Route path="/" element={<GestionTiendas />} />
           <Route path="/tiendas" element={<GestionTiendas />} />
+          <Route path="/campanyas" element={<GestionCampanyas />} />
         </Routes>
       </BrowserRouter>
     </ProveedorAuten>
@@ -56,6 +58,7 @@ function App() {
                   <Route path="/welcome_admin" element={<WelcomeAdmin />} />
                   <Route path="/gestion/colaboradores_admin" element={<GestionColaboradoresAdmin />} />
                   <Route path="/gestion/tienda_admin" element={<GestionTiendaAdmin />} />
+                  <Route path="/gestion/campanya_admin" element={<GestionCampanyas />} />
                 </Route>
 
                 <Route element={<RolRequerido roles={['coordinador']} />}>
