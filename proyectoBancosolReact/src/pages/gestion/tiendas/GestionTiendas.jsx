@@ -3,8 +3,6 @@
 import { useState, useEffect, useMemo } from "react";
 
 // Importar los CSS del proyecto
-import "../../../assets/css/header_comun.css";
-import "../../../assets/css/footer_comun.css";
 import "../../../assets/css/style_gestion.css";
 
 const API_URL = "http://localhost:3001";
@@ -35,34 +33,33 @@ function DetallePanel({ tienda }) {
   if (!tienda) {
     return (
       <div>
-        <div> ID: </div>
-        <div> NOMBRE: </div>
-        <div> CADENA: </div>
-        <div> DOMICILIO: </div>
-        <div> LOCALIDAD: </div>
-        <div> ZONA: </div>
-        <div> COORD: </div>
+        <div className="detail-row"><span>ID:</span><strong>---</strong></div>
+        <div className="detail-row"><span>NOMBRE:</span><strong>---</strong></div>
+        <div className="detail-row"><span>CADENA:</span><strong>---</strong></div>
+        <div className="detail-row"><span>DOMICILIO:</span><strong>---</strong></div>
+        <div className="detail-row"><span>LOCALIDAD:</span><strong>---</strong></div>
+        <div className="detail-row"><span>ZONA:</span><strong>---</strong></div>
+        <div className="detail-row"><span>COORDINADOR:</span><strong>---</strong></div>
       </div>
     );
   }
 
   const campos = [
-    ["ID",          tienda.id],
-    ["NOMBRE",      tienda.nombre],
-    ["CADENA",      tienda.cadena],
-    ["DOMICILIO",   tienda.domicilio],
-    ["LOCALIDAD",   tienda.localidad],
-    ["ZONA",        tienda.zona],
+    ["ID", tienda.id],
+    ["NOMBRE", tienda.nombre],
+    ["CADENA", tienda.cadena],
+    ["DOMICILIO", tienda.domicilio],
+    ["LOCALIDAD", tienda.localidad],
+    ["ZONA", tienda.zona],
     ["COORDINADOR", tienda.coord],
   ];
 
   return (
     <div>
       {campos.map(([label, val]) => (
-        <div className="detail-row" key={label}
-          style={{ display: "flex", gap: "8px", marginBottom: "6px", fontSize: "0.9em" }}>
-          <span style={{ fontWeight: "bold", minWidth: "95px" }}>{label}:</span>
-          <span>{val}</span>
+        <div className="detail-row" key={label}>
+          <span>{label} :</span>
+          <span className="fw-bold">{val}</span>
         </div>
       ))}
     </div>
@@ -71,9 +68,8 @@ function DetallePanel({ tienda }) {
 
 function FormularioPanel({ form, onChange, modoModal }) {
   const campo = (label, field, required = false, disabled = false) => (
-    <div key={field}
-      style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", fontSize: "0.9em" }}>
-      <span style={{ fontWeight: "bold", minWidth: "95px" }}>{label}{required && " *"}</span>
+    <div key={field}>
+      <span>{label}{required && " *"}</span>
       <input
         value={form[field]}
         disabled={disabled}
@@ -83,13 +79,13 @@ function FormularioPanel({ form, onChange, modoModal }) {
   );
 
   return (
-    <div className="max-h-70vh" style={{ padding: "10px 5px" }}>
-      {campo("ID",          "id",        true,  modoModal === "modificar")}
-      {campo("NOMBRE",      "nombre",    true)}
-      {campo("CADENA",      "cadena")}
-      {campo("ZONA",        "zona")}
-      {campo("DOMICILIO",   "domicilio")}
-      {campo("LOCALIDAD",   "localidad")}
+    <div className="max-h-70vh" >
+      {campo("ID", "id", true, modoModal === "modificar")}
+      {campo("NOMBRE", "nombre", true)}
+      {campo("CADENA", "cadena")}
+      {campo("ZONA", "zona")}
+      {campo("DOMICILIO", "domicilio")}
+      {campo("LOCALIDAD", "localidad")}
       {campo("COORDINADOR", "coord")}
     </div>
   );
@@ -100,20 +96,20 @@ export default function GestionTiendas() {
   const rolActual = localStorage.getItem("userRole") || "admin";
   const esAdmin   = rolActual === "admin";
 
-  const [tiendas,    setTiendas]    = useState([]);
+  const [tiendas, setTiendas] = useState([]);
   const [errorCarga, setErrorCarga] = useState(null);
-  const [cargando,   setCargando]   = useState(true);
+  const [cargando, setCargando] = useState(true);
 
-  const [selectedId,      setSelectedId]      = useState(null);
-  const [filtroCadena,    setFiltroCadena]    = useState("Todas");
+  const [selectedId, setSelectedId] = useState(null);
+  const [filtroCadena, setFiltroCadena] = useState("Todas");
   const [filtroLocalidad, setFiltroLocalidad] = useState("Todas");
-  const [filtroZona,      setFiltroZona]      = useState("Todas");
-  const [filtroCoord,     setFiltroCoord]     = useState("Todas");
+  const [filtroZona, setFiltroZona] = useState("Todas");
+  const [filtroCoord, setFiltroCoord] = useState("Todas");
 
-  const [vistaPanel,  setVistaPanel]  = useState("detalle");
-  const [modoModal,   setModoModal]   = useState("anadir");
+  const [vistaPanel, setVistaPanel] = useState("detalle");
+  const [modoModal, setModoModal] = useState("anadir");
   const [panelTitulo, setPanelTitulo] = useState("TIENDA SELECCIONADA");
-  const [form,        setForm]        = useState(FORM_VACIO);
+  const [form, setForm] = useState(FORM_VACIO);
 
   useEffect(() => {
     (async () => {
@@ -135,17 +131,17 @@ export default function GestionTiendas() {
     }
   }
 
-  const cadenas     = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.cadena).filter(Boolean))],    [tiendas]);
+  const cadenas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.cadena).filter(Boolean))],    [tiendas]);
   const localidades = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.localidad).filter(Boolean))], [tiendas]);
-  const zonas       = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.zona).filter(Boolean))],      [tiendas]);
-  const coords      = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.coord).filter(Boolean))],     [tiendas]);
+  const zonas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.zona).filter(Boolean))],      [tiendas]);
+  const coords = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.coord).filter(Boolean))],     [tiendas]);
 
   const tiendasFiltradas = useMemo(() =>
     tiendas.filter((t) =>
-      (filtroCadena    === "Todas" || t.cadena    === filtroCadena)    &&
+      (filtroCadena === "Todas" || t.cadena === filtroCadena)    &&
       (filtroLocalidad === "Todas" || t.localidad === filtroLocalidad) &&
-      (filtroZona      === "Todas" || t.zona      === filtroZona)      &&
-      (filtroCoord     === "Todas" || t.coord     === filtroCoord)
+      (filtroZona === "Todas" || t.zona === filtroZona)      &&
+      (filtroCoord === "Todas" || t.coord === filtroCoord)
     ),
     [tiendas, filtroCadena, filtroLocalidad, filtroZona, filtroCoord]
   );
@@ -153,7 +149,7 @@ export default function GestionTiendas() {
   const tiendaSeleccionada = tiendas.find((t) => t.id === selectedId) || null;
 
   if (!esAdmin) {
-    return <p style={{ padding: 20 }}>No tienes permiso para acceder a esta página.</p>;
+    return <p> No tienes permiso para acceder a esta página.</p>;
   }
 
   function seleccionarTienda(id) {
@@ -168,13 +164,13 @@ export default function GestionTiendas() {
 
   function rellenarFormDesdeTienda(t) {
     setForm({
-      id:        t.id        || "",
-      nombre:    t.nombre    || "",
-      cadena:    t.cadena    || "",
-      zona:      t.zona      || "",
+      id: t.id || "",
+      nombre: t.nombre || "",
+      cadena: t.cadena || "",
+      zona: t.zona || "",
       domicilio: t.domicilio || "",
       localidad: t.localidad || "",
-      coord:     t.coord     || "",
+      coord: t.coord || "",
     });
   }
 
@@ -205,12 +201,12 @@ export default function GestionTiendas() {
     if (!form.nombre.trim()) return alert("El campo NOMBRE es obligatorio.");
 
     const obj = {
-      nombre:    form.nombre.trim(),
-      cadena:    form.cadena.trim(),
-      zona:      form.zona.trim(),
+      nombre: form.nombre.trim(),
+      cadena: form.cadena.trim(),
+      zona: form.zona.trim(),
       domicilio: form.domicilio.trim(),
       localidad: form.localidad.trim(),
-      coord:     form.coord.trim(),
+      coord: form.coord.trim(),
     };
 
     if (modoModal === "anadir") {
@@ -266,67 +262,58 @@ export default function GestionTiendas() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", backgroundColor: "#f4f7f6" }}>
+    <div>
 
-      {/* HEADER */}
       <header className="main-header">
         <div className="logo-area">
-          <img
-            id="logo"
-            src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png"
-            alt="Bancosol Logo"
-          />
-          <h1 style={{ color: "#293189", margin: 0, fontSize: "1.8em", fontWeight: "bold" }}>
-            GESTIÓN DE TIENDAS
-          </h1>
+          <img src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png"/>
+          <div>
+            <h1>GESTIÓN DE TIENDAS</h1>
+          </div>
         </div>
       </header>
 
-      {/* MAIN */}
-      <main className="dashboard" style={{ flex: 1 }}>
+      <main className="dashboard">
 
         {/* BANNER ERROR */}
         {errorCarga && (
           <div className="mensaje-error-carga">{errorCarga}</div>
         )}
 
-        {/* FILTROS */}
+        {/* filtros */}
         <section className="filters">
-          {/* Columna izquierda */}
+
           <div className="filter-group">
-            <label style={{ fontWeight: "bold", fontSize: "13px" }}>CADENA</label>
+            <label>CADENA</label>
             <select value={filtroCadena} onChange={(e) => setFiltroCadena(e.target.value)}>
               {cadenas.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
 
-            <label style={{ fontWeight: "bold", fontSize: "13px" }}>LOCALIDAD</label>
+            <label>LOCALIDAD</label>
             <select value={filtroLocalidad} onChange={(e) => setFiltroLocalidad(e.target.value)}>
               {localidades.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
 
-          {/* Columna derecha */}
           <div className="filter-group">
-            <label style={{ fontWeight: "bold", fontSize: "13px" }}>ZONA GEOGRÁFICA</label>
+            <label>ZONA GEOGRÁFICA</label>
             <select value={filtroZona} onChange={(e) => setFiltroZona(e.target.value)}>
               {zonas.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
 
-            <label style={{ fontWeight: "bold", fontSize: "13px" }}>COORDINADOR</label>
+            <label>COORDINADOR</label>
             <select value={filtroCoord} onChange={(e) => setFiltroCoord(e.target.value)}>
               {coords.map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
           </div>
         </section>
 
-        {/* TABLA + PANEL */}
         <div className="content-layout">
 
-          {/* TABLA */}
+          {/* tabla */}
           <section className="table-container">
-            
-              <table>
 
+              <table>
                 <thead>
                   <tr>
                     {["TIENDA", "CADENA", "DOMICILIO", "LOCALIDAD", "COORDINADOR GR"]
@@ -336,16 +323,14 @@ export default function GestionTiendas() {
                 
                 <tbody>
                   {tiendasFiltradas.length === 0 ? (
-                    <tr>
-                        No hay tiendas con esos filtros
-                    </tr>
+                    <tr> No hay tiendas con esos filtros </tr>
                   ) : (
                     tiendasFiltradas.map((t) => (
                       <FilaTabla
-                        key={t.id}
-                        t={t}
-                        seleccionado={selectedId}
-                        onSeleccionar={seleccionarTienda}
+                        key = {t.id}
+                        t = {t}
+                        seleccionado = {selectedId}
+                        onSeleccionar = {seleccionarTienda}
                       />
                     ))
                   )}
@@ -354,17 +339,16 @@ export default function GestionTiendas() {
 
           </section>
 
-          {/* PANEL LATERAL */}
+          {/* panel lateral */}
           <aside className="details-panel">
-            {/* Cabecera del panel */}
             <div className="panel-header">{panelTitulo}</div>
 
-            {/* Vista detalle */}
+            {/* Vista de detalle: visible por defecto */}
             {vistaPanel === "detalle" && (
               <DetallePanel tienda={tiendaSeleccionada} />
             )}
 
-            {/* Vista formulario */}
+            {/* Vista de formulario: oculta hasta que se pulse Añadir o Modificar */}
             {vistaPanel === "formulario" && (
               <>
                 <FormularioPanel
@@ -372,30 +356,25 @@ export default function GestionTiendas() {
                   onChange={cambiarForm}
                   modoModal={modoModal}
                 />
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginTop: "10px" }}>
+                
+                <div>
                   <button onClick={confirmarModal}>Guardar</button>
                   <button onClick={cerrarFormulario}>Cancelar</button>
                 </div>
               </>
             )}
 
-            {/* Botones admin — sólo en vista detalle */}
+            {/* Botones de acción: solo visibles para admin */}
             {esAdmin && vistaPanel === "detalle" && (
-              <div id="admin-menu" style={{ marginTop: "12px" }}>
-                {/* Fila: Añadir + Modificar */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "8px" }}>
+              <div class="action-buttons" id="admin-menu">
                   <button onClick={abrirAnadir}>Añadir tienda</button>
                   <button onClick={abrirModificar}>Modificar tienda</button>
-                </div>
-                {/* Fila: Eliminar (ancho completo) */}
-                <div>
                   <button onClick={eliminarTienda}> Eliminar tienda </button>
-                </div>
               </div>
             )}
 
-            {/* Botón Menú Principal */}
-            <div>
+            {/* Botón volver al menú principal */}
+            <div class="action-buttons">
               <button onClick={() => alert("Menú principal no disponible en modo standalone.")}> Menú Principal </button>
             </div>
 
@@ -403,7 +382,6 @@ export default function GestionTiendas() {
         </div>
       </main>
 
-      {/* FOOTER */}
       <footer>
         <p>© 2026 Bancosol | Grupo 4 | Tecnologías del Cliente para Aplicaciones Web</p>
       </footer>
