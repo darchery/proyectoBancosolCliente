@@ -24,3 +24,10 @@ header h1 {
     width: auto; 
     display: block; 
 }
+
+.header-titulo {
+    color: #293189;
+    margin: 0;
+    font-size: 1.8em;
+    font-weight: bold;
+}
