@@ -1,8 +1,8 @@
-import { Navigate, Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router-dom';
 // Ruta protegida que verifica si el usuario está autenticado
-import { useAuth } from './useAuth';
+import { useAuth } from './useAuthHook';
 
-export function ProtectedRoute() {
+export function RutaProtegida() {
     // Obtener el estado de autenticación del contexto
     const { estaAutenticado } = useAuth();
 

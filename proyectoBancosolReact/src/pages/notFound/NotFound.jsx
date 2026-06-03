@@ -3,9 +3,9 @@ import './not_found.css';
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 
-export function NotFound() {
+export default function NotFound() {
   return (
-    <div class="not-found-wrapper">
+    <div className="not-found-wrapper">
       <Header />
       <main>
         <h1>404 — Página no encontrada</h1>

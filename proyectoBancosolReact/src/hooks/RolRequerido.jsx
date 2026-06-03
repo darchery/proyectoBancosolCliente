@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router-dom';
 // Ruta protegida que verifica si el usuario tiene el puesto requerido
 import { useAuth } from './useAuthHook';
 
