@@ -17,7 +17,6 @@ const FORM_VACIO = {
     obs: "",
 };
 
-// ── Subcomponentes ────────────────────────────────────────────────────────────
 
 function FilaTabla({ c, seleccionado, onSeleccionar }) {
     const esSeleccionado = c.id === seleccionado;
@@ -41,6 +40,9 @@ function FilaTabla({ c, seleccionado, onSeleccionar }) {
         </tr>
     );
 }
+
+
+
 
 function DetallePanel({ colaborador, onValidar }) {
     if (!colaborador) {
@@ -87,13 +89,16 @@ function DetallePanel({ colaborador, onValidar }) {
             {c.pendienteValidacion && onValidar && (
                 <div className="action-buttons mt-10">
                     <button className="btn btn-success full-width" onClick={onValidar}>
-                        ✔ Validar colaborador
+                        Validar colaborador
                     </button>
                 </div>
             )}
         </>
     );
 }
+
+
+
 
 function FormularioPanel({ form, onChange }) {
     const campo = (label, field, required = false) => (
@@ -175,8 +180,6 @@ function AsignarTiendaPanel({ tiendas, tiendaActual, onConfirmar, onCancelar }) 
     );
 }
 
-// ── Componente principal ──────────────────────────────────────────────────────
-
 export default function GestionColaboradores() {
     const rolActual = localStorage.getItem("userRole") || "admin";
     const esAdmin = rolActual === "admin";
@@ -201,7 +204,7 @@ export default function GestionColaboradores() {
     const [panelTitulo, setPanelTitulo] = useState("COLABORADOR SELECCIONADO");
     const [form, setForm] = useState(FORM_VACIO);
 
-    // ── Carga inicial ──────────────────────────────────────────────────────────
+
     useEffect(() => {
         (async () => {
             setCargando(true);
@@ -231,7 +234,7 @@ export default function GestionColaboradores() {
         }
     }
 
-    // ── Filtros ────────────────────────────────────────────────────────────────
+
     const localidades = useMemo(
         () => ["Todas", ...new Set(colaboradores.map((c) => c.localidad).filter(Boolean))],
         [colaboradores]
@@ -256,7 +259,6 @@ export default function GestionColaboradores() {
 
     const colaboradorSeleccionado = colaboradores.find((c) => c.id === selectedId) || null;
 
-    // ── Selección ──────────────────────────────────────────────────────────────
     function seleccionarColaborador(id) {
         setSelectedId(id);
         setPanelTitulo("COLABORADOR SELECCIONADO");
@@ -473,7 +475,7 @@ export default function GestionColaboradores() {
         window.location.href = DASHBOARD_URLS[rolActual] || DASHBOARD_URLS.admin;
     }
 
-    // ── Render ─────────────────────────────────────────────────────────────────
+
     return (
         <div>
             {/* HEADER */}
@@ -606,7 +608,7 @@ export default function GestionColaboradores() {
                         {esCoord && vistaPanel === "detalle" && (
                             <div className="action-buttons mt-10" id="coord-menu">
                                 <button className="btn btn-primary full-width" onClick={abrirAniadirPendiente}>
-                                    Añadir (pendiente)
+                                    Añadir
                                 </button>
                                 <button className="btn btn-secondary full-width" onClick={exportarExcel}>
                                     Exportar Excel
