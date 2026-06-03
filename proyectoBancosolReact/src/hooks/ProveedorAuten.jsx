@@ -29,8 +29,8 @@ export function ProveedorAuten({ children }) {
   };
 
   return (
-    <ContextoAuten value={{ usuario, estaAutenticado: !!usuario, login, logout }}>
+    <ContextoAuten.Provider value={{ usuario, estaAutenticado: !!usuario, login, logout }}>
       {children}
-    </ContextoAuten>
+    </ContextoAuten.Provider>
   );
 }
