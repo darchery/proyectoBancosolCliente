@@ -1,9 +1,10 @@
 //import Home from './pages/home/Home';
 //import NotFound from './pages/notFound/NotFound';
 
-import { BrowserRouter, Routes, Route } from 'react-router';
+// npm install react-router-dom
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //import { ProtectedRoute } from './ProtectedRoute';
-//import { RolRequerido } from './RolRequerido';
+//import { RolRequerido } from './RolRequerido';;
 import { ProveedorAuten } from './hooks/ProveedorAuten';
 
 // TODO: Poner ruta concreta
