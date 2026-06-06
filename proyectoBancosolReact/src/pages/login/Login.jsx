@@ -1,6 +1,4 @@
 import './login.css';
-import Header from '../../components/layout/Header';
-import Footer from '../../components/layout/Footer';
 
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
@@ -37,7 +35,6 @@ function Login() {
 
     return (
         <div className="login-wrapper">
-        <Header />
         <main>
             <div className="login-box">
             <h1>Iniciar sesión</h1>
@@ -58,7 +55,6 @@ function Login() {
             <Link to="/">Volver al inicio</Link>
             </div>
         </main>
-        <Footer />
         </div>
     );
 

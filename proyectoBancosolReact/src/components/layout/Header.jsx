@@ -11,7 +11,7 @@ function Header({ titulo }) {
                     {titulo && <h1 className="header-titulo">{titulo}</h1>}
                 </div>
             </header>
-            <Outlet />
+            {/*<Outlet />*/}
         </>
     );
 }

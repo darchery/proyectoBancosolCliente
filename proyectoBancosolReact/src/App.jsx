@@ -26,37 +26,33 @@ function App() {
     <>
       <ProveedorAuten>
         <BrowserRouter>
+          <Header />
           <Routes>
-            Rutas públicas 
+            {/* Rutas públicas */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/solicitar-acceso" element={<SolicitarAcceso />} />
 
-             {/*Rutas protegidas => Requieren login*/}
+            {/* Rutas protegidas => Requieren login */}
             <Route element={<RutaProtegida />}>
-
-              <Route element={<Header />}>
-
-                <Route element={<RolRequerido roles={['admin']} />}>
-                  <Route path="/welcome" element={<Welcome />} />
-                  <Route path="/gestion/colaboradores" element={<GestionColaboradores />} />
-                  <Route path="/gestion/tiendas" element={<GestionTiendas />} />
-                  <Route path="/gestion/campanyas" element={<GestionCampanyas />} />
-                </Route>
-
-                <Route element={<RolRequerido roles={['coordinador']} />}>
-                  <Route path="/welcome" element={<Welcome />} />
-                  <Route path="/gestion/colaboradores" element={<GestionColaboradores />} />
-                  <Route path="/gestion/tiendas" element={<GestionTiendas />} />
-                </Route>
-
+              <Route element={<RolRequerido roles={['admin']} />}>
+                <Route path="/welcome" element={<Welcome />} />
+                <Route path="/gestion/colaboradores" element={<GestionColaboradores />} />
+                <Route path="/gestion/tiendas" element={<GestionTiendas />} />
+                <Route path="/gestion/campanyas" element={<GestionCampanyas />} />
               </Route>
-              
+
+              <Route element={<RolRequerido roles={['coordinador']} />}>
+                <Route path="/welcome" element={<Welcome />} />
+                <Route path="/gestion/colaboradores" element={<GestionColaboradores />} />
+                <Route path="/gestion/tiendas" element={<GestionTiendas />} />
+              </Route>
             </Route>
 
             <Route path="*" element={<NotFound />} />
 
           </Routes>
+          <Footer />
         </BrowserRouter>
       </ProveedorAuten>
     </>

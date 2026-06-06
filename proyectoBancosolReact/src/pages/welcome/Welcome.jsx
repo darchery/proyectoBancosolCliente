@@ -1,6 +1,4 @@
 import './welcome.css';  // o importar style_welcome.css desde assets
-import Header from '../../components/layout/Header';
-import Footer from '../../components/layout/Footer';
 import { useAuth } from '../../hooks/useAuthHook';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,17 +19,30 @@ function Welcome() {
     entidad_colaboradora: ['Bandeja Entrada'],
   };
 
+  const rutasPorOpcion = {
+    'Tiendas': '/gestion/tiendas',
+    'Colaboradores': '/gestion/colaboradores',
+    'Coordinadores': '/gestion/coordinadores',
+    'Campañas': '/gestion/campanyas',
+    'Asignación Voluntarios': '/gestion/asignacion-voluntarios',
+    'Bandeja Entrada': '/gestion/bandeja-entrada',
+  };
+
   const opciones = menuPorRol[usuario?.rol] || [];
+
+  function handleNavegar(opcion) {
+    const ruta = rutasPorOpcion[opcion];
+    if (ruta) navigate(ruta);
+  }
 
   return (
     <div className="welcome-wrapper">
-      <Header />
       <main>
         <h1>Bienvenido {usuario?.rol}</h1>
         <div className="welcome-box">
           <section>
             {opciones.map(op => (
-              <button key={op}>{op}</button>
+              <button key={op} onClick={() => handleNavegar(op)}>{op}</button>
             ))}
           </section>
         </div>
@@ -41,7 +52,6 @@ function Welcome() {
           </button>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

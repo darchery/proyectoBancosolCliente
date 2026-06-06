@@ -179,8 +179,15 @@ function GestionCampanyas() {
     if (cargando) return <p style={{ padding: 20 }}>Cargando...</p>;
 
     return (
+        <>
+        {/**
+             * TODO: Decicidir que header queremos usar
+             * 1. Común de Header.jsx, más soso
+             * 2. Este header nativo(mejor))
+             * 3. Cambiar el header común y usar el de esta página para todas
+        */}
         <div className="page-campanya">
-            <Header titulo="GESTIÓN DE CAMPAÑAS" />
+            {/*<Header titulo="GESTIÓN DE CAMPAÑAS" />*/}
 
             {/* Cuerpo: tres columnas (campañas, cadenas, acciones) */}
             <main className="management-container">
@@ -220,6 +227,7 @@ function GestionCampanyas() {
 
             <Footer />
         </div>
+        </>
     );
 }
 

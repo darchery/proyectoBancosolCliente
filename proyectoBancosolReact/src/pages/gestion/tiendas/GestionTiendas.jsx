@@ -263,7 +263,13 @@ export default function GestionTiendas() {
 
   return (
     <div>
-
+      {/**
+       * TODO: Decicidir que header queremos usar
+       * 1. Común de Header.jsx, más soso
+       * 2. Este header nativo(mejor))
+       * 3. Cambiar el header común y usar el de esta página para todas
+       */}
+       {/** 
       <header className="main-header">
         <div className="logo-area">
           <img src="/src/assets/images/LOGO_BANCOSOL_FOOTER.png"/>
@@ -272,7 +278,7 @@ export default function GestionTiendas() {
           </div>
         </div>
       </header>
-
+        */}
       <main className="dashboard">
 
         {/* BANNER ERROR */}

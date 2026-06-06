@@ -1,6 +1,4 @@
 import './solicitar_acceso.css';
-import Header from '../../components/layout/Header';
-import Footer from '../../components/layout/Footer';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -29,7 +27,6 @@ function SolicitarAcceso() {
 
   return (
     <div className="solicitar-acceso-wrapper">
-      <Header />
       <main>
         <h1>Solicitud de acceso</h1>
         <form onSubmit={handleSubmit}>
@@ -47,7 +44,6 @@ function SolicitarAcceso() {
         </form>
         <Link to="/">Volver al inicio</Link>
       </main>
-      <Footer />
     </div>
   );
 }

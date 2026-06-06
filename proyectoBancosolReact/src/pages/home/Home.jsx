@@ -1,13 +1,10 @@
 import './home.css';
-import Header from '../../components/layout/Header';
-import Footer from '../../components/layout/Footer';
 import { Link } from 'react-router-dom'
 
 
 function Home() {
     return (
         <div className="index-home-wrapper">
-            <Header />
             <main>
                 <h1>Bienvenido a Bancosol</h1>
                 <div className="home-box">
@@ -17,7 +14,6 @@ function Home() {
                     </section>
                 </div>
             </main>
-            <Footer />
         </div>
     )
 }
