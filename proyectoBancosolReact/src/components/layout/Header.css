@@ -19,6 +19,12 @@ header h1 {
     box-sizing: border-box; 
 }
 
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 #logo {
     height: 60px; 
     width: auto; 

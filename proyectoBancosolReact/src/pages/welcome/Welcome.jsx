@@ -12,11 +12,11 @@ function Welcome() {
   }
 
   const menuPorRol = {
-    admin: ['Tiendas', 'Colaboradores', 'Coordinadores', 'Campañas'],
-    capitan: ['Asignación Voluntarios'],
+    admin: ['Tiendas', 'Colaboradores', 'Campañas'],
     coordinador: ['Tiendas', 'Colaboradores'],
+    /*capitan: ['Asignación Voluntarios']
     capitan_coordinador: ['Tiendas', 'Colaboradores', 'Asignación Voluntarios'],
-    entidad_colaboradora: ['Bandeja Entrada'],
+    entidad_colaboradora: ['Bandeja Entrada'],*/
   };
 
   const rutasPorOpcion = {

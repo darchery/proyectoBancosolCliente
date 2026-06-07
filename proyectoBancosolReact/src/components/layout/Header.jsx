@@ -1,17 +1,36 @@
 import './Header.css';
-import logo from '../../assets/images/LOGO_BANCOSOL.png';
-import { Outlet } from 'react-router-dom';
+import logoFooter from '../../assets/images/LOGO_BANCOSOL_FOOTER.png';
+import { useLocation } from 'react-router-dom';
 
-function Header({ titulo }) {
+function Header() {
+    const location = useLocation();
+
+    // Mapea rutas a títulos dinámicos
+    const getTituloFromRuta = (ruta) => {
+        const titulos = {
+            '/gestion/campanyas': 'GESTIÓN DE CAMPAÑAS',
+            '/gestion/colaboradores': 'GESTIÓN DE COLABORADORES',
+            '/gestion/tiendas': 'GESTIÓN DE TIENDAS',
+            '/welcome': 'BIENVENIDO',
+            '/': 'INICIO',
+            '/login': 'ACCESO',
+            '/solicitar-acceso': 'SOLICITAR ACCESO',
+        };
+        return titulos[ruta] || null;
+    };
+
+    const titulo = getTituloFromRuta(location.pathname);
+
     return (
         <>
             <header className="main-header">
                 <div className="logo-area">
-                    <img id="logo" src={logo} alt="Bancosol Logo" />
-                    {titulo && <h1 className="header-titulo">{titulo}</h1>}
+                    <img src={logoFooter} alt="Bancosol Logo" />
+                    <div>   
+                        {titulo && <h1 className="header-titulo">{titulo}</h1>}
+                    </div>
                 </div>
             </header>
-            {/*<Outlet />*/}
         </>
     );
 }

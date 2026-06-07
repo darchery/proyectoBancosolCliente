@@ -180,12 +180,6 @@ function GestionCampanyas() {
 
     return (
         <>
-        {/**
-             * TODO: Decicidir que header queremos usar
-             * 1. Común de Header.jsx, más soso
-             * 2. Este header nativo(mejor))
-             * 3. Cambiar el header común y usar el de esta página para todas
-        */}
         <div className="page-campanya">
             {/*<Header titulo="GESTIÓN DE CAMPAÑAS" />*/}
 
