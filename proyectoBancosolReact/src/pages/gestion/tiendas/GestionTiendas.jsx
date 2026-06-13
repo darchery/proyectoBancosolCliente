@@ -371,12 +371,8 @@ export default function GestionTiendas() {
 
           </aside>
         </div>
+
       </main>
-
-      <footer>
-        <p>© 2026 Bancosol | Grupo 4 | Tecnologías del Cliente para Aplicaciones Web</p>
-      </footer>
-
     </div>
   );
 }

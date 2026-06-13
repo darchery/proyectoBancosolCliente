@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import "../../../assets/css/style_gestion.css";
-import Header from "../../../components/layout/Header";
-import Footer from "../../../components/layout/Footer";
 import PanelCampanyas from "./components/PanelCampanyas";
 import PanelCadenas from "./components/PanelCadenas";
 import PanelAcciones from "./components/PanelAcciones";
@@ -219,7 +217,6 @@ function GestionCampanyas() {
                 />
             )}
 
-            <Footer />
         </div>
         </>
     );
