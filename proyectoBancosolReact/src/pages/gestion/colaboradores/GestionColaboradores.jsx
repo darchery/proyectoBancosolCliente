@@ -1,12 +1,16 @@
 import { useState, useEffect, useMemo } from "react";
+import { useAuth } from '../../../hooks/useAuthHook';
+import { useNavigate } from 'react-router-dom';
 // import * as XLSX from "xlsx";
 
 const API_URL = "http://localhost:3001";
 
+/*
 const DASHBOARD_URLS = {
     admin: "../../welcome/welcome_admin.html",
     coordinador: "../../welcome/welcome_coordinador.html",
 };
+*/
 
 const FORM_VACIO = {
     nombre: "", domicilio: "", cp: "", localidad: "",
@@ -181,9 +185,14 @@ function AsignarTiendaPanel({ tiendas, tiendaActual, onConfirmar, onCancelar }) 
 }
 
 export default function GestionColaboradores() {
-    const rolActual = localStorage.getItem("userRole") || "admin";
-    const esAdmin = rolActual === "admin";
-    const esCoord = rolActual === "coordinador";
+    //const rolActual = localStorage.getItem("userRole") || "admin";
+    //const esAdmin = rolActual === "admin";
+    //const esCoord = rolActual === "coordinador";
+
+    const { usuario } = useAuth();
+    const navigate = useNavigate();
+    const esAdmin = usuario?.rol === "admin";
+    const esCoord = usuario?.rol === "coordinador";
 
     if (!esAdmin && !esCoord) {
         return <p style={{ padding: 20 }}>No tienes permiso para acceder a esta página.</p>;
@@ -472,7 +481,7 @@ export default function GestionColaboradores() {
     }
 
     function volverMenu() {
-        window.location.href = DASHBOARD_URLS[rolActual] || DASHBOARD_URLS.admin;
+        navigate('/welcome');
     }
 
 
