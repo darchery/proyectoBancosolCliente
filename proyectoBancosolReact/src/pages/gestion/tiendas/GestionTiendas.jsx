@@ -1,6 +1,8 @@
 // T1: npx json-server --watch src/data/db.json --port 3001
 // T2: npm run dev 
 import { useState, useEffect, useMemo } from "react";
+import { useAuth } from '../../../hooks/useAuthHook';
+import { useNavigate } from 'react-router-dom';
 
 // Importar los CSS del proyecto
 import "../../../assets/css/style_gestion.css";
@@ -93,8 +95,10 @@ function FormularioPanel({ form, onChange, modoModal }) {
 
 // Componente principal
 export default function GestionTiendas() {
-  const rolActual = localStorage.getItem("userRole") || "admin";
-  const esAdmin   = rolActual === "admin";
+  const navigate = useNavigate();
+
+  const { usuario } = useAuth();
+  const esAdmin = usuario?.rol === "admin";
 
   const [tiendas, setTiendas] = useState([]);
   const [errorCarga, setErrorCarga] = useState(null);
@@ -357,7 +361,7 @@ export default function GestionTiendas() {
 
             {/* Botones de acción: solo visibles para admin */}
             {esAdmin && vistaPanel === "detalle" && (
-              <div class="action-buttons" id="admin-menu">
+              <div className="action-buttons" id="admin-menu">
                   <button onClick={abrirAnadir}>Añadir tienda</button>
                   <button onClick={abrirModificar}>Modificar tienda</button>
                   <button onClick={eliminarTienda}> Eliminar tienda </button>
@@ -365,8 +369,8 @@ export default function GestionTiendas() {
             )}
 
             {/* Botón volver al menú principal */}
-            <div class="action-buttons">
-              <button onClick={() => alert("Menú principal no disponible en modo standalone.")}> Menú Principal </button>
+            <div className="action-buttons">
+              <button onClick={() => navigate('/welcome')}> Menú Principal </button>
             </div>
 
           </aside>
