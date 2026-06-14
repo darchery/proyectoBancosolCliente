@@ -7,28 +7,10 @@
       "id": "CaoI157ZkRE"
     },
     {
-      "usuario": "capitan",
-      "clave": "capitan",
-      "rol": "capitan",
-      "id": "BqLPv7wVKPY"
-    },
-    {
       "usuario": "coordinador",
       "clave": "coordinador",
       "rol": "coordinador",
       "id": "f1Ld1jiJF3I"
-    },
-    {
-      "usuario": "capitan_coordinador",
-      "clave": "capitan_coordinador",
-      "rol": "capitan_coordinador",
-      "id": "LJmLfHIs7Ws"
-    },
-    {
-      "usuario": "entidad_colaboradora",
-      "clave": "entidad_colaboradora",
-      "rol": "entidad_colaboradora",
-      "id": "o9HWhoXu5ak"
     }
   ],
   "colaboradores": [

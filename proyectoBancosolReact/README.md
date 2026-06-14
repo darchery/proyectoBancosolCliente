@@ -46,7 +46,7 @@ Arranca en `http://localhost:5173`.
 | Usuario | Contraseña | Rol |
 |---------|-----------|-----|
 | admin | admin | admin |
-| coordinador1 | coordinador1 | coordinador |
+| coordinador    | coordinador | coordinador |
 
 ## Estructura del proyecto
 
