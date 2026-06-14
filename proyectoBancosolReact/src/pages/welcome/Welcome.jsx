@@ -13,7 +13,7 @@ function Welcome() {
 
   const menuPorRol = {
     admin: ['Tiendas', 'Colaboradores', 'Campañas'],
-    coordinador: ['Tiendas', 'Colaboradores'],
+    coordinador: ['Colaboradores']
     /*capitan: ['Asignación Voluntarios']
     capitan_coordinador: ['Tiendas', 'Colaboradores', 'Asignación Voluntarios'],
     entidad_colaboradora: ['Bandeja Entrada'],*/
