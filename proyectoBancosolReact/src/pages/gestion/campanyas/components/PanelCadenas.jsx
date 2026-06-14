@@ -24,7 +24,7 @@ function PanelCadenas({ cadenas, onToggleCadena, onAbrirModal }) {
         <button onClick={() => onAbrirModal("anyadir")}>Añadir cadena</button>
         <button onClick={() => onAbrirModal("eliminar")}>Eliminar cadena</button>
         <button onClick={() => onAbrirModal("modificar")}>Modificar cadena</button>
-        <button onClick={() => onAbrirModal("guardar")}>Guardar cambios</button>
+        <button onClick={() => onAbrirModal("guardar")}>Guardar cadenas seleccionadas</button>
       </div>
     </div>
   );
