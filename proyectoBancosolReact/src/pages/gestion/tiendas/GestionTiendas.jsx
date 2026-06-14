@@ -1,12 +1,8 @@
-// T1: npx json-server --watch src/data/db.json --port 3001
-// T2: npm run dev 
 import { useState, useEffect, useMemo } from "react";
 import { useAuth } from '../../../hooks/useAuthHook';
 import { useNavigate } from 'react-router-dom';
 
-// Importar los CSS y componentes del proyecto
 import "../../../assets/css/style_gestion.css";
-
 import FilaTabla from "./components/FilaTabla";
 import DetallePanel from "./components/DetallePanel";
 import FormularioPanel from "./components/FormularioPanel";
@@ -20,11 +16,11 @@ const FORM_VACIO = {
 const errorMensaje = "Error. ¿Está arrancado json-server?"; 
 
 // Componente principal
-export default function GestionTiendas() {
+function GestionTiendas() {
   const navigate = useNavigate();
 
   const [tiendas, setTiendas] = useState([]);
-  const [errorCarga, setErrorCarga] = useState(null);
+  const [error, setError] = useState(null);
   const [cargando, setCargando] = useState(true);
 
   const [selectedId, setSelectedId] = useState(null);
@@ -51,17 +47,17 @@ export default function GestionTiendas() {
       const res = await fetch(`${API_URL}/tiendas`);
       if (!res.ok) throw new Error();
       setTiendas(await res.json());
-      setErrorCarga(null);
+      setError(null);
     } catch {
-      setErrorCarga("No se pudo conectar con el servidor para cargar las tiendas.");
+      setError("No se pudieron cargar las tiendas.");
       setTiendas([]);
     }
   }
 
-  const cadenas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.cadena).filter(Boolean))],    [tiendas]);
+  const cadenas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.cadena).filter(Boolean))], [tiendas]);
   const localidades = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.localidad).filter(Boolean))], [tiendas]);
-  const zonas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.zona).filter(Boolean))],      [tiendas]);
-  const coords = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.coord).filter(Boolean))],     [tiendas]);
+  const zonas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.zona).filter(Boolean))], [tiendas]);
+  const coords = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.coord).filter(Boolean))], [tiendas]);
 
   const tiendasFiltradas = useMemo(() =>
     tiendas.filter((t) =>
@@ -294,3 +290,5 @@ export default function GestionTiendas() {
     </div>
   );
 }
+
+export default GestionTiendas
