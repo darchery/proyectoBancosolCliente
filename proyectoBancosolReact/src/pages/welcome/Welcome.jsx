@@ -36,18 +36,18 @@ function Welcome() {
   return (
     <div className="welcome-wrapper">
       <main>
-        <h1>Bienvenido {usuario?.rol}</h1>
         <div className="welcome-box">
+          <h1>Bienvenido, {usuario?.rol}</h1>
           <section>
             {opciones.map(op => (
               <button key={op} onClick={() => handleNavegar(op)}>{op}</button>
             ))}
           </section>
-        </div>
-        <div className="logout-container">
-          <button className="boton-logout" onClick={handleLogout}>
-            Cerrar sesión
-          </button>
+          <div className="logout-container">
+            <button className="boton-logout" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
+          </div>
         </div>
       </main>
     </div>

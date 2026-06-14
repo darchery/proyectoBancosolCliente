@@ -1,28 +1,16 @@
-/* Ajustes globales de caja */
-* {
-    box-sizing: border-box;
-}
-
-/* Fondo y estructura general de los paneles de bienvenida */
-body {
+/* Fondo y estructura general del wrapper de bienvenida */
+.welcome-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
+    flex: 1;
+    width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f8f9fa;
 }
 
-/* Cabecera superior */
-header {
-    width: 100%;
-}
-
 /* Título del rol de usuario */
-h1 {
+.welcome-wrapper h1 {
     color: #293189;
     text-align: center;
     margin-top: 0;
@@ -30,7 +18,7 @@ h1 {
 }
 
 /* Espacio flexible para el centrado vertical */
-main {
+.welcome-wrapper main {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -40,17 +28,8 @@ main {
     padding-bottom: 40px;
 }
 
-/* Texto informativo del panel */
-.panel-control {
-    color: #293189;
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-    text-align: center;
-    font-weight: bold;
-}
-
 /* Bloque central de gestión */
-.welcome-box {
+.welcome-wrapper .welcome-box {
     background: white;
     padding: 10px;
     border-radius: 12px;
@@ -60,10 +39,11 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 /* Layout de los botones internos */
-section {
+.welcome-wrapper section {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -71,7 +51,7 @@ section {
 }
 
 /* Botones de acceso a las gestiones */
-section button {
+.welcome-wrapper section button {
     display: block;
     margin: 12px auto;
     width: 100%;
@@ -89,14 +69,14 @@ section button {
 }
 
 /* Feedback al pasar el ratón */
-section button:hover {
+.welcome-wrapper section button:hover {
     background-color: #1565c0;
     transform: translateY(-2px);
 }
 
 /* Espaciado para el bloque de salida */
-.logout-container {
-    margin-top: 20px;
+.welcome-wrapper .logout-container {
+    margin-top: auto;
     margin-bottom: 20px;
     width: 100%;
     display: flex;
@@ -104,7 +84,7 @@ section button:hover {
 }
 
 /* Botón estilizado para cerrar sesión */
-.boton-logout {
+.welcome-wrapper .boton-logout {
     display: inline-block;
     padding: 10px 30px;
     color: #293189;
@@ -119,12 +99,7 @@ section button:hover {
 }
 
 /* Cambio de colores en el botón de logout */
-.boton-logout:hover {
+.welcome-wrapper .boton-logout:hover {
     background-color: #293189;
     color: white;
-}
-
-/* Pie de página */
-footer {
-    width: 100%;
 }

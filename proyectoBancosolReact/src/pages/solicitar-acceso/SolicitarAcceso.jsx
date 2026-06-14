@@ -28,21 +28,23 @@ function SolicitarAcceso() {
   return (
     <div className="solicitar-acceso-wrapper">
       <main>
-        <h1>Solicitud de acceso</h1>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="correo_solicitud">
-            Introduzca su correo electrónico:
-          </label>
-          <input
-            type="email" id="correo_solicitud"
-            value={correo}
-            onChange={e => setCorreo(e.target.value)}
-            placeholder="ejemplo@correo.com" required
-          />
-          <button type="submit" id="btn-enviar">Enviar solicitud</button>
-          {mensaje && <p id="info_solicitud">{mensaje}</p>}
-        </form>
-        <Link to="/">Volver al inicio</Link>
+        <div className="solicitud-box">
+          <h1>Solicitud de acceso</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="correo_solicitud">
+              Introduzca su correo electrónico:
+            </label>
+            <input
+              type="email" id="correo_solicitud"
+              value={correo}
+              onChange={e => setCorreo(e.target.value)}
+              placeholder="ejemplo@correo.com" required
+            />
+            <button type="submit" id="btn-enviar">Enviar solicitud</button>
+            {mensaje && <p id="info_solicitud">{mensaje}</p>}
+          </form>
+          <Link to="/" className="volver-link">Volver al inicio</Link>
+        </div>
       </main>
     </div>
   );

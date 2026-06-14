@@ -4,8 +4,12 @@ import { useState, useEffect, useMemo } from "react";
 import { useAuth } from '../../../hooks/useAuthHook';
 import { useNavigate } from 'react-router-dom';
 
-// Importar los CSS del proyecto
+// Importar los CSS y componentes del proyecto
 import "../../../assets/css/style_gestion.css";
+
+import FilaTabla from "./components/FilaTabla";
+import DetallePanel from "./components/DetallePanel";
+import FormularioPanel from "./components/FormularioPanel";
 
 const API_URL = "http://localhost:3001";
 
@@ -14,85 +18,6 @@ const FORM_VACIO = {
 };
 
 const errorMensaje = "Error. ¿Está arrancado json-server?"; 
-
-// Subcomponentes
-
-function FilaTabla({ t, seleccionado, onSeleccionar }) {
-  const esSeleccionado = t.id === seleccionado;
-  return (
-    <tr
-      className={`cursor-pointer${esSeleccionado ? " fila-seleccionada" : ""}`}
-      onClick={() => onSeleccionar(t.id)}
-    >
-      <td>{t.nombre}</td>
-      <td>{t.cadena}</td>
-      <td>{t.domicilio}</td>
-      <td>{t.localidad}</td>
-      <td>{t.coord}</td>
-    </tr>
-  );
-}
-
-function DetallePanel({ tienda }) {
-  if (!tienda) {
-    return (
-      <div>
-        <div className="detail-row"><span>ID:</span><strong>---</strong></div>
-        <div className="detail-row"><span>NOMBRE:</span><strong>---</strong></div>
-        <div className="detail-row"><span>CADENA:</span><strong>---</strong></div>
-        <div className="detail-row"><span>DOMICILIO:</span><strong>---</strong></div>
-        <div className="detail-row"><span>LOCALIDAD:</span><strong>---</strong></div>
-        <div className="detail-row"><span>ZONA:</span><strong>---</strong></div>
-        <div className="detail-row"><span>COORDINADOR:</span><strong>---</strong></div>
-      </div>
-    );
-  }
-
-  const campos = [
-    ["ID", tienda.id],
-    ["NOMBRE", tienda.nombre],
-    ["CADENA", tienda.cadena],
-    ["DOMICILIO", tienda.domicilio],
-    ["LOCALIDAD", tienda.localidad],
-    ["ZONA", tienda.zona],
-    ["COORDINADOR", tienda.coord],
-  ];
-
-  return (
-    <div>
-      {campos.map(([label, val]) => (
-        <div className="detail-row" key={label}>
-          <span>{label} :</span>
-          <span className="fw-bold">{val}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function FormularioPanel({ form, onChange, modoModal }) {
-  const campo = (label, field, required = false, disabled = false) => (
-    <div key={field}>
-      <span>{label}{required && " *"}</span>
-      <input
-        value={form[field]}
-        disabled={disabled}
-        onChange={(e) => onChange(field, e.target.value)}
-      />
-    </div>
-  );
-
-  return (
-    <div className="max-h-70vh" >
-      {campo("NOMBRE", "nombre", true)}
-      {campo("CADENA", "cadena")}
-      {campo("ZONA", "zona")}
-      {campo("DOMICILIO", "domicilio")}
-      {campo("LOCALIDAD", "localidad")}
-      {campo("COORDINADOR", "coord")}
-    </div>
-  );
-}
 
 // Componente principal
 export default function GestionTiendas() {
@@ -181,8 +106,10 @@ export default function GestionTiendas() {
 
   function abrirModificar() {
     if (!selectedId) return alert("Selecciona primero una tienda de la tabla.");
+
     const t = tiendas.find((x) => x.id === selectedId);
     if (!t) return;
+
     setModoModal("modificar");
     rellenarFormDesdeTienda(t);
     setPanelTitulo("MODIFICAR TIENDA");
@@ -220,6 +147,7 @@ export default function GestionTiendas() {
         cerrarFormulario();
 
       } catch { alert(errorMensaje); }
+
     } else {
       try {
 
@@ -238,6 +166,7 @@ export default function GestionTiendas() {
 
   async function eliminarTienda() {
     if (!selectedId) return alert("Selecciona primero una tienda de la tabla.");
+
     const t = tiendas.find((x) => x.id === selectedId);
     if (!confirm(`¿Seguro que quieres eliminar "${t?.nombre}"?`)) return;
 
@@ -253,7 +182,6 @@ export default function GestionTiendas() {
 
   return (
     <div>
-        
       <main className="dashboard">
 
         {/* BANNER ERROR */}
