@@ -36,7 +36,7 @@ function Welcome() {
   return (
     <div className="welcome-wrapper">
       <main>
-        <h1>Bienvenido {usuario?.rol}</h1>
+        <h1>Bienvenido, {usuario?.rol}</h1>
         <div className="welcome-box">
           <section>
             {opciones.map(op => (

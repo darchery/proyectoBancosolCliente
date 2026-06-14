@@ -4,21 +4,14 @@
 }
 
 /* Fondo y alineación del formulario de solicitud */
-.solicitar-acceso-wrapper body {
+.solicitar-acceso-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    margin: 0;
-    padding: 0;
+    flex: 1;
+    width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f8f9fa;
-    min-height: 100vh;
-}
-
-/* Header superior */
-.solicitar-acceso-wrapper header {
-    width: 100%;
 }
 
 /* Título de la sección de acceso */
@@ -40,15 +33,14 @@
     padding-bottom: 40px;
 }
 
-/* Caja blanca con sombra para el formulario */
-.solicitar-acceso-wrapper form {
+/* Caja blanca con sombra */
+.solicitar-acceso-wrapper .solicitud-box {
     background: white;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(13, 71, 161, 0.15);
     width: 90%;
     max-width: 450px;
-    height: auto;
 }
 
 /* Estilo del label del correo */
@@ -97,12 +89,16 @@
     text-align: center;
 }
 
-/* Estilo para mensajes de éxito */
-.solicitar-acceso-wrapper .mensaje-ok {
-    color: green;
+/* Enlace volver igual que login */
+.solicitar-acceso-wrapper .volver-link {
+    display: block;
+    margin-top: 30px;
+    color: #0d47a1;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
 }
 
-/* Footer pegado al fondo */
-.solicitar-acceso-wrapper footer {
-    width: 100%;
+.solicitar-acceso-wrapper .volver-link:hover {
+    text-decoration: underline;
 }
