@@ -15,7 +15,7 @@ const FORM_VACIO = {
 
 const errorMensaje = "Error. ¿Está arrancado json-server?"; 
 
-// Componente principal
+// Componente principal: gestiona listado, filtrado y CRUD
 function GestionTiendas() {
   const navigate = useNavigate();
 
@@ -24,6 +24,7 @@ function GestionTiendas() {
   const [cargando, setCargando] = useState(true);
 
   const [selectedId, setSelectedId] = useState(null);
+  
   const [filtroCadena, setFiltroCadena] = useState("Todas");
   const [filtroLocalidad, setFiltroLocalidad] = useState("Todas");
   const [filtroZona, setFiltroZona] = useState("Todas");
@@ -54,6 +55,7 @@ function GestionTiendas() {
     }
   }
 
+  // FILTROS: Listamos los valores únicos para cada filtro
   const cadenas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.cadena).filter(Boolean))], [tiendas]);
   const localidades = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.localidad).filter(Boolean))], [tiendas]);
   const zonas = useMemo(() => ["Todas", ...new Set(tiendas.map((t) => t.zona).filter(Boolean))], [tiendas]);
@@ -69,6 +71,7 @@ function GestionTiendas() {
     [tiendas, filtroCadena, filtroLocalidad, filtroZona, filtroCoord]
   );
 
+  // SELECCIÓN TIENDA
   const tiendaSeleccionada = tiendas.find((t) => t.id === selectedId) || null;
 
   function seleccionarTienda(id) {
@@ -118,6 +121,7 @@ function GestionTiendas() {
     setForm(FORM_VACIO);
   }
 
+  // guarda cambios del form: crea tienda (POST) o actualiza la seleccionada (PUT)
   async function confirmarModal() {
     if (!form.nombre.trim()) return alert("El campo NOMBRE es obligatorio.");
 
