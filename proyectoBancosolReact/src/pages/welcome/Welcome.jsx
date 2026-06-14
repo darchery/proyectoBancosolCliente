@@ -20,10 +20,10 @@ function Welcome() {
   const rutasPorOpcion = {
     'Tiendas': '/gestion/tiendas',
     'Colaboradores': '/gestion/colaboradores',
+    'Campañas': '/gestion/campanyas'/*
     'Coordinadores': '/gestion/coordinadores',
-    'Campañas': '/gestion/campanyas',
     'Asignación Voluntarios': '/gestion/asignacion-voluntarios',
-    'Bandeja Entrada': '/gestion/bandeja-entrada',
+    'Bandeja Entrada': '/gestion/bandeja-entrada',*/
   };
 
   const opciones = menuPorRol[usuario?.rol] || [];
