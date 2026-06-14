@@ -4,9 +4,8 @@ import { RutaProtegida } from './hooks/RutaProtegida';
 import { RolRequerido } from './hooks/RolRequerido';
 import { ProveedorAuten } from './hooks/ProveedorAuten';
 
-// TODO: Poner ruta concreta
-
 import NotFound from './pages/notFound/NotFound';
+import Unauthorized from './pages/unauthorized/Unauthorized';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -43,6 +42,7 @@ function App() {
               </Route>
             </Route>
 
+            <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<NotFound />} />
 
           </Routes>

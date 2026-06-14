@@ -304,7 +304,7 @@ export default function GestionTiendas() {
                 
                 <tbody>
                   {tiendasFiltradas.length === 0 ? (
-                    <tr> No hay tiendas con esos filtros </tr>
+                    <tr><td colSpan={5} className="empty-row-msg">No hay tiendas con esos filtros</td></tr>
                   ) : (
                     tiendasFiltradas.map((t) => (
                       <FilaTabla

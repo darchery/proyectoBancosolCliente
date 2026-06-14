@@ -36,7 +36,7 @@ function Login() {
     return (
         <div className="login-wrapper">
         <main>
-            <div className="login-box">
+            <div className="login-wrapper-box">
             <h1>Iniciar sesión</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="input-usuario">Usuario:</label>

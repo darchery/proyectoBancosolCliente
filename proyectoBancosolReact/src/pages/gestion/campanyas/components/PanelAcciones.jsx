@@ -1,10 +1,12 @@
+import logoBancosol from '../../../../assets/images/LOGO_BANCOSOL.png';
+
 // Columna derecha: logo decorativo y botones de acción principales
 function PanelAcciones({ onGenerar, onAbrirHistorico, onVolverMenu }) {
   return (
     <div className="right-column">
       <div className="character-container">
         <img
-          src="/src/assets/images/LOGO_BANCOSOL.png"
+          src={logoBancosol}
           alt="Bancosol"
           className="opacity-05 grayscale"
         />

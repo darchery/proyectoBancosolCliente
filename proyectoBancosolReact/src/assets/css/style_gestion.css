@@ -548,3 +548,6 @@ tr:hover { background-color: var(--light-blue); cursor: pointer; }
 /* --- CLASES DE UTILIDAD (Dimensiones y scroll) --- */
 .max-h-400px { max-height: 400px !important; overflow-y: auto !important; }
 .max-h-70vh { max-height: 70vh; overflow-y: auto; }
+
+/* --- CLASES DE UTILIDAD (Mensaje para tablas sin resultados) --- */
+.empty-row-msg { text-align: center; color: #666; padding: 20px !important; }
