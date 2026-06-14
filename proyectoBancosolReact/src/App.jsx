@@ -35,17 +35,15 @@ function App() {
 
             {/* Rutas protegidas => Requieren login */}
             <Route element={<RutaProtegida />}>
-              <Route element={<RolRequerido roles={['admin']} />}>
+              <Route element={<RolRequerido roles={['admin', 'coordinador']} />}>
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/gestion/colaboradores" element={<GestionColaboradores />} />
                 <Route path="/gestion/tiendas" element={<GestionTiendas />} />
-                <Route path="/gestion/campanyas" element={<GestionCampanyas />} />
               </Route>
 
-              <Route element={<RolRequerido roles={['coordinador']} />}>
-                <Route path="/welcome" element={<Welcome />} />
-                <Route path="/gestion/colaboradores" element={<GestionColaboradores />} />
-                <Route path="/gestion/tiendas" element={<GestionTiendas />} />
+              {/* Rutas exclusivas de admin */}
+              <Route element={<RolRequerido roles={['admin']} />}>
+                <Route path="/gestion/campanyas" element={<GestionCampanyas />} />
               </Route>
             </Route>
 
