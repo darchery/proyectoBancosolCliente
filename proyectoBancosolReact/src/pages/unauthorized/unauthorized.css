@@ -1,7 +1,9 @@
+/* Reset de box-sizing para todos los hijos del wrapper */
 .unauthorized-wrapper * {
     box-sizing: border-box;
 }
 
+/* Contenedor principal centrado vertical */
 .unauthorized-wrapper {
     display: flex;
     flex-direction: column;
@@ -15,6 +17,7 @@
     width: 100%;
 }
 
+/* Título de error (403) con color corporativo */
 .unauthorized-wrapper h1 {
     color: #293189;
     text-align: center;
@@ -22,6 +25,7 @@
     margin-bottom: 25px;
 }
 
+/* Enlace de vuelta al inicio */
 .unauthorized-wrapper a {
     color: #0d47a1;
     font-weight: bold;
