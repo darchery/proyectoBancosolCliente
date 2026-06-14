@@ -3,6 +3,11 @@ import { useAuth } from '../../../hooks/useAuthHook';
 import { useNavigate } from 'react-router-dom';
 import * as XLSX from "xlsx";
 
+import FilaTabla from "./components/FilaTabla";
+import DetallePanel from "./components/DetallePanel";
+import FormularioPanel from "./components/FormularioPanel";
+import AsignarTiendaPanel from "./components/AsignarTiendaPanel";
+
 const API_URL = "http://localhost:3001";
 
 /*
@@ -21,170 +26,7 @@ const FORM_VACIO = {
     obs: "",
 };
 
-
-function FilaTabla({ c, seleccionado, onSeleccionar }) {
-    const esSeleccionado = c.id === seleccionado;
-    return (
-        <tr
-            className={`cursor-pointer${esSeleccionado ? " fila-seleccionada" : ""}`}
-            onClick={() => onSeleccionar(c.id)}
-        >
-            <td>
-                {c.nombre}
-                {c.pendienteValidacion && (
-                    <span className="badge-pendiente"> (pendiente)</span>
-                )}
-            </td>
-            <td>{c.domicilio || "---"}</td>
-            <td>{c.localidad || "---"}</td>
-            <td>{c.colabora || "---"}</td>
-            <td>{c.coord || "---"}</td>
-            <td>{c.contacto1?.nombre || "---"}</td>
-            <td>{c.observaciones || ""}</td>
-        </tr>
-    );
-}
-
-
-
-
-function DetallePanel({ colaborador, onValidar }) {
-    if (!colaborador) {
-        return (
-            <p className="text-muted text-center mt-10">
-                Selecciona un colaborador de la tabla para ver sus detalles.
-            </p>
-        );
-    }
-
-    const c = colaborador;
-    const campos = [
-        ["NOMBRE", c.nombre],
-        ["DOMICILIO", c.domicilio],
-        ["CP", c.cp],
-        ["LOCALIDAD", c.localidad],
-        ["COLABORA EN", c.colabora],
-        ["COORDINADOR", c.coord],
-        ["TIENDA ID", c.tiendaId],
-    ];
-
-    return (
-        <>
-            {campos.map(([label, val]) => (
-                <div className="detail-row" key={label}>
-                    <span>{label}:</span>
-                    <strong>{val || "---"}</strong>
-                </div>
-            ))}
-
-            <div className="panel-header mt-10">CONTACTOS</div>
-            {[c.contacto1, c.contacto2, c.contacto3].map((ct, i) => (
-                <div className="detail-row" key={i}>
-                    <span>Contacto {i + 1}:</span>
-                    <strong>{ct?.nombre ? `${ct.nombre} — ${ct.tel}` : "---"}</strong>
-                </div>
-            ))}
-
-            <div className="panel-header mt-10">OBSERVACIONES</div>
-            <div className="detail-row">
-                <strong>{c.observaciones || "---"}</strong>
-            </div>
-
-            {c.pendienteValidacion && onValidar && (
-                <div className="action-buttons mt-10">
-                    <button className="btn btn-success full-width" onClick={onValidar}>
-                        Validar colaborador
-                    </button>
-                </div>
-            )}
-        </>
-    );
-}
-
-
-
-
-function FormularioPanel({ form, onChange }) {
-    const campo = (label, field, required = false) => (
-        <div className="detail-row" key={field}>
-            <span>{label}{required && " *"}</span>
-            <input
-                className="input-field"
-                value={form[field]}
-                onChange={(e) => onChange(field, e.target.value)}
-            />
-        </div>
-    );
-
-    return (
-        <div className="max-h-70vh">
-            {campo("NOMBRE", "nombre", true)}
-            {campo("DOMICILIO", "domicilio")}
-            {campo("CP", "cp")}
-            {campo("LOCALIDAD", "localidad")}
-            {campo("COLABORA EN", "colabora")}
-            {campo("ZONA", "zona")}
-            {campo("COORDINADOR", "coord")}
-
-            <div className="panel-header mt-10">CONTACTO 1</div>
-            {campo("Nombre", "c1nombre")}
-            {campo("Teléfono", "c1tel")}
-
-            <div className="panel-header mt-10">CONTACTO 2</div>
-            {campo("Nombre", "c2nombre")}
-            {campo("Teléfono", "c2tel")}
-
-            <div className="panel-header mt-10">CONTACTO 3</div>
-            {campo("Nombre", "c3nombre")}
-            {campo("Teléfono", "c3tel")}
-
-            <div className="panel-header mt-10">OBSERVACIONES</div>
-            <textarea
-                className="input-field w-100 p-4"
-                rows={3}
-                value={form.obs}
-                onChange={(e) => onChange("obs", e.target.value)}
-            />
-        </div>
-    );
-}
-
-function AsignarTiendaPanel({ tiendas, tiendaActual, onConfirmar, onCancelar }) {
-    const [tiendaId, setTiendaId] = useState(tiendaActual || "");
-
-    return (
-        <>
-            <p className="fs-09 mb-8">
-                Selecciona la tienda a asignar al colaborador:
-            </p>
-            <div className="detail-row">
-                <span>TIENDA</span>
-                <select
-                    className="w-100 p-4"
-                    value={tiendaId}
-                    onChange={(e) => setTiendaId(e.target.value)}
-                >
-                    <option value="">-- Sin asignar --</option>
-                    {tiendas.map((t) => (
-                        <option key={t.id} value={t.id}>
-                            {t.nombre} ({t.localidad})
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <div className="action-buttons mt-10">
-                <button className="btn btn-primary" onClick={() => onConfirmar(tiendaId || null)}>
-                    Asignar
-                </button>
-                <button className="btn btn-secondary" onClick={onCancelar}>
-                    Cancelar
-                </button>
-            </div>
-        </>
-    );
-}
-
-export default function GestionColaboradores() {
+function GestionColaboradores() {
 
 
     const { usuario } = useAuth();
@@ -628,3 +470,5 @@ export default function GestionColaboradores() {
         </div>
     );
 }
+
+export default GestionColaboradores
