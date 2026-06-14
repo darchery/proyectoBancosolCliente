@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useAuth } from '../../../hooks/useAuthHook';
 import { useNavigate } from 'react-router-dom';
+import "../../../assets/css/style_gestion.css";
 import * as XLSX from "xlsx";
 
 import FilaTabla from "./components/FilaTabla";

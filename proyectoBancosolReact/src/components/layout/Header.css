@@ -25,10 +25,10 @@ header h1 {
     gap: 20px;
 }
 
-#logo {
-    height: 60px; 
-    width: auto; 
-    display: block; 
+.logo-area img {
+    height: 60px;
+    width: auto;
+    display: block;
 }
 
 .header-titulo {

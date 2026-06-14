@@ -18,32 +18,6 @@ body {
     background-color: #f4f7f6;
 }
 
-/* Títulos de sección en la cabecera */
-header h1 {
-    color: #293189;
-    text-align: center;
-    margin-bottom: 0.5rem;
-}
-
-/* Cabecera blanca superior con borde azul */
-.main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: white;
-    border-bottom: 3px solid var(--blue-bancosol);
-}
-
-/* Distribución del logo en la cabecera */
-.logo-area { display: flex; align-items: center; gap: 15px; }
-
-/* Margen del logo para separarlo del título */
-.logo-area .title-area { margin-left: auto; }
-
-/* Altura controlada de la imagen del logo */
-.logo-area img { height: 60px; }
-
 /* Indicador naranja de acceso administrador */
 .admin-badge {
     background: var(--orange-admin);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function AsignarTiendaPanel({ tiendas, tiendaActual, onConfirmar, onCancelar }) {
     const [tiendaId, setTiendaId] = useState(tiendaActual || "");

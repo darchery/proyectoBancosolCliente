@@ -7,7 +7,7 @@ const TITULOS = {
   anyadir: "Añadir nueva cadena",
   eliminar: "Eliminar cadena",
   modificar: "Modificar cadena",
-  guardar: "Confirmar cambios",
+  guardar: "Guardar selección",
   historico: "Histórico de Campañas Generadas",
 };
 
@@ -156,7 +156,7 @@ function ModalCampanyas({
                     : "Ninguna cadena seleccionada"}
                 </p>
               </div>
-              <p className="text-muted">¿Deseas guardar estos cambios?</p>
+              <p className="text-muted">¿Deseas guardar esta selección?</p>
             </>
           )}
 
@@ -205,7 +205,7 @@ function ModalCampanyas({
               )}
               {modo === "guardar" && (
                 <button className="btn-modal primary" onClick={onGuardarCambios}>
-                  Guardar Cambios
+                  Guardar selección
                 </button>
               )}
             </>

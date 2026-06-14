@@ -1,5 +1,5 @@
 import './Header.css';
-import logoFooter from '../../assets/images/LOGO_BANCOSOL_FOOTER.png';
+import logoBanner from '../../assets/images/LOGO_BANCOSOL_BANNER.png';
 import { useLocation } from 'react-router-dom';
 
 function Header() {
@@ -22,7 +22,7 @@ function Header() {
         <>
             <header className="main-header">
                 <div className="logo-area">
-                    <img src={logoFooter} alt="Bancosol Logo" />
+                    <img src={logoBanner} alt="Bancosol Logo" />
                     <div>   
                         {titulo && <h1 className="header-titulo">{titulo}</h1>}
                     </div>
