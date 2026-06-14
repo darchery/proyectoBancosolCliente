@@ -13,6 +13,8 @@ const FORM_VACIO = {
   id: "", nombre: "", cadena: "", zona: "", domicilio: "", localidad: "", coord: "",
 };
 
+const errorMensaje = "Error. ¿Está arrancado json-server?"; 
+
 // Subcomponentes
 
 function FilaTabla({ t, seleccionado, onSeleccionar }) {
@@ -82,7 +84,6 @@ function FormularioPanel({ form, onChange, modoModal }) {
 
   return (
     <div className="max-h-70vh" >
-      {campo("ID", "id", true, modoModal === "modificar")}
       {campo("NOMBRE", "nombre", true)}
       {campo("CADENA", "cadena")}
       {campo("ZONA", "zona")}
@@ -96,9 +97,6 @@ function FormularioPanel({ form, onChange, modoModal }) {
 // Componente principal
 export default function GestionTiendas() {
   const navigate = useNavigate();
-
-  const { usuario } = useAuth();
-  const esAdmin = usuario?.rol === "admin";
 
   const [tiendas, setTiendas] = useState([]);
   const [errorCarga, setErrorCarga] = useState(null);
@@ -151,10 +149,6 @@ export default function GestionTiendas() {
   );
 
   const tiendaSeleccionada = tiendas.find((t) => t.id === selectedId) || null;
-
-  if (!esAdmin) {
-    return <p> No tienes permiso para acceder a esta página.</p>;
-  }
 
   function seleccionarTienda(id) {
     setSelectedId(id);
@@ -214,25 +208,21 @@ export default function GestionTiendas() {
     };
 
     if (modoModal === "anadir") {
-      if (!form.id.trim()) return alert("El campo ID es obligatorio.");
-      if (tiendas.find((t) => t.id === form.id.trim()))
-        return alert(`Ya existe una tienda con el ID "${form.id.trim()}".`);
-
       try {
+
         const res = await fetch(`${API_URL}/tiendas`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: form.id.trim(), ...obj }),
+          body: JSON.stringify(obj),
         });
         if (!res.ok) throw new Error();
         await cargarTiendas();
         cerrarFormulario();
-        alert(`Tienda "${obj.nombre}" añadida correctamente.`);
-      } catch {
-        alert("No se pudo guardar la tienda. ¿Está arrancado json-server?");
-      }
+
+      } catch { alert(errorMensaje); }
     } else {
       try {
+
         const res = await fetch(`${API_URL}/tiendas/${selectedId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -241,17 +231,15 @@ export default function GestionTiendas() {
         if (!res.ok) throw new Error();
         await cargarTiendas();
         cerrarFormulario();
-        alert(`Tienda "${obj.nombre}" modificada correctamente.`);
-      } catch {
-        alert("No se pudo modificar la tienda. ¿Está arrancado json-server?");
-      }
+      
+      } catch { alert(errorMensaje); }
     }
   }
 
   async function eliminarTienda() {
     if (!selectedId) return alert("Selecciona primero una tienda de la tabla.");
     const t = tiendas.find((x) => x.id === selectedId);
-    if (!confirm(`¿Seguro que quieres eliminar "${t?.nombre}"?\nEsta acción no se puede deshacer.`)) return;
+    if (!confirm(`¿Seguro que quieres eliminar "${t?.nombre}"?`)) return;
 
     try {
       const res = await fetch(`${API_URL}/tiendas/${selectedId}`, { method: "DELETE" });
@@ -259,10 +247,8 @@ export default function GestionTiendas() {
       setSelectedId(null);
       setVistaPanel("detalle");
       await cargarTiendas();
-      alert("Tienda eliminada correctamente.");
-    } catch {
-      alert("No se pudo eliminar la tienda. ¿Está arrancado json-server?");
-    }
+    
+    } catch {alert(errorMensaje); }
   }
 
   return (
@@ -358,9 +344,9 @@ export default function GestionTiendas() {
                 </div>
               </>
             )}
-
-            {/* Botones de acción: solo visibles para admin */}
-            {esAdmin && vistaPanel === "detalle" && (
+          
+            {/* No es necesario controlar por que rol */}
+            {vistaPanel === "detalle" && (
               <div className="action-buttons" id="admin-menu">
                   <button onClick={abrirAnadir}>Añadir tienda</button>
                   <button onClick={abrirModificar}>Modificar tienda</button>
