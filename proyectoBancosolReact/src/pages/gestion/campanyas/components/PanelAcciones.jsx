@@ -1,5 +1,5 @@
 // Columna derecha: logo decorativo y botones de acción principales
-function PanelAcciones({ onGenerar, onAbrirHistorico }) {
+function PanelAcciones({ onGenerar, onAbrirHistorico, onVolverMenu }) {
   return (
     <div className="right-column">
       <div className="character-container">
@@ -13,7 +13,7 @@ function PanelAcciones({ onGenerar, onAbrirHistorico }) {
         <div className="main-actions">
           <button onClick={onGenerar}>Generar campaña</button>
           <button onClick={onAbrirHistorico}>Ver histórico</button>
-          <button className="btn-volver-menu">Menú Principal</button>
+          <button className="btn-volver-menu" onClick={onVolverMenu} >Menú Principal</button>
         </div>
       </div>
     </div>

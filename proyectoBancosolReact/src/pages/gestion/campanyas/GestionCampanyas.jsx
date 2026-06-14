@@ -5,10 +5,14 @@ import PanelCadenas from "./components/PanelCadenas";
 import PanelAcciones from "./components/PanelAcciones";
 import ModalCampanyas from "./components/ModalCampanyas";
 
+import { useNavigate } from 'react-router-dom';
+
 // URL del json-server
 const API_URL = "http://localhost:3001";
 
 function GestionCampanyas() {
+
+    const navigate = useNavigate();
 
     // Estado principal: campañas disponibles, cadenas y lo que tiene seleccionado el usuario
     const [campanyas, setCampanyas] = useState([]);
@@ -179,8 +183,6 @@ function GestionCampanyas() {
     return (
         <>
         <div className="page-campanya">
-            {/*<Header titulo="GESTIÓN DE CAMPAÑAS" />*/}
-
             {/* Cuerpo: tres columnas (campañas, cadenas, acciones) */}
             <main className="management-container">
                 {error && <div className="mensaje-error-carga">{error}</div>}
@@ -200,6 +202,7 @@ function GestionCampanyas() {
                 <PanelAcciones
                     onGenerar={handleGenerarCampanya}
                     onAbrirHistorico={() => abrirModal("historico")}
+                    onVolverMenu={() => navigate('/welcome')} 
                 />
             </main>
 
