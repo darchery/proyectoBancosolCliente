@@ -49,7 +49,7 @@ function GestionTiendas() {
       setTiendas(await res.json());
       setError(null);
     } catch {
-      setError("No se pudieron cargar las tiendas.");
+      setError("No se pudo conectar con el servidor para cargar las tiendas.");
       setTiendas([]);
     }
   }
@@ -181,8 +181,8 @@ function GestionTiendas() {
       <main className="dashboard">
 
         {/* BANNER ERROR */}
-        {errorCarga && (
-          <div className="mensaje-error-carga">{errorCarga}</div>
+        {error && (
+          <div className="mensaje-error-carga">{error}</div>
         )}
 
         {/* filtros */}
