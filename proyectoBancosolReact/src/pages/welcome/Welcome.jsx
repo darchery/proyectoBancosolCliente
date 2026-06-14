@@ -11,12 +11,10 @@ function Welcome() {
     navigate('/');
   }
 
+  // Sólo hemos implementado dos roles: admin y coordinador
   const menuPorRol = {
     admin: ['Tiendas', 'Colaboradores', 'Campañas'],
-    coordinador: ['Tiendas', 'Colaboradores'],
-    /*capitan: ['Asignación Voluntarios']
-    capitan_coordinador: ['Tiendas', 'Colaboradores', 'Asignación Voluntarios'],
-    entidad_colaboradora: ['Bandeja Entrada'],*/
+    coordinador: ['Colaboradores']
   };
 
   const rutasPorOpcion = {

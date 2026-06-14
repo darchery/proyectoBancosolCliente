@@ -1,16 +1,76 @@
-# React + Vite
+# Bancosol - Aplicación React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web para la gestión de tiendas, colaboradores y campañas de Bancosol.
 
-Currently, two official plugins are available:
+## Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 18+
+- npm
 
-## React Compiler
+## Instalación
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+```
 
-## Expanding the ESLint configuration
+## Ejecución
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+El proyecto necesita dos terminales:
+
+### Terminal 1: Servidor de datos (json-server)
+
+```bash
+npx json-server --watch src/data/db.json
+```
+
+Arranca en `http://localhost:3001`. Proporciona los endpoints:
+- `GET/POST/PUT/DELETE /usuarios`
+- `GET/POST/PUT/DELETE /tiendas`
+- `GET/POST/PUT/DELETE /colaboradores`
+- `GET/POST/PUT/DELETE /coordinadores`
+- `GET/POST/PUT/DELETE /campanyas`
+- `GET/POST/PUT/DELETE /cadenas`
+- `GET/POST/PUT/DELETE /campanyas_generadas`
+- `GET/POST/PUT/DELETE /solicitudes`
+
+### Terminal 2: Aplicación React
+
+```bash
+npm run dev
+```
+
+Arranca en `http://localhost:5173`.
+
+## Usuarios de prueba (db.json)
+
+| Usuario | Contraseña | Rol |
+|---------|-----------|-----|
+| admin | admin | admin |
+| coordinador1 | coordinador1 | coordinador |
+
+## Estructura del proyecto
+
+```
+src/
+├── components/layout/     → Header y Footer comunes
+├── hooks/                 → Autenticación, rutas protegidas, roles
+├── pages/
+│   ├── home/              → Página de inicio
+│   ├── login/             → Inicio de sesión
+│   ├── solicitar-acceso/  → Solicitud de acceso
+│   ├── welcome/           → Menú principal por rol
+│   ├── notFound/          → Página 404
+│   └── gestion/
+│       ├── tiendas/       → CRUD de tiendas
+│       ├── colaboradores/ → CRUD de colaboradores
+│       └── campanyas/     → Gestión de campañas y cadenas
+├── assets/                → CSS e imágenes
+└── data/db.json           → Datos de prueba (json-server)
+```
+
+## Tecnologías
+
+- React 19 + Vite
+- React Router DOM (enrutamiento)
+- json-server (API REST simulada)
+- xlsx (exportación a Excel)
