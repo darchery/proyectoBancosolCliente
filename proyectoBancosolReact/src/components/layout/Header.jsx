@@ -11,9 +11,6 @@ function Header() {
             '/gestion/campanyas': 'GESTIÓN DE CAMPAÑAS',
             '/gestion/colaboradores': 'GESTIÓN DE COLABORADORES',
             '/gestion/tiendas': 'GESTIÓN DE TIENDAS',
-            '/welcome': 'BIENVENIDO',
-            '/': 'INICIO',
-            '/login': 'ACCESO',
             '/solicitar-acceso': 'SOLICITAR ACCESO',
         };
         return titulos[ruta] || null;
