@@ -39,10 +39,6 @@ function App() {
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/gestion/colaboradores" element={<GestionColaboradores />} />
                 <Route path="/gestion/tiendas" element={<GestionTiendas />} />
-              </Route>
-
-              {/* Rutas exclusivas de admin */}
-              <Route element={<RolRequerido roles={['admin']} />}>
                 <Route path="/gestion/campanyas" element={<GestionCampanyas />} />
               </Route>
             </Route>
