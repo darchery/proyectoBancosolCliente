@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useAuth } from '../../../hooks/useAuthHook';
 import { useNavigate } from 'react-router-dom';
-// import * as XLSX from "xlsx";
+import * as XLSX from "xlsx";
 
 const API_URL = "http://localhost:3001";
 
@@ -185,9 +185,7 @@ function AsignarTiendaPanel({ tiendas, tiendaActual, onConfirmar, onCancelar }) 
 }
 
 export default function GestionColaboradores() {
-    //const rolActual = localStorage.getItem("userRole") || "admin";
-    //const esAdmin = rolActual === "admin";
-    //const esCoord = rolActual === "coordinador";
+
 
     const { usuario } = useAuth();
     const navigate = useNavigate();
